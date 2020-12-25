@@ -138,6 +138,10 @@ CMS_LANGUAGES = {
 ],
 }
 
+LANGUAGES = (
+        ('uk', 'Ukrainian'),
+        ('en', 'English'),
+    )
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
