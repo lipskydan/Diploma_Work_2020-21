@@ -1,0 +1,39 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+    {% if item.name == 'PC' %}
+    Оновлення ПК
+    {% elif item.name == 'Switch' %}
+    Оновлення камутатора
+    {% endif %}
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+    {% if item.name == 'PC' %}
+    <h1>Оновлення ПК</h1>
+    {% elif item.name == 'Switch' %}
+    <h1>Оновлення камутатора</h1>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <br><h5>Тип обладнання</h5>
+        <input type="text" name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням"><br><h5>Інвентарний номер</h5>
+        <input type="text" name="inventory_number" id="inventory_number" class="form-control" value="{{ item.inventory_number }}" placeholder="Введіть інвентарний номер"><br><h5>Поверх</h5>
+        <input type="text" name="floor" id="floor" class="form-control" value="{{ item.floor }}" placeholder="Введіть номер поверху"><br><h5>Кабінет</h5>
+        <input type="text" name="room" id="room" class="form-control" value="{{ item.room }}" placeholder="Введіть номер кабінету">
+
+        {% if item.name == 'Switch' %}
+            <br><h5>Кількість Ethernet портів</h5>
+           <input type="text" name="count_of_ports" id="count_of_ports" class="form-control" value="{{ item.count_of_ports }}" placeholder="Введіть кількість Ethernet портів"><br>
+        {% elif item.name == 'PC' %}
+            <br>
+        {% else %}
+            <br>
+        {% endif %}
+
+        <input type="submit" class="btn btn-success" value="Оновити">
+    </form>
+
+</div>
+
+{% endblock %}

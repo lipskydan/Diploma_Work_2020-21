@@ -1,0 +1,25 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+Список обладнання
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+   <h1>Список обладнання</h1>
+
+    {% if items|length > 0 %}
+        {% for el in items %}
+        <div class="alert alert-info">
+            <h2>Тип обладнання: {{ el.name_for_user }}</h2>
+            <h2>Інвентарний номер: {{ el.inventory_number }}</h2>
+            <a href="/IT_items/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
+<!--            <a href="{% url 'IT_items:item_detail' el.name el.id %}" class="btn btn-warning">Детальніше</a>-->
+        </div>
+        {% endfor %}
+    {% else %}
+    <p>У нас ще немає обладнання</p>
+    {% endif %}
+
+</div>
+{% endblock %}

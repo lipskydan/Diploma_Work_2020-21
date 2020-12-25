@@ -1,0 +1,32 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+{{ item.name }} - {{ item.inventory_number }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+   <h1>Детальна інформація:</h1>
+
+    <div class="alert alert-info">
+        <h3>Тип обладнання: {{ item.name_for_user }}</h3>
+        <h4>Інвентарний номер: {{ item.inventory_number }}</h4>
+        <h4>Поверх: {{ item.floor }}</h4>
+        <h4>Кабінет: {{ item.room }}</h4>
+
+        {% if item.name == 'PC' %}
+            <h4>инфа по ПК:</h4>
+
+        {% elif item.name == 'Switch' %}
+            <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>
+        {% endif %}
+
+        <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>
+        <a href="/IT_items/{{ item.name }}/{{ item.id }}/update" class="btn btn-success">Редагування</a>
+
+
+
+
+    </div>
+</div>
+{% endblock %}
