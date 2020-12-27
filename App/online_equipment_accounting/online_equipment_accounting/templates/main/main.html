@@ -11,8 +11,18 @@
     <h5 class="my-0 font-weight-normal">Welcome {{ user.first_name }} {{ user.last_name }},
         <a href="logout">Logout</a></h5>
     {% else %}
-    <h3 class="my-0 font-weight-normal">Ви не авторизовані</h3><br>
-    <a href="/login" class="btn btn-danger">Авторизуватися</a>
+    <div class="d-flex justify-content-center">
+        <aside class="col-sm-4">
+            <div class="card">
+                <article class="card-body">
+                    <h4 class="card-title mb-4 mt-1">Ви не авторизовані</h4>
+                    <div class="form-group">
+                        <a href="/login" class="btn btn-success btn-block">Авторизуватися</a>
+                    </div>
+                </article>
+            </div>
+        </aside>
+    </div>
     {% endif %}
 
 </div>
