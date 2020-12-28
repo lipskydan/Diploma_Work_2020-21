@@ -7,14 +7,15 @@
 {% block body %}
 <div class="container mt-5">
    <h1>Додавання ПК</h1><br>
-
-
     <form method="post">
         {% csrf_token %}
-
-        <input type="text" name="inventory_number" id="inventory_number" class="form-control" placeholder="Введіть інвентарний номер"><br>
-        <input type="text" name="floor" id="floor" class="form-control" placeholder="Введіть номер поверху"><br>
-        <input type="text" name="room" id="room" class="form-control" placeholder="Введіть номер кабінету"><br>
+        <div class="">
+            {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }} <br> {{ field }} <br>
+            </div>
+            {% endfor %}
+        </div>
 
         <input type="submit" class="btn btn-outline-success" value="Створити">
     </form>
@@ -22,3 +23,19 @@
 </div>
 
 {% endblock %}
+
+<!--<div class="container mt-5">-->
+<!--   <h1>Додавання ПК</h1><br>-->
+
+<!--    <form method="post">-->
+<!--        {% csrf_token %}-->
+
+<!--        <input type="text" name="inventory_number" id="inventory_number" class="form-control" placeholder="Введіть інвентарний номер"><br>-->
+<!--&lt;!&ndash;        <input type="datetime-local" name="pub_date" id="pub_date" class="form-control" placeholder="Введіть дату створення"><br>&ndash;&gt;-->
+<!--        <input type="text" name="floor" id="floor" class="form-control" placeholder="Введіть номер поверху"><br>-->
+<!--        <input type="text" name="room" id="room" class="form-control" placeholder="Введіть номер кабінету"><br>-->
+
+<!--        <input type="submit" class="btn btn-outline-success" value="Створити">-->
+<!--    </form>-->
+
+<!--</div>-->
