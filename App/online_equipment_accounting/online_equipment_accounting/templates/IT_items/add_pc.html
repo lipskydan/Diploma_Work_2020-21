@@ -12,30 +12,22 @@
         <div class="">
             {% for field in form %}
             <div class="form-group">
+                <!--Name of field and input-->
                 {{ field.label_tag }} <br> {{ field }} <br>
+
+                <!--Show help text for field-->
+                {% if field.help_text %}
+                    <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+
+                <!--Show error text for field-->
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
             </div>
             {% endfor %}
         </div>
-
         <input type="submit" class="btn btn-outline-success" value="Створити">
     </form>
-
 </div>
-
 {% endblock %}
-
-<!--<div class="container mt-5">-->
-<!--   <h1>Додавання ПК</h1><br>-->
-
-<!--    <form method="post">-->
-<!--        {% csrf_token %}-->
-
-<!--        <input type="text" name="inventory_number" id="inventory_number" class="form-control" placeholder="Введіть інвентарний номер"><br>-->
-<!--&lt;!&ndash;        <input type="datetime-local" name="pub_date" id="pub_date" class="form-control" placeholder="Введіть дату створення"><br>&ndash;&gt;-->
-<!--        <input type="text" name="floor" id="floor" class="form-control" placeholder="Введіть номер поверху"><br>-->
-<!--        <input type="text" name="room" id="room" class="form-control" placeholder="Введіть номер кабінету"><br>-->
-
-<!--        <input type="submit" class="btn btn-outline-success" value="Створити">-->
-<!--    </form>-->
-
-<!--</div>-->

@@ -8,6 +8,8 @@ class PC(models.Model):
     floor = models.IntegerField('номер поверху')
     room = models.IntegerField('номер кабінету')
 
+    # end = models.DateField(default=None, blank=True, null=True)
+
     # pub_date = models.DateTimeField('дата створення')
 
     name_for_user = 'Персональний комп\'ютор'
