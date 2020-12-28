@@ -9,8 +9,8 @@ class PC(models.Model):
     room = models.IntegerField('номер кабінету')
 
     # end = models.DateField(default=None, blank=True, null=True)
-
     # pub_date = models.DateTimeField('дата створення')
+    # b = models.CharField(max_length=7, default="foobar")
 
     name_for_user = 'Персональний комп\'ютор'
     name = 'PC'
