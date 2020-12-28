@@ -1,33 +1,75 @@
 {% extends 'base_main.html' %}
-
 {% block title %}
 Додавання ПК
 {% endblock %}
-
 {% block body %}
 <div class="container mt-5">
-   <h1>Додавання ПК</h1><br>
-    <form method="post">
-        {% csrf_token %}
-        <div class="">
-            {% for field in form %}
-            <div class="form-group">
-                <!--Name of field and input-->
-                {{ field.label_tag }} <br> {{ field }} <br>
+   <div class="d-flex justify-content-center">
+      <aside class="col-sm-6">
+         <div class="card">
+            <article class="card-body">
+               <h1>Додавання ПК</h1>
+               <form method="post">
+                  {% csrf_token %}
+                  <div class="">
+                      <div class="form-group">
+                          <table class="table" border="0">
+                              <tr>
+                                  <td>
+                                      <!--Name of field and input-->
+                                      {{ form.inventory_number.label_tag }} {{ form.inventory_number }}
 
-                <!--Show help text for field-->
-                {% if field.help_text %}
-                    <small style="color: grey">{{ field.help_text }}</small>
-                {% endif %}
+                                      <!--Show help text for field-->
+                                      {% if form.inventory_number.help_text %}
+                                      <small style="color: grey">{{ form.inventory_number.help_text }}</small>
+                                      {% endif %}
 
-                <!--Show error text for field-->
-                {% for error in field.errors %}
-                    <p style="color: red">{{ error }}</p>
-                {% endfor %}
-            </div>
-            {% endfor %}
-        </div>
-        <input type="submit" class="btn btn-outline-success" value="Створити">
-    </form>
+                                      <!--Show error text for field-->
+                                      {% for error in form.inventory_number.errors %}
+                                      <p style="color: red">{{ error }}</p> 
+                                      {% endfor %}                          
+                                  </td>
+                                  <td></td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <!--Name of field and input-->
+                                      {{ form.floor.label_tag }}{{ form.floor }}
+
+                                      <!--Show help text for field-->
+                                      {% if form.floor.help_text %}
+                                      <small style="color: grey">{{ form.floor.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.floor.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                                  </td>
+                                  <td>
+                                      <!--Name of field and input-->
+                                      {{ form.room.label_tag }}{{ form.room }}
+
+                                      <!--Show help text for field-->
+                                      {% if form.room.help_text %}
+                                      <small style="color: grey">{{ form.room.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.room.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                                  </td>
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
+                  <input type="submit" class="btn btn-outline-success" value="Створити">
+               </form>
+            </article>
+         </div>
+      </aside>
+   </div>
+</div>
 </div>
 {% endblock %}
