@@ -61,6 +61,35 @@
                                       {% endfor %}
                                   </td>
                               </tr>
+                              <tr>
+                                  <td>
+                                      <!--Name of field and input-->
+                                      {{ form.motherboard_model.label_tag }}{{ form.motherboard_model }}
+
+                                      <!--Show help text for field-->
+                                      {% if form.motherboard_model.help_text %}
+                                      <small style="color: grey">{{ form.motherboard_model.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.motherboard_model.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                                  </td>
+                                  <td>
+                                          <!--Name of field and input-->
+                                          {{ form.motherboard_serial_number.label_tag }}{{ form.motherboard_serial_number }}
+
+                                          <!--Show help text for field-->
+                                          {% if form.motherboard_serial_number.help_text %}
+                                          <small style="color: grey">{{ form.motherboard_serial_number.help_text }}</small>
+                                          {% endif %}
+
+                                          <!--Show error text for field-->
+                                          {% for error in form.motherboard_serial_number.errors %}
+                                          <p style="color: red">{{ error }}</p>
+                                          {% endfor %}
+                                      </td>
                           </table>
                       </div>
                   </div>

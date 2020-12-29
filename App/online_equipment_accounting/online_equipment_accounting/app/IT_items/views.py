@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 from django.urls import reverse
 
-from .models import PC
+from .models import PC, Motherboard
 from .forms import AddPcForm
 
 
@@ -32,7 +32,9 @@ def add_pc(request):
         form = AddPcForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'])
+            motherboard = Motherboard(model=cd['motherboard_model'], serial_number=cd['motherboard_serial_number'])
+            motherboard.save()
+            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], motherboard=motherboard)
             item.save()
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
     else:
@@ -58,6 +60,7 @@ def item_delete(request, item_name, item_id):
     except:
         raise Http404('ERROR item_delete')
 
+    item.motherboard.delete()
     item.delete()
 
     return HttpResponseRedirect(reverse('IT_items:IT_items'))
