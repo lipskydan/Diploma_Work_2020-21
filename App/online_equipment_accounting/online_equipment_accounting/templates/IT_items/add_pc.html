@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container mt-5">
    <div class="d-flex justify-content-center">
-      <aside class="col-sm-6">
+      <aside class="col-sm-11">
          <div class="card">
             <article class="card-body">
                <h1>Додавання ПК</h1>
@@ -13,7 +13,7 @@
                   {% csrf_token %}
                   <div class="">
                       <div class="form-group">
-                          <table class="table" border="0">
+                          <table class="table" border="1">
                               <tr>
                                   <td>
                                       <!--Name of field and input-->
@@ -64,32 +64,19 @@
                               <tr>
                                   <td>
                                       <!--Name of field and input-->
-                                      {{ form.motherboard_model.label_tag }}{{ form.motherboard_model }}
+                                      {{ form.motherboard.label_tag }}{{ form.motherboard }}
 
                                       <!--Show help text for field-->
-                                      {% if form.motherboard_model.help_text %}
-                                      <small style="color: grey">{{ form.motherboard_model.help_text }}</small>
+                                      {% if form.motherboard.help_text %}
+                                      <br><small style="color: grey">{{ form.motherboard.help_text }}</small>
                                       {% endif %}
 
                                       <!--Show error text for field-->
-                                      {% for error in form.motherboard_model.errors %}
+                                      {% for error in form.motherboard.errors %}
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
                                   </td>
-                                  <td>
-                                          <!--Name of field and input-->
-                                          {{ form.motherboard_serial_number.label_tag }}{{ form.motherboard_serial_number }}
-
-                                          <!--Show help text for field-->
-                                          {% if form.motherboard_serial_number.help_text %}
-                                          <small style="color: grey">{{ form.motherboard_serial_number.help_text }}</small>
-                                          {% endif %}
-
-                                          <!--Show error text for field-->
-                                          {% for error in form.motherboard_serial_number.errors %}
-                                          <p style="color: red">{{ error }}</p>
-                                          {% endfor %}
-                                      </td>
+                                  <td></td>
                           </table>
                       </div>
                   </div>
@@ -99,6 +86,5 @@
          </div>
       </aside>
    </div>
-</div>
 </div>
 {% endblock %}

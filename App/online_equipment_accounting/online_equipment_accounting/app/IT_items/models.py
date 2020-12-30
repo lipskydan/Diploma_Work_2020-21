@@ -1,8 +1,16 @@
 from django.db import models
 
+# MOTHERBOARD_CHOICES = [
+#     ('', ''),
+#     ('ASUS', 'ASUS'),
+#     ('ASROCK', 'ASROCK'),
+# ]
+
 
 class Motherboard(models.Model):
     __tablename__ = 'Motherboard'
+
+    # model = models.CharField('модель материнської плати', max_length=200, default='відсутній', choices=MOTHERBOARD_CHOICES)
 
     model = models.CharField('модель материнської плати', max_length=200, default='відсутній')
     serial_number = models.CharField('серійний номер', max_length=200, default='відсутній')
@@ -13,7 +21,7 @@ class Motherboard(models.Model):
     object = models.Manager()
 
     def __str__(self):
-        return self.name_for_user + ' - модель ' + str(self.model) + ' - серійний номер ' + str(self.serial_number)
+        return 'модель ' + str(self.model) + ' - серійний номер ' + str(self.serial_number)
 
     class Meta:
         verbose_name = 'Материнська плата'
@@ -27,7 +35,9 @@ class PC(models.Model):
     floor = models.IntegerField('номер поверху')
     room = models.IntegerField('номер кабінету')
 
-    motherboard = models.ForeignKey(Motherboard, on_delete=models.CASCADE, default='відсутній')
+    # motherboard = models.ForeignKey(Motherboard, on_delete=models.CASCADE, default='відсутній')
+    MOTHERBOARD_CHOICES=Motherboard.object.all()
+    motherboard = models.ForeignKey(Motherboard, on_delete=models.CASCADE)
 
     # end = models.DateField(default=None, blank=True, null=True)
     # pub_date = models.DateTimeField('дата створення')
