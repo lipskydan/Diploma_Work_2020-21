@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import PC, Motherboard
-from .forms import AddPcForm
+from .forms import AddPcForm, AddMotherboardForm
 
 
 def IT_items(request):
@@ -50,14 +50,20 @@ def add_pc(request):
 
     return render(request, 'IT_items/add_pc.html', {'form': form})
 
-def add_switch(request):
-    if request.method == 'POST':
 
-        # item = PC(inventory_number=request.POST['inventory_number'], floor=request.POST['floor'], room=request.POST['room'])
-        # item.save()
-        return HttpResponseRedirect(reverse('IT_items:IT_items'))
+def add_motherboard(request):
+    if request.method == 'POST':
+        form = AddMotherboardForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            motherboard = Motherboard(model=cd['motherboard_model'], serial_number=cd['motherboard_serial_number'])
+            motherboard.save()
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
-        return render(request, 'IT_items/add_pc.html')
+        form = AddMotherboardForm()
+        pass
+
+    return render(request, 'IT_items/add_motherboard.html', {'form': form})
 
 
 def item_delete(request, item_name, item_id):
