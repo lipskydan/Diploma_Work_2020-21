@@ -37,7 +37,7 @@ class PC(models.Model):
 
     # motherboard = models.ForeignKey(Motherboard, on_delete=models.CASCADE, default='відсутній')
     MOTHERBOARD_CHOICES=Motherboard.object.all()
-    motherboard = models.ForeignKey(Motherboard, on_delete=models.CASCADE)
+    motherboard = models.ForeignKey(Motherboard, on_delete=models.SET_NULL, null=True)
 
     # end = models.DateField(default=None, blank=True, null=True)
     # pub_date = models.DateTimeField('дата створення')

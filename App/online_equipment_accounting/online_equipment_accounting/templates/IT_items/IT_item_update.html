@@ -56,11 +56,11 @@
                                   <tr>
                                   <td>
                                       <p>Модель материнської плати:</p>
-                                      <input type="text" name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.motherboard.model }}" placeholder="Введіть модель материнської плати">
+                                      <input type="text" disabled name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.motherboard.model }}" placeholder="Введіть модель материнської плати">
                                   </td>
                                   <td>
                                       <p>Серійний номер материнської плати:</p>
-                                      <input type="text" name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.motherboard.serial_number }}" placeholder="Введіть серійний номер материнської плати">
+                                      <input type="text" disabled name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.motherboard.serial_number }}" placeholder="Введіть серійний номер материнської плати">
                                   </td>
                               </tr>
                               {% elif item.name == 'Switch' %}

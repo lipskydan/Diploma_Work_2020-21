@@ -1,0 +1,35 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+{{ item.name }} - {{ item.inventory_number }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+      <aside class="col-sm-10">
+         <div class="card">
+            <article class="card-body">
+                <div class="alert alert-info">
+
+                    {% if item.name == 'Motherboard' %}
+                        <h3 class="alert-heading">Материнська плата</h3>
+                        <hr>
+                        <h5>Модель: {{item.model}}</h5>
+                        <h5>Серійний номер: {{item.serial_number}}</h5>
+                        <hr>
+                    {% elif item.name == 'Switch' %}
+<!--                        <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>-->
+                    {% endif %}
+                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>
+                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update" class="btn btn-success">Редагування</a>
+
+
+                </div>
+            </article>
+         </div>
+      </aside>
+    </div>
+</div>
+{% endblock %}
+
