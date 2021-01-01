@@ -9,8 +9,13 @@ from .forms import AddPcForm
 
 def IT_items(request):
     items_pc = PC.objects.all()
+    # items_motherboard = Motherboard.object.all()
+    return render(request, 'IT_items/IT-items.html', {'items_pc': items_pc})
+
+
+def pc_accessories(request):
     items_motherboard = Motherboard.object.all()
-    return render(request, 'IT_items/IT-items.html', {'items_pc': items_pc, 'items_motherboard':items_motherboard})
+    return render(request, 'IT_items/pc_accessories.html', {'items_motherboard': items_motherboard})
 
 
 def item_detail(request, item_name, item_id):

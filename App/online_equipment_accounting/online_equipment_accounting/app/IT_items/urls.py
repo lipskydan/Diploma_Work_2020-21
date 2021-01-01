@@ -15,6 +15,7 @@ urlpatterns = [
     # url(r'^add-item/add-pc/$', views.add_pc, name='add_pc'),
 
     path('', views.IT_items, name='IT_items'),
+    path('pc_accessories', views.pc_accessories, name='pc_accessories'),
     path('add-item', views.add_item, name='add_item'),
     path('<str:item_name>/<int:item_id>', views.item_detail, name='item_detail'),
     path('<str:item_name>/<int:item_id>/del', views.item_delete, name='item_delete'),

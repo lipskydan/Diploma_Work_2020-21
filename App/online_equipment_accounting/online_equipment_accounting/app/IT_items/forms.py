@@ -36,3 +36,5 @@ class AddPcForm(forms.ModelForm):
         widgets = {
             'motherboard': forms.Select(attrs={'class': 'form-control'})
         }
+
+

@@ -13,9 +13,9 @@
                   {% csrf_token %}
                   <div class="">
                       <div class="form-group">
-                          <table class="table" border="1">
+                          <table class="table" border="0">
                               <tr>
-                                  <td>
+                                  <td align="justify">
                                       <!--Name of field and input-->
                                       {{ form.inventory_number.label_tag }} {{ form.inventory_number }}
 
@@ -32,9 +32,11 @@
                                   <td></td>
                               </tr>
                               <tr>
-                                  <td>
+                                  <td align="justify">
                                       <!--Name of field and input-->
-                                      {{ form.floor.label_tag }}{{ form.floor }}
+                                      {{ form.floor.label_tag }}
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      {{ form.floor }}
 
                                       <!--Show help text for field-->
                                       {% if form.floor.help_text %}
@@ -46,9 +48,9 @@
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
                                   </td>
-                                  <td>
+                                  <td align="justify">
                                       <!--Name of field and input-->
-                                      {{ form.room.label_tag }}{{ form.room }}
+                                      {{ form.room.label_tag }} {{ form.room }}
 
                                       <!--Show help text for field-->
                                       {% if form.room.help_text %}
@@ -62,9 +64,9 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td>
+                                  <td colspan="2" align="center">
                                       <!--Name of field and input-->
-                                      {{ form.motherboard.label_tag }}{{ form.motherboard }}
+                                      {{ form.motherboard.label_tag }} {{ form.motherboard }}
 
                                       <!--Show help text for field-->
                                       {% if form.motherboard.help_text %}
@@ -76,7 +78,7 @@
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
                                   </td>
-                                  <td></td>
+<!--                                  <td></td>-->
                           </table>
                       </div>
                   </div>
