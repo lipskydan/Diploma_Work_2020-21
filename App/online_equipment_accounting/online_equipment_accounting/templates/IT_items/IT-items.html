@@ -10,7 +10,19 @@
         <aside class="col-sm-10">
             <div class="card">
                 <article class="card-body">
-                    <h1>Список IT-обладнання</h1><br>
+                    <h1 align="center">Список IT-обладнання</h1><br>
+                </article>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <aside class="col-sm-10">
+            <div class="card">
+                <article class="card-body">
+                    <h1>Персональні комп'ютори</h1><br>
                     {% if items_pc|length > 0 %}
                     {% for el in items_pc %}
                     <div class="alert alert-info">
@@ -21,37 +33,13 @@
                     </div>
                     {% endfor %}
                     {% else %}
-                    <p>У нас ще немає обладнання</p>
+                    <div class="alert alert-info">
+                        <h3>У нас ще немає персональних комп'ютерів</h3>
+                    </div>
                     {% endif %}
                 </article>
             </div>
       </aside>
    </div>
 </div>
-
-
-<!--<div class="container mt-5">-->
-<!--    <div class="d-flex justify-content-center">-->
-<!--        <aside class="col-sm-10">-->
-<!--            <div class="card">-->
-<!--                <article class="card-body">-->
-<!--                    <h1>Список комплектуючих</h1><br>-->
-<!--                    {% if items_motherboard|length > 0 %}-->
-<!--                    {% for el in items_motherboard %}-->
-<!--                    <div class="alert alert-info">-->
-<!--                        <h2>Тип: {{ el.name_for_user }}</h2>-->
-<!--                        <h2>Модель: {{ el.model }}</h2>-->
-<!--                        <h2>Серійний номер: {{ el.serial_number }}</h2>-->
-<!--                        <a href="/IT_items/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>-->
-<!--&lt;!&ndash;                        <a href="{% url 'IT_items:item_detail' el.name el.id %}" class="btn btn-warning">Детальніше</a>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    {% endfor %}-->
-<!--                    {% else %}-->
-<!--                    <p>У нас ще немає обладнання</p>-->
-<!--                    {% endif %}-->
-<!--                </article>-->
-<!--            </div>-->
-<!--      </aside>-->
-<!--   </div>-->
-<!--</div>-->
 {% endblock %}

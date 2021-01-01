@@ -54,13 +54,37 @@
 
                               {% if item.name == 'PC' %}
                                   <tr>
-                                  <td>
-                                      <p>Модель материнської плати:</p>
-                                      <input type="text" disabled name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.motherboard.model }}" placeholder="Введіть модель материнської плати">
-                                  </td>
-                                  <td>
-                                      <p>Серійний номер материнської плати:</p>
-                                      <input type="text" disabled name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.motherboard.serial_number }}" placeholder="Введіть серійний номер материнської плати">
+                                      <td colspan="2">
+                                          <!--Name of field-->
+                                         {{ form.motherboard.label_tag }}
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                          <p>Модель:</p>
+                                          <input type="text" disabled name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.motherboard.model }}" placeholder="-">
+                                      </td>
+                                      <td>
+                                          <p>Серійний номер:</p>
+                                          <input type="text" disabled name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.motherboard.serial_number }}" placeholder="-">
+                                      </td>
+
+                                  </tr>
+                                  <tr>
+                                  <td colspan="2" align="center">
+                                      <p align="left">Оберіть нову материнську плату:</p>
+                                      <!--Name of input-->
+                                      {{ form.motherboard }}
+
+                                      <!--Show help text for field-->
+                                      {% if form.motherboard.help_text %}
+                                      <br><small style="color: grey">{{ form.motherboard.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.motherboard.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
                                   </td>
                               </tr>
                               {% elif item.name == 'Switch' %}
@@ -68,9 +92,6 @@
                               {% else %}
 
                               {% endif %}
-
-
-
 
                           </table>
                       </div>

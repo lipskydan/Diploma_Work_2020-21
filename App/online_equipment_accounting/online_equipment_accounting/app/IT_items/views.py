@@ -85,7 +85,9 @@ def item_delete(request, item_name, item_id):
     except:
         raise Http404('ERROR item_delete')
 
-    item.motherboard.delete()
+    # if item.motherboard:
+    #     item.motherboard.delete()
+
     item.delete()
 
     return HttpResponseRedirect(reverse('IT_items:IT_items'))
@@ -111,28 +113,15 @@ def item_update(request, item_name, item_id):
         item = PC.objects.get(id=item_id)
 
     if request.method == 'POST':
-        # form = AddPcForm(request.POST)
-        #
-        # if form.is_valid():
-        #     cd = form.cleaned_data
-        #
-        #     item.name = item.name
-        #
-        #     item.inventory_number = cd['inventory_number']
-        #     item.floor = cd['floor']
-        #     item.room = cd['room']
-        #
-        #     if item_name == 'PC':
-        #         item.motherboard.model = cd['motherboard_model']
-        #         item.motherboard.serial_number = cd['motherboard_serial_number']
+        form = AddPcForm(request.POST)
 
-        item.inventory_number = request.POST['inventory_number']
-        item.floor = request.POST['floor']
-        item.room = request.POST['room']
+        if form.is_valid():
+            cd = form.cleaned_data
 
-        if item_name == 'PC':
-            item.motherboard.model = request.POST['motherboard_model']
-            item.motherboard.serial_number = request.POST['motherboard_serial_number']
+            item.inventory_number = request.POST['inventory_number']
+            item.floor = request.POST['floor']
+            item.room = request.POST['room']
+            item.motherboard = cd['motherboard']
 
         try:
             item.save()
@@ -141,46 +130,27 @@ def item_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        return render(request, 'IT_items/IT_item_update.html', {'item': item})
+        form = AddPcForm()
+        return render(request, 'IT_items/IT_item_update.html', {'item': item, 'form': form})
 
 
 def pc_accessories_update(request, item_name, item_id):
     item = None
 
-    if item_name == 'PC':
-        item = PC.objects.get(id=item_id)
+    if item_name == 'Motherboard':
+        item = Motherboard.object.get(id=item_id)
 
     if request.method == 'POST':
-        # form = AddPcForm(request.POST)
-        #
-        # if form.is_valid():
-        #     cd = form.cleaned_data
-        #
-        #     item.name = item.name
-        #
-        #     item.inventory_number = cd['inventory_number']
-        #     item.floor = cd['floor']
-        #     item.room = cd['room']
-        #
-        #     if item_name == 'PC':
-        #         item.motherboard.model = cd['motherboard_model']
-        #         item.motherboard.serial_number = cd['motherboard_serial_number']
-
-        item.inventory_number = request.POST['inventory_number']
-        item.floor = request.POST['floor']
-        item.room = request.POST['room']
-
-        if item_name == 'PC':
-            item.motherboard.model = request.POST['motherboard_model']
-            item.motherboard.serial_number = request.POST['motherboard_serial_number']
+        item.model = request.POST['motherboard_model']
+        item.serial_number = request.POST['motherboard_serial_number']
 
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:IT_items'))
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
         except:
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        return render(request, 'IT_items/IT_item_update.html', {'item': item})
+        return render(request, 'IT_items/pc_accessories_update.html', {'item': item})
 
 
