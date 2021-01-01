@@ -1,5 +1,7 @@
 from django import forms
 
+from django.forms import widgets
+
 from .models import Motherboard, PC
 
 
@@ -18,7 +20,8 @@ class AddPcForm(forms.ModelForm):
 
     motherboard = forms.ModelChoiceField(queryset=Motherboard.object.all(), label='Материнська плата',
                                          empty_label='', required=False, help_text='Необов’язково',
-                                         localize=True, )
+                                         localize=True,
+                                         widget=widgets.Select(attrs={'size': 1}))
 
 
 
