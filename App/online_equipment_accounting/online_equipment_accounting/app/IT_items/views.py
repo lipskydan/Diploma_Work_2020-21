@@ -8,6 +8,8 @@ from django.views.generic import View
 from .models import PC, Motherboard
 from .forms import AddPcForm, AddMotherboardForm
 
+from .utils import render_to_pdf
+
 
 def IT_items(request):
     items_pc = PC.objects.all()
@@ -156,3 +158,18 @@ def pc_accessories_update(request, item_name, item_id):
         return render(request, 'IT_items/pc_accessories_update.html', {'item': item})
 
 
+class GeneratePdf(View):
+    def get(self, request, item_name, item_id):
+
+        item = None
+        try:
+            if item_name == 'PC':
+                item = PC.objects.get(id=item_id)
+        except:
+            raise Http404('ERROR GeneratePdf:get')
+
+        # getting the template
+        pdf = render_to_pdf('IT_items/invoice.html', {'item': item})
+
+        # rendering the template
+        return HttpResponse(pdf, content_type='application/pdf')

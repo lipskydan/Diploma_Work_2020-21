@@ -4,6 +4,8 @@ from django.urls import re_path
 
 from . import views
 
+from .views import GeneratePdf
+
 app_name = 'IT_items'
 urlpatterns = [
     # url(r'^$', views.IT_items, name='IT_items'),
@@ -23,6 +25,8 @@ urlpatterns = [
     path('<str:item_name>/<int:item_id>', views.item_detail, name='item_detail'),
     path('<str:item_name>/<int:item_id>/del', views.item_delete, name='item_delete'),
     path('<str:item_name>/<int:item_id>/update', views.item_update, name='item_update'),
+
+    path('<str:item_name>/<int:item_id>/pdf', GeneratePdf.as_view()),
 
     path('pc_accessories/<str:item_name>/<int:item_id>', views.pc_accessories_detail, name='item_detail'),
     path('pc_accessories/<str:item_name>/<int:item_id>/del', views.pc_accessories_delete, name='item_delete'),

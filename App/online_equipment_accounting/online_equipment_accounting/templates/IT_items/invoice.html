@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>
+        {% if item.name == 'PC' %}
+            {{ item.name }} - {{ item.inventory_number }}
+        {% elif item.name == 'Switch' %}
+        {% endif %}
+    </title>
+</head>
+<body>
+
+<table class="table" border="0">
+    <tr>
+        <td colspan="2">
+            <h2>Basic</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Equipment type: {{ item.name }}</p>
+        </td>
+        <td>
+            <p>Inventory number: {{ item.inventory_number }}</p>
+        </td>
+    </tr>
+    <tr>
+
+    </tr>
+    <tr>
+        <td colspan="2">
+            <h2>Location</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Floor: {{ item.floor }}</p>
+        </td>
+        <td>
+            <p>Cabinet: {{ item.room }}</p>
+        </td>
+    </tr>
+    <tr>
+
+    </tr>
+    <tr>
+        <td colspan="2">
+            <h2>Components</h2>
+        </td>
+    </tr>
+    <tr>
+
+    </tr>
+    <tr>
+        <td colspan="2">
+            <h2>Motherboard</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Model: {{item.motherboard.model}}</p>
+        </td>
+        <td>
+            <p>The serial number: {{item.motherboard.serial_number}}</p>
+        </td>
+    </tr>
+</table>
+
+
+<!--    <h2>Basic</h2>-->
+
+<!--    <h5>Equipment type: {{ item.name }}</h5>-->
+<!--    <h5>Inventory number: {{ item.inventory_number }}</h5>-->
+
+<!--    <h2>Location</h2>-->
+
+<!--    <h5>Floor: {{ item.floor }}</h5>-->
+<!--    <h5>Cabinet: {{ item.room }}</h5>-->
+
+<!--    <h2>Components</h2>-->
+
+<!--    <h3>Motherboard</h3>-->
+
+<!--    <h5>Model: {{item.motherboard.model}}</h5>-->
+<!--    <h5>The serial number: {{item.motherboard.serial_number}}</h5>-->
+</body>
+</html>
+
+
+
+
+
