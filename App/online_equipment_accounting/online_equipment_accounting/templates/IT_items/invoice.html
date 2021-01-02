@@ -1,97 +1,45 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>
-        {% if item.name == 'PC' %}
-            {{ item.name_for_user }} - поверх: {{ item.floor }} - кабінет: {{ item.room }} - інвентарний номер: {{ item.inventory_number }}
-        {% elif item.name == 'Switch' %}
-        {% endif %}
-    </title>
-</head>
-<body>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Генерація PDF</title>
+    <style type="text/css">
+      @page {
+        size: "A4";
+        border: 1px solid #999999;
+        margin: .4cm;
+      }
 
-<table class="table" border="0">
-    <tr>
-        <td colspan="2">
-            <h2>Basic</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p>Equipment type: {{ item.name }}</p>
-        </td>
-        <td>
-            <p>Inventory number: {{ item.inventory_number }}</p>
-        </td>
-    </tr>
-    <tr>
+       @font-face {
+        font-family: "Arial";
+        src: url("online_equipment_accounting/arial.ttf") format("truetype");
+        }
 
-    </tr>
-    <tr>
-        <td colspan="2">
-            <h2>Location</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p>Floor: {{ item.floor }}</p>
-        </td>
-        <td>
-            <p>Cabinet: {{ item.room }}</p>
-        </td>
-    </tr>
-    <tr>
+      body {
+        font-family: "Arial";
+        font-size: 20px
+        }
 
-    </tr>
-    <tr>
-        <td colspan="2">
-            <h2>Components</h2>
-        </td>
-    </tr>
-    <tr>
+      .container {
+        padding: .4cm;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h2>Основне</h2>
+        <p>Тип обладнання: {{ item_name_for_user }}</p>
+        <p>Інвентарний номер: {{ item_inventory_number }}</p>
 
-    </tr>
-    <tr>
-        <td colspan="2">
-            <h2>Motherboard</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p>Model: {{item.motherboard.model}}</p>
-        </td>
-        <td>
-            <p>The serial number: {{item.motherboard.serial_number}}</p>
-        </td>
-    </tr>
-</table>
+        <h2>Місцезнаходження</h2>
+        <p>Поверх: {{ item_floor }}</p>
+        <p>Кабінет: {{ item_room }}</p>
 
+        <h2>Компоненти</h2>
 
-<!--    <h2>Basic</h2>-->
-
-<!--    <h5>Equipment type: {{ item.name }}</h5>-->
-<!--    <h5>Inventory number: {{ item.inventory_number }}</h5>-->
-
-<!--    <h2>Location</h2>-->
-
-<!--    <h5>Floor: {{ item.floor }}</h5>-->
-<!--    <h5>Cabinet: {{ item.room }}</h5>-->
-
-<!--    <h2>Components</h2>-->
-
-<!--    <h3>Motherboard</h3>-->
-
-<!--    <h5>Model: {{item.motherboard.model}}</h5>-->
-<!--    <h5>The serial number: {{item.motherboard.serial_number}}</h5>-->
-</body>
+        <h2>Материнська плата</h2>
+        <p>Модель: {{item_motherboard_model}}</p>
+        <p>Серійний номер: {{item_motherboard_serial_number}}</p>
+    </div>
+  </body>
 </html>
-
-
-
-
-

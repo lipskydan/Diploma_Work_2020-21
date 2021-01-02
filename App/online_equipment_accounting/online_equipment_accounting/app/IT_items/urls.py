@@ -4,7 +4,7 @@ from django.urls import re_path
 
 from . import views
 
-from .views import GeneratePdf
+from .views import GeneratePDF
 
 app_name = 'IT_items'
 urlpatterns = [
@@ -26,7 +26,7 @@ urlpatterns = [
     path('<str:item_name>/<int:item_id>/del', views.item_delete, name='item_delete'),
     path('<str:item_name>/<int:item_id>/update', views.item_update, name='item_update'),
 
-    path('<str:item_name>/<int:item_id>/pdf', GeneratePdf.as_view()),
+    path('<str:item_name>/<int:item_id>/pdf', GeneratePDF.as_view()),
 
     path('pc_accessories/<str:item_name>/<int:item_id>', views.pc_accessories_detail, name='item_detail'),
     path('pc_accessories/<str:item_name>/<int:item_id>/del', views.pc_accessories_delete, name='item_delete'),

@@ -1,3 +1,7 @@
+import os
+
+from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.template.loader import get_template
@@ -158,8 +162,11 @@ def pc_accessories_update(request, item_name, item_id):
         return render(request, 'IT_items/pc_accessories_update.html', {'item': item})
 
 
-class GeneratePdf(View):
+class GeneratePDF(LoginRequiredMixin, View):
     def get(self, request, item_name, item_id):
+        """
+        Generate PDF from HTML template
+        """
 
         item = None
         try:
@@ -168,27 +175,29 @@ class GeneratePdf(View):
         except:
             raise Http404('ERROR GeneratePdf:get')
 
-        # getting the template
-        pdf = render_to_pdf('IT_items/invoice.html', {'item': item})
+        context = {
+            'item_id': item.id,
+            'item_name': item.name,
+            'item_name_for_user': item.name_for_user,
+            'item_inventory_number': item.inventory_number,
+            'item_floor': item.floor,
+            'item_room': item.room,
+            'item_motherboard_model': item.motherboard.model,
+            'item_motherboard_serial_number': item.motherboard.serial_number,
+        }
+
+        template = 'IT_items/invoice.html'
+        pdf = render_to_pdf(template, context)
+
         if pdf:
+            filename = 'item_{}_#_{}_floor_{}_room_{}.pdf'.format(item.name, item.inventory_number, item.floor, item.room)
+            content = 'inline; filename="{}"'.format(filename)
+
+            if request.GET.get('save_to_file') == 'true':
+                content = 'attachment; filename="{}"'.format(filename)
+
             response = HttpResponse(pdf, content_type='application/pdf')
-
-            filename = 'Invoice_%s.pdf' % ('12341231')
-
-            # filename = str(item.name) + ' - поверх ' + str(item.floor) + ' - кабінет ' + str(item.room) + ' - ' + str(
-            #     item.inventory_number) + '.pdf'
-
-            content = "inline; filename='%s'" % (filename)
-
-            # download = request.GET.get("download")
-            # if download:
-            #     content = "attachment; filename='%s'" % (filename)
-
             response['Content-Disposition'] = content
             return response
-        return HttpResponse("Not found")
 
-
-
-        # # rendering the template
-        # return HttpResponse(pdf, content_type='application/pdf')
+        return HttpResponse(status=404)
