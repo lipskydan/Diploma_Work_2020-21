@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>
         {% if item.name == 'PC' %}
-            {{ item.name }} - {{ item.inventory_number }}
+            {{ item.name_for_user }} - поверх: {{ item.floor }} - кабінет: {{ item.room }} - інвентарний номер: {{ item.inventory_number }}
         {% elif item.name == 'Switch' %}
         {% endif %}
     </title>
