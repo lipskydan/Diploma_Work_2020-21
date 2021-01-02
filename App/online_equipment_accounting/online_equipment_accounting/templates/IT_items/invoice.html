@@ -1,8 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Генерація PDF</title>
+      <link rel="stylesheet" href="online_equipment_accounting/templates/bootstrap_for_xhtml2pdf.css">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <title>Генерація PDF</title>
     <style type="text/css">
       @page {
         size: "A4";
@@ -26,20 +27,32 @@
     </style>
   </head>
   <body>
-    <div class="container">
-        <h2>Основне</h2>
-        <p>Тип обладнання: {{ item_name_for_user }}</p>
-        <p>Інвентарний номер: {{ item_inventory_number }}</p>
+<!--    <div class="container">-->
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+      <aside class="col-sm-10">
+         <div class="card">
+            <article class="card-body">
+                <div class="">
+                    <h2>Основне</h2>
+                    <p>Тип обладнання: {{ item_name_for_user }}</p>
+                    <p>Інвентарний номер: {{ item_inventory_number }}</p>
 
-        <h2>Місцезнаходження</h2>
-        <p>Поверх: {{ item_floor }}</p>
-        <p>Кабінет: {{ item_room }}</p>
+                    <h2>Місцезнаходження</h2>
+                    <p>Поверх: {{ item_floor }}</p>
+                    <p>Кабінет: {{ item_room }}</p>
 
-        <h2>Компоненти</h2>
+                    <h2>Компоненти</h2>
 
-        <h2>Материнська плата</h2>
-        <p>Модель: {{item_motherboard_model}}</p>
-        <p>Серійний номер: {{item_motherboard_serial_number}}</p>
+                    <h2>Материнська плата</h2>
+                    <p>Модель: {{item_motherboard_model}}</p>
+                    <p>Серійний номер: {{item_motherboard_serial_number}}</p>
+                </div>
+            </article>
+         </div>
+      </aside>
     </div>
+</div>
+<!--    </div>-->
   </body>
 </html>
