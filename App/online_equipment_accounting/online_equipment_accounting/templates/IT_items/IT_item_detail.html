@@ -33,8 +33,20 @@
                     {% elif item.name == 'Switch' %}
 <!--                        <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>-->
                     {% endif %}
-                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>
-                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/update" class="btn btn-success">Редагування</a>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>
+                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/update" class="btn btn-success">Редагування</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/render_to_pdf" class="btn btn-warning">Створити PDF</a>
+                        </div>
+                    </div>
+
+<!--                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>-->
+<!--                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/update" class="btn btn-success">Редагування</a>-->
+<!--                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/render_to_pdf" class="btn btn-success">Створити PDF</a>-->
 
 
                 </div>

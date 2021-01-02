@@ -1,7 +1,9 @@
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
+from django.template.loader import get_template
 
 from django.urls import reverse
+from django.views.generic import View
 
 from .models import PC, Motherboard
 from .forms import AddPcForm, AddMotherboardForm
