@@ -10,8 +10,6 @@ from django.db import models
 class Motherboard(models.Model):
     __tablename__ = 'Motherboard'
 
-    # model = models.CharField('модель материнської плати', max_length=200, default='відсутній', choices=MOTHERBOARD_CHOICES)
-
     model = models.CharField('модель материнської плати', max_length=200, default='відсутній')
     serial_number = models.CharField('серійний номер', max_length=200, default='відсутній')
 
@@ -35,7 +33,6 @@ class PC(models.Model):
     floor = models.IntegerField('номер поверху')
     room = models.IntegerField('номер кабінету')
 
-    # motherboard = models.ForeignKey(Motherboard, on_delete=models.CASCADE, default='відсутній')
     MOTHERBOARD_CHOICES=Motherboard.object.all()
     motherboard = models.ForeignKey(Motherboard, on_delete=models.SET_NULL, null=True)
 
