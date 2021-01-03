@@ -30,8 +30,10 @@ class PC(models.Model):
     __tablename__ = 'PC'
 
     inventory_number = models.CharField('інвентарний номер', max_length=200)
+
     floor = models.IntegerField('номер поверху')
     room = models.IntegerField('номер кабінету')
+    place = models.IntegerField('номер учбового місця', default=0, blank=True, null=True)
 
     MOTHERBOARD_CHOICES=Motherboard.object.all()
     motherboard = models.ForeignKey(Motherboard, on_delete=models.SET_NULL, null=True)

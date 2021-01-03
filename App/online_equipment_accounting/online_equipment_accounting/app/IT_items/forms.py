@@ -12,6 +12,8 @@ class AddPcForm(forms.ModelForm):
                                localize=True)
     room = forms.IntegerField(label='Номер кабінету', required=True, help_text='Обов’язково',
                               localize=True)
+    place = forms.IntegerField(label='Номер учбового місця', required=False, help_text='Необов’язково',
+                               localize=True)
 
     motherboard = forms.ModelChoiceField(queryset=Motherboard.object.all(), label='Материнська плата',
                                          empty_label='', required=False, help_text='Необов’язково',
@@ -39,4 +41,3 @@ class AddMotherboardForm(forms.ModelForm):
     class Meta:
         model = Motherboard
         fields = ['motherboard_serial_number', 'motherboard_model', ]
-

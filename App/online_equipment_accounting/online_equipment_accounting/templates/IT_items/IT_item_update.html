@@ -10,7 +10,7 @@
 {% block body %}
 <div class="container mt-5">
    <div class="d-flex justify-content-center">
-      <aside class="col-sm-6">
+      <aside class="col-sm-8">
          <div class="card">
             <article class="card-body">
 
@@ -22,80 +22,117 @@
 
                <form method="post">
                   {% csrf_token %}
-                  <div class="">
-                      <div class="form-group">
-                          <table class="table" border="0">
-                              <tr>
-                                  <td colspan="2">
-                                    <p>Тип обладнання:</p>
-                                      <input type="text" disabled name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
-                                  </td>
+                   <div class="form-group">
+                       <table class="col-sm-12" align="center" border="0">
+                           <tr>
+                               <td colspan="3">
+                                   <hr>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td colspan="3">
+                                   <p>Тип обладнання:</p>
+                                   <input type="text" disabled name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
+                               </td>
 
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <p>Інвентарний номер:</p>
-                                      <input type="text" name="inventory_number" id="inventory_number" class="form-control" value="{{ item.inventory_number }}" placeholder="Введіть інвентарний номер">
-                                  </td>
-                                  <td>
+                           </tr>
+                            <tr>
+                               <td colspan="3">
+                                   <hr>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   <p>Інвентарний номер:</p>
+                                   <input type="text" name="inventory_number" id="inventory_number" class="form-control" value="{{ item.inventory_number }}" placeholder="Введіть інвентарний номер">
+                               </td>
+                           </tr>
+                            <tr>
+                               <td colspan="3">
+                                   <hr>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   <p>Поверх:</p>
+                                   <input type="text" name="floor" id="floor" class="form-control" value="{{ item.floor }}" placeholder="Введіть номер поверху">
+                               </td>
+                               <td width="20px">
 
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <p>Поверх:</p>
-                                      <input type="text" name="floor" id="floor" class="form-control" value="{{ item.floor }}" placeholder="Введіть номер поверху">
-                                  </td>
-                                  <td>
-                                      <p>Кабінет:</p>
-                                      <input type="text" name="room" id="room" class="form-control" value="{{ item.room }}" placeholder="Введіть номер кабінету">
-                                  </td>
-                              </tr>
+                               </td>
+                               <td>
+                                   <p>Кабінет:</p>
+                                   <input type="text" name="room" id="room" class="form-control" value="{{ item.room }}" placeholder="Введіть номер кабінету">
+                               </td>
+                           </tr>
+                           <tr>
+                               <td colspan="3">
+                                   <br>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   <p>Учбове місце:</p>
+                                   <input type="text" name="place" id="place" class="form-control" value="{{ item.place }}" placeholder="Введіть номер поверху">
+                               </td>
+                           </tr>
 
-                              {% if item.name == 'PC' %}
-                                  <tr>
-                                      <td colspan="2">
-                                          <!--Name of field-->
-                                         {{ form.motherboard.label_tag }}
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          <p>Модель:</p>
-                                          <input type="text" disabled name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.motherboard.model }}" placeholder="-">
-                                      </td>
-                                      <td>
-                                          <p>Серійний номер:</p>
-                                          <input type="text" disabled name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.motherboard.serial_number }}" placeholder="-">
-                                      </td>
 
-                                  </tr>
-                                  <tr>
-                                  <td colspan="2" align="center">
-                                      <p align="left">Оберіть нову материнську плату:</p>
-                                      <!--Name of input-->
-                                      {{ form.motherboard }}
+                           {% if item.name == 'PC' %}
+                            <tr>
+                               <td colspan="3">
+                                   <hr>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td colspan="3">
+                                   <!--Name of field-->
+                                   {{ form.motherboard.label_tag }}
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   <p>Модель:</p>
+                                   <input type="text" disabled name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.motherboard.model }}" placeholder="-">
+                               </td>
+                               <td></td>
+                               <td>
+                                   <p>Серійний номер:</p>
+                                   <input type="text" disabled name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.motherboard.serial_number }}" placeholder="-">
+                               </td>
+                           </tr>
+                            <tr>
+                               <td colspan="3">
+                                   <br>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td colspan="3" align="center">
+                                   <p align="center">Оберіть нову материнську плату:</p>
+                                   <!--Name of input-->
+                                   {{ form.motherboard }}
 
-                                      <!--Show help text for field-->
-                                      {% if form.motherboard.help_text %}
-                                      <br><small style="color: grey">{{ form.motherboard.help_text }}</small>
-                                      {% endif %}
+                                   <!--Show help text for field-->
+                                   {% if form.motherboard.help_text %}
+                                   <br><small style="color: grey">{{ form.motherboard.help_text }}</small>
+                                   {% endif %}
 
-                                      <!--Show error text for field-->
-                                      {% for error in form.motherboard.errors %}
-                                      <p style="color: red">{{ error }}</p>
-                                      {% endfor %}
-                                  </td>
-                              </tr>
-                              {% elif item.name == 'Switch' %}
-
-                              {% else %}
-
-                              {% endif %}
-
-                          </table>
-                      </div>
-                  </div>
+                                   <!--Show error text for field-->
+                                   {% for error in form.motherboard.errors %}
+                                   <p style="color: red">{{ error }}</p>
+                                   {% endfor %}
+                               </td>
+                           </tr>
+                           {% elif item.name == 'Switch' %}
+                           {% else %}
+                           {% endif %}
+                            <tr>
+                               <td colspan="3">
+                                   <hr>
+                               </td>
+                           </tr>
+                       </table>
+                   </div>
                  <input type="submit" class="btn btn-success" value="Оновити">
                </form>
             </article>
@@ -104,4 +141,3 @@
    </div>
 </div>
 {% endblock %}
-

@@ -60,7 +60,7 @@ def add_pc(request):
             cd = form.cleaned_data
             # motherboard = Motherboard(model=cd['motherboard_model'], serial_number=cd['motherboard_serial_number'])
             # motherboard.save()
-            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], motherboard=cd['motherboard'])
+            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place= cd['place'], motherboard=cd['motherboard'])
             item.save()
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
     else:
@@ -129,6 +129,7 @@ def item_update(request, item_name, item_id):
             item.inventory_number = request.POST['inventory_number']
             item.floor = request.POST['floor']
             item.room = request.POST['room']
+            item.place = request.POST['place']
             item.motherboard = cd['motherboard']
 
         try:
