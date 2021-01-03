@@ -11,12 +11,12 @@
                <h1>Додавання ПК</h1>
                <form method="post">
                   {% csrf_token %}
-                  <div class="">
                       <div class="form-group">
-                          <table class="table" border="0">
-                              <tr>
-                                  <td align="justify">
-                                      <!--Name of field and input-->
+                          <div class="container">
+                              <hr>
+                              <div class="row">
+                                <div class="col-sm">
+                                    <!--Name of field and input-->
                                       {{ form.inventory_number.label_tag }} {{ form.inventory_number }}
 
                                       <!--Show help text for field-->
@@ -26,14 +26,14 @@
 
                                       <!--Show error text for field-->
                                       {% for error in form.inventory_number.errors %}
-                                      <p style="color: red">{{ error }}</p> 
-                                      {% endfor %}                          
-                                  </td>
-                                  <td></td>
-                              </tr>
-                              <tr>
-                                  <td align="justify">
-                                      <!--Name of field and input-->
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                                </div>
+                              </div>
+                              <hr>
+                              <div class="row">
+                                  <div class="col-sm">
+                                       <!--Name of field and input-->
                                       {{ form.floor.label_tag }}
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       {{ form.floor }}
@@ -47,9 +47,9 @@
                                       {% for error in form.floor.errors %}
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
-                                  </td>
-                                  <td align="justify">
-                                      <!--Name of field and input-->
+                                  </div>
+                                  <div class="col-sm">
+                                        <!--Name of field and input-->
                                       {{ form.room.label_tag }} {{ form.room }}
 
                                       <!--Show help text for field-->
@@ -61,10 +61,11 @@
                                       {% for error in form.room.errors %}
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td colspan="2" align="center">
+                                  </div>
+                              </div>
+                              <hr>
+                              <div class="row">
+                                  <div class="col-sm">
                                       <!--Name of field and input-->
                                       {{ form.motherboard.label_tag }} {{ form.motherboard }}
 
@@ -77,11 +78,11 @@
                                       {% for error in form.motherboard.errors %}
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
-                                  </td>
-                              </tr>
-                          </table>
+                                  </div>
+                              </div>
+                              <hr>
+                          </div>
                       </div>
-                  </div>
                   <input type="submit" class="btn btn-outline-success" value="Створити">
                </form>
             </article>
