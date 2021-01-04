@@ -31,13 +31,16 @@ class AddPcForm(forms.ModelForm):
 
 class AddMotherboardForm(forms.ModelForm):
     motherboard_serial_number = forms.CharField(label='Серійний номер материнської плати', max_length=30,
-                                                required=True, help_text='Обов’язково',
+                                                required=True, help_text='Обов’язково, у разі відсутності - вказати що відсутньо',
                                                 localize=True)
 
+    motherboard_brand = forms.CharField(label='Бренд материнської плати', max_length=30,
+                                        required=True, help_text='Обов’язково, у разі відсутності - вказати що відсутньо')
+
     motherboard_model = forms.CharField(label='Модель материнської плати', max_length=30,
-                                        required=True, help_text='Обов’язково',
+                                        required=True, help_text='Обов’язково, у разі відсутності - вказати що відсутньо',
                                         localize=True)
 
     class Meta:
         model = Motherboard
-        fields = ['motherboard_serial_number', 'motherboard_model', ]
+        fields = ['motherboard_serial_number', 'motherboard_brand', 'motherboard_model', ]

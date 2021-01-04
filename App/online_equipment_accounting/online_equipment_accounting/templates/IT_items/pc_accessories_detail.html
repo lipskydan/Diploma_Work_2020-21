@@ -1,7 +1,7 @@
 {% extends 'base_main.html' %}
 
 {% block title %}
-{{ item.name }} - {{ item.inventory_number }}
+{{ item.name }} - {{ item.serial_number }}
 {% endblock %}
 
 {% block body %}
@@ -15,8 +15,17 @@
                     {% if item.name == 'Motherboard' %}
                         <h3 class="alert-heading">Материнська плата</h3>
                         <hr>
+                        <h5>Бренд: {{item.brand}}</h5>
                         <h5>Модель: {{item.model}}</h5>
                         <h5>Серійний номер: {{item.serial_number}}</h5>
+                        <hr>
+                        {% if item.is_established%}
+                        <h5>Статус: Задіяна у роботі</h5>
+                        {% elif not item.is_established %}
+                        <h5>Статус: На складі</h5>
+                        {% else %}
+                        <h5>Задіяна: ???</h5>
+                        {% endif %}
                         <hr>
                     {% elif item.name == 'Switch' %}
 <!--                        <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>-->

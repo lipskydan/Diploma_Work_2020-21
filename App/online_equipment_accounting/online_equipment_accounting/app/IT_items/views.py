@@ -60,8 +60,28 @@ def add_pc(request):
             cd = form.cleaned_data
             # motherboard = Motherboard(model=cd['motherboard_model'], serial_number=cd['motherboard_serial_number'])
             # motherboard.save()
-            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place= cd['place'], motherboard=cd['motherboard'])
+
+            motherboard = cd['motherboard']
+            print('motherboard')
+            print(motherboard.model + ' ' + motherboard.serial_number + ' ' + str(motherboard.is_established))
+
+            # motherboard_new = Motherboard.object.get(model=motherboard.model, serial_number=motherboard.serial_number)
+            # motherboard_new.is_established = True
+            # motherboard_new.save()
+            #
+            # print('motherboard_new')
+            # print(motherboard_new.model + ' ' + motherboard_new.serial_number + ' ' + str(motherboard_new.is_established))
+
+            # motherboard_new = Motherboard.object.get(id=needed_motherboard.id)
+            # motherboard_new.is_established = True
+            # motherboard_new.save()
+
+            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place= cd['place'],
+                      motherboard=motherboard_new)
             item.save()
+
+
+
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
     else:
         form = AddPcForm()
@@ -75,7 +95,7 @@ def add_motherboard(request):
         form = AddMotherboardForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            motherboard = Motherboard(model=cd['motherboard_model'], serial_number=cd['motherboard_serial_number'])
+            motherboard = Motherboard(brand=cd['motherboard_brand'], model=cd['motherboard_model'], serial_number=cd['motherboard_serial_number'])
             motherboard.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -132,6 +152,15 @@ def item_update(request, item_name, item_id):
             item.place = request.POST['place']
             item.motherboard = cd['motherboard']
 
+            # motherboard_new = Motherboard.object.get(model=item.motherboard.model,
+            #                                          serial_number=item.motherboard.serial_number)
+            #
+            # motherboard_new.is_established = False
+            #
+            # item.motherboard = motherboard_new
+            # motherboard_new.save()
+
+
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
@@ -150,6 +179,7 @@ def pc_accessories_update(request, item_name, item_id):
         item = Motherboard.object.get(id=item_id)
 
     if request.method == 'POST':
+        item.brand = request.POST['motherboard_brand']
         item.model = request.POST['motherboard_model']
         item.serial_number = request.POST['motherboard_serial_number']
 
@@ -164,11 +194,12 @@ def pc_accessories_update(request, item_name, item_id):
 
 
 class GeneratePDF(LoginRequiredMixin, View):
-    def get(self, request, item_name, item_id):
+
+    @staticmethod
+    def get(request, item_name, item_id):
         """
         Generate PDF from HTML template
         """
-
         item = None
         try:
             if item_name == 'PC':
@@ -185,13 +216,14 @@ class GeneratePDF(LoginRequiredMixin, View):
             'item_room': item.room,
             'item_motherboard_model': item.motherboard.model,
             'item_motherboard_serial_number': item.motherboard.serial_number,
+            'item_place': item.place,
         }
 
         template = 'IT_items/invoice.html'
         pdf = render_to_pdf(template, context)
 
         if pdf:
-            filename = 'item_{}_#_{}_floor_{}_room_{}.pdf'.format(item.name, item.inventory_number, item.floor, item.room)
+            filename = '{}_#_{}_floor_{}_room_{}.pdf'.format(item.name, item.inventory_number, item.floor, item.room)
             content = 'inline; filename="{}"'.format(filename)
 
             if request.GET.get('save_to_file') == 'true':

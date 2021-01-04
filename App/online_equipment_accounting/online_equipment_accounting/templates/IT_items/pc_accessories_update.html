@@ -10,42 +10,51 @@
 {% block body %}
 <div class="container mt-5">
    <div class="d-flex justify-content-center">
-      <aside class="col-sm-6">
+      <aside class="col-sm-8">
          <div class="card">
             <article class="card-body">
 
                 {% if item.name == 'Motherboard' %}
-                    <h1>Оновлення материнської плати</h1>
-                {% elif item.name == 'Switch' %}
+                <h1>Оновлення материнської плати</h1>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="">
+                        <div class="form-group">
+                            <table class="table" border="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Тип обладнання:</p>
+                                        <input type="text" disabled name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Модель материнської плати:</p>
+                                        <input type="text" name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.model }}" placeholder="Введіть модель материнської плати">
+                                    </td>
+                                    <td>
+                                        <p>Бренд материнської плати:</p>
+                                        <input type="text" name="motherboard_brand" id="motherboard_brand" class="form-control" value="{{ item.brand }}" placeholder="Введіть тип обладнанням">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Серійний номер материнської плати:</p>
+                                        <input type="text" name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер материнської плати">
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Оновити">
+                </form>
+
+                 {% elif item.name == 'Switch' %}
                     <h1>Оновлення камутатора</h1>
                 {% endif %}
 
-               <form method="post">
-                  {% csrf_token %}
-                  <div class="">
-                      <div class="form-group">
-                          <table class="table" border="0">
-                              <tr>
-                                  <td colspan="2">
-                                      <p>Тип обладнання:</p>
-                                      <input type="text" disabled name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <p>Модель материнської плати:</p>
-                                      <input type="text" name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.model }}" placeholder="Введіть модель материнської плати">
-                                  </td>
-                                  <td>
-                                      <p>Серійний номер материнської плати:</p>
-                                      <input type="text" name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер материнської плати">
-                                  </td>
-                              </tr>
-                          </table>
-                      </div>
-                  </div>
-                 <input type="submit" class="btn btn-success" value="Оновити">
-               </form>
             </article>
          </div>
       </aside>

@@ -27,13 +27,12 @@
                         <div class="col-md-11"><h1>Материнські плати</h1></div>
                         <div class="col-md-1"> <h1><a href="add-item/add-motherboard" class="badge badge-info">+</a></h1></div>
                     </div>
-
-
                     {% if items_motherboard|length > 0 %}
                     {% for el in items_motherboard %}
                     <div class="alert alert-info">
-<!--                        <h2>Тип: {{ el.name_for_user }}</h2>-->
-                        <h2>Модель: {{ el.model }}</h2>
+<!--                        <h2>Бренд: {{el.brand}}</h2>-->
+<!--                        <h2>Модель: {{ el.model }}</h2>-->
+                        <h2>Модель: {{el.brand}} {{ el.model }}</h2>
                         <h2>Серійний номер: {{ el.serial_number }}</h2>
                         <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
                     </div>
@@ -43,11 +42,11 @@
                         <h3>У нас ще немає материнських плат</h3>
                     </div>
                     {% endif %}
-
-
                 </article>
             </div>
       </aside>
    </div>
 </div>
+
+
 {% endblock %}
