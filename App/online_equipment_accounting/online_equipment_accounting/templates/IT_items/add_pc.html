@@ -12,14 +12,14 @@
                <form method="post">
                   {% csrf_token %}
                       <div class="form-group">
-                          <table align="center" border="0">
+                          <table class="col-sm-12" align="center" border="0">
                               <tr>
                                   <td colspan="2">
                                       <hr>
                                   </td>
                               </tr>
                               <tr>
-                                  <td align="justify">
+                                  <td align="center">
                                       <!--Name of field and input-->
                                       {{ form.inventory_number.label_tag }}
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -44,10 +44,10 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td align="justify">
+                                  <td align="center" width="50%">
                                       <!--Name of field and input-->
                                       {{ form.floor.label_tag }}
-                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
                                       {{ form.floor }}
 
                                       <br>
@@ -62,7 +62,7 @@
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
                                   </td>
-                                  <td align="justify">
+                                  <td align="center">
                                       <!--Name of field and input-->
                                       {{ form.room.label_tag }} {{ form.room }}
 
@@ -85,7 +85,7 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td align="left">
+                                  <td align="center">
                                       <!--Name of field and input-->
                                       {{ form.place.label_tag }} {{ form.place }}
 
@@ -121,6 +121,11 @@
                                       {% for error in form.motherboard.errors %}
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2">
+                                      <hr>
                                   </td>
                               </tr>
                           </table>

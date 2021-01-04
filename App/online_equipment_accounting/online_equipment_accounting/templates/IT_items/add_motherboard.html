@@ -12,12 +12,19 @@
                <form method="post">
                   {% csrf_token %}
                    <div class="form-group">
-                        <table class="table" border="0">
+                        <table class="col-sm-12" align="center" border="0">
                             <tr>
-                                <td align="justify">
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
 
                                     <!--Name of field and input-->
                                     {{ form.motherboard_serial_number.label_tag }} {{ form.motherboard_serial_number }}
+
+                                    <br>
 
                                     <!--Show help text for field-->
                                     {% if form.motherboard_serial_number.help_text %}
@@ -31,11 +38,18 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td align="justify">
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
                                     <!--Name of field and input-->
                                     {{ form.motherboard_brand.label_tag }}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {{ form.motherboard_brand }}
+
+                                    <br>
 
                                     <!--Show help text for field-->
                                     {% if form.motherboard_brand.help_text %}
@@ -49,11 +63,18 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td align="justify">
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
                                     <!--Name of field and input-->
                                     {{ form.motherboard_model.label_tag }}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {{ form.motherboard_model }}
+
+                                    <br>
 
                                     <!--Show help text for field-->
                                     {% if form.motherboard_model.help_text %}
@@ -65,6 +86,63 @@
                                     <p style="color: red">{{ error }}</p>
                                     {% endfor %}
                                 </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.motherboard_integrated_graphics.label_tag }}
+                                    {{ form.motherboard_integrated_graphics }}
+                                    <br>
+                                    <!--Show help text for field-->
+                                    {% if form.motherboard_integrated_graphics.help_text %}
+                                    <small style="color: grey">{{ form.motherboard_integrated_graphics.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.motherboard_integrated_graphics.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                                <td align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.motherboard_integrated_sound_card.label_tag }}
+                                    {{ form.motherboard_integrated_sound_card }}
+                                    <br>
+                                    <!--Show help text for field-->
+                                    {% if form.motherboard_integrated_sound_card.help_text %}
+                                    <small style="color: grey">{{ form.motherboard_integrated_sound_card.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.motherboard_integrated_sound_card.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                                <td align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.motherboard_integrated_lan_card.label_tag }}
+                                    {{ form.motherboard_integrated_lan_card }}
+                                    <br>
+                                    <!--Show help text for field-->
+                                    {% if form.motherboard_integrated_lan_card.help_text %}
+                                    <small style="color: grey">{{ form.motherboard_integrated_lan_card.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.motherboard_integrated_lan_card.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
                             </tr>
                         </table>
                    </div>

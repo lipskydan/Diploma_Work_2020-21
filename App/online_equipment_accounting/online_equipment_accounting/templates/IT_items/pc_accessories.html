@@ -23,10 +23,19 @@
         <aside class="col-sm-10">
             <div class="card">
                 <article class="card-body">
-                     <div class="row">
-                        <div class="col-md-11"><h1>Материнські плати</h1></div>
-                        <div class="col-md-1"> <h1><a href="add-item/add-motherboard" class="badge badge-info">+</a></h1></div>
-                    </div>
+
+                    <table class="col-sm-12" border="0">
+                        <tr>
+                            <td>
+                              <div class="col-md-11"><h1>Материнські плати</h1></div>
+                            </td>
+                            <td align="center">
+                                <div class="col-md-1"> <h1><a href="add-item/add-motherboard" class="badge badge-info">+</a></h1></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+
                     {% if items_motherboard|length > 0 %}
                     {% for el in items_motherboard %}
                     <div class="alert alert-info">

@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.template.loader import get_template
 
 from django.urls import reverse
+from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import View
 
 from .models import PC, Motherboard
@@ -58,29 +59,9 @@ def add_pc(request):
         form = AddPcForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            # motherboard = Motherboard(model=cd['motherboard_model'], serial_number=cd['motherboard_serial_number'])
-            # motherboard.save()
 
-            motherboard = cd['motherboard']
-            print('motherboard')
-            print(motherboard.model + ' ' + motherboard.serial_number + ' ' + str(motherboard.is_established))
-
-            # motherboard_new = Motherboard.object.get(model=motherboard.model, serial_number=motherboard.serial_number)
-            # motherboard_new.is_established = True
-            # motherboard_new.save()
-            #
-            # print('motherboard_new')
-            # print(motherboard_new.model + ' ' + motherboard_new.serial_number + ' ' + str(motherboard_new.is_established))
-
-            # motherboard_new = Motherboard.object.get(id=needed_motherboard.id)
-            # motherboard_new.is_established = True
-            # motherboard_new.save()
-
-            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place= cd['place'],
-                      motherboard=motherboard_new)
+            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place= cd['place'], motherboard=cd['motherboard'])
             item.save()
-
-
 
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
     else:
@@ -95,7 +76,11 @@ def add_motherboard(request):
         form = AddMotherboardForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            motherboard = Motherboard(brand=cd['motherboard_brand'], model=cd['motherboard_model'], serial_number=cd['motherboard_serial_number'])
+            motherboard = Motherboard(brand=cd['motherboard_brand'], model=cd['motherboard_model'],
+                                      serial_number=cd['motherboard_serial_number'],
+                                      integrated_graphics=cd['motherboard_integrated_graphics'],
+                                      integrated_sound_card=cd['motherboard_integrated_sound_card'],
+                                      integrated_lan_card=cd['motherboard_integrated_lan_card'])
             motherboard.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -181,7 +166,10 @@ def pc_accessories_update(request, item_name, item_id):
     if request.method == 'POST':
         item.brand = request.POST['motherboard_brand']
         item.model = request.POST['motherboard_model']
-        item.serial_number = request.POST['motherboard_serial_number']
+
+        item.integrated_graphics = True if request.POST.get('motherboard_integrated_graphics') else False
+        item.integrated_sound_card = True if request.POST.get('motherboard_integrated_sound_card') else False
+        item.integrated_lan_card = True if request.POST.get('motherboard_integrated_lan_card') else False
 
         try:
             item.save()

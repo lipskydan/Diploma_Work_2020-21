@@ -27,10 +27,37 @@
                     <hr>
                     {% if item.name == 'PC' %}
                         <h3 class="alert-heading">Материнська плата</h3>
+
+                        {% if item.motherboard%}
+                            <hr>
+                            <h5>Бренд: {{item.motherboard.brand}}</h5>
+                            <h5>Модель: {{item.motherboard.model}}</h5>
+                            <h5>Серійний номер: {{item.motherboard.serial_number}}</h5>
+                            <hr>
+
+                            {% if item.motherboard.integrated_graphics%}
+                                <h5>Інтегрована відеокарта: наявна</h5>
+                            {% else %}
+                                <h5>Інтегрована відеокарта: відсутня</h5>
+                            {% endif %}
+
+                            {% if item.motherboard.integrated_sound_card%}
+                                <h5>Інтегрована звукова-карта: наявна</h5>
+                            {% else %}
+                                <h5>Інтегрована звукова-карта: відсутня</h5>
+                            {% endif %}
+
+                            {% if item.motherboard.integrated_lan_card%}
+                                <h5>Інтегрована мережева-карта: наявна</h5>
+                            {% else %}
+                                <h5>Інтегрована мережева-карта: відсутня</h5>
+                            {% endif %}
+                        {% else %}
+                            <h5>Відсутня</h5>
+                        {% endif %}
+
                         <hr>
-                        <h5>Модель: {{item.motherboard.model}}</h5>
-                        <h5>Серійний номер: {{item.motherboard.serial_number}}</h5>
-                        <hr>
+
                     {% elif item.name == 'Switch' %}
 <!--                        <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>-->
                     {% endif %}

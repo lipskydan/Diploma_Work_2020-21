@@ -42,7 +42,7 @@
                                </td>
                            </tr>
                            <tr>
-                               <td>
+                               <td colspan="3">
                                    <p>Інвентарний номер:</p>
                                    <input type="text" name="inventory_number" id="inventory_number" class="form-control" value="{{ item.inventory_number }}" placeholder="Введіть інвентарний номер">
                                </td>
@@ -53,14 +53,14 @@
                                </td>
                            </tr>
                            <tr>
-                               <td>
+                               <td width="49%">
                                    <p>Поверх:</p>
                                    <input type="text" name="floor" id="floor" class="form-control" value="{{ item.floor }}" placeholder="Введіть номер поверху">
                                </td>
-                               <td width="20px">
+                               <td width="2%">
 
                                </td>
-                               <td>
+                               <td width="49%">
                                    <p>Кабінет:</p>
                                    <input type="text" name="room" id="room" class="form-control" value="{{ item.room }}" placeholder="Введіть номер кабінету">
                                </td>
@@ -92,13 +92,63 @@
                            </tr>
                            <tr>
                                <td>
+                                   <p>Бренд:</p>
+                                   <input type="text" disabled name="motherboard_brand" id="motherboard_brand" class="form-control" value="{{ item.motherboard.brand }}" placeholder="-">
+                               </td>
+                               <td>
+                               </td>
+                               <td>
                                    <p>Модель:</p>
                                    <input type="text" disabled name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.motherboard.model }}" placeholder="-">
                                </td>
-                               <td></td>
-                               <td>
+
+
+                           </tr>
+                           <tr>
+                               <td colspan="3">
                                    <p>Серійний номер:</p>
                                    <input type="text" disabled name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.motherboard.serial_number }}" placeholder="-">
+                               </td>
+                           </tr>
+                           <tr>
+                               <td colspan="3">
+                                   <br>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   <label>
+                                       Інтегрована відеокарта:
+                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <input disabled type="checkbox" name=motherboard_integrated_graphics id="motherboard_integrated_graphics" {% if item.motherboard.integrated_graphics %} checked="checked" {% endif %}>
+                                   </label>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td colspan="3">
+                                   <br>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   <label>
+                                       Інтегрована звукова-карта:
+                                       &nbsp;&nbsp;&nbsp;
+                                       <input disabled type="checkbox" name="motherboard_integrated_sound_card" id="motherboard_integrated_sound_card" {% if item.motherboard.integrated_sound_card %} checked="checked" {% endif %}>
+                                   </label>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td colspan="3">
+                                   <br>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   <label>
+                                       Інтегрована мережева-карта:
+                                       <input disabled type="checkbox" name="motherboard_integrated_lan_card" id="motherboard_integrated_lan_card" {% if item.motherboard.integrated_lan_card %} checked="checked" {% endif %}>
+                                   </label>
                                </td>
                            </tr>
                             <tr>
@@ -123,14 +173,16 @@
                                    {% endfor %}
                                </td>
                            </tr>
-                           {% elif item.name == 'Switch' %}
-                           {% else %}
-                           {% endif %}
-                            <tr>
+                           <tr>
                                <td colspan="3">
                                    <hr>
                                </td>
                            </tr>
+                           {% elif item.name == 'Switch' %}
+                           {% else %}
+                           {% endif %}
+
+
                        </table>
                    </div>
                  <input type="submit" class="btn btn-success" value="Оновити">

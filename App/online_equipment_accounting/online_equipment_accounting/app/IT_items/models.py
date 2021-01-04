@@ -12,7 +12,12 @@ class Motherboard(models.Model):
 
     brand = models.CharField('бренд материнської плати', max_length=200, default='відсутній')
     model = models.CharField('модель материнської плати', max_length=200, default='відсутній')
-    serial_number = models.CharField('серійний номер', max_length=200, default='відсутній')
+
+    serial_number = models.CharField('серійний номер', max_length=200, unique=True)
+
+    integrated_graphics = models.BooleanField(default=False)
+    integrated_sound_card = models.BooleanField(default=False)
+    integrated_lan_card = models.BooleanField(default=False)
 
     # is_established = models.BooleanField(default=False)
 
@@ -22,7 +27,7 @@ class Motherboard(models.Model):
     object = models.Manager()
 
     def __str__(self):
-        return 'модель ' + str(self.model) + ' - серійний номер ' + str(self.serial_number)
+        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - серійний номер ' + str(self.serial_number)
 
     class Meta:
         verbose_name = 'Материнська плата'
@@ -32,7 +37,7 @@ class Motherboard(models.Model):
 class PC(models.Model):
     __tablename__ = 'PC'
 
-    inventory_number = models.CharField('інвентарний номер', max_length=200)
+    inventory_number = models.CharField('інвентарний номер', max_length=200, unique=True)
 
     floor = models.IntegerField('номер поверху')
     room = models.IntegerField('номер кабінету')
