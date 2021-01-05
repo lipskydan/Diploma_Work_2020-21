@@ -34,6 +34,28 @@ class Motherboard(models.Model):
         verbose_name_plural = 'Материнські плати'
 
 
+class PowerSupply(models.Model):
+    __tablename__ = 'PowerSupply'
+
+    brand = models.CharField('бренд блока живлення', max_length=200, default='відсутній')
+    model = models.CharField('модель блока живлення', max_length=200, default='відсутній')
+
+    serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
+    inventory_number = models.CharField('інвентарний номер', max_length=200, unique=True, default='відсутній')
+
+    name_for_user = 'Блока живлення'
+    name = 'Power_Supply'
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - серійний номер ' + str(self.serial_number)
+
+    class Meta:
+        verbose_name = 'Блок живлення'
+        verbose_name_plural = 'Блоки живлення'
+
+
 class PC(models.Model):
     __tablename__ = 'PC'
 
