@@ -44,6 +44,8 @@ def pc_accessories_detail(request, item_name, item_id):
     try:
         if item_name == 'Motherboard':
             item = Motherboard.object.get(id=item_id)
+        if item_name == 'PowerSupply':
+            item = PowerSupply.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_detail')
 
@@ -129,14 +131,14 @@ def pc_accessories_delete(request, item_name, item_id):
     try:
         if item_name == 'Motherboard':
             item = Motherboard.object.get(id=item_id)
+        elif item_name == 'PowerSupply':
+            item = PowerSupply.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_delete')
 
     item.delete()
 
     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-
-
 
 
 def item_update(request, item_name, item_id):
@@ -177,19 +179,23 @@ def item_update(request, item_name, item_id):
         return render(request, 'IT_items/IT_item_update.html', {'item': item, 'form': form})
 
 
-def pc_accessories_update(request, item_name, item_id):
+def motherboard_update(request, item_name, item_id):
     item = None
 
     if item_name == 'Motherboard':
         item = Motherboard.object.get(id=item_id)
 
     if request.method == 'POST':
-        item.brand = request.POST['motherboard_brand']
-        item.model = request.POST['motherboard_model']
 
-        item.integrated_graphics = True if request.POST.get('motherboard_integrated_graphics') else False
-        item.integrated_sound_card = True if request.POST.get('motherboard_integrated_sound_card') else False
-        item.integrated_lan_card = True if request.POST.get('motherboard_integrated_lan_card') else False
+        if item_name == 'Motherboard':
+            item.brand = request.POST['motherboard_brand']
+            item.model = request.POST['motherboard_model']
+
+            item.serial_number = request.POST['motherboard_serial_number']
+
+            item.integrated_graphics = True if request.POST.get('motherboard_integrated_graphics') else False
+            item.integrated_sound_card = True if request.POST.get('motherboard_integrated_sound_card') else False
+            item.integrated_lan_card = True if request.POST.get('motherboard_integrated_lan_card') else False
 
         try:
             item.save()
@@ -198,7 +204,31 @@ def pc_accessories_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        return render(request, 'IT_items/pc_accessories_update.html', {'item': item})
+        return render(request, 'IT_items/motherboard_update.html', {'item': item})
+
+
+def power_supply_update(request, item_name, item_id):
+    item = None
+
+    if item_name == 'PowerSupply':
+        item = PowerSupply.objects.get(id=item_id)
+
+    if request.method == 'POST':
+
+        if item_name == 'PowerSupply':
+            item.brand = request.POST['power_supply_brand']
+            item.model = request.POST['power_supply_model']
+            item.serial_or_inventory_number = request.POST['power_supply_serial_number_or_inventory_number']
+            item.power_consumption = request.POST['power_supply_power_consumption']
+
+        try:
+            item.save()
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+        except:
+            return 'При обновлении оборудывания произошла ошибка'
+
+    else:
+        return render(request, 'IT_items/power_supply_update.html', {'item': item})
 
 
 class GeneratePDF(LoginRequiredMixin, View):

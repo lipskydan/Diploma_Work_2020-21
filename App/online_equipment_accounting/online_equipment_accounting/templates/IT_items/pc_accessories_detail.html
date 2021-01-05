@@ -1,7 +1,11 @@
 {% extends 'base_main.html' %}
 
 {% block title %}
+{% if item.name == 'Motherboard' %}
 {{ item.name }} - {{ item.serial_number }}
+{% elif item.name == 'PowerSupply' %}
+{{ item.name }} - {{ item.serial_or_inventory_number }}
+{% endif %}
 {% endblock %}
 
 {% block body %}
@@ -12,9 +16,11 @@
             <article class="card-body">
                 <div class="alert alert-info">
 
+                    <h3 class="alert-heading">{{ item.name_for_user }}</h3>
+                    <hr>
+
                     {% if item.name == 'Motherboard' %}
-                        <h3 class="alert-heading">Материнська плата</h3>
-                        <hr>
+
                         <h5>Бренд: {{item.brand}}</h5>
                         <h5>Модель: {{item.model}}</h5>
                         <h5>Серійний номер: {{item.serial_number}}</h5>
@@ -40,13 +46,22 @@
 
                         <hr>
 
+                    {% elif item.name == 'PowerSupply' %}
 
-                    {% elif item.name == 'Switch' %}
-<!--                        <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>-->
+                        <h5>Бренд: {{item.brand}}</h5>
+                        <h5>Модель: {{item.model}}</h5>
+                        <h5>Серійний номер: {{item.serial_or_inventory_number}}</h5>
+                        <h5>Максимальна споживана потужність від мережі: {{item.power_consumption}} Вт</h5>
+                        <hr>
+
                     {% endif %}
-                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>
-                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update" class="btn btn-success">Редагування</a>
 
+                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>
+                    {% if item.name == 'Motherboard' %}
+                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-motherboard" class="btn btn-success">Редагування</a>
+                    {% elif item.name == 'PowerSupply' %}
+                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-power-supply" class="btn btn-success">Редагування</a>
+                    {% endif %}
 
                 </div>
             </article>

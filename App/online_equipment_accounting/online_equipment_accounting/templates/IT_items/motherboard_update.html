@@ -3,8 +3,6 @@
 {% block title %}
     {% if item.name == 'Motherboard' %}
     Оновлення материнської плати
-    {% elif item.name == 'Switch' %}
-    Оновлення комутатора
     {% endif %}
 {% endblock %}
 {% block body %}
@@ -40,11 +38,11 @@
                                 </tr>
                                 <tr>
                                     <td width="50%">
-                                        <p>Модель материнської плати:</p>
+                                        <p>Модель:</p>
                                         <input type="text" name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.model }}" placeholder="Введіть модель материнської плати">
                                     </td>
                                     <td>
-                                        <p>Бренд материнської плати:</p>
+                                        <p>Бренд:</p>
                                         <input type="text" name="motherboard_brand" id="motherboard_brand" class="form-control" value="{{ item.brand }}" placeholder="Введіть тип обладнанням">
                                     </td>
                                 </tr>
@@ -55,7 +53,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        <p>Серійний номер материнської плати:</p>
+                                        <p>Серійний номер:</p>
                                         <input type="text" name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер материнської плати">
                                     </td>
                                 </tr>
@@ -110,9 +108,6 @@
                     </div>
                     <input type="submit" class="btn btn-success" value="Оновити">
                 </form>
-
-                 {% elif item.name == 'Switch' %}
-                    <h1>Оновлення камутатора</h1>
                 {% endif %}
 
             </article>

@@ -14,7 +14,7 @@ class Motherboard(models.Model):
     brand = models.CharField('бренд материнської плати', max_length=200, default='відсутній')
     model = models.CharField('модель материнської плати', max_length=200, default='відсутній')
 
-    serial_number = models.CharField('серійний номер', max_length=200, unique=True)
+    serial_number = models.CharField('серійний номер', max_length=200, unique=False)
 
     integrated_graphics = models.BooleanField(default=False)
     integrated_sound_card = models.BooleanField(default=False)
@@ -49,7 +49,7 @@ class PowerSupply(models.Model):
     power_consumption = models.IntegerField('споживана потужність')
 
     name_for_user = 'Блок живлення'
-    name = 'Power_Supply'
+    name = 'PowerSupply'
 
     objects = models.Manager()
 
