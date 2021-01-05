@@ -25,7 +25,7 @@ urlpatterns = [
 
     path('<str:item_name>/<int:item_id>', views.item_detail, name='item_detail'),
     path('<str:item_name>/<int:item_id>/del', views.item_delete, name='item_delete'),
-    path('<str:item_name>/<int:item_id>/update', views.item_update, name='item_update'),
+    path('<str:item_name>/<int:item_id>/update-pc', views.pc_update, name='pc_update'),
 
     path('<str:item_name>/<int:item_id>/pdf', GeneratePDF.as_view()),
 

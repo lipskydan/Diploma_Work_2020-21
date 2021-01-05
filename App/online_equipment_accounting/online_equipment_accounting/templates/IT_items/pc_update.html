@@ -1,0 +1,174 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+    Оновлення ПК
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <aside class="col-sm-8">
+            <div class="card">
+                <article class="card-body">
+                    <h1>Оновлення ПК</h1>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <table class="col-sm-12" align="center" border="0">
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Тип обладнання:</p>
+                                        <input type="text" disabled name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Інвентарний номер:</p>
+                                        <input type="text" name="inventory_number" id="inventory_number" class="form-control" value="{{ item.inventory_number }}" placeholder="Введіть інвентарний номер">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="49%">
+                                        <p>Поверх:</p>
+                                        <input type="text" name="floor" id="floor" class="form-control" value="{{ item.floor }}" placeholder="Введіть номер поверху">
+                                    </td>
+                                    <td width="2%">
+
+                                    </td>
+                                    <td width="49%">
+                                        <p>Кабінет:</p>
+                                        <input type="text" name="room" id="room" class="form-control" value="{{ item.room }}" placeholder="Введіть номер кабінету">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Учбове місце:</p>
+                                        <input type="text" name="place" id="place" class="form-control" value="{{ item.place }}" placeholder="Введіть номер поверху">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <!--Name of field-->
+                                        {{ form.motherboard.label_tag }}
+                               </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Бренд:</p>
+                                        <input type="text" disabled name="motherboard_brand" id="motherboard_brand" class="form-control" value="{{ item.motherboard.brand }}" placeholder="-">
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <p>Модель:</p>
+                                        <input type="text" disabled name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.motherboard.model }}" placeholder="-">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Серійний номер:</p>
+                                        <input type="text" disabled name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.motherboard.serial_number }}" placeholder="-">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Інтегрована відеокарта:
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input disabled type="checkbox" name=motherboard_integrated_graphics id="motherboard_integrated_graphics" {% if item.motherboard.integrated_graphics %} checked="checked" {% endif %}>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Інтегрована звукова-карта:
+                                            &nbsp;&nbsp;&nbsp;
+                                            <input disabled type="checkbox" name="motherboard_integrated_sound_card" id="motherboard_integrated_sound_card" {% if item.motherboard.integrated_sound_card %} checked="checked" {% endif %}>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>
+                                            Інтегрована мережева-карта:
+                                            <input disabled type="checkbox" name="motherboard_integrated_lan_card" id="motherboard_integrated_lan_card" {% if item.motherboard.integrated_lan_card %} checked="checked" {% endif %}>
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <p align="center">Оберіть нову материнську плату:</p>
+                                        <!--Name of input-->
+                                        {{ form.motherboard }}
+
+                                        <!--Show help text for field-->
+                                        {% if form.motherboard.help_text %}
+                                        <br><small style="color: grey">{{ form.motherboard.help_text }}</small>
+                                        {% endif %}
+
+                                        <!--Show error text for field-->
+                                        {% for error in form.motherboard.errors %}
+                                        <p style="color: red">{{ error }}</p>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <input type="submit" class="btn btn-success" value="Оновити">
+                    </form>
+                </article>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

@@ -44,8 +44,6 @@ class PowerSupply(models.Model):
     serial_or_inventory_number = models.CharField('серійний або інвентарний номер',
                                                   max_length=200, unique=True, default='відсутній')
 
-    # inventory_number = models.CharField(' номер', max_length=200, unique=True, default='відсутній')
-
     power_consumption = models.IntegerField('споживана потужність')
 
     name_for_user = 'Блок живлення'

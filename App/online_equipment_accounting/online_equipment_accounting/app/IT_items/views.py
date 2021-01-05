@@ -141,7 +141,7 @@ def pc_accessories_delete(request, item_name, item_id):
     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
 
 
-def item_update(request, item_name, item_id):
+def pc_update(request, item_name, item_id):
     item = None
 
     if item_name == 'PC':
@@ -159,14 +159,6 @@ def item_update(request, item_name, item_id):
             item.place = request.POST['place']
             item.motherboard = cd['motherboard']
 
-            # motherboard_new = Motherboard.object.get(model=item.motherboard.model,
-            #                                          serial_number=item.motherboard.serial_number)
-            #
-            # motherboard_new.is_established = False
-            #
-            # item.motherboard = motherboard_new
-            # motherboard_new.save()
-
 
         try:
             item.save()
@@ -176,7 +168,7 @@ def item_update(request, item_name, item_id):
 
     else:
         form = AddPcForm()
-        return render(request, 'IT_items/IT_item_update.html', {'item': item, 'form': form})
+        return render(request, 'IT_items/pc_update.html', {'item': item, 'form': form})
 
 
 def motherboard_update(request, item_name, item_id):
