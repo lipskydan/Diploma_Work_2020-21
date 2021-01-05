@@ -39,8 +39,6 @@
                     {% if items_motherboard|length > 0 %}
                     {% for el in items_motherboard %}
                     <div class="alert alert-info">
-<!--                        <h2>Бренд: {{el.brand}}</h2>-->
-<!--                        <h2>Модель: {{ el.model }}</h2>-->
                         <h2>Модель: {{el.brand}} {{ el.model }}</h2>
                         <h2>Серійний номер: {{ el.serial_number }}</h2>
                         <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
@@ -49,6 +47,43 @@
                     {% else %}
                     <div class="alert alert-info">
                         <h3>У нас ще немає материнських плат</h3>
+                    </div>
+                    {% endif %}
+                </article>
+            </div>
+      </aside>
+   </div>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <aside class="col-sm-10">
+            <div class="card">
+                <article class="card-body">
+
+                    <table class="col-sm-12" border="0">
+                        <tr>
+                            <td>
+                              <div class="col-md-11"><h1>Блоки живлення</h1></div>
+                            </td>
+                            <td align="center">
+                                <div class="col-md-1"> <h1><a href="add-item/add-power-supply" class="badge badge-info">+</a></h1></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+
+                    {% if items_power_supply|length > 0 %}
+                    {% for el in items_power_supply %}
+                    <div class="alert alert-info">
+                        <h2>Модель: {{el.brand}} {{ el.model }}</h2>
+                        <h2>Серійний номер: {{ el.serial_or_inventory_number }}</h2>
+                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="alert alert-info">
+                        <h3>У нас ще немає блоків живлення</h3>
                     </div>
                     {% endif %}
                 </article>

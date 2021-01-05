@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # MOTHERBOARD_CHOICES = [
 #     ('', ''),
 #     ('ASUS', 'ASUS'),
@@ -27,7 +28,7 @@ class Motherboard(models.Model):
     object = models.Manager()
 
     def __str__(self):
-        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - серійний номер ' + str(self.serial_number)
+        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_number)
 
     class Meta:
         verbose_name = 'Материнська плата'
@@ -40,16 +41,20 @@ class PowerSupply(models.Model):
     brand = models.CharField('бренд блока живлення', max_length=200, default='відсутній')
     model = models.CharField('модель блока живлення', max_length=200, default='відсутній')
 
-    serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
-    inventory_number = models.CharField('інвентарний номер', max_length=200, unique=True, default='відсутній')
+    serial_or_inventory_number = models.CharField('серійний або інвентарний номер',
+                                                  max_length=200, unique=True, default='відсутній')
 
-    name_for_user = 'Блока живлення'
+    # inventory_number = models.CharField(' номер', max_length=200, unique=True, default='відсутній')
+
+    power_consumption = models.IntegerField('споживана потужність')
+
+    name_for_user = 'Блок живлення'
     name = 'Power_Supply'
 
     objects = models.Manager()
 
     def __str__(self):
-        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - серійний номер ' + str(self.serial_number)
+        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_or_inventory_number)
 
     class Meta:
         verbose_name = 'Блок живлення'
@@ -78,7 +83,8 @@ class PC(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name + ' - поверх ' + str(self.floor) + ' - кабінет ' + str(self.room) + ' - ' + str(self.inventory_number)
+        return self.name + ' - поверх ' + str(self.floor) + ' - кабінет ' + str(self.room) + ' - ' + str(
+            self.inventory_number)
 
     class Meta:
         verbose_name = 'Персональний комп\'ютор'

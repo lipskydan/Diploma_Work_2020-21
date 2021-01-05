@@ -21,6 +21,7 @@ urlpatterns = [
     path('add-item', views.add_item, name='add_item'),
     path('add-item/add-pc', views.add_pc, name='add_pc'),
     path('add-item/add-motherboard', views.add_motherboard, name='add_motherboard'),
+    path('add-item/add-power-supply', views.add_power_supply, name='add_power_supply'),
 
     path('<str:item_name>/<int:item_id>', views.item_detail, name='item_detail'),
     path('<str:item_name>/<int:item_id>/del', views.item_delete, name='item_delete'),

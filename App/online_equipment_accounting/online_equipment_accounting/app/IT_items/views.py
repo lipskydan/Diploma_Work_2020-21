@@ -10,21 +10,22 @@ from django.urls import reverse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import View
 
-from .models import PC, Motherboard
-from .forms import AddPcForm, AddMotherboardForm
+from .models import PC, Motherboard, PowerSupply
+from .forms import AddPcForm, AddMotherboardForm,  AddPowerSupplyForm
 
 from .utils import render_to_pdf
 
 
 def IT_items(request):
     items_pc = PC.objects.all()
-    # items_motherboard = Motherboard.object.all()
     return render(request, 'IT_items/IT-items.html', {'items_pc': items_pc})
 
 
 def pc_accessories(request):
     items_motherboard = Motherboard.object.all()
-    return render(request, 'IT_items/pc_accessories.html', {'items_motherboard': items_motherboard})
+    items_power_supply = PowerSupply.objects.all()
+    return render(request, 'IT_items/pc_accessories.html',
+                  {'items_motherboard': items_motherboard, 'items_power_supply':items_power_supply})
 
 
 def item_detail(request, item_name, item_id):
@@ -90,6 +91,23 @@ def add_motherboard(request):
     return render(request, 'IT_items/add_motherboard.html', {'form': form})
 
 
+def add_power_supply(request):
+    if request.method == 'POST':
+        form = AddPowerSupplyForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            power_supply = PowerSupply(brand=cd['power_supply_brand'], model=cd['power_supply_model'],
+                                       serial_or_inventory_number=cd['power_supply_serial_number_or_inventory_number'],
+                                       power_consumption=cd['power_supply_power_consumption'])
+            power_supply.save()
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+    else:
+        form = AddPowerSupplyForm()
+        pass
+
+    return render(request, 'IT_items/add_power_supply.html', {'form': form})
+
+
 def item_delete(request, item_name, item_id):
     item = None
     try:
@@ -117,6 +135,8 @@ def pc_accessories_delete(request, item_name, item_id):
     item.delete()
 
     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+
+
 
 
 def item_update(request, item_name, item_id):
