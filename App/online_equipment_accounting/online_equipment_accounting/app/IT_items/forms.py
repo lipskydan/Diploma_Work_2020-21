@@ -7,23 +7,18 @@ from .models import PC, Motherboard, PowerSupply
 
 class UpdatePcForm(forms.ModelForm):
     motherboard = forms.ModelChoiceField(queryset=Motherboard.object.all(), label='Материнська плата',
-                                         empty_label='', required=False, help_text='Необов’язково',
+                                         empty_label='Відсутня', required=False, help_text='Необов’язково',
                                          localize=True,
-                                         widget=widgets.Select(attrs={'size': 1}))
+                                         widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     power_supply = forms.ModelChoiceField(queryset=PowerSupply.objects.all(), label='Блок живлення',
-                                          empty_label='', required=False, help_text='Необов’язково',
+                                          empty_label='Відсутній', required=False, help_text='Необов’язково',
                                           localize=True,
-                                          widget=widgets.Select(attrs={'size': 1}))
+                                          widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     class Meta:
         model = PC
-        fields = ['motherboard', 'power_supply']
-
-        widgets = {
-            'motherboard': forms.Select(attrs={'class': 'form-control'}),
-            'power_supply': forms.Select(attrs={'class': 'form-control'})
-        }
+        fields = ['inventory_number', 'floor', 'room', 'place', 'motherboard', 'power_supply']
 
 
 class AddPcForm(forms.ModelForm):
@@ -50,7 +45,7 @@ class AddPcForm(forms.ModelForm):
 
     class Meta:
         model = PC
-        fields = ['inventory_number', 'floor', 'room', 'motherboard', 'power_supply']
+        fields = ['inventory_number', 'floor', 'room', 'place', 'motherboard', 'power_supply']
 
         widgets = {
             'motherboard': forms.Select(attrs={'class': 'form-control'}),

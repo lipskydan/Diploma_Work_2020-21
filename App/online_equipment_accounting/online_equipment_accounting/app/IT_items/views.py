@@ -10,8 +10,11 @@ from django.urls import reverse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import View
 
+from django import forms
+from django.forms import widgets
+
 from .models import PC, Motherboard, PowerSupply
-from .forms import AddPcForm, AddMotherboardForm,  AddPowerSupplyForm, UpdatePcForm
+from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, UpdatePcForm
 
 from .utils import render_to_pdf
 
@@ -25,7 +28,7 @@ def pc_accessories(request):
     items_motherboard = Motherboard.object.all()
     items_power_supply = PowerSupply.objects.all()
     return render(request, 'IT_items/pc_accessories.html',
-                  {'items_motherboard': items_motherboard, 'items_power_supply':items_power_supply})
+                  {'items_motherboard': items_motherboard, 'items_power_supply': items_power_supply})
 
 
 def item_detail(request, item_name, item_id):
@@ -57,13 +60,12 @@ def add_item(request):
 
 
 def add_pc(request):
-
     if request.method == 'POST':
         form = AddPcForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
 
-            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place= cd['place'],
+            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place=cd['place'],
                       motherboard=cd['motherboard'], power_supply=cd['power_supply'])
 
             item.save()
@@ -145,23 +147,41 @@ def pc_accessories_delete(request, item_name, item_id):
 
 def pc_update(request, item_name, item_id):
     item = None
+    motherboards = None
 
     if item_name == 'PC':
         item = PC.objects.get(id=item_id)
+        motherboards = Motherboard.object.filter()
 
     if request.method == 'POST':
-        form = UpdatePcForm(request.POST)
+        # form = UpdatePcForm(request.POST)
 
-        if form.is_valid():
-            cd = form.cleaned_data
+        item.inventory_number = request.POST['inventory_number']
+        item.floor = request.POST['floor']
+        item.room = request.POST['room']
+        item.place = request.POST['place']
 
-            item.inventory_number = request.POST['inventory_number']
-            item.floor = request.POST['floor']
-            item.room = request.POST['room']
-            item.place = request.POST['place']
+        # item.motherboard = request.POST['motherboard'] if request.POST.get('motherboard') else item.motherboard
+        # item.motherboard = request.POST.get('motherboard', None)
+        # item.motherboard = request.POST['motherboard'] if request.POST.get('motherboard_integrated_graphics') else item.motherboard
 
-            item.motherboard = cd['motherboard']
-            item.power_supply = cd['power_supply']
+        motherboard = request.POST.get('motherboard', item.motherboard)
+
+        motherboard_dic = motherboard.split()
+
+        item.motherboard.brand = motherboard_dic[1]
+        item.motherboard.model = motherboard_dic[2]
+        item.motherboard.serial_number = motherboard_dic[5]
+
+        # item.motherboard.save()
+        print(item.motherboard)
+
+        # if form.is_valid():
+        #     print('form.is_valid()')
+        #     cd = form.cleaned_data
+        #
+        #     item.motherboard = cd['motherboard']
+        #     item.power_supply = cd['power_supply']
 
         try:
             item.save()
@@ -170,8 +190,10 @@ def pc_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        form = UpdatePcForm()
-        return render(request, 'IT_items/pc_update.html', {'item': item, 'form': form})
+        # form = UpdatePcForm(initial={'motherboard': item.motherboard, 'power_supply': item.power_supply})
+        # form = UpdatePcForm()
+
+        return render(request, 'IT_items/pc_update.html', {'item': item, 'motherboards': motherboards})
 
 
 def motherboard_update(request, item_name, item_id):
