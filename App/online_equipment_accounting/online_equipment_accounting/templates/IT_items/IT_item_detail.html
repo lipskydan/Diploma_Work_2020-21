@@ -14,8 +14,8 @@
 
                     <h2 class="alert-heading">Основне</h2>
                     <hr>
-                    <h5>Тип обладнання: {{ item.name_for_user }}</h5>
-                    <h5>Інвентарний номер: {{ item.inventory_number }}</h5>
+                    <h5 align="justify">Тип обладнання: {{ item.name_for_user }}</h5>
+                    <h5 align="justify">Інвентарний номер: {{ item.inventory_number }}</h5>
                     <hr>
                     <h2 class="alert-heading">Місцезнаходження</h2>
                     <hr>
@@ -27,13 +27,13 @@
                     <hr>
                     {% if item.name == 'PC' %}
                         <h3 class="alert-heading">Материнська плата</h3>
+                        <hr>
 
                         {% if item.motherboard %}
-                            <hr>
                             <h5>Бренд: {{item.motherboard.brand}}</h5>
                             <h5>Модель: {{item.motherboard.model}}</h5>
                             <h5>Серійний номер: {{item.motherboard.serial_number}}</h5>
-                            <hr>
+                            <br>
 
                             {% if item.motherboard.integrated_graphics%}
                                 <h5>Інтегрована відеокарта: наявна</h5>
@@ -57,6 +57,20 @@
                         {% endif %}
 
                         <hr>
+                        <h3 class="alert-heading">Блок живлення</h3>
+                        <hr>
+
+                        {% if item.power_supply %}
+                            <h5>Бренд: {{item.power_supply.brand}}</h5>
+                            <h5>Модель: {{item.power_supply.model}}</h5>
+                            <h5>Серійний номер: {{item.power_supply.serial_or_inventory_number}}</h5>
+                            <h5>Максимальна споживана потужність від мережі: {{item.power_supply.power_consumption}}W</h5>
+                        {% else %}
+                            <h5>Відсутня</h5>
+                        {% endif %}
+
+                        <hr>
+
 
                     {% elif item.name == 'Switch' %}
 <!--                        <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>-->
@@ -65,7 +79,11 @@
                     <div class="row">
                         <div class="col-md-9">
                             <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>
+
+                            {% if item.name == 'PC' %}
                             <a href="/IT_items/{{ item.name }}/{{ item.id }}/update-pc" class="btn btn-success">Редагування</a>
+                            {% endif %}
+
                         </div>
                         <div class="col-md-3">
                             <a href="/IT_items/{{ item.name }}/{{ item.id }}/pdf" class="btn btn-warning">Створити PDF</a>

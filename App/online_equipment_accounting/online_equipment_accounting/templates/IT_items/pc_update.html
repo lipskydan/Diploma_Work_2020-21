@@ -14,7 +14,7 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                            <table class="col-sm-12" align="center" border="0">
+                            <table class="col-sm-12" align="center" border="1">
                                 <tr>
                                     <td colspan="3">
                                         <hr>
@@ -75,7 +75,7 @@
                                     <td colspan="3">
                                         <!--Name of field-->
                                         {{ form.motherboard.label_tag }}
-                               </td>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -153,6 +153,55 @@
 
                                         <!--Show error text for field-->
                                         {% for error in form.motherboard.errors %}
+                                        <p style="color: red">{{ error }}</p>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <!--Name of field-->
+                                        {{ form.power_supply.label_tag }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Бренд:</p>
+                                        <input type="text" disabled name="power_supply_brand" id="power_supply_brand" class="form-control" value="{{ item.power_supply.brand }}" placeholder="-">
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <p>Модель:</p>
+                                        <input type="text" disabled name="power_supply_model" id="power_supply_model" class="form-control" value="{{ item.power_supply.model }}" placeholder="-">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Серійний номер:</p>
+                                        <input type="text" disabled name="serial_or_inventory_number" id="serial_or_inventory_number" class="form-control" value="{{ item.power_supply.serial_or_inventory_number }}" placeholder="-">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <p align="center">Оберіть новий блок живлення:</p>
+                                        {{ form.power_supply }}
+
+                                        <!--Show help text for field-->
+                                        {% if form.power_supply.help_text %}
+                                        <br><small style="color: grey">{{ form.power_supply.help_text }}</small>
+                                        {% endif %}
+
+                                        <!--Show error text for field-->
+                                        {% for error in form.power_supply.errors %}
                                         <p style="color: red">{{ error }}</p>
                                         {% endfor %}
                                     </td>

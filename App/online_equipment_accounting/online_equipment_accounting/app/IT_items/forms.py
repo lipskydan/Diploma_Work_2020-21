@@ -5,6 +5,27 @@ from django.forms import widgets
 from .models import PC, Motherboard, PowerSupply
 
 
+class UpdatePcForm(forms.ModelForm):
+    motherboard = forms.ModelChoiceField(queryset=Motherboard.object.all(), label='Материнська плата',
+                                         empty_label='', required=False, help_text='Необов’язково',
+                                         localize=True,
+                                         widget=widgets.Select(attrs={'size': 1}))
+
+    power_supply = forms.ModelChoiceField(queryset=PowerSupply.objects.all(), label='Блок живлення',
+                                          empty_label='', required=False, help_text='Необов’язково',
+                                          localize=True,
+                                          widget=widgets.Select(attrs={'size': 1}))
+
+    class Meta:
+        model = PC
+        fields = ['motherboard', 'power_supply']
+
+        widgets = {
+            'motherboard': forms.Select(attrs={'class': 'form-control'}),
+            'power_supply': forms.Select(attrs={'class': 'form-control'})
+        }
+
+
 class AddPcForm(forms.ModelForm):
     inventory_number = forms.CharField(label='Інвентарний номер', max_length=30, required=True, help_text='Обов’язково',
                                        localize=True,
@@ -22,12 +43,18 @@ class AddPcForm(forms.ModelForm):
                                          localize=True,
                                          widget=widgets.Select(attrs={'size': 1}))
 
+    power_supply = forms.ModelChoiceField(queryset=PowerSupply.objects.all(), label='Блок живлення',
+                                          empty_label='', required=False, help_text='Необов’язково',
+                                          localize=True,
+                                          widget=widgets.Select(attrs={'size': 1}))
+
     class Meta:
         model = PC
-        fields = ['inventory_number', 'floor', 'room', 'motherboard', ]
+        fields = ['inventory_number', 'floor', 'room', 'motherboard', 'power_supply']
 
         widgets = {
-            'motherboard': forms.Select(attrs={'class': 'form-control'})
+            'motherboard': forms.Select(attrs={'class': 'form-control'}),
+            'power_supply': forms.Select(attrs={'class': 'form-control'})
         }
 
 
@@ -76,7 +103,9 @@ class AddPowerSupplyForm(forms.ModelForm):
                                                                      help_text='Обов’язково')
 
     power_supply_power_consumption = forms.IntegerField(label='Максимальна споживана потужність від мережі',
-                                                        required=False, help_text="Необов’язково (одиниця вимірювання вати)", localize=True)
+                                                        required=False,
+                                                        help_text="Необов’язково (одиниця вимірювання вати)",
+                                                        localize=True)
 
     class Meta:
         model = PowerSupply

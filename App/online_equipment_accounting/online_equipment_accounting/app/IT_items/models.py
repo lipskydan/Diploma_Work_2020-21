@@ -68,12 +68,8 @@ class PC(models.Model):
     room = models.IntegerField('номер кабінету')
     place = models.IntegerField('номер учбового місця', default=0, blank=True, null=True)
 
-    # MOTHERBOARD_CHOICES=Motherboard.object.all()
     motherboard = models.ForeignKey(Motherboard, on_delete=models.SET_NULL, null=True)
-
-    # end = models.DateField(default=None, blank=True, null=True)
-    # pub_date = models.DateTimeField('дата створення')
-    # b = models.CharField(max_length=7, default="foobar")
+    power_supply = models.ForeignKey(PowerSupply, on_delete=models.SET_NULL, null=True)
 
     name_for_user = 'Персональний комп\'ютор'
     name = 'PC'

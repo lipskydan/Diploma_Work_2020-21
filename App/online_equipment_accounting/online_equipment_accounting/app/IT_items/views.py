@@ -11,7 +11,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import View
 
 from .models import PC, Motherboard, PowerSupply
-from .forms import AddPcForm, AddMotherboardForm,  AddPowerSupplyForm
+from .forms import AddPcForm, AddMotherboardForm,  AddPowerSupplyForm, UpdatePcForm
 
 from .utils import render_to_pdf
 
@@ -63,7 +63,9 @@ def add_pc(request):
         if form.is_valid():
             cd = form.cleaned_data
 
-            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place= cd['place'], motherboard=cd['motherboard'])
+            item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place= cd['place'],
+                      motherboard=cd['motherboard'], power_supply=cd['power_supply'])
+
             item.save()
 
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
@@ -148,7 +150,7 @@ def pc_update(request, item_name, item_id):
         item = PC.objects.get(id=item_id)
 
     if request.method == 'POST':
-        form = AddPcForm(request.POST)
+        form = UpdatePcForm(request.POST)
 
         if form.is_valid():
             cd = form.cleaned_data
@@ -157,8 +159,9 @@ def pc_update(request, item_name, item_id):
             item.floor = request.POST['floor']
             item.room = request.POST['room']
             item.place = request.POST['place']
-            item.motherboard = cd['motherboard']
 
+            item.motherboard = cd['motherboard']
+            item.power_supply = cd['power_supply']
 
         try:
             item.save()
@@ -167,7 +170,7 @@ def pc_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        form = AddPcForm()
+        form = UpdatePcForm()
         return render(request, 'IT_items/pc_update.html', {'item': item, 'form': form})
 
 
