@@ -154,34 +154,20 @@ def pc_update(request, item_name, item_id):
         motherboards = Motherboard.object.filter()
 
     if request.method == 'POST':
-        # form = UpdatePcForm(request.POST)
 
         item.inventory_number = request.POST['inventory_number']
         item.floor = request.POST['floor']
         item.room = request.POST['room']
         item.place = request.POST['place']
 
-        # item.motherboard = request.POST['motherboard'] if request.POST.get('motherboard') else item.motherboard
-        # item.motherboard = request.POST.get('motherboard', None)
-        # item.motherboard = request.POST['motherboard'] if request.POST.get('motherboard_integrated_graphics') else item.motherboard
-
-        motherboard = request.POST.get('motherboard', item.motherboard)
-
-        motherboard_dic = motherboard.split()
-
-        item.motherboard.brand = motherboard_dic[1]
-        item.motherboard.model = motherboard_dic[2]
-        item.motherboard.serial_number = motherboard_dic[5]
-
-        # item.motherboard.save()
-        print(item.motherboard)
-
-        # if form.is_valid():
-        #     print('form.is_valid()')
-        #     cd = form.cleaned_data
-        #
-        #     item.motherboard = cd['motherboard']
-        #     item.power_supply = cd['power_supply']
+        motherboard = request.POST.get('motherboard', None)
+        if motherboard != 'None':
+            motherboard_dic = motherboard.split()
+            motherboard = Motherboard.object.get(model=motherboard_dic[2], brand=motherboard_dic[1],
+                                                 serial_number=motherboard_dic[5])
+            item.motherboard = motherboard
+        else:
+            item.motherboard = None
 
         try:
             item.save()
@@ -190,9 +176,6 @@ def pc_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        # form = UpdatePcForm(initial={'motherboard': item.motherboard, 'power_supply': item.power_supply})
-        # form = UpdatePcForm()
-
         return render(request, 'IT_items/pc_update.html', {'item': item, 'motherboards': motherboards})
 
 

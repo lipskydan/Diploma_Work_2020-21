@@ -14,7 +14,7 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                            <table class="col-sm-12" align="center" border="1">
+                            <table class="col-sm-12" align="center" border="0">
                                 <tr>
                                     <td colspan="3">
                                         <hr>
@@ -33,19 +33,6 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3">
-<!--                                        &lt;!&ndash;Name of input&ndash;&gt;-->
-<!--                                        <p>{{ form.inventory_number.label }}:</p>-->
-<!--                                        {{ form.inventory_number }}-->
-
-<!--                                        &lt;!&ndash;Show help text for field&ndash;&gt;-->
-<!--                                        {% if form.inventory_number.help_text %}-->
-<!--                                        <br><small style="color: grey">{{ form.inventory_number.help_text }}</small>-->
-<!--                                        {% endif %}-->
-
-<!--                                        &lt;!&ndash;Show error text for field&ndash;&gt;-->
-<!--                                        {% for error in form.inventory_number.errors %}-->
-<!--                                        <p style="color: red">{{ error }}</p>-->
-<!--                                        {% endfor %}-->
                                         <p>Інвентарний номер:</p>
                                         <input type="text" name="inventory_number" id="inventory_number" class="form-control" value="{{ item.inventory_number }}" placeholder="Введіть інвентарний номер">
                                     </td>
@@ -57,19 +44,6 @@
                                 </tr>
                                 <tr>
                                     <td width="49%">
-                                        <!--Name of input-->
-<!--                                        <p>{{ form.floor.label }}:</p>-->
-<!--                                        {{ form.floor }}-->
-
-<!--                                        &lt;!&ndash;Show help text for field&ndash;&gt;-->
-<!--                                        {% if form.floor.help_text %}-->
-<!--                                        <br><small style="color: grey">{{ form.floor.help_text }}</small>-->
-<!--                                        {% endif %}-->
-
-<!--                                        &lt;!&ndash;Show error text for field&ndash;&gt;-->
-<!--                                        {% for error in form.floor.errors %}-->
-<!--                                        <p style="color: red">{{ error }}</p>-->
-<!--                                        {% endfor %}-->
                                         <p>Поверх:</p>
                                         <input type="text" name="floor" id="floor" class="form-control" value="{{ item.floor }}" placeholder="Введіть номер поверху">
                                     </td>
@@ -77,19 +51,6 @@
 
                                     </td>
                                     <td width="49%">
-<!--                                        &lt;!&ndash;Name of input&ndash;&gt;-->
-<!--                                        <p>{{ form.room.label }}:</p>-->
-<!--                                        {{ form.room }}-->
-
-<!--                                        &lt;!&ndash;Show help text for field&ndash;&gt;-->
-<!--                                        {% if form.room.help_text %}-->
-<!--                                        <br><small style="color: grey">{{ form.room.help_text }}</small>-->
-<!--                                        {% endif %}-->
-
-<!--                                        &lt;!&ndash;Show error text for field&ndash;&gt;-->
-<!--                                        {% for error in form.room.errors %}-->
-<!--                                        <p style="color: red">{{ error }}</p>-->
-<!--                                        {% endfor %}-->
                                         <p>Кабінет:</p>
                                         <input type="text" name="room" id="room" class="form-control" value="{{ item.room }}" placeholder="Введіть номер кабінету">
                                     </td>
@@ -101,22 +62,11 @@
                                 </tr>
                                 <tr>
                                     <td>
-<!--                                        &lt;!&ndash;Name of input&ndash;&gt;-->
-<!--                                        <p>{{ form.place.label }}</p>-->
-<!--                                        {{ form.place }}-->
-
-<!--                                        &lt;!&ndash;Show help text for field&ndash;&gt;-->
-<!--                                        {% if form.place.help_text %}-->
-<!--                                        <br><small style="color: grey">{{ form.place.help_text }}</small>-->
-<!--                                        {% endif %}-->
-
-<!--                                        &lt;!&ndash;Show error text for field&ndash;&gt;-->
-<!--                                        {% for error in form.place.errors %}-->
-<!--                                        <p style="color: red">{{ error }}</p>-->
-<!--                                        {% endfor %}-->
                                         <p>Учбове місце:</p>
                                         <input type="text" name="place" id="place" class="form-control" value="{{ item.place }}" placeholder="Введіть номер поверху">
                                     </td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3">
@@ -126,8 +76,6 @@
                                 <tr>
                                     <td colspan="3">
                                         <p>Материнська плата:</p>
-                                        <!--Name of field-->
-<!--                                        {{ form.motherboard.label_tag }}-->
                                     </td>
                                 </tr>
                                 <tr>
@@ -139,32 +87,14 @@
                                     <td colspan="3" align="center">
                                         <div class="mx-auto" style="width: 75%">
                                             <select class="form-control" name="motherboard" id="motherboard">
-
+                                                <option value="None"></option>
                                                 {% for motherboard in motherboards %}
                                                 <option {% if motherboard == item.motherboard %} selected {% endif %}
-                                                        >
-                                                    {% if motherboard %}
+                                                        value="{{ motherboard }}">
                                                     {{ motherboard }}
-                                                    {% endif %}
                                                 </option>
                                                 {% endfor %}
-
-
-
-
                                             </select>
-<!--                                            &lt;!&ndash;Name of input&ndash;&gt;-->
-<!--                                            {{ form.motherboard }}-->
-
-<!--                                            &lt;!&ndash;Show help text for field&ndash;&gt;-->
-<!--                                            {% if form.motherboard.help_text %}-->
-<!--                                            <br><small style="color: grey">{{ form.motherboard.help_text }}</small>-->
-<!--                                            {% endif %}-->
-
-<!--                                            &lt;!&ndash;Show error text for field&ndash;&gt;-->
-<!--                                            {% for error in form.motherboard.errors %}-->
-<!--                                            <p style="color: red">{{ error }}</p>-->
-<!--                                            {% endfor %}-->
                                         </div>
                                     </td>
                                 </tr>
@@ -176,8 +106,6 @@
                                 <tr>
                                     <td colspan="3">
                                         <p>Блок живлення:</p>
-<!--                                        &lt;!&ndash;Name of field&ndash;&gt;-->
-<!--                                        {{ form.power_supply.label_tag }}-->
                                     </td>
                                 </tr>
                                 <tr>
@@ -187,20 +115,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3" align="center">
-<!--                                        <div class="mx-auto" style="width: 75%">-->
-<!--                                            &lt;!&ndash;Name of input&ndash;&gt;-->
-<!--                                            {{ form.power_supply }}-->
-
-<!--                                            &lt;!&ndash;Show help text for field&ndash;&gt;-->
-<!--                                            {% if form.power_supply.help_text %}-->
-<!--                                            <br><small style="color: grey">{{ form.power_supply.help_text }}</small>-->
-<!--                                            {% endif %}-->
-
-<!--                                            &lt;!&ndash;Show error text for field&ndash;&gt;-->
-<!--                                            {% for error in form.power_supply.errors %}-->
-<!--                                            <p style="color: red">{{ error }}</p>-->
-<!--                                            {% endfor %}-->
-<!--                                        </div>-->
+                                        <!-- CODE -->
                                     </td>
                                 </tr>
                                 <tr>
