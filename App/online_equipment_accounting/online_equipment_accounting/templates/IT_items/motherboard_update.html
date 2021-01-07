@@ -73,7 +73,6 @@
                                 <tr>
                                     <td>
                                         <p>Форм-фактор:</p>
-<!--                                        <input type="text" name="motherboard_form_factor" id="motherboard_form_factor" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер материнської плати">-->
                                         <div class="mx-auto" style="width: 90%">
                                             <select class="form-control" name="motherboard_form_factor" id="motherboard_form_factor">
                                                 {% for form_factor in form_factors %}
@@ -85,7 +84,19 @@
                                             </select>
                                         </div>
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <p>Форм-фактор:</p>
+                                        <div class="mx-auto" style="width: 90%">
+                                            <select class="form-control" name="motherboard_type_ram_slot" id="motherboard_type_ram_slot">
+                                                {% for type_ram_slot in type_ram_slots %}
+                                                <option {% if type_ram_slot == item.type_ram_slot %} selected {% endif %}
+                                                        value="{{ type_ram_slot }}">
+                                                    {{ type_ram_slot }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
                                 </tr>
                                  <tr>
                                     <td colspan="2">

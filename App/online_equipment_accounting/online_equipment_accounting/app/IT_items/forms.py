@@ -4,23 +4,7 @@ from django.forms import widgets
 
 from .models import PC, Motherboard, PowerSupply
 
-from .models import MOTHERBOARD_FROM_FACTORS
-
-
-class UpdatePcForm(forms.ModelForm):
-    motherboard = forms.ModelChoiceField(queryset=Motherboard.object.all(), label='Материнська плата',
-                                         empty_label='Відсутня', required=False, help_text='Необов’язково',
-                                         localize=True,
-                                         widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
-
-    power_supply = forms.ModelChoiceField(queryset=PowerSupply.objects.all(), label='Блок живлення',
-                                          empty_label='Відсутній', required=False, help_text='Необов’язково',
-                                          localize=True,
-                                          widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
-
-    class Meta:
-        model = PC
-        fields = ['inventory_number', 'floor', 'room', 'place', 'motherboard', 'power_supply']
+from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS
 
 
 class AddPcForm(forms.ModelForm):
@@ -77,6 +61,10 @@ class AddMotherboardForm(forms.ModelForm):
                                                 required=False, localize=True, help_text='Необов’язково',
                                                 widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
+    motherboard_type_ram_slot = forms.ChoiceField(label='Тип слоту для ОЗУ', choices=TYPE_RAM_SLOTS,
+                                                required=False, localize=True, help_text='Необов’язково',
+                                                widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+
     motherboard_integrated_graphics = forms.BooleanField(label='Інтегрована відеокарта', localize=True,
                                                          required=False, help_text='Вказати чи наявна',
                                                          widget=forms.CheckboxInput(attrs={'class': 'checkbox'}))
@@ -92,7 +80,7 @@ class AddMotherboardForm(forms.ModelForm):
         model = Motherboard
         fields = ['motherboard_serial_number', 'motherboard_brand', 'motherboard_model',
                   'motherboard_integrated_graphics', 'motherboard_integrated_sound_card',
-                  'motherboard_integrated_lan_card']
+                  'motherboard_integrated_lan_card', 'motherboard_form_factor']
 
 
 class AddPowerSupplyForm(forms.ModelForm):

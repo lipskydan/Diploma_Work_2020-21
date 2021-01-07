@@ -28,7 +28,7 @@ class Motherboard(models.Model):
     serial_number = models.CharField('серійний номер', max_length=200, unique=False)
 
     form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS)
-    type_ram_slot = models.CharField(max_length=20, choices=TYPE_RAM_SLOTS)
+    type_ram_slot = models.CharField(max_length=20, choices=TYPE_RAM_SLOTS, default='не вказано')
 
     integrated_graphics = models.BooleanField(default=False)
     integrated_sound_card = models.BooleanField(default=False)

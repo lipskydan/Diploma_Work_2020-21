@@ -172,6 +172,24 @@
                                       <hr>
                                   </td>
                             </tr>
+                            <tr>
+                                <td colspan="3" align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.motherboard_type_ram_slot.label_tag }}
+                                    <div class="mx-auto" style="width: 50%">
+                                    {{ form.motherboard_type_ram_slot }}
+                                    </div>
+                                    <!--Show help text for field-->
+                                    {% if form.motherboard_type_ram_slot.help_text %}
+                                    <small style="color: grey">{{ form.motherboard_type_ram_slot.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.motherboard_type_ram_slot.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
                         </table>
                    </div>
                    <input type="submit" class="btn btn-outline-success" value="Створити">
