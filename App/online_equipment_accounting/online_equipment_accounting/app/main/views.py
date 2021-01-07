@@ -7,9 +7,21 @@ from django.template import RequestContext
 
 from .forms import SignUpForm, LoginForm
 
+from django.db import models
+from IT_items.models import Motherboard, PowerSupply, PC
+
 
 def main(request):
-    return render(request, 'main/main.html')
+    power_supplies = PowerSupply.objects.all()
+    motherboards = Motherboard.object.all()
+    pcs = PC.objects.all()
+
+    power_supplies_count = power_supplies.count()
+
+    return render(request, 'main/main.html', {'pcs': pcs,
+                                              'motherboards': motherboards,
+                                              'power_supplies': power_supplies,
+                                              'power_supplies_count': power_supplies_count})
 
 
 def user_sign_up(request):
