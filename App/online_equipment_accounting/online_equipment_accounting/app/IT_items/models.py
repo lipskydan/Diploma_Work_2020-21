@@ -1,12 +1,5 @@
 from django.db import models
 
-
-# MOTHERBOARD_CHOICES = [
-#     ('', ''),
-#     ('ASUS', 'ASUS'),
-#     ('ASROCK', 'ASROCK'),
-# ]
-
 MOTHERBOARD_FROM_FACTORS = [
     ('не вказано', ''),
     ('ATX', 'ATX'),
@@ -14,8 +7,15 @@ MOTHERBOARD_FROM_FACTORS = [
     ('Mini-ITX', 'Mini-ITX'),
     ('Nano-ITX', 'Nano-ITX'),
     ('Pico-ITX', 'Pico-ITX'),
+]
 
-
+TYPE_RAM_SLOTS = [
+    ('не вказано', ''),
+    ('DIMM', 'DIMM'),
+    ('RIMM', 'RIMM'),
+    ('DDR DIMM', 'DDR DIMM'),
+    ('DDR2', 'DDR2'),
+    ('DDR3', 'DDR3'),
 ]
 
 
@@ -28,6 +28,7 @@ class Motherboard(models.Model):
     serial_number = models.CharField('серійний номер', max_length=200, unique=False)
 
     form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS)
+    type_ram_slot = models.CharField(max_length=20, choices=TYPE_RAM_SLOTS)
 
     integrated_graphics = models.BooleanField(default=False)
     integrated_sound_card = models.BooleanField(default=False)
