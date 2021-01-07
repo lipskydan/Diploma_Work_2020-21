@@ -8,35 +8,13 @@ from django.db import models
 # ]
 
 MOTHERBOARD_FROM_FACTORS = [
-    ('',''),
+    ('не вказано', ''),
     ('ATX', 'ATX'),
     ('microATX', 'microATX'),
     ('Mini-ITX', 'Mini-ITX'),
     ('Nano-ITX', 'Nano-ITX'),
     ('Pico-ITX', 'Pico-ITX'),
 
-    # # Устаревшие
-    # ('Baby-AT', 'Baby-AT'),
-    # ('Mini-ATX', 'Mini-ATX'),
-    # ('AT', 'AT'),
-    # ('LPX', 'LPX'),
-    #
-    # # Современные
-    # ('ATX', 'ATX'),
-    # ('microATX', 'microATX'),
-    # ('Flex-АТХ', 'Flex-АТХ'),
-    # ('NLX', 'NLX'),
-    # ('WTX', 'WTX'),
-    # ('CEB', 'CEB'),
-    #
-    # # Традиционные настольные
-    # ('Mini-ITX', 'Mini-ITX'),
-    # ('BTX', 'BTX'),
-    #
-    # # Внедряемые
-    # ('Mini-ITX', 'Mini-ITX'),
-    # ('Nano-ITX', 'Nano-ITX'),
-    # ('Pico-ITX', 'Pico-ITX'),
 
 ]
 
@@ -49,7 +27,7 @@ class Motherboard(models.Model):
 
     serial_number = models.CharField('серійний номер', max_length=200, unique=False)
 
-    form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS, default='')
+    form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS)
 
     integrated_graphics = models.BooleanField(default=False)
     integrated_sound_card = models.BooleanField(default=False)

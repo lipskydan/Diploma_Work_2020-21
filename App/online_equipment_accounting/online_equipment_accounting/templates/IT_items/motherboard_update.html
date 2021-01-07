@@ -28,7 +28,9 @@
                                 <tr>
                                     <td colspan="2">
                                         <p>Тип обладнання:</p>
-                                        <input type="text" disabled name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
+                                        <div class="mx-auto" style="width: 95%">
+                                            <input type="text" disabled name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -39,11 +41,15 @@
                                 <tr>
                                     <td width="50%">
                                         <p>Модель:</p>
-                                        <input type="text" name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.model }}" placeholder="Введіть модель материнської плати">
+                                        <div class="mx-auto" style="width: 90%">
+                                            <input type="text" name="motherboard_model" id="motherboard_model" class="form-control" value="{{ item.model }}" placeholder="Введіть модель материнської плати">
+                                        </div>
                                     </td>
                                     <td>
                                         <p>Бренд:</p>
-                                        <input type="text" name="motherboard_brand" id="motherboard_brand" class="form-control" value="{{ item.brand }}" placeholder="Введіть тип обладнанням">
+                                        <div class="mx-auto" style="width: 90%">
+                                            <input type="text" name="motherboard_brand" id="motherboard_brand" class="form-control" value="{{ item.brand }}" placeholder="Введіть тип обладнанням">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -54,10 +60,34 @@
                                 <tr>
                                     <td colspan="2">
                                         <p>Серійний номер:</p>
-                                        <input type="text" name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер материнської плати">
+                                        <div class="mx-auto" style="width: 95%">
+                                            <input type="text" name="motherboard_serial_number" id="motherboard_serial_number" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер материнської плати">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Форм-фактор:</p>
+<!--                                        <input type="text" name="motherboard_form_factor" id="motherboard_form_factor" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер материнської плати">-->
+                                        <div class="mx-auto" style="width: 90%">
+                                            <select class="form-control" name="motherboard_form_factor" id="motherboard_form_factor">
+                                                {% for form_factor in form_factors %}
+                                                <option {% if form_factor == item.form_factor %} selected {% endif %}
+                                                        value="{{ form_factor }}">
+                                                    {{ form_factor }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                 <tr>
                                     <td colspan="2">
                                         <hr>
                                     </td>

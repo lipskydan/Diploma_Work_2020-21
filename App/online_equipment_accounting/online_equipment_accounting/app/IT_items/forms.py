@@ -28,6 +28,7 @@ class AddPcForm(forms.ModelForm):
                                        localize=True,
                                        error_messages={
                                            'unique': 'Персональний комп\'ютор з таким інвентарним номером вже існує.'})
+
     floor = forms.IntegerField(label='Номер поверху', required=True, help_text='Обов’язково',
                                localize=True)
     room = forms.IntegerField(label='Номер кабінету', required=True, help_text='Обов’язково',
@@ -57,20 +58,24 @@ class AddPcForm(forms.ModelForm):
 
 class AddMotherboardForm(forms.ModelForm):
     motherboard_serial_number = forms.CharField(label='Серійний номер', max_length=30,
-                                                required=True,
+                                                required=True, localize=True,
                                                 help_text='Обов’язково, у разі відсутності - вказати що відсутньо',
-                                                localize=True)
+                                                widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard_brand = forms.CharField(label='Бренд', max_length=30,
                                         required=True,
-                                        help_text='Обов’язково, у разі відсутності - вказати відсутньо')
+                                        help_text='Обов’язково, у разі відсутності - вказати відсутньо',
+                                        widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard_model = forms.CharField(label='Модель', max_length=30,
                                         required=True,
                                         help_text='Обов’язково, у разі відсутності - вказати відсутньо',
-                                        localize=True)
+                                        localize=True,
+                                        widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
 
-    motherboard_form_factor = forms.ChoiceField(choices=MOTHERBOARD_FROM_FACTORS)
+    motherboard_form_factor = forms.ChoiceField(label='Форм-фактор', choices=MOTHERBOARD_FROM_FACTORS,
+                                                required=False, localize=True, help_text='Необов’язково',
+                                                widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard_integrated_graphics = forms.BooleanField(label='Інтегрована відеокарта', localize=True,
                                                          required=False, help_text='Вказати чи наявна',

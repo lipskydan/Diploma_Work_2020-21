@@ -14,6 +14,7 @@ from django import forms
 from django.forms import widgets
 
 from .models import PC, Motherboard, PowerSupply
+from .models import MOTHERBOARD_FROM_FACTORS
 from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, UpdatePcForm
 
 from .utils import render_to_pdf
@@ -87,7 +88,8 @@ def add_motherboard(request):
                                       serial_number=cd['motherboard_serial_number'],
                                       integrated_graphics=cd['motherboard_integrated_graphics'],
                                       integrated_sound_card=cd['motherboard_integrated_sound_card'],
-                                      integrated_lan_card=cd['motherboard_integrated_lan_card'])
+                                      integrated_lan_card=cd['motherboard_integrated_lan_card'],
+                                      form_factor=cd['motherboard_form_factor'])
             motherboard.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -197,9 +199,12 @@ def pc_update(request, item_name, item_id):
 
 def motherboard_update(request, item_name, item_id):
     item = None
+    form_factors = None
 
     if item_name == 'Motherboard':
         item = Motherboard.object.get(id=item_id)
+
+        form_factors = [el[0] for el in MOTHERBOARD_FROM_FACTORS]
 
     if request.method == 'POST':
 
@@ -208,6 +213,8 @@ def motherboard_update(request, item_name, item_id):
             item.model = request.POST['motherboard_model']
 
             item.serial_number = request.POST['motherboard_serial_number']
+
+            item.form_factor = request.POST.get('motherboard_form_factor', None)
 
             item.integrated_graphics = True if request.POST.get('motherboard_integrated_graphics') else False
             item.integrated_sound_card = True if request.POST.get('motherboard_integrated_sound_card') else False
@@ -220,7 +227,7 @@ def motherboard_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        return render(request, 'IT_items/motherboard_update.html', {'item': item})
+        return render(request, 'IT_items/motherboard_update.html', {'item': item, 'form_factors': form_factors})
 
 
 def power_supply_update(request, item_name, item_id):

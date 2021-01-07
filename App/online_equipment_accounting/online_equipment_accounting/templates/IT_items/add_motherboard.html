@@ -22,9 +22,11 @@
                                 <td colspan="3" align="center">
 
                                     <!--Name of field and input-->
-                                    {{ form.motherboard_serial_number.label_tag }} {{ form.motherboard_serial_number }}
+                                    {{ form.motherboard_serial_number.label_tag }}
 
-                                    <br>
+                                    <div class="mx-auto" style="width: 50%">
+                                    {{ form.motherboard_serial_number }}
+                                    </div>
 
                                     <!--Show help text for field-->
                                     {% if form.motherboard_serial_number.help_text %}
@@ -46,10 +48,10 @@
                                 <td colspan="3" align="center">
                                     <!--Name of field and input-->
                                     {{ form.motherboard_brand.label_tag }}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                    <div class="mx-auto" style="width: 50%">
                                     {{ form.motherboard_brand }}
-
-                                    <br>
+                                    </div>
 
                                     <!--Show help text for field-->
                                     {% if form.motherboard_brand.help_text %}
@@ -71,10 +73,11 @@
                                 <td colspan="3" align="center">
                                     <!--Name of field and input-->
                                     {{ form.motherboard_model.label_tag }}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    {{ form.motherboard_model }}
+<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
 
-                                    <br>
+                                    <div class="mx-auto" style="width: 50%">
+                                    {{ form.motherboard_model }}
+                                    </div>
 
                                     <!--Show help text for field-->
                                     {% if form.motherboard_model.help_text %}
@@ -83,6 +86,31 @@
 
                                     <!--Show error text for field-->
                                     {% for error in form.motherboard_model.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.motherboard_form_factor.label_tag }}
+
+                                    <div class="mx-auto" style="width: 50%">
+                                    {{ form.motherboard_form_factor }}
+                                    </div>
+
+                                    <!--Show help text for field-->
+                                    {% if form.motherboard_form_factor.help_text %}
+                                    <small style="color: grey">{{ form.motherboard_form_factor.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.motherboard_form_factor.errors %}
                                     <p style="color: red">{{ error }}</p>
                                     {% endfor %}
                                 </td>
