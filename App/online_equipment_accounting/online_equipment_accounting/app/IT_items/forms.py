@@ -4,6 +4,8 @@ from django.forms import widgets
 
 from .models import PC, Motherboard, PowerSupply
 
+from .models import MOTHERBOARD_FROM_FACTORS
+
 
 class UpdatePcForm(forms.ModelForm):
     motherboard = forms.ModelChoiceField(queryset=Motherboard.object.all(), label='Материнська плата',
@@ -67,6 +69,8 @@ class AddMotherboardForm(forms.ModelForm):
                                         required=True,
                                         help_text='Обов’язково, у разі відсутності - вказати відсутньо',
                                         localize=True)
+
+    motherboard_form_factor = forms.ChoiceField(choices=MOTHERBOARD_FROM_FACTORS)
 
     motherboard_integrated_graphics = forms.BooleanField(label='Інтегрована відеокарта', localize=True,
                                                          required=False, help_text='Вказати чи наявна',
