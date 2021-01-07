@@ -148,10 +148,13 @@ def pc_accessories_delete(request, item_name, item_id):
 def pc_update(request, item_name, item_id):
     item = None
     motherboards = None
+    power_supplies = None
 
     if item_name == 'PC':
         item = PC.objects.get(id=item_id)
+
         motherboards = Motherboard.object.filter()
+        power_supplies = PowerSupply.objects.filter()
 
     if request.method == 'POST':
 
@@ -163,11 +166,22 @@ def pc_update(request, item_name, item_id):
         motherboard = request.POST.get('motherboard', None)
         if motherboard != 'None':
             motherboard_dic = motherboard.split()
-            motherboard = Motherboard.object.get(model=motherboard_dic[2], brand=motherboard_dic[1],
+            motherboard = Motherboard.object.get(model=motherboard_dic[2],
+                                                 brand=motherboard_dic[1],
                                                  serial_number=motherboard_dic[5])
             item.motherboard = motherboard
         else:
             item.motherboard = None
+
+        power_supply = request.POST.get('power_supply', None)
+        if power_supply != 'None':
+            power_supply_dic = power_supply.split()
+            power_supply = PowerSupply.objects.get(model=power_supply_dic[2],
+                                                   brand=power_supply_dic[1],
+                                                   serial_or_inventory_number=power_supply_dic[5])
+            item.power_supply = power_supply
+        else:
+            item.power_supply = None
 
         try:
             item.save()
@@ -176,7 +190,9 @@ def pc_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        return render(request, 'IT_items/pc_update.html', {'item': item, 'motherboards': motherboards})
+        return render(request, 'IT_items/pc_update.html', {'item': item,
+                                                           'motherboards': motherboards,
+                                                           'power_supplies': power_supplies})
 
 
 def motherboard_update(request, item_name, item_id):

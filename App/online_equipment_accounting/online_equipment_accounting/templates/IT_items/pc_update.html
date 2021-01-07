@@ -87,7 +87,7 @@
                                     <td colspan="3" align="center">
                                         <div class="mx-auto" style="width: 75%">
                                             <select class="form-control" name="motherboard" id="motherboard">
-                                                <option value="None"></option>
+                                                <option value="None">Відсутня</option>
                                                 {% for motherboard in motherboards %}
                                                 <option {% if motherboard == item.motherboard %} selected {% endif %}
                                                         value="{{ motherboard }}">
@@ -115,7 +115,17 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3" align="center">
-                                        <!-- CODE -->
+                                        <div class="mx-auto" style="width: 75%">
+                                            <select class="form-control" name="power_supply" id="power_supply">
+                                                <option value="None">Відсутній</option>
+                                                {% for power_supply in power_supplies %}
+                                                <option {% if power_supply == item.power_supply %} selected {% endif %}
+                                                        value="{{ power_supply }}">
+                                                    {{ power_supply }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
