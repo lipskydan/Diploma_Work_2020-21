@@ -13,7 +13,7 @@ from django.views.generic import View
 from django import forms
 from django.forms import widgets
 
-from .models import PC, Motherboard, PowerSupply
+from .models import PC, Motherboard, PowerSupply, VideoCard
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS
 
 from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm
@@ -29,8 +29,10 @@ def IT_items(request):
 def pc_accessories(request):
     items_motherboard = Motherboard.object.all()
     items_power_supply = PowerSupply.objects.all()
+    items_video_card = VideoCard.objects.all()
     return render(request, 'IT_items/pc_accessories.html',
-                  {'items_motherboard': items_motherboard, 'items_power_supply': items_power_supply})
+                  {'items_motherboard': items_motherboard, 'items_power_supply': items_power_supply,
+                   'items_video_card': items_video_card})
 
 
 def item_detail(request, item_name, item_id):
@@ -117,6 +119,10 @@ def add_power_supply(request):
         pass
 
     return render(request, 'IT_items/add_power_supply.html', {'form': form})
+
+
+def add_video_card(request):
+    pass
 
 
 def item_delete(request, item_name, item_id):

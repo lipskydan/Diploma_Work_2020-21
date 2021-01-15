@@ -62,8 +62,8 @@ class AddMotherboardForm(forms.ModelForm):
                                                 widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard_type_ram_slot = forms.ChoiceField(label='Тип слоту для ОЗУ', choices=TYPE_RAM_SLOTS,
-                                                required=False, localize=True, help_text='Необов’язково',
-                                                widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+                                                  required=False, localize=True, help_text='Необов’язково',
+                                                  widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard_integrated_graphics = forms.BooleanField(label='Інтегрована відеокарта', localize=True,
                                                          required=False, help_text='Вказати чи наявна',
@@ -103,3 +103,18 @@ class AddPowerSupplyForm(forms.ModelForm):
         model = PowerSupply
         fields = ['power_supply_brand', 'power_supply_model', 'power_supply_serial_number_or_inventory_number',
                   'power_supply_power_consumption']
+
+
+class AddVideoCard(forms.ModelForm):
+    video_card_brand = forms.CharField(label='Бренд', max_length=30, required=True,
+                                       help_text='Обов’язково, у разі відсутності - вказати відсутньо')
+
+    video_card_model = forms.CharField(label='Модель', max_length=30, required=True, localize=True,
+                                       help_text='Обов’язково, у разі відсутності - вказати відсутньо')
+
+    video_card_serial_number = forms.CharField(label='Серійний номер', max_length=30,
+                                               required=True, localize=True,
+                                               help_text='Обов’язково')
+
+    video_card_memory_size = forms.IntegerField(label='обсяг пам\'яті', help_text='Необов’язково', required=False,
+                                                localize=True)

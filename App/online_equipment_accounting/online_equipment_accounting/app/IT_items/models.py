@@ -25,7 +25,7 @@ class Motherboard(models.Model):
     brand = models.CharField('бренд материнської плати', max_length=200, default='відсутній')
     model = models.CharField('модель материнської плати', max_length=200, default='відсутній')
 
-    serial_number = models.CharField('серійний номер', max_length=200, unique=False)
+    serial_number = models.CharField('серійний номер', max_length=200, unique=False,  default='відсутній')
 
     form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS)
     type_ram_slot = models.CharField(max_length=20, choices=TYPE_RAM_SLOTS, default='не вказано')
@@ -33,8 +33,6 @@ class Motherboard(models.Model):
     integrated_graphics = models.BooleanField(default=False)
     integrated_sound_card = models.BooleanField(default=False)
     integrated_lan_card = models.BooleanField(default=False)
-
-    # is_established = models.BooleanField(default=False)
 
     name_for_user = 'Материнська плата'
     name = 'Motherboard'
@@ -56,7 +54,7 @@ class PowerSupply(models.Model):
     model = models.CharField('модель блока живлення', max_length=200, default='відсутній')
 
     serial_or_inventory_number = models.CharField('серійний або інвентарний номер',
-                                                  max_length=200, unique=True, default='відсутній')
+                                                  max_length=200, unique=False, default='відсутній')
 
     power_consumption = models.IntegerField('споживана потужність')
 
@@ -71,6 +69,27 @@ class PowerSupply(models.Model):
     class Meta:
         verbose_name = 'Блок живлення'
         verbose_name_plural = 'Блоки живлення'
+
+
+class VideoCard(models.Model):
+    __tablename__ = 'VideoCard'
+
+    brand = models.CharField('бренд відео карти', max_length=200, default='відсутній')
+    model = models.CharField('модель відео карти', max_length=200, default='відсутній')
+    serial_number = models.CharField('серійний номер', max_length=200, unique=False, default='відсутній')
+    memory_size = models.IntegerField('обсяг пам\'яті', default=0)
+
+    name_for_user = 'Відео Карта'
+    name = 'VideoCard'
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_number)
+
+    class Meta:
+        verbose_name = 'Відео Карта'
+        verbose_name_plural = 'Відео Карти'
 
 
 class PC(models.Model):
