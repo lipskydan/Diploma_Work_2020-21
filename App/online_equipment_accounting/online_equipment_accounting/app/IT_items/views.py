@@ -48,6 +48,7 @@ def item_detail(request, item_name, item_id):
 
 def pc_accessories_detail(request, item_name, item_id):
     item = None
+
     try:
         if item_name == 'Motherboard':
             item = Motherboard.object.get(id=item_id)
@@ -72,7 +73,9 @@ def add_pc(request):
             cd = form.cleaned_data
 
             item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place=cd['place'],
-                      motherboard=cd['motherboard'], power_supply=cd['power_supply'])
+                      motherboard=cd['motherboard'],
+                      power_supply=cd['power_supply'],
+                      video_card=cd['video_card'])
 
             item.save()
 
@@ -178,12 +181,14 @@ def pc_update(request, item_name, item_id):
     item = None
     motherboards = None
     power_supplies = None
+    video_cards = None
 
     if item_name == 'PC':
         item = PC.objects.get(id=item_id)
 
         motherboards = Motherboard.object.filter()
         power_supplies = PowerSupply.objects.filter()
+        video_cards = VideoCard.objects.filter()
 
     if request.method == 'POST':
 
@@ -212,6 +217,16 @@ def pc_update(request, item_name, item_id):
         else:
             item.power_supply = None
 
+        video_card = request.POST.get('video_card', None)
+        if video_card != 'None':
+            video_card_dic = video_card.split()
+            video_card = VideoCard.objects.get(model=video_card_dic[2],
+                                               brand=video_card_dic[1],
+                                               serial_number=video_card_dic[5])
+            item.video_card = video_card
+        else:
+            item.video_card = None
+
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
@@ -221,7 +236,8 @@ def pc_update(request, item_name, item_id):
     else:
         return render(request, 'IT_items/pc_update.html', {'item': item,
                                                            'motherboards': motherboards,
-                                                           'power_supplies': power_supplies})
+                                                           'power_supplies': power_supplies,
+                                                           'video_cards': video_cards})
 
 
 def motherboard_update(request, item_name, item_id):
@@ -295,11 +311,10 @@ def video_card_update(request, item_name, item_id):
     if request.method == 'POST':
 
         if item_name == 'VideoCard':
-            item.brand = request.POST['power_supply_brand']
-            item.model = request.POST['power_supply_model']
-            item.serial_or_inventory_number = request.POST['power_supply_serial_number_or_inventory_number']
-            item.power_consumption = request.POST['power_supply_power_consumption']
-
+            item.brand = request.POST['video_card_brand']
+            item.model = request.POST['video_card_model']
+            item.serial_number = request.POST['video_card_serial_number']
+            item.memory_size = request.POST['video_card_memory_size']
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
@@ -307,7 +322,7 @@ def video_card_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        return render(request, 'IT_items/power_supply_update.html', {'item': item})
+        return render(request, 'IT_items/video_card_update.html', {'item': item})
 
 
 class GeneratePDF(LoginRequiredMixin, View):

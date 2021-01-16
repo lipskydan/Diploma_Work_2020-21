@@ -72,6 +72,19 @@
                         {% endif %}
 
                         <hr>
+                        <h3 class="alert-heading">Відео карта</h3>
+                        <hr>
+
+                        {% if item.video_card %}
+                            <h5>Бренд: {{item.video_card.brand}}</h5>
+                            <h5>Модель: {{item.video_card.model}}</h5>
+                            <h5>Серійний номер: {{item.video_card.serial_number}}</h5>
+                            <h5>Обсяг пам'яті: {{item.video_card.memory_size}} MB</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
+                        <hr>
 
 
                     {% elif item.name == 'Switch' %}

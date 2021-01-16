@@ -14,7 +14,7 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                            <table class="col-sm-12" align="center" border="0">
+                            <table class="col-sm-12" align="center" border="1">
                                 <tr>
                                     <td colspan="3">
                                         <hr>
@@ -122,6 +122,36 @@
                                                 <option {% if power_supply == item.power_supply %} selected {% endif %}
                                                         value="{{ power_supply }}">
                                                     {{ power_supply }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Відео карта:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <div class="mx-auto" style="width: 75%">
+                                            <select class="form-control" name="video_card" id="video_card">
+                                                <option value="None">Відсутній</option>
+                                                {% for video_card in video_cards %}
+                                                <option {% if video_card == item.video_card %} selected {% endif %}
+                                                        value="{{ video_card }}">
+                                                    {{ video_card }}
                                                 </option>
                                                 {% endfor %}
                                             </select>

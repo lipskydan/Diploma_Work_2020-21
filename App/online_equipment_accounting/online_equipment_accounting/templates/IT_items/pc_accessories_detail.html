@@ -5,7 +5,7 @@
 {{ item.name }} - {{ item.serial_number }}
 {% elif item.name == 'PowerSupply' %}
 {{ item.name }} - {{ item.serial_or_inventory_number }}
-{% elif item.name == 'PowerSupply' %}
+{% elif item.name == 'VideoCard' %}
 {{ item.name }} - {{ item.serial_number }}
 {% endif %}
 {% endblock %}
@@ -63,6 +63,7 @@
                         <h5>Бренд: {{item.brand}}</h5>
                         <h5>Модель: {{item.model}}</h5>
                         <h5>Серійний номер: {{item.serial_number}}</h5>
+                        <h5>Обсяг пам'яті: {{item.memory_size}} MB</h5>
                         <hr>
 
                     {% endif %}
@@ -73,7 +74,7 @@
                     {% elif item.name == 'PowerSupply' %}
                     <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-power-supply" class="btn btn-success">Редагування</a>
                     {% elif item.name == 'VideoCard' %}
-                    <a href="" class="btn btn-success">Редагування</a>
+                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-video-card" class="btn btn-success">Редагування</a>
                     {% endif %}
 
                 </div>
