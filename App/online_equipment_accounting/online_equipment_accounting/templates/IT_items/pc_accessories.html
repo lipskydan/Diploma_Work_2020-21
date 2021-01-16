@@ -100,7 +100,7 @@
                                 <h1>Відео Карти</h1></div>
                             </td>
                             <td align="right">
-<!--                                <h1><a href="add-item/add-power-supply" class="badge badge-info">+</a></h1>-->
+                                <h1><a href="add-item/add-video-card" class="badge badge-info">+</a></h1>
                             </td>
                         </tr>
                     </table>
@@ -110,8 +110,8 @@
                     {% for el in items_video_card %}
                     <div class="alert alert-info">
                         <h2>Модель: {{el.brand}} {{ el.model }}</h2>
-                        <h2>Серійний номер: {{ el.serial_or_inventory_number }}</h2>
-<!--                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>-->
+                        <h2>Серійний номер: {{ el.serial_number }}</h2>
+                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
                     </div>
                     {% endfor %}
                     {% else %}

@@ -35,6 +35,7 @@ urlpatterns = [
 
     path('pc_accessories/<str:item_name>/<int:item_id>/update-motherboard', views.motherboard_update, name='motherboard_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-power-supply', views.power_supply_update, name='power_supply_update'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/update-video-card', views.video_card_update, name='video_card_update'),
 ]
 
 

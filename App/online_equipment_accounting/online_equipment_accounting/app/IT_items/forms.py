@@ -2,7 +2,7 @@ from django import forms
 
 from django.forms import widgets
 
-from .models import PC, Motherboard, PowerSupply
+from .models import PC, Motherboard, PowerSupply, VideoCard
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS
 
@@ -106,15 +106,21 @@ class AddPowerSupplyForm(forms.ModelForm):
 
 
 class AddVideoCard(forms.ModelForm):
-    video_card_brand = forms.CharField(label='Бренд', max_length=30, required=True,
-                                       help_text='Обов’язково, у разі відсутності - вказати відсутньо')
+    video_card_brand = forms.CharField(label='Бренд', max_length=30, required=False,
+                                       help_text='Необов’язково')
 
-    video_card_model = forms.CharField(label='Модель', max_length=30, required=True, localize=True,
-                                       help_text='Обов’язково, у разі відсутності - вказати відсутньо')
+    # help_text = 'Обов’язково, у разі відсутності - вказати відсутньо'
+
+    video_card_model = forms.CharField(label='Модель', max_length=30, required=False, localize=True,
+                                       help_text='Необов’язково')
 
     video_card_serial_number = forms.CharField(label='Серійний номер', max_length=30,
                                                required=True, localize=True,
                                                help_text='Обов’язково')
 
-    video_card_memory_size = forms.IntegerField(label='обсяг пам\'яті', help_text='Необов’язково', required=False,
-                                                localize=True)
+    video_card_memory_size = forms.IntegerField(label='Обсяг пам\'яті', localize=True, required=False,
+                                                help_text='Необов’язково, вказувати в MB (1 GB = 1024 MB)')
+
+    class Meta:
+        model = VideoCard
+        fields = ['video_card_brand', 'video_card_model', 'video_card_serial_number', 'video_card_memory_size']

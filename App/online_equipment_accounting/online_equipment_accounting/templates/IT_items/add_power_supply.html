@@ -22,9 +22,12 @@
                                 <td colspan="3" align="center">
 
                                     <!--Name of field and input-->
-                                    {{ form.power_supply_serial_number_or_inventory_number.label_tag }} {{ form.power_supply_serial_number_or_inventory_number }}
-
+                                    {{ form.power_supply_serial_number_or_inventory_number.label_tag }}
                                     <br>
+                                    {{ form.power_supply_serial_number_or_inventory_number }}
+                                    <br>
+
+
 
                                     <!--Show help text for field-->
                                     {% if form.power_supply_serial_number_or_inventory_number.help_text %}
