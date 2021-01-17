@@ -5,11 +5,55 @@
 {% endblock %}
 
 {% block body %}
-<div  class="container mt-5">
+<div  class="container mt-4">
 
     {% if user.is_authenticated %}
+
     <h5 class="my-0 font-weight-normal">Вітаю {{ user.first_name }} {{ user.last_name }},
         <a href="logout">Logout</a></h5>
+
+    <br>
+
+
+
+
+    <table class="table" border="1" width="100%">
+        <thead>
+        <tr>
+            <th colspan="8">
+                 <h5 align="center">Материнські плати</h5>
+            </th>
+        </tr>
+        <tr>
+            <th scope="col">serial <br> number</th>
+            <th scope="col">brand</th>
+            <th scope="col">model</th>
+            <th scope="col">form<br>factor</th>
+            <th scope="col">type <br> ram slot</th>
+            <th scope="col">integrated <br> graphics</th>
+            <th scope="col">integrated <br> sound_card</th>
+            <th scope="col">integrated <br> lan_card</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for motherboard in motherboards %}
+        <tr>
+<!--            <th scope="row"></th>-->
+            <td>{{motherboard.serial_number}}</td>
+            <td>{{motherboard.brand}}</td>
+            <td>{{motherboard.model}}</td>
+            <td>{{motherboard.form_factor}}</td>
+            <td>{{motherboard.type_ram_slot}}</td>
+            <td>{{motherboard.integrated_graphics}}</td>
+            <td>{{motherboard.integrated_sound_card}}</td>
+            <td>{{motherboard.integrated_lan_card}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
 
 
 <!--    <h4>Кількість блоків живлення: {{ power_supplies_count }} </h4>-->
