@@ -17,7 +17,7 @@
 
 
 
-    <table class="table" border="1" width="100%">
+    <table class="table" border="0" width="100%">
         <thead>
         <tr>
             <th colspan="8">
@@ -38,8 +38,9 @@
         <tbody>
         {% for motherboard in motherboards %}
         <tr>
-<!--            <th scope="row"></th>-->
-            <td>{{motherboard.serial_number}}</td>
+            <td>
+                <a href="/IT_items/pc_accessories/{{motherboard.name}}/{{motherboard.id}}">{{motherboard.serial_number}}</a>
+            </td>
             <td>{{motherboard.brand}}</td>
             <td>{{motherboard.model}}</td>
             <td>{{motherboard.form_factor}}</td>
