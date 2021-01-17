@@ -74,12 +74,12 @@ class PowerSupply(models.Model):
 class VideoCard(models.Model):
     __tablename__ = 'VideoCard'
 
-    brand = models.CharField('бренд відео карти', max_length=200, default='відсутній')
-    model = models.CharField('модель відео карти', max_length=200, default='відсутній')
+    brand = models.CharField('бренд відеокарти', max_length=200, default='відсутній')
+    model = models.CharField('модель відеокарти', max_length=200, default='відсутній')
     serial_number = models.CharField('серійний номер', max_length=200, unique=False, default='відсутній')
     memory_size = models.IntegerField('обсяг пам\'яті', default=0)
 
-    name_for_user = 'Відео Карта'
+    name_for_user = 'Відеокарта'
     name = 'VideoCard'
 
     objects = models.Manager()
@@ -88,8 +88,28 @@ class VideoCard(models.Model):
         return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_number)
 
     class Meta:
-        verbose_name = 'Відео Карта'
-        verbose_name_plural = 'Відео Карти'
+        verbose_name = 'Відеокарта'
+        verbose_name_plural = 'Відеокарти'
+
+
+class LanCard(models.Model):
+    __tablename__ = 'LanCard'
+
+    brand = models.CharField('бренд мережевої плати', max_length=200, default='відсутній')
+    model = models.CharField('модель мережевої плати', max_length=200, default='відсутній')
+    serial_number = models.CharField('серійний номер', max_length=200, unique=False, default='відсутній')
+
+    name_for_user = 'Мережева плата'
+    name = 'LanCard'
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_number)
+
+    class Meta:
+        verbose_name = 'Мережева плата'
+        verbose_name_plural = 'Мережеві плати'
 
 
 class PC(models.Model):

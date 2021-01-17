@@ -8,10 +8,11 @@ from django.template import RequestContext
 from .forms import SignUpForm, LoginForm
 
 from django.db import models
-from IT_items.models import Motherboard, PowerSupply, PC
+from IT_items.models import Motherboard, PowerSupply, PC, VideoCard
 
 
 def main(request):
+    video_cards = VideoCard.objects.all()
     power_supplies = PowerSupply.objects.all()
     motherboards = Motherboard.object.all()
     pcs = PC.objects.all()
@@ -21,7 +22,8 @@ def main(request):
     return render(request, 'main/main.html', {'pcs': pcs,
                                               'motherboards': motherboards,
                                               'power_supplies': power_supplies,
-                                              'power_supplies_count': power_supplies_count})
+                                              'power_supplies_count': power_supplies_count,
+                                              'video_cards': video_cards})
 
 
 def user_sign_up(request):
