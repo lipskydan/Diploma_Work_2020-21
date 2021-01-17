@@ -23,19 +23,30 @@ urlpatterns = [
     path('add-item/add-motherboard', views.add_motherboard, name='add_motherboard'),
     path('add-item/add-power-supply', views.add_power_supply, name='add_power_supply'),
     path('add-item/add-video-card', views.add_video_card, name='add_video_card'),
+    path('add-item/add-lan-card', views.add_lan_card, name='add_lan_card'),
 
     path('<str:item_name>/<int:item_id>', views.item_detail, name='item_detail'),
+    path('pc_accessories/<str:item_name>/<int:item_id>', views.pc_accessories_detail, name='item_detail'),
+
     path('<str:item_name>/<int:item_id>/del', views.item_delete, name='item_delete'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/del', views.pc_accessories_delete, name='item_delete'),
+
     path('<str:item_name>/<int:item_id>/update-pc', views.pc_update, name='pc_update'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/update-motherboard', views.motherboard_update,
+         name='motherboard_update'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/update-power-supply', views.power_supply_update,
+         name='power_supply_update'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/update-video-card', views.video_card_update,
+         name='video_card_update'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/update-lan-card', views.lan_card_update,
+         name='lan_card_update'),
 
     path('<str:item_name>/<int:item_id>/pdf', GeneratePDF.as_view()),
 
-    path('pc_accessories/<str:item_name>/<int:item_id>', views.pc_accessories_detail, name='item_detail'),
-    path('pc_accessories/<str:item_name>/<int:item_id>/del', views.pc_accessories_delete, name='item_delete'),
 
-    path('pc_accessories/<str:item_name>/<int:item_id>/update-motherboard', views.motherboard_update, name='motherboard_update'),
-    path('pc_accessories/<str:item_name>/<int:item_id>/update-power-supply', views.power_supply_update, name='power_supply_update'),
-    path('pc_accessories/<str:item_name>/<int:item_id>/update-video-card', views.video_card_update, name='video_card_update'),
+
+
+
 ]
 
 

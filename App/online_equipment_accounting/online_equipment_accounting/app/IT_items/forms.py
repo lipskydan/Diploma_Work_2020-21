@@ -2,7 +2,7 @@ from django import forms
 
 from django.forms import widgets
 
-from .models import PC, Motherboard, PowerSupply, VideoCard
+from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS
 
@@ -114,8 +114,6 @@ class AddVideoCard(forms.ModelForm):
     video_card_brand = forms.CharField(label='Бренд', max_length=30, required=False,
                                        help_text='Необов’язково')
 
-    # help_text = 'Обов’язково, у разі відсутності - вказати відсутньо'
-
     video_card_model = forms.CharField(label='Модель', max_length=30, required=False, localize=True,
                                        help_text='Необов’язково')
 
@@ -129,3 +127,19 @@ class AddVideoCard(forms.ModelForm):
     class Meta:
         model = VideoCard
         fields = ['video_card_brand', 'video_card_model', 'video_card_serial_number', 'video_card_memory_size']
+
+
+class AddLanCard(forms.ModelForm):
+    lan_card_brand = forms.CharField(label='Бренд', max_length=30, required=False,
+                                     help_text='Необов’язково')
+
+    lan_card_model = forms.CharField(label='Модель', max_length=30, required=False, localize=True,
+                                     help_text='Необов’язково')
+
+    lan_card_serial_number = forms.CharField(label='Серійний номер', max_length=30,
+                                             required=True, localize=True,
+                                             help_text='Обов’язково')
+
+    class Meta:
+        model = LanCard
+        fields = ['lan_card_brand', 'lan_card_model', 'lan_card_serial_number']

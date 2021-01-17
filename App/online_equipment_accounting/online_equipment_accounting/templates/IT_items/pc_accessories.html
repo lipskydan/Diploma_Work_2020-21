@@ -97,7 +97,7 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1>Відео Карти</h1></div>
+                                <h1>Відеокарти</h1></div>
                             </td>
                             <td align="right">
                                 <h1><a href="add-item/add-video-card" class="badge badge-info">+</a></h1>
@@ -116,7 +116,43 @@
                     {% endfor %}
                     {% else %}
                     <div class="alert alert-info">
-                        <h3>У нас ще немає Відео Карт</h3>
+                        <h3>У нас ще немає Відеокарт</h3>
+                    </div>
+                    {% endif %}
+                </article>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <aside class="col-sm-10">
+            <div class="card">
+                <article class="card-body">
+                    <table class="col-sm-12" border="0">
+                        <tr>
+                            <td>
+                                <h1>Мережеві плати</h1></div>
+                            </td>
+                            <td align="right">
+                                <h1><a href="add-item/add-lan-card" class="badge badge-info">+</a></h1>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+
+                    {% if items_lan_cards|length > 0 %}
+                    {% for el in items_lan_cards %}
+                    <div class="alert alert-info">
+                        <h2>Модель: {{el.brand}} {{ el.model }}</h2>
+                        <h2>Серійний номер: {{ el.serial_number }}</h2>
+                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="alert alert-info">
+                        <h3>У нас ще немає Мережевих плат</h3>
                     </div>
                     {% endif %}
                 </article>
