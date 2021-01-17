@@ -26,7 +26,21 @@
                     <h2 class="alert-heading">Компоненти</h2>
                     <hr>
                     {% if item.name == 'PC' %}
-                        <h3 class="alert-heading">Материнська плата</h3>
+
+                         <table class="col-sm-12" border="0">
+                            <tr>
+                                <td>
+                                   <h3 class="alert-heading">Материнська плата</h3>
+                                </td>
+                                <td align="right">
+                                    {% if item.motherboard %}
+<!--                                    <h1><a href="" class="badge badge-info">+-</a></h1>-->
+                                    <a href="/IT_items/pc_accessories/{{ item.motherboard.name }}/{{ item.motherboard.id }}/update-motherboard" class="btn btn-success">Редагування</a>
+                                     {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+
                         <hr>
 
                         {% if item.motherboard %}
@@ -59,7 +73,19 @@
                         {% endif %}
 
                         <hr>
-                        <h3 class="alert-heading">Блок живлення</h3>
+                         <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Блок живлення</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.power_supply %}
+    <!--                                    <h1><a href="" class="badge badge-info">+-</a></h1>-->
+                                        <a href="/IT_items/pc_accessories/{{ item.power_supply.name }}/{{ item.power_supply.id }}/update-power-supply" class="btn btn-success">Редагування</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
                         <hr>
 
                         {% if item.power_supply %}
@@ -72,7 +98,20 @@
                         {% endif %}
 
                         <hr>
-                        <h3 class="alert-heading">Відео карта</h3>
+                        <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Відео карта</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.video_card %}
+    <!--                                    <h1><a href="" class="badge badge-info">+-</a></h1>-->
+                                        <a href="/IT_items/pc_accessories/{{ item.video_card.name }}/{{ item.video_card.id }}/update-video-card" class="btn btn-success">Редагування</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+
                         <hr>
 
                         {% if item.video_card %}
@@ -80,6 +119,31 @@
                             <h5>Модель: {{item.video_card.model}}</h5>
                             <h5>Серійний номер: {{item.video_card.serial_number}}</h5>
                             <h5>Обсяг пам'яті: {{item.video_card.memory_size}} MB</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
+                        <hr>
+                        <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Мережева плата</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.lan_card %}
+    <!--                                    <h1><a href="" class="badge badge-info">+-</a></h1>-->
+                                        <a href="/IT_items/pc_accessories/{{ item.lan_card.name }}/{{ item.lan_card.id }}/update-lan-card" class="btn btn-success">Редагування</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.lan_card %}
+                            <h5>Бренд: {{item.lan_card.brand}}</h5>
+                            <h5>Модель: {{item.lan_card.model}}</h5>
+                            <h5>Серійний номер: {{item.lan_card.serial_number}}</h5>
                         {% else %}
                             <h5>Відсутній</h5>
                         {% endif %}

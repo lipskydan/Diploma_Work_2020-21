@@ -165,6 +165,27 @@
                                       {% endfor %}
                                   </td>
                               </tr>
+                              <tr>
+                                  <td colspan="2">
+                                      <hr>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" align="center">
+                                      <!--Name of field and input-->
+                                      {{ form.lan_card.label_tag }} {{ form.lan_card }}
+
+                                      <!--Show help text for field-->
+                                      {% if form.lan_card.help_text %}
+                                      <br><small style="color: grey">{{ form.lan_card.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.lan_card.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                                  </td>
+                              </tr>
                           </table>
                       </div>
                   <input type="submit" class="btn btn-outline-success" value="Створити">

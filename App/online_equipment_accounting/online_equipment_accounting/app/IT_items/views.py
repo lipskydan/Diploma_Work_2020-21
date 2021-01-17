@@ -69,7 +69,8 @@ def add_pc(request):
             item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place=cd['place'],
                       motherboard=cd['motherboard'],
                       power_supply=cd['power_supply'],
-                      video_card=cd['video_card'])
+                      video_card=cd['video_card'],
+                      lan_card=cd['lan_card'])
 
             item.save()
 
@@ -192,6 +193,7 @@ def pc_update(request, item_name, item_id):
     motherboards = None
     power_supplies = None
     video_cards = None
+    lan_cards = None
 
     if item_name == 'PC':
         item = PC.objects.get(id=item_id)
@@ -199,6 +201,7 @@ def pc_update(request, item_name, item_id):
         motherboards = Motherboard.object.filter()
         power_supplies = PowerSupply.objects.filter()
         video_cards = VideoCard.objects.filter()
+        lan_cards = LanCard.objects.filter()
 
     if request.method == 'POST':
 
@@ -237,6 +240,16 @@ def pc_update(request, item_name, item_id):
         else:
             item.video_card = None
 
+        lan_card = request.POST.get('lan_card', None)
+        if lan_card != 'None':
+            lan_card_dic = lan_card.split()
+            lan_card = LanCard.objects.get(model=lan_card_dic[2],
+                                           brand=lan_card_dic[1],
+                                           serial_number=lan_card_dic[5])
+            item.lan_card = lan_card
+        else:
+            item.lan_card = None
+
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
@@ -247,7 +260,8 @@ def pc_update(request, item_name, item_id):
         return render(request, 'IT_items/pc_update.html', {'item': item,
                                                            'motherboards': motherboards,
                                                            'power_supplies': power_supplies,
-                                                           'video_cards': video_cards})
+                                                           'video_cards': video_cards,
+                                                           'lan_cards': lan_cards})
 
 
 def motherboard_update(request, item_name, item_id):

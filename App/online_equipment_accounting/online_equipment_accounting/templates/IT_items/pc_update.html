@@ -163,6 +163,36 @@
                                         <hr>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Мережева плата:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <div class="mx-auto" style="width: 75%">
+                                            <select class="form-control" name="lan_card" id="lan_card">
+                                                <option value="None">Відсутній</option>
+                                                {% for lan_card in lan_cards %}
+                                                <option {% if lan_card == item.lan_card %} selected {% endif %}
+                                                        value="{{ lan_card }}">
+                                                    {{ lan_card }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                         <input type="submit" class="btn btn-success" value="Оновити">
