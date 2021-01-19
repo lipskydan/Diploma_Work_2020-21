@@ -21,7 +21,7 @@
     <div class="d-flex justify-content-center">
         <aside class="col-sm-10">
             <div class="card">
-                <article class="card-body">
+                <article class="card-body ">
 
                     <table class="col-sm-12" border="0">
                         <tr>
@@ -29,7 +29,7 @@
                                <h1>Персональні комп'ютори</h1>
                             </td>
                             <td align="right">
-                                <h1><a href="add-item/add-pc" class="badge badge-info">+</a></h1>
+                                <h1><a href="add-item/add-pc" class="badge badge-secondary">+</a></h1>
                             </td>
                         </tr>
                     </table>
@@ -37,14 +37,14 @@
 
                     {% if items_pc|length > 0 %}
                     {% for el in items_pc %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h2>Тип обладнання: {{ el.name_for_user }}</h2>
                         <h2>Інвентарний номер: {{ el.inventory_number }}</h2>
-                        <a href="/IT_items/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
+                        <a href="/IT_items/{{el.name}}/{{el.id}} " class="btn btn-secondary">Детальніше</a>
                     </div>
                     {% endfor %}
                     {% else %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h3>У нас ще немає персональних комп'ютерів</h3>
                     </div>
                     {% endif %}

@@ -12,6 +12,38 @@
             <div class="card">
                 <article class="card-body">
                     <h1 align="center">Список комплектуючих</h1><br>
+
+                    <div class="row" align="center">
+                        <div class="col-md-3">
+                            <h4><a href="#motherboard" class="btn btn-outline-secondary">Материнські плати</a></h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h4><a href="#power-supply" class="btn btn-outline-secondary">Блоки живлення</a></h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h4><a href="#video-card" class="btn btn-outline-secondary">Відеокарти</a></h4>
+                        </div>
+                        <div class="col-md-3">
+                            <h4><a href="#lan-card" class="btn btn-outline-secondary">Мережеві плати</a></h4>
+                        </div>
+                    </div>
+
+<!--                    <table class="table" align="center" border="0">-->
+<!--                        <tr>-->
+<!--                            <td align="center">-->
+<!--                                <h4><a href="#motherboard" class="btn btn-outline-secondary">Материнські плати</a></h4>-->
+<!--                            </td>-->
+<!--                            <td align="center">-->
+<!--                                <h4><a href="#power-supply" class="btn btn-outline-secondary">Блоки живлення</a></h4>-->
+<!--                            </td>-->
+<!--                            <td align="center">-->
+<!--                                <h4><a href="#video-card" class="btn btn-outline-secondary">Відеокарти</a></h4>-->
+<!--                            </td>-->
+<!--                            <td align="center">-->
+<!--                                <h4><a href="#lan-card" class="btn btn-outline-secondary">Мережеві плати</a></h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
                 </article>
             </div>
         </aside>
@@ -27,24 +59,24 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1>Материнські плати</h1>
+                                <h1><a id="motherboard">Материнські плати</a></h1>
                             </td>
                             <td align="right">
-                                <h1><a href="add-item/add-motherboard" class="badge badge-info">+</a></h1>
+                                <h1><a href="add-item/add-motherboard" class="badge badge-secondary">+</a></h1>
                         </tr>
                     </table>
                     <br>
 
                     {% if items_motherboard|length > 0 %}
                     {% for el in items_motherboard %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h2>Модель: {{el.brand}} {{ el.model }}</h2>
                         <h2>Серійний номер: {{ el.serial_number }}</h2>
-                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
+                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-secondary">Детальніше</a>
                     </div>
                     {% endfor %}
                     {% else %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h3>У нас ще немає материнських плат</h3>
                     </div>
                     {% endif %}
@@ -62,10 +94,10 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1>Блоки живлення</h1></div>
+                                <h1><a id="power-supply">Блоки живлення</a></h1></div>
                             </td>
                             <td align="right">
-                                <h1><a href="add-item/add-power-supply" class="badge badge-info">+</a></h1>
+                                <h1><a href="add-item/add-power-supply" class="badge badge-secondary">+</a></h1>
                             </td>
                         </tr>
                     </table>
@@ -73,14 +105,14 @@
 
                     {% if items_power_supply|length > 0 %}
                     {% for el in items_power_supply %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h2>Модель: {{el.brand}} {{ el.model }}</h2>
                         <h2>Серійний номер: {{ el.serial_or_inventory_number }}</h2>
-                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
+                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-secondary">Детальніше</a>
                     </div>
                     {% endfor %}
                     {% else %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h3>У нас ще немає блоків живлення</h3>
                     </div>
                     {% endif %}
@@ -97,10 +129,10 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1>Відеокарти</h1></div>
+                                <h1><a id="video-card">Відеокарти</a></h1></div>
                             </td>
                             <td align="right">
-                                <h1><a href="add-item/add-video-card" class="badge badge-info">+</a></h1>
+                                <h1><a href="add-item/add-video-card" class="badge badge-secondary">+</a></h1>
                             </td>
                         </tr>
                     </table>
@@ -108,14 +140,14 @@
 
                     {% if items_video_card|length > 0 %}
                     {% for el in items_video_card %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h2>Модель: {{el.brand}} {{ el.model }}</h2>
                         <h2>Серійний номер: {{ el.serial_number }}</h2>
-                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
+                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-secondary">Детальніше</a>
                     </div>
                     {% endfor %}
                     {% else %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h3>У нас ще немає Відеокарт</h3>
                     </div>
                     {% endif %}
@@ -133,10 +165,10 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1>Мережеві плати</h1></div>
+                                <h1><a id="lan-card">Мережеві плати</a></h1></div>
                             </td>
                             <td align="right">
-                                <h1><a href="add-item/add-lan-card" class="badge badge-info">+</a></h1>
+                                <h1><a href="add-item/add-lan-card" class="badge badge-secondary">+</a></h1>
                             </td>
                         </tr>
                     </table>
@@ -144,14 +176,14 @@
 
                     {% if items_lan_cards|length > 0 %}
                     {% for el in items_lan_cards %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h2>Модель: {{el.brand}} {{ el.model }}</h2>
                         <h2>Серійний номер: {{ el.serial_number }}</h2>
-                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-warning">Детальніше</a>
+                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-secondary">Детальніше</a>
                     </div>
                     {% endfor %}
                     {% else %}
-                    <div class="alert alert-info">
+                    <div class="alert alert-secondary">
                         <h3>У нас ще немає Мережевих плат</h3>
                     </div>
                     {% endif %}
