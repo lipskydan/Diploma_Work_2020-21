@@ -16,7 +16,7 @@ def IT_items(request):
 
 
 def pc_accessories(request):
-    items_motherboard = Motherboard.object.all()
+    items_motherboard = Motherboard.objects.all()
     items_power_supply = PowerSupply.objects.all()
     items_video_card = VideoCard.objects.all()
     items_lan_cards = LanCard.objects.all()
@@ -43,7 +43,7 @@ def pc_accessories_detail(request, item_name, item_id):
 
     try:
         if item_name == 'Motherboard':
-            item = Motherboard.object.get(id=item_id)
+            item = Motherboard.objects.get(id=item_id)
         if item_name == 'PowerSupply':
             item = PowerSupply.objects.get(id=item_id)
         if item_name == 'VideoCard':
@@ -173,7 +173,7 @@ def pc_accessories_delete(request, item_name, item_id):
     item = None
     try:
         if item_name == 'Motherboard':
-            item = Motherboard.object.get(id=item_id)
+            item = Motherboard.objects.get(id=item_id)
         elif item_name == 'PowerSupply':
             item = PowerSupply.objects.get(id=item_id)
         elif item_name == 'VideoCard':
@@ -198,7 +198,7 @@ def pc_update(request, item_name, item_id):
     if item_name == 'PC':
         item = PC.objects.get(id=item_id)
 
-        motherboards = Motherboard.object.filter()
+        motherboards = Motherboard.objects.filter()
         power_supplies = PowerSupply.objects.filter()
         video_cards = VideoCard.objects.filter()
         lan_cards = LanCard.objects.filter()
@@ -213,9 +213,9 @@ def pc_update(request, item_name, item_id):
         motherboard = request.POST.get('motherboard', None)
         if motherboard != 'None':
             motherboard_dic = motherboard.split()
-            motherboard = Motherboard.object.get(model=motherboard_dic[2],
-                                                 brand=motherboard_dic[1],
-                                                 serial_number=motherboard_dic[5])
+            motherboard = Motherboard.objects.get(model=motherboard_dic[2],
+                                                  brand=motherboard_dic[1],
+                                                  serial_number=motherboard_dic[5])
             item.motherboard = motherboard
         else:
             item.motherboard = None
@@ -270,7 +270,7 @@ def motherboard_update(request, item_name, item_id):
     type_ram_slots = None
 
     if item_name == 'Motherboard':
-        item = Motherboard.object.get(id=item_id)
+        item = Motherboard.objects.get(id=item_id)
 
         form_factors = [el[0] for el in MOTHERBOARD_FROM_FACTORS]
         type_ram_slots = [el[0] for el in TYPE_RAM_SLOTS]

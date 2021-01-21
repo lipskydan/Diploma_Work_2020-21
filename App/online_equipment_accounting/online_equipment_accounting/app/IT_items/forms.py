@@ -20,7 +20,7 @@ class AddPcForm(forms.ModelForm):
     place = forms.IntegerField(label='Номер учбового місця', required=False, help_text='Необов’язково',
                                localize=True)
 
-    motherboard = forms.ModelChoiceField(queryset=Motherboard.object.all(), label='Материнська плата',
+    motherboard = forms.ModelChoiceField(queryset=Motherboard.objects.all(), label='Материнська плата',
                                          empty_label='', required=False, help_text='Необов’язково',
                                          localize=True,
                                          widget=widgets.Select(attrs={'size': 1}))

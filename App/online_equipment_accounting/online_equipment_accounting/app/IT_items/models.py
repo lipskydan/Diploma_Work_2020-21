@@ -37,7 +37,7 @@ class Motherboard(models.Model):
     name_for_user = 'Материнська плата'
     name = 'Motherboard'
 
-    object = models.Manager()
+    objects = models.Manager()
 
     def __str__(self):
         return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_number)
@@ -110,6 +110,26 @@ class LanCard(models.Model):
     class Meta:
         verbose_name = 'Мережева плата'
         verbose_name_plural = 'Мережеві плати'
+
+
+class SoundCard(models.Model):
+    __tablename__ = 'SoundCard'
+
+    brand = models.CharField('бренд звукової плати', max_length=200, default='відсутній')
+    model = models.CharField('модель звукової плати', max_length=200, default='відсутній')
+    serial_number = models.CharField('серійний номер', max_length=200, unique=False, default='відсутній')
+
+    name_for_user = 'Звукова плата'
+    name = 'SoundCard'
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_number)
+
+    class Meta:
+        verbose_name = 'Звукова плата'
+        verbose_name_plural = 'Звукові плати'
 
 
 class PC(models.Model):
