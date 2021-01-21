@@ -45,11 +45,4 @@ urlpatterns = [
          name='sound_card_update'),
 
     path('<str:item_name>/<int:item_id>/pdf', GeneratePDF.as_view()),
-
-
-
-
-
 ]
-
-
