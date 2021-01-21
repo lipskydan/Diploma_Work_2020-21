@@ -12,7 +12,7 @@
                <form method="post">
                   {% csrf_token %}
                       <div class="form-group">
-                          <table class="col-sm-12" align="center" border="0">
+                          <table class="col-sm-12" align="center" border="1">
                               <tr>
                                   <td colspan="2">
                                       <hr>
@@ -47,7 +47,7 @@
                                   <td align="center" width="50%">
                                       <!--Name of field and input-->
                                       {{ form.floor.label_tag }}
-<!--                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       {{ form.floor }}
 
                                       <br>
@@ -64,7 +64,9 @@
                                   </td>
                                   <td align="center">
                                       <!--Name of field and input-->
-                                      {{ form.room.label_tag }} {{ form.room }}
+                                      {{ form.room.label_tag }}
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      {{ form.room }}
 
                                       <br>
 
@@ -131,7 +133,9 @@
                               <tr>
                                   <td colspan="2" align="center">
                                       <!--Name of field and input-->
-                                      {{ form.power_supply.label_tag }} {{ form.power_supply }}
+                                      {{ form.power_supply.label_tag }}
+<!--                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                      {{ form.power_supply }}
 
                                       <!--Show help text for field-->
                                       {% if form.power_supply.help_text %}
@@ -152,7 +156,9 @@
                               <tr>
                                   <td colspan="2" align="center">
                                       <!--Name of field and input-->
-                                      {{ form.video_card.label_tag }} {{ form.video_card }}
+                                      {{ form.video_card.label_tag }}
+<!--                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                      {{ form.video_card }}
 
                                       <!--Show help text for field-->
                                       {% if form.video_card.help_text %}
@@ -173,7 +179,9 @@
                               <tr>
                                   <td colspan="2" align="center">
                                       <!--Name of field and input-->
-                                      {{ form.lan_card.label_tag }} {{ form.lan_card }}
+                                      {{ form.lan_card.label_tag }}
+<!--                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                      {{ form.lan_card }}
 
                                       <!--Show help text for field-->
                                       {% if form.lan_card.help_text %}
@@ -186,6 +194,27 @@
                                       {% endfor %}
                                   </td>
                               </tr>
+                              <tr>
+                                  <td colspan="2">
+                                      <hr>
+                                  </td>
+                              </tr>
+<!--                              <tr>-->
+<!--                                  <td colspan="2" align="center">-->
+<!--                                      &lt;!&ndash;Name of field and input&ndash;&gt;-->
+<!--                                      {{ form.sound_card.label_tag }} {{ form.sound_card }}-->
+
+<!--                                      &lt;!&ndash;Show help text for field&ndash;&gt;-->
+<!--                                      {% if form.sound_card.help_text %}-->
+<!--                                      <br><small style="color: grey">{{ form.sound_card.help_text }}</small>-->
+<!--                                      {% endif %}-->
+
+<!--                                      &lt;!&ndash;Show error text for field&ndash;&gt;-->
+<!--                                      {% for error in form.sound_card.errors %}-->
+<!--                                      <p style="color: red">{{ error }}</p>-->
+<!--                                      {% endfor %}-->
+<!--                                  </td>-->
+<!--                              </tr>-->
                           </table>
                       </div>
                   <input type="submit" class="btn btn-outline-secondary" value="Створити">

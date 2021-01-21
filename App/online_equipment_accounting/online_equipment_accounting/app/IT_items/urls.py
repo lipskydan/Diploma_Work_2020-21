@@ -24,6 +24,7 @@ urlpatterns = [
     path('add-item/add-power-supply', views.add_power_supply, name='add_power_supply'),
     path('add-item/add-video-card', views.add_video_card, name='add_video_card'),
     path('add-item/add-lan-card', views.add_lan_card, name='add_lan_card'),
+    path('add-item/add-sound-card', views.add_sound_card, name='add_sound_card'),
 
     path('<str:item_name>/<int:item_id>', views.item_detail, name='item_detail'),
     path('pc_accessories/<str:item_name>/<int:item_id>', views.pc_accessories_detail, name='item_detail'),
@@ -40,6 +41,8 @@ urlpatterns = [
          name='video_card_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-lan-card', views.lan_card_update,
          name='lan_card_update'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/update-sound-card', views.sound_card_update,
+         name='sound_card_update'),
 
     path('<str:item_name>/<int:item_id>/pdf', GeneratePDF.as_view()),
 

@@ -40,6 +40,11 @@ class AddPcForm(forms.ModelForm):
                                       localize=True,
                                       widget=widgets.Select(attrs={'size': 1}))
 
+    # sound_card = forms.ModelChoiceField(queryset=SoundCard.objects.all(), label='Звукова плата',
+    #                                     empty_label='', required=False, help_text='Необов’язково',
+    #                                     localize=True,
+    #                                     widget=widgets.Select(attrs={'size': 1}))
+
     class Meta:
         model = PC
         fields = ['inventory_number', 'floor', 'room', 'place', 'motherboard', 'power_supply']
