@@ -14,7 +14,7 @@ from IT_items.models import Motherboard, PowerSupply, PC, VideoCard
 def main(request):
     video_cards = VideoCard.objects.all()
     power_supplies = PowerSupply.objects.all()
-    motherboards = Motherboard.object.all()
+    motherboards = Motherboard.objects.all()
     pcs = PC.objects.all()
 
     power_supplies_count = power_supplies.count()

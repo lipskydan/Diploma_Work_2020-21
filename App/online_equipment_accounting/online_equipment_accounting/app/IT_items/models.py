@@ -145,6 +145,7 @@ class PC(models.Model):
     power_supply = models.ForeignKey(PowerSupply, on_delete=models.SET_NULL, null=True)
     video_card = models.ForeignKey(VideoCard, on_delete=models.SET_NULL, null=True)
     lan_card = models.ForeignKey(LanCard, on_delete=models.SET_NULL, null=True)
+    sound_card = models.ForeignKey(SoundCard, on_delete=models.SET_NULL, null=True)
 
     name_for_user = 'Персональний комп\'ютор'
     name = 'PC'

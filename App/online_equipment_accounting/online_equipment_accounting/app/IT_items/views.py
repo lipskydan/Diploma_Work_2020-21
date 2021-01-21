@@ -3,10 +3,11 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import View
+from django.core.exceptions import ObjectDoesNotExist
 
-from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCard, AddLanCard
+from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCard, AddLanCard, AddSoundCard
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS
-from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard
+from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard
 from .utils import render_to_pdf
 
 
@@ -20,11 +21,13 @@ def pc_accessories(request):
     items_power_supply = PowerSupply.objects.all()
     items_video_card = VideoCard.objects.all()
     items_lan_cards = LanCard.objects.all()
+    items_sound_cards = SoundCard.objects.all()
 
     return render(request, 'IT_items/pc_accessories.html', {'items_motherboard': items_motherboard,
                                                             'items_power_supply': items_power_supply,
                                                             'items_video_card': items_video_card,
-                                                            'items_lan_cards': items_lan_cards})
+                                                            'items_lan_cards': items_lan_cards,
+                                                            'items_sound_cards': items_sound_cards})
 
 
 def item_detail(request, item_name, item_id):
@@ -50,6 +53,8 @@ def pc_accessories_detail(request, item_name, item_id):
             item = VideoCard.objects.get(id=item_id)
         if item_name == 'LanCard':
             item = LanCard.objects.get(id=item_id)
+        if item_name == 'SoundCard':
+            item = SoundCard.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_detail')
 
@@ -70,7 +75,8 @@ def add_pc(request):
                       motherboard=cd['motherboard'],
                       power_supply=cd['power_supply'],
                       video_card=cd['video_card'],
-                      lan_card=cd['lan_card'])
+                      lan_card=cd['lan_card'],
+                      sound_card=cd['sound_card'])
 
             item.save()
 
@@ -156,7 +162,24 @@ def add_lan_card(request):
     return render(request, 'IT_items/add_lan_card.html', {'form': form})
 
 
-def item_delete(request, item_name, item_id):
+def add_sound_card(request):
+    if request.method == 'POST':
+        form = AddSoundCard(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            sound_card = SoundCard(brand=cd['sound_card_brand'],
+                                   model=cd['sound_card_model'],
+                                   serial_number=cd['sound_card_serial_number'])
+            sound_card.save()
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+    else:
+        form = AddSoundCard()
+        pass
+
+    return render(request, 'IT_items/add_sound_card.html', {'form': form})
+
+
+def item_delete(item_name, item_id):
     item = None
     try:
         if item_name == 'PC':
@@ -169,7 +192,7 @@ def item_delete(request, item_name, item_id):
     return HttpResponseRedirect(reverse('IT_items:IT_items'))
 
 
-def pc_accessories_delete(request, item_name, item_id):
+def pc_accessories_delete(item_name, item_id):
     item = None
     try:
         if item_name == 'Motherboard':
@@ -180,6 +203,8 @@ def pc_accessories_delete(request, item_name, item_id):
             item = VideoCard.objects.get(id=item_id)
         elif item_name == 'LanCard':
             item = LanCard.objects.get(id=item_id)
+        elif item_name == 'SoundCard':
+            item = SoundCard.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_delete')
 
@@ -194,6 +219,7 @@ def pc_update(request, item_name, item_id):
     power_supplies = None
     video_cards = None
     lan_cards = None
+    sound_cards = None
 
     if item_name == 'PC':
         item = PC.objects.get(id=item_id)
@@ -202,6 +228,7 @@ def pc_update(request, item_name, item_id):
         power_supplies = PowerSupply.objects.filter()
         video_cards = VideoCard.objects.filter()
         lan_cards = LanCard.objects.filter()
+        sound_cards = SoundCard.objects.filter()
 
     if request.method == 'POST':
 
@@ -250,10 +277,20 @@ def pc_update(request, item_name, item_id):
         else:
             item.lan_card = None
 
+        sound_card = request.POST.get('sound_card', None)
+        if sound_card != 'None':
+            sound_card_dic = sound_card.split()
+            sound_card = SoundCard.objects.get(model=sound_card_dic[2],
+                                               brand=sound_card_dic[1],
+                                               serial_number=sound_card_dic[5])
+            item.sound_card = sound_card
+        else:
+            item.sound_card = None
+
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:IT_items'))
-        except:
+        except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
@@ -261,7 +298,8 @@ def pc_update(request, item_name, item_id):
                                                            'motherboards': motherboards,
                                                            'power_supplies': power_supplies,
                                                            'video_cards': video_cards,
-                                                           'lan_cards': lan_cards})
+                                                           'lan_cards': lan_cards,
+                                                           'sound_cards': sound_cards})
 
 
 def motherboard_update(request, item_name, item_id):
@@ -293,7 +331,7 @@ def motherboard_update(request, item_name, item_id):
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-        except:
+        except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
@@ -319,7 +357,7 @@ def power_supply_update(request, item_name, item_id):
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-        except:
+        except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
@@ -342,7 +380,7 @@ def video_card_update(request, item_name, item_id):
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-        except:
+        except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
@@ -364,11 +402,33 @@ def lan_card_update(request, item_name, item_id):
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-        except:
+        except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
         return render(request, 'IT_items/lan_card_update.html', {'item': item})
+
+
+def sound_card_update(request, item_name, item_id):
+    item = None
+
+    if item_name == 'SoundCard':
+        item = SoundCard.objects.get(id=item_id)
+
+    if request.method == 'POST':
+
+        if item_name == 'SoundCard':
+            item.brand = request.POST['sound_card_brand']
+            item.model = request.POST['sound_card_model']
+            item.serial_number = request.POST['sound_card_serial_number']
+        try:
+            item.save()
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+        except ObjectDoesNotExist:
+            return 'При обновлении оборудывания произошла ошибка'
+
+    else:
+        return render(request, 'IT_items/sound_card_update.html', {'item': item})
 
 
 class GeneratePDF(LoginRequiredMixin, View):
