@@ -2,7 +2,7 @@ from django import forms
 
 from django.forms import widgets
 
-from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard
+from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS
 
@@ -148,3 +148,19 @@ class AddLanCard(forms.ModelForm):
     class Meta:
         model = LanCard
         fields = ['lan_card_brand', 'lan_card_model', 'lan_card_serial_number']
+
+
+class AddSoundCard(forms.ModelForm):
+    sound_card_brand = forms.CharField(label='Бренд', max_length=30, required=False,
+                                       help_text='Необов’язково')
+
+    sound_card_model = forms.CharField(label='Модель', max_length=30, required=False, localize=True,
+                                       help_text='Необов’язково')
+
+    sound_card_serial_number = forms.CharField(label='Серійний номер', max_length=30,
+                                               required=True, localize=True,
+                                               help_text='Обов’язково')
+
+    class Meta:
+        model = SoundCard
+        fields = ['sound_card_brand', 'sound_card_model', 'sound_card_serial_number']
