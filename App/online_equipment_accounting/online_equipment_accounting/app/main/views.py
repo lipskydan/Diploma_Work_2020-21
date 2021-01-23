@@ -8,14 +8,16 @@ from django.template import RequestContext
 from .forms import SignUpForm, LoginForm
 
 from django.db import models
-from IT_items.models import Motherboard, PowerSupply, PC, VideoCard
+from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, SoundCard
 
 
 def main(request):
-    video_cards = VideoCard.objects.all()
-    power_supplies = PowerSupply.objects.all()
-    motherboards = Motherboard.objects.all()
     pcs = PC.objects.all()
+    motherboards = Motherboard.objects.all()
+    power_supplies = PowerSupply.objects.all()
+    video_cards = VideoCard.objects.all()
+    lan_cards = LanCard.objects.all()
+    sound_cards = SoundCard.objects.all()
 
     power_supplies_count = power_supplies.count()
 
@@ -23,7 +25,9 @@ def main(request):
                                               'motherboards': motherboards,
                                               'power_supplies': power_supplies,
                                               'power_supplies_count': power_supplies_count,
-                                              'video_cards': video_cards})
+                                              'video_cards': video_cards,
+                                              'lan_cards': lan_cards,
+                                              'sound_cards': sound_cards})
 
 
 def user_sign_up(request):

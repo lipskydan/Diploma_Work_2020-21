@@ -9,6 +9,8 @@
 {{ item.name }} - {{ item.serial_number }}
 {% elif item.name == 'LanCard' %}
 {{ item.name }} - {{ item.serial_number }}
+{% elif item.name == 'SoundCard' %}
+{{ item.name }} - {{ item.serial_number }}
 {% endif %}
 {% endblock %}
 
@@ -75,17 +77,31 @@
                         <h5>Серійний номер: {{item.serial_number}}</h5>
                         <hr>
 
+                    {% elif item.name == 'SoundCard' %}
+
+                        <h5>Бренд: {{item.brand}}</h5>
+                        <h5>Модель: {{item.model}}</h5>
+                        <h5>Серійний номер: {{item.serial_number}}</h5>
+                        <hr>
+
                     {% endif %}
 
                     <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del" class="btn btn-danger">Видалити</a>
                     {% if item.name == 'Motherboard' %}
+<!--                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del-motherboard" class="btn btn-danger">Видалити</a>-->
                     <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-motherboard" class="btn btn-success">Редагування</a>
                     {% elif item.name == 'PowerSupply' %}
+<!--                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del-power-supply" class="btn btn-danger">Видалити</a>-->
                     <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-power-supply" class="btn btn-success">Редагування</a>
                     {% elif item.name == 'VideoCard' %}
+<!--                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del-video-card" class="btn btn-danger">Видалити</a>-->
                     <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-video-card" class="btn btn-success">Редагування</a>
-                     {% elif item.name == 'LanCard' %}
+                    {% elif item.name == 'LanCard' %}
+<!--                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del-lan-card" class="btn btn-danger">Видалити</a>-->
                     <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-lan-card" class="btn btn-success">Редагування</a>
+                    {% elif item.name == 'SoundCard' %}
+<!--                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del-sound-card" class="btn btn-danger">Видалити</a>-->
+                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-sound-card" class="btn btn-success">Редагування</a>
                     {% endif %}
 
                 </div>

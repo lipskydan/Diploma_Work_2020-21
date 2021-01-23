@@ -178,7 +178,7 @@ def add_sound_card(request):
     return render(request, 'IT_items/add_sound_card.html', {'form': form})
 
 
-def item_delete(item_name, item_id):
+def item_delete(request, item_name, item_id):
     item = None
     try:
         if item_name == 'PC':
@@ -191,7 +191,7 @@ def item_delete(item_name, item_id):
     return HttpResponseRedirect(reverse('IT_items:IT_items'))
 
 
-def pc_accessories_delete(item_name, item_id):
+def pc_accessories_delete(request, item_name, item_id):
     item = None
     try:
         if item_name == 'Motherboard':
@@ -206,6 +206,66 @@ def pc_accessories_delete(item_name, item_id):
             item = SoundCard.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_delete')
+
+    item.delete()
+
+    return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+
+
+def motherboard_delete(request, item_name, item_id):
+    item = None
+    try:
+        item = Motherboard.objects.get(id=item_id)
+    except:
+        raise Http404('ERROR motherboard_delete')
+
+    item.delete()
+
+    return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+
+
+def power_supply_delete(request, item_name, item_id):
+    item = None
+    try:
+        item = PowerSupply.objects.get(name=item_name, id=item_id)
+    except:
+        raise Http404('ERROR motherboard_delete')
+
+    item.delete()
+
+    return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+
+
+def video_card_delete(request, item_name, item_id):
+    item = None
+    try:
+        item = VideoCard.objects.get(id=item_id)
+    except:
+        raise Http404('ERROR motherboard_delete')
+
+    item.delete()
+
+    return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+
+
+def lan_card_delete(request, item_name, item_id):
+    item = None
+    try:
+        item = LanCard.objects.get(id=item_id)
+    except:
+        raise Http404('ERROR motherboard_delete')
+
+    item.delete()
+
+    return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+
+
+def sound_card_delete(request, item_name, item_id):
+    item = None
+    try:
+        item = SoundCard.objects.get(id=item_id)
+    except:
+        raise Http404('ERROR motherboard_delete')
 
     item.delete()
 

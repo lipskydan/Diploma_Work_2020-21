@@ -32,6 +32,12 @@ urlpatterns = [
     path('<str:item_name>/<int:item_id>/del', views.item_delete, name='item_delete'),
     path('pc_accessories/<str:item_name>/<int:item_id>/del', views.pc_accessories_delete, name='item_delete'),
 
+    # path('pc_accessories/<str:item_name>/<int:item_id>/del-motherboard', views.motherboard_delete, name='motherboard_delete'),
+    # path('pc_accessories/<str:item_name>/<int:item_id>/del-power-supply', views.power_supply_delete, name='power_supply_delete'),
+    # path('pc_accessories/<str:item_name>/<int:item_id>/del-video-card', views.video_card_delete, name='video_card_delete'),
+    # path('pc_accessories/<str:item_name>/<int:item_id>/del-lan-card', views.lan_card_delete, name='lan_card_delete'),
+    # path('pc_accessories/<str:item_name>/<int:item_id>/del-sound-card', views.sound_card_delete, name='sound_card_delete'),
+
     path('<str:item_name>/<int:item_id>/update-pc', views.pc_update, name='pc_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-motherboard', views.motherboard_update,
          name='motherboard_update'),

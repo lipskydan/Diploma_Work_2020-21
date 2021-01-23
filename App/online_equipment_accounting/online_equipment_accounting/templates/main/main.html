@@ -60,6 +60,141 @@
         </table>
     </div>
 
+    <div class="row">
+        <div class="col-sm" align="left">
+            <div class="jumbotron">
+                 <table class="table" border="0">
+                     <thead>
+                     <tr>
+                         <th colspan="8">
+                             <h5 align="center">Блоки живлення</h5>
+                         </th>
+                     </tr>
+                     <tr>
+                         <th scope="col">serial number</th>
+                        <th scope="col">brand</th>
+                        <th scope="col">model</th>
+                        <th scope="col">power consumption</th>
+                    </tr>
+                     </thead>
+                     <tbody>
+                     {% for power_supply in power_supplies %}
+                     <tr>
+                         <td>
+                             <a href="/IT_items/pc_accessories/{{power_supply.name}}/{{power_supply.id}}" class="text-dark">
+                                 {{power_supply.serial_or_inventory_number}}
+                             </a>
+                         </td>
+                         <td>{{power_supply.brand}}</td>
+                         <td>{{power_supply.model}}</td>
+                         <td>{{power_supply.power_consumption}}</td>
+                     </tr>
+                     {% endfor %}
+                     </tbody>
+                 </table>
+            </div>
+        </div>
+        <div class="col-sm" align="right">
+            <div class="jumbotron">
+                <table class="table" border="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th colspan="8">
+                            <h5 align="center">Відеокарти</h5>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">serial number</th>
+                        <th scope="col">brand</th>
+                        <th scope="col">model</th>
+                        <th scope="col">memory size</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for video_card in video_cards %}
+                    <tr>
+                        <td>
+                            <a href="/IT_items/pc_accessories/{{video_card.name}}/{{video_card.id}}" class="text-dark">
+                                {{video_card.serial_number}}
+                            </a>
+                        </td>
+                        <td>{{video_card.brand}}</td>
+                        <td>{{video_card.model}}</td>
+                        <td>{{video_card.memory_size}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="col-sm" align="left">
+            <div class="jumbotron">
+                 <table class="table" border="0">
+                     <thead>
+                     <tr>
+                         <th colspan="8">
+                             <h5 align="center">Мережеві плати</h5>
+                         </th>
+                     </tr>
+                     <tr>
+                         <th scope="col">serial number</th>
+                        <th scope="col">brand</th>
+                        <th scope="col">model</th>
+                    </tr>
+                     </thead>
+                     <tbody>
+                     {% for lan_card in lan_cards %}
+                     <tr>
+                         <td>
+                             <a href="/IT_items/pc_accessories/{{lan_card.name}}/{{lan_card.id}}" class="text-dark">
+                                 {{lan_card.serial_number}}
+                             </a>
+                         </td>
+                         <td>{{lan_card.brand}}</td>
+                         <td>{{lan_card.model}}</td>
+                     </tr>
+                     {% endfor %}
+                     </tbody>
+                 </table>
+            </div>
+        </div>
+        <div class="col-sm" align="right">
+            <div class="jumbotron">
+                <table class="table" border="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th colspan="8">
+                            <h5 align="center">Звукові плати</h5>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th scope="col">serial number</th>
+                        <th scope="col">brand</th>
+                        <th scope="col">model</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for sound_card in sound_cards %}
+                    <tr>
+                        <td>
+                            <a href="/IT_items/pc_accessories/{{sound_card.name}}/{{sound_card.id}}" class="text-dark">
+                                {{sound_card.serial_number}}
+                            </a>
+                        </td>
+                        <td>{{sound_card.brand}}</td>
+                        <td>{{sound_card.model}}</td>
+                        <td>{{sound_card.memory_size}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     {% else %}
     <div class="d-flex justify-content-center">
         <aside class="col-sm-4">
