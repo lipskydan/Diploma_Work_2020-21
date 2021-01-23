@@ -13,7 +13,46 @@ from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, So
 
 def main(request):
     pcs = PC.objects.all()
+
+    #####################
     motherboards = Motherboard.objects.all()
+
+    labels_motherboard_brand = []
+    data_motherboard_brand = []
+    motherboard_dict = dict()
+    queryset_motherboard = Motherboard.objects.order_by('brand')[:]
+
+    for qs in queryset_motherboard:
+        if qs.brand not in motherboard_dict:
+            motherboard_dict[qs.brand] = 1
+            labels_motherboard_brand.append(qs.brand)
+        else:
+            motherboard_dict[qs.brand] += 1
+
+    for key in motherboard_dict.keys():
+        data_motherboard_brand.append(motherboard_dict[key])
+
+    print(motherboard_dict)
+
+    motherboard_dict = dict()
+    queryset_motherboard = Motherboard.objects.order_by('form_factor')[:]
+    labels_motherboard_form_factor = []
+    data_motherboard_form_factor = []
+
+    for qs in queryset_motherboard:
+        if qs.form_factor not in motherboard_dict:
+            motherboard_dict[qs.form_factor] = 1
+            labels_motherboard_form_factor.append(qs.form_factor)
+        else:
+            motherboard_dict[qs.form_factor] += 1
+
+    for key in motherboard_dict.keys():
+        data_motherboard_form_factor.append(motherboard_dict[key])
+
+    print(motherboard_dict)
+
+    #####################
+
     power_supplies = PowerSupply.objects.all()
     video_cards = VideoCard.objects.all()
     lan_cards = LanCard.objects.all()
@@ -21,8 +60,12 @@ def main(request):
 
     power_supplies_count = power_supplies.count()
 
-    return render(request, 'main/main.html', {'pcs': pcs,
-                                              'motherboards': motherboards,
+    return render(request, 'main/main.html', {'motherboards': motherboards,
+                                              'labels_motherboard_brand': labels_motherboard_brand,
+                                              'data_motherboard_brand': data_motherboard_brand,
+                                              'labels_motherboard_form_factor': labels_motherboard_form_factor,
+                                              'data_motherboard_form_factor': data_motherboard_form_factor,
+                                              'pcs': pcs,
                                               'power_supplies': power_supplies,
                                               'power_supplies_count': power_supplies_count,
                                               'video_cards': video_cards,
