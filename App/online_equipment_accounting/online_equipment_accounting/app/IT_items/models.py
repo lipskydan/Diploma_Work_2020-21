@@ -76,7 +76,7 @@ class VideoCard(models.Model):
 
     brand = models.CharField('бренд відеокарти', max_length=200, default='відсутній')
     model = models.CharField('модель відеокарти', max_length=200, default='відсутній')
-    serial_number = models.CharField('серійний номер', max_length=200, unique=False, default='відсутній')
+    serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
     memory_size = models.IntegerField('обсяг пам\'яті', default=0)
 
     name_for_user = 'Відеокарта'
@@ -97,7 +97,7 @@ class LanCard(models.Model):
 
     brand = models.CharField('бренд мережевої плати', max_length=200, default='відсутній')
     model = models.CharField('модель мережевої плати', max_length=200, default='відсутній')
-    serial_number = models.CharField('серійний номер', max_length=200, unique=False, default='відсутній')
+    serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
 
     name_for_user = 'Мережева плата'
     name = 'LanCard'
@@ -143,7 +143,7 @@ class PC(models.Model):
 
     motherboard = models.ForeignKey(Motherboard, on_delete=models.OneToOneField, null=True)
     power_supply = models.ForeignKey(PowerSupply, on_delete=models.OneToOneField, null=True)
-    video_card = models.ForeignKey(VideoCard, on_delete=models.SET_NULL, null=True)
+    video_card = models.ForeignKey(VideoCard, on_delete=models.OneToOneField, null=True)
     lan_card = models.ForeignKey(LanCard, on_delete=models.SET_NULL, null=True)
     sound_card = models.ForeignKey(SoundCard, on_delete=models.SET_NULL, null=True)
 

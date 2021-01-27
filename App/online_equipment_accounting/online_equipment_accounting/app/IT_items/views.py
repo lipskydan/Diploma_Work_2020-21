@@ -148,7 +148,13 @@ def add_video_card(request):
                                    model=cd['video_card_model'],
                                    serial_number=cd['video_card_serial_number'],
                                    memory_size=cd['video_card_memory_size'])
-            video_card.save()
+            # video_card.save()
+            try:
+                video_card.save()
+            except:
+                return render(request, 'IT_items/error.html', {'serial_number': video_card.serial_number,
+                                                               'name_of_item': video_card.name})
+
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
         form = AddVideoCard()

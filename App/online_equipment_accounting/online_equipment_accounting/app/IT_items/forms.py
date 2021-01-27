@@ -133,8 +133,8 @@ class AddVideoCard(forms.ModelForm):
                                                required=True, localize=True,
                                                help_text='Обов’язково')
 
-    video_card_memory_size = forms.IntegerField(label='Обсяг пам\'яті', localize=True, required=False,
-                                                help_text='Необов’язково, вказувати в MB (1 GB = 1024 MB)')
+    video_card_memory_size = forms.IntegerField(label='Обсяг пам\'яті', localize=True, required=True,
+                                                help_text='Обов’язково, вказувати в MB (1 GB = 1024 MB)')
 
     class Meta:
         model = VideoCard
