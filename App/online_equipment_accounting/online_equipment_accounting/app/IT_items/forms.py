@@ -112,8 +112,8 @@ class AddPowerSupplyForm(forms.ModelForm):
                                                                      help_text='Обов’язково')
 
     power_supply_power_consumption = forms.IntegerField(label='Максимальна споживана потужність від мережі',
-                                                        required=False,
-                                                        help_text="Необов’язково (одиниця вимірювання вати)",
+                                                        required=True,
+                                                        help_text='Обов’язково',
                                                         localize=True)
 
     class Meta:

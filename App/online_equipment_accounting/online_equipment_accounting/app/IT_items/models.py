@@ -54,9 +54,9 @@ class PowerSupply(models.Model):
     model = models.CharField('модель блока живлення', max_length=200, default='відсутній')
 
     serial_or_inventory_number = models.CharField('серійний або інвентарний номер',
-                                                  max_length=200, unique=False, default='відсутній')
+                                                  max_length=200, unique=True, default='відсутній')
 
-    power_consumption = models.IntegerField('споживана потужність')
+    power_consumption = models.IntegerField('споживана потужність', default=0)
 
     name_for_user = 'Блок живлення'
     name = 'PowerSupply'
@@ -142,7 +142,7 @@ class PC(models.Model):
     place = models.IntegerField('номер учбового місця', default=0, blank=True, null=True)
 
     motherboard = models.ForeignKey(Motherboard, on_delete=models.OneToOneField, null=True)
-    power_supply = models.ForeignKey(PowerSupply, on_delete=models.SET_NULL, null=True)
+    power_supply = models.ForeignKey(PowerSupply, on_delete=models.OneToOneField, null=True)
     video_card = models.ForeignKey(VideoCard, on_delete=models.SET_NULL, null=True)
     lan_card = models.ForeignKey(LanCard, on_delete=models.SET_NULL, null=True)
     sound_card = models.ForeignKey(SoundCard, on_delete=models.SET_NULL, null=True)

@@ -124,7 +124,13 @@ def add_power_supply(request):
             power_supply = PowerSupply(brand=cd['power_supply_brand'], model=cd['power_supply_model'],
                                        serial_or_inventory_number=cd['power_supply_serial_number_or_inventory_number'],
                                        power_consumption=cd['power_supply_power_consumption'])
-            power_supply.save()
+            # power_supply.save()
+            try:
+                power_supply.save()
+            except:
+                return render(request, 'IT_items/error.html', {'serial_number': power_supply.serial_or_inventory_number,
+                                                               'name_of_item': power_supply.name})
+
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
         form = AddPowerSupplyForm()
