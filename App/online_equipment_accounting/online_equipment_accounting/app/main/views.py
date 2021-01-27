@@ -33,8 +33,8 @@ def main(request):
         data_motherboard_brand.append(motherboard_dict[key])
 
     print(motherboard_dict)
-
     motherboard_dict = dict()
+
     queryset_motherboard = Motherboard.objects.order_by('form_factor')[:]
     labels_motherboard_form_factor = []
     data_motherboard_form_factor = []
@@ -50,6 +50,7 @@ def main(request):
         data_motherboard_form_factor.append(motherboard_dict[key])
 
     print(motherboard_dict)
+    motherboard_dict = dict()
 
     #####################
 

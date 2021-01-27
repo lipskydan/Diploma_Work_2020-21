@@ -50,5 +50,7 @@ urlpatterns = [
     path('pc_accessories/<str:item_name>/<int:item_id>/update-sound-card', views.sound_card_update,
          name='sound_card_update'),
 
+    path('error', views.error, name='error'),
+
     path('<str:item_name>/<int:item_id>/pdf', GeneratePDF.as_view()),
 ]

@@ -92,15 +92,22 @@ def add_motherboard(request):
         form = AddMotherboardForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            motherboard = Motherboard(brand=cd['motherboard_brand'],
+            motherboard = Motherboard(serial_number=cd['motherboard_serial_number'],
+                                      brand=cd['motherboard_brand'],
                                       model=cd['motherboard_model'],
-                                      serial_number=cd['motherboard_serial_number'],
                                       integrated_graphics=cd['motherboard_integrated_graphics'],
                                       integrated_sound_card=cd['motherboard_integrated_sound_card'],
                                       integrated_lan_card=cd['motherboard_integrated_lan_card'],
                                       form_factor=cd['motherboard_form_factor'],
                                       type_ram_slot=cd['motherboard_type_ram_slot'])
-            motherboard.save()
+
+            # motherboard.save()
+            try:
+                motherboard.save()
+            except:
+                return render(request, 'IT_items/error.html', {'serial_number': motherboard.serial_number,
+                                                               'name_of_item': motherboard.name})
+
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
         form = AddMotherboardForm()
@@ -487,6 +494,10 @@ def sound_card_update(request, item_name, item_id):
 
     else:
         return render(request, 'IT_items/sound_card_update.html', {'item': item})
+
+
+def error(request):
+    return render(request, 'IT_items/error.html')
 
 
 class GeneratePDF(LoginRequiredMixin, View):

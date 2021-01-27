@@ -58,7 +58,9 @@ class AddPcForm(forms.ModelForm):
 class AddMotherboardForm(forms.ModelForm):
     motherboard_serial_number = forms.CharField(label='Серійний номер', max_length=30,
                                                 required=True, localize=True,
-                                                help_text='Обов’язково, у разі відсутності - вказати що відсутньо',
+                                                help_text='Обов’язково',
+                                                error_messages={
+                                                    'unique': 'Материнська плата з таким серійним номером вже існує.'},
                                                 widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard_brand = forms.CharField(label='Бренд', max_length=30,

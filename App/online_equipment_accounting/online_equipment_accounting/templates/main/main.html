@@ -1,4 +1,5 @@
 {% extends 'base_main.html' %}
+{% load static %}
 
 {% block title %}
 Главная страница
@@ -6,7 +7,7 @@
 
 {% block body %}
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
 <script>
 
      var motherboard_brand = {
@@ -82,8 +83,13 @@
 
     <div class="jumbotron">
         <h3 align="center">Материнські плати</h3>
-        <hr>
-        <table class="" align="center" border="0">
+
+        <table class="" align="center" border="1">
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
             <tr>
                 <td align="center">
                     <canvas id="motherboard-brand-chart" width="500" height="375"></canvas>
@@ -97,17 +103,18 @@
                     <hr>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2">
+                    <canvas id="" width="500" height="375"></canvas>
+                </td>
+            </tr>
         </table>
     </div>
 
     <div class="jumbotron">
         <table class="table" border="0" >
             <thead>
-<!--            <tr>-->
-<!--                <th colspan="8">-->
-<!--                     <h5 align="center">Материнські плати</h5>-->
-<!--                </th>-->
-<!--            </tr>-->
+
             <tr>
                 <th scope="col">serial <br> number</th>
                 <th scope="col">brand</th>
@@ -142,16 +149,6 @@
 
 
 
-<!--    <div class="row">-->
-<!--        <div class="column">-->
-<!--&lt;!&ndash;            <div class="jumbotron">&ndash;&gt;-->
-<!--                <canvas id="motherboard-brand-chart" width="500" height="300"></canvas>-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--        </div>-->
-<!--        <div class="column">-->
-<!--           <canvas id="motherboard-form-factor-chart" width="500" height="300"></canvas>-->
-<!--        </div>-->
-<!--    </div>-->
 
 
 
@@ -310,8 +307,7 @@
         </aside>
     </div>
     {% endif %}
-
-
-
 </div>
+
+
 {% endblock %}

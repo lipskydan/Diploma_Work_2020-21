@@ -61,7 +61,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(PROJECT_ROOT, 'templates')
+            os.path.join(PROJECT_ROOT, 'templates'),
+            os.path.join(PROJECT_ROOT, 'static')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -77,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'online_equipment_accounting.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -87,7 +87,6 @@ DATABASES = {
         'NAME': str(BASE_DIR / "db.sqlite3"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -108,41 +107,41 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CMS_LANGUAGES = {
-## Customize this
-'default': {
-    'public': True,
-    'hide_untranslated': False,
-    'redirect_on_fallback': True,
-},
-1: [
-    {
-        'name': 'Русский',
+    ## Customize this
+    'default': {
         'public': True,
         'hide_untranslated': False,
         'redirect_on_fallback': True,
-        'code': 'ru',
     },
-    {
-        'name': 'Українська',
-        'public': True,
-        'hide_untranslated': False,
-        'redirect_on_fallback': True,
-        'code': 'uk',
-    },
-    {
-        'name': 'English',
-        'public': True,
-        'hide_untranslated': False,
-        'redirect_on_fallback': True,
-        'code': 'en',
-    },
-],
+    1: [
+        {
+            'name': 'Русский',
+            'public': True,
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+            'code': 'ru',
+        },
+        {
+            'name': 'Українська',
+            'public': True,
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+            'code': 'uk',
+        },
+        {
+            'name': 'English',
+            'public': True,
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+            'code': 'en',
+        },
+    ],
 }
 
 LANGUAGES = (
-        ('uk', 'Ukrainian'),
-        ('en', 'English'),
-    )
+    ('uk', 'Ukrainian'),
+    ('en', 'English'),
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -157,8 +156,25 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, "static"),
+   ]
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'online_equipment_accounting', 'static')
+# ]
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "static"),
+# )
+
+# STATICFILES_DIRS = [
+#         os.path.join(BASE_DIR, 'online_equipment_accounting/static/')
+#     ]
+#
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
