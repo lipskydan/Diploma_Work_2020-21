@@ -171,7 +171,13 @@ def add_lan_card(request):
             lan_card = LanCard(brand=cd['lan_card_brand'],
                                model=cd['lan_card_model'],
                                serial_number=cd['lan_card_serial_number'])
-            lan_card.save()
+            # lan_card.save()
+            try:
+                lan_card.save()
+            except:
+                return render(request, 'IT_items/error.html', {'serial_number': lan_card.serial_number,
+                                                               'name_of_item': lan_card.name})
+
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
         form = AddLanCard()
@@ -318,9 +324,14 @@ def pc_update(request, item_name, item_id):
         motherboard = request.POST.get('motherboard', None)
         if motherboard != 'None':
             motherboard_dic = motherboard.split()
-            motherboard = Motherboard.objects.get(model=motherboard_dic[2],
-                                                  brand=motherboard_dic[1],
-                                                  serial_number=motherboard_dic[5])
+
+            try:
+                motherboard = Motherboard.objects.get(model=motherboard_dic[2],
+                                                      brand=motherboard_dic[1],
+                                                      serial_number=motherboard_dic[5])
+            except ObjectDoesNotExist:
+                motherboard = None
+
             item.motherboard = motherboard
         else:
             item.motherboard = None

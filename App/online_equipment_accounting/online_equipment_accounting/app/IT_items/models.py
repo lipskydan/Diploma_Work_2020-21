@@ -25,7 +25,7 @@ class Motherboard(models.Model):
     brand = models.CharField('бренд материнської плати', max_length=200, default='відсутній')
     model = models.CharField('модель материнської плати', max_length=200, default='відсутній')
 
-    serial_number = models.CharField('серійний номер', max_length=200, unique=True)
+    serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
 
     form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS)
     type_ram_slot = models.CharField(max_length=20, choices=TYPE_RAM_SLOTS, default='не вказано')
@@ -144,7 +144,7 @@ class PC(models.Model):
     motherboard = models.ForeignKey(Motherboard, on_delete=models.OneToOneField, null=True)
     power_supply = models.ForeignKey(PowerSupply, on_delete=models.OneToOneField, null=True)
     video_card = models.ForeignKey(VideoCard, on_delete=models.OneToOneField, null=True)
-    lan_card = models.ForeignKey(LanCard, on_delete=models.SET_NULL, null=True)
+    lan_card = models.ForeignKey(LanCard, on_delete=models.OneToOneField, null=True)
     sound_card = models.ForeignKey(SoundCard, on_delete=models.SET_NULL, null=True)
 
     name_for_user = 'Персональний комп\'ютор'
