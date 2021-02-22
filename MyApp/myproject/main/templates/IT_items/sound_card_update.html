@@ -1,0 +1,79 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+    {% if item.name == 'SoundCard' %}
+    Оновлення звукової плати
+    {% endif %}
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+   <div class="d-flex justify-content-center">
+      <aside class="col-sm-8">
+         <div class="card">
+            <article class="card-body">
+
+                 {% if item.name == 'SoundCard' %}
+                    <h1>Оновлення звукової плати</h1>
+
+                    <form method="post">
+                    {% csrf_token %}
+                    <div class="">
+                        <div class="form-group">
+                            <table class="col-sm-12" align="center" border="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Тип обладнання:</p>
+                                        <input type="text" disabled name="name_sound_card" id="name_sound_card" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Серійний номер:</p>
+                                        <input type="text" name="sound_card_serial_number" id="sound_card_serial_number" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <p>Бренд:</p>
+                                        <input type="text" name="sound_card_brand" id="sound_card_brand" class="form-control" value="{{ item.brand }}" placeholder="Введіть бренд">
+                                    </td>
+                                     <td width="50%">
+                                        <p>Модель:</p>
+                                        <input type="text" name="sound_card_model" id="sound_card_model" class="form-control" value="{{ item.model }}" placeholder="Введіть модель">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Оновити">
+                </form>
+
+                {% endif %}
+
+            </article>
+         </div>
+      </aside>
+   </div>
+</div>
+{% endblock %}
+

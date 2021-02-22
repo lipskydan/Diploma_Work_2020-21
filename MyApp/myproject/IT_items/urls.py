@@ -7,8 +7,14 @@ from . import views
 from .views import GeneratePDF
 
 app_name = 'IT_items'
-
 urlpatterns = [
+    # url(r'^$', views.IT_items, name='IT_items'),
+    # url(r'^add-item/$', views.add_item, name='add_item'),
+    # url(r'^<str:item_name>/<int:item_id>/$', views.item_detail, name='item_detail'),
+    # url(r'^<str:item_name>/<int:item_id>/del/$', views.item_delete, name='item_delete'),
+    # url(r'^<str:item_name>/<int:item_id>/update/$', views.item_update, name='item_update'),
+    # url(r'^add-item/add-pc/$', views.add_pc, name='add_pc'),
+
     path('', views.IT_items, name='IT_items'),
     path('pc_accessories', views.pc_accessories, name='pc_accessories'),
 

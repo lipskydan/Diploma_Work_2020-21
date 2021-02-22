@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'main'
+    'main',
+    'IT_items',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -100,13 +101,50 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CMS_LANGUAGES = {
+    ## Customize this
+    'default': {
+        'public': True,
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+    1: [
+        {
+            'name': 'Русский',
+            'public': True,
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+            'code': 'ru',
+        },
+        {
+            'name': 'Українська',
+            'public': True,
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+            'code': 'uk',
+        },
+        {
+            'name': 'English',
+            'public': True,
+            'hide_untranslated': False,
+            'redirect_on_fallback': True,
+            'code': 'en',
+        },
+    ],
+}
+
+LANGUAGES = (
+    ('uk', 'Ukrainian'),
+    ('en', 'English'),
+)
 
 # Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
+# https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'UTC'
+
 
 USE_I18N = True
 
