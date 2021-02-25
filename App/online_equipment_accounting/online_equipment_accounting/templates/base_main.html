@@ -15,32 +15,31 @@
     {% if user.is_authenticated %}
         <div class="d-flex justify-content-between flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
             <nav class="my-2 my-md-0 mr-md-3">
-                <h4 class="my-0 mr-md-auto font-weight-normal">База даних - обладнання ФКНК КНУ</h4>
+                <h4 class="my-0 mr-md-auto font-weight-normal">ІОС ФКНК КНУ</h4>
             </nav>
 
 
             <nav class="my-2 my-md-0 mr-md-3">
-                <a class="btn btn-outline-secondary" href="/" role="button">Головна</a>
-<!--                <a class="btn btn-outline-secondary" href="/IT_items" role="button">Список IT-обладнання</a>-->
+                <a class="btn btn-outline-success" href="/" role="button">Головна</a>
 
                 <div class="btn-group">
-                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Список обладнання
                     </button>
 
                     <div class="dropdown-menu">
-                        <a class="dropdown-item bg-light text-dark" href="/IT_items">IT-обладнання</a>
-                        <a class="dropdown-item bg-light text-dark" href="/IT_items/pc_accessories">Комплектуючі до ПК</a>
+                        <a class="dropdown-item bg-light text-success" href="/IT_items">IT-обладнання</a>
+                        <a class="dropdown-item bg-light text-success" href="/IT_items/pc_accessories">Комплектуючі до ПК</a>
                     </div>
                 </div>
 
-                <a class=" btn bg-secondary text-white" href="/IT_items/add-item">Додати</a>
+                <a class=" btn btn-success text-white" href="/IT_items/add">Додати</a>
 <!--                <a class=" btn btn-outline-success" href="/IT_items/add-item">Додати</a>-->
             </nav>
         </div>
     {% else %}
     <div class="d-flex justify-content-center flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-         <h5 class="my-0 font-weight-normal">База даних - обладнання ФКНК КНУ</h5>
+         <h5 class="my-0 font-weight-normal">ІОС ФКНК КНУ</h5>
     </div>
     {% endif %}
 

@@ -61,8 +61,12 @@ def pc_accessories_detail(request, item_name, item_id):
     return render(request, 'IT_items/pc_accessories_detail.html', {'item': item})
 
 
+def add(request):
+    return render(request, 'IT_items/add.html')
+
+
 def add_item(request):
-    return render(request, 'IT_items/add_item.html')
+    return render(request, 'IT_items/add.html')
 
 
 def add_pc(request):

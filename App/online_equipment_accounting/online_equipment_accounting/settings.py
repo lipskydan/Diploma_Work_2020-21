@@ -161,20 +161,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "statics"),
-   ]
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
 
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'online_equipment_accounting', 'statics')
-# ]
-
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "statics"),
-# )
-
-# STATICFILES_DIRS = [
-#         os.path.join(BASE_DIR, 'online_equipment_accounting/statics/')
-#     ]
-#
-# STATIC_ROOT = os.path.join(BASE_DIR, 'statics')
