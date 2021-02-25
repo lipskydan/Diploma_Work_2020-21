@@ -16,18 +16,18 @@
         datasets: [{
             data: {{ data_motherboard_brand|safe }},
             backgroundColor: [
+               'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255, 159, 64, 0.2)'
             ],
             label: ''
         }],
@@ -64,7 +64,7 @@
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
             ],
-            label: {{ labels_motherboard_form_factor|safe }}
+            label: ''
         }],
         labels: {{ labels_motherboard_form_factor|safe }}
         },
@@ -79,18 +79,123 @@
         }
      };
 
+
+     var motherboard_integrated_items = {
+     type: 'horizontalBar',
+     data: {
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 50,
+            maxBarThickness: 50,
+            minBarLength: 10,
+            data: {{ data_motherboard_integrated_items|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+
+            ],
+            label: ''
+        }],
+        labels: {{ labels_motherboard_integrated_items|safe }}
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Інтегровані елементи'
+
+            },
+            animation: {
+                duration: 2700,
+            },
+
+            scales: {
+        xAxes: [{
+            gridLines: {
+                offsetGridLines: true
+            }
+        }]
+    }
+        }
+     };
+
+
+     var motherboard_ram = {
+     type: 'bar',
+     data: {
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 50,
+            maxBarThickness: 50,
+            minBarLength: 10,
+            data: {{ data_motherboard_ram|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+
+            ],
+            label: ''
+        }],
+        labels: {{ labels_motherboard_ram|safe }}
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'type ram slot'
+
+            },
+            animation: {
+                duration: 2700,
+            },
+
+            scales: {
+        xAxes: [{
+            gridLines: {
+                offsetGridLines: true
+            }
+        }]
+    }
+        }
+     };
+
+
+
     window.onload = function() {
       var motherboard_brand_w = document.getElementById('motherboard-brand-chart').getContext('2d');
       var motherboard_form_factor_w = document.getElementById('motherboard-form-factor-chart').getContext('2d');
+      var motherboard_integrated_items_w = document.getElementById('motherboard-integrated-items-chart').getContext('2d');
+      var motherboard_ram_w = document.getElementById('motherboard-ram-chart').getContext('2d');
+
       window.myPie = new Chart(motherboard_brand_w, motherboard_brand);
       window.myPie = new Chart(motherboard_form_factor_w, motherboard_form_factor);
+      window.myPie = new Chart(motherboard_integrated_items_w, motherboard_integrated_items);
+      window.myPie = new Chart(motherboard_ram_w, motherboard_ram);
     };
 
   </script>
 
-{% load static %}
-<!--<script src="{% static '/main/js/a.js' %}" type="text/javascript"></script>-->
-<script src="/online_equipment_accounting/templates/a.js" type="text/javascript"></script>
+<!--{% load static %}-->
+<!--&lt;!&ndash;<script src="{% static '/main/js/a.js' %}" type="text/javascript"></script>&ndash;&gt;-->
+<!--<script src="/a.js" type="text/javascript"></script>-->
 
 <div  class="container mt-4">
 
@@ -110,34 +215,6 @@
     <div class="jumbotron">
         <h3 align="center">Материнські плати</h3>
 
-        <table class="" align="center" border="1">
-            <tr>
-                <td colspan="2">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <canvas id="motherboard-brand-chart" width="500" height="375"></canvas>
-                </td>
-                <td align="center">
-                    <canvas id="motherboard-form-factor-chart" width="500" height="375"></canvas>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <canvas id="" width="500" height="375"></canvas>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="jumbotron">
         <table class="table" border="0" >
             <thead>
 
@@ -172,6 +249,40 @@
             </tbody>
         </table>
     </div>
+
+    <div class="jumbotron">
+        <table class="" align="center" border="0">
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <canvas id="motherboard-ram-chart" width="500" height="375"></canvas>
+                </td>
+                <td align="center">
+                    <canvas id="motherboard-brand-chart" width="500" height="375"></canvas>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">
+                    <canvas id="motherboard-integrated-items-chart" width="500" height="375"></canvas>
+                </td>
+                <td>
+                    <canvas id="motherboard-form-factor-chart" width="500" height="375"></canvas>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
 
 
 
