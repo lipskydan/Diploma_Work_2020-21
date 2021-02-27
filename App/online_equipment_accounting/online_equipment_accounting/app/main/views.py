@@ -58,10 +58,10 @@ def get_motherboard_integrated_items_data_and_labels():
     data_motherboard = [data_motherboard_integrated_graphics, data_motherboard_integrated_sound_card,
                         data_motherboard_integrated_lan_card, motherboards_count]
 
-    labels_motherboard = ['integrated graphics',
-                          'integrated sound card',
-                          'integrated_lan_card',
-                          'total']
+    labels_motherboard = ['інтегрована відеокарта',
+                          'інтегрована звукова-карта',
+                          'інтегрована мережева-карта',
+                          'загальна кількість']
 
     return data_motherboard, labels_motherboard
 
@@ -101,6 +101,7 @@ def main(request):
     power_supplies_count = power_supplies.count()
 
     return render(request, 'main/main.html', {'motherboards': motherboards,
+
                                               'labels_motherboard_brand': labels_motherboard_brand,
                                               'data_motherboard_brand': data_motherboard_brand,
                                               'labels_motherboard_form_factor': labels_motherboard_form_factor,
@@ -109,6 +110,7 @@ def main(request):
                                               'data_motherboard_integrated_items': data_motherboard_integrated_items,
                                               'labels_motherboard_ram': labels_motherboard_ram,
                                               'data_motherboard_ram': data_motherboard_ram,
+
                                               'pcs': pcs,
                                               'power_supplies': power_supplies,
                                               'power_supplies_count': power_supplies_count,

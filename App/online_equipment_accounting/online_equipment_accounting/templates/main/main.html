@@ -114,17 +114,35 @@
                 text: 'Інтегровані елементи'
 
             },
+
             animation: {
                 duration: 2700,
             },
 
             scales: {
-        xAxes: [{
-            gridLines: {
-                offsetGridLines: true
+                yAxes: [{
+                  id: 'y-axis-0',
+                  gridLines: {
+                    display: false
+                  },
+                  ticks: {
+                    beginAtZero:true,
+                  },
+                  afterBuildTicks: function(chart) {
+
+                  }
+                }],
+                xAxes: [{
+                  id: 'x-axis-0',
+                  gridLines: {
+                    display: true
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                  }
+                }]
             }
-        }]
-    }
         }
      };
 
@@ -160,20 +178,38 @@
         options: {
             title: {
                 display: true,
-                text: 'type ram slot'
+                text: 'тип слоту ОЗУ'
+                },
 
-            },
             animation: {
                 duration: 2700,
             },
 
             scales: {
-        xAxes: [{
-            gridLines: {
-                offsetGridLines: true
+                yAxes: [{
+                  id: 'y-axis-0',
+                  gridLines: {
+                    display: true
+                  },
+                  ticks: {
+                    beginAtZero:true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                  },
+                  afterBuildTicks: function(chart) {
+
+                  }
+                }],
+                xAxes: [{
+                  id: 'x-axis-0',
+                  gridLines: {
+                    display: false
+                  },
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
             }
-        }]
-    }
+
         }
      };
 
@@ -191,11 +227,16 @@
       window.myPie = new Chart(motherboard_ram_w, motherboard_ram);
     };
 
-  </script>
+    function hideMotherboardChart() {
+        var x = document.getElementById("motherboard-chart");
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        } else {
+        x.style.display = "none";
+    }
+}
 
-<!--{% load static %}-->
-<!--&lt;!&ndash;<script src="{% static '/main/js/a.js' %}" type="text/javascript"></script>&ndash;&gt;-->
-<!--<script src="/a.js" type="text/javascript"></script>-->
+  </script>
 
 <div  class="container mt-4">
 
@@ -212,45 +253,82 @@
 
     <br>
 
-    <div class="jumbotron">
-        <h3 align="center">Материнські плати</h3>
+    <div class="container">
+        <div class="jumbotron">
+            <h3 align="center">Материнські плати &nbsp;
+                <a href="#motherboard-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#motherboard-table" aria-expanded="false" aria-controls="motherboard-table">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                    </svg>
+                </a>
 
-        <table class="table" border="0" >
-            <thead>
-
-            <tr>
-                <th scope="col">serial <br> number</th>
-                <th scope="col">brand</th>
-                <th scope="col">model</th>
-                <th scope="col">form<br>factor</th>
-                <th scope="col">type <br> ram slot</th>
-                <th scope="col">integrated <br> graphics</th>
-                <th scope="col">integrated <br> sound_card</th>
-                <th scope="col">integrated <br> lan_card</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for motherboard in motherboards %}
-            <tr>
-                <td>
-                    <a href="/IT_items/pc_accessories/{{motherboard.name}}/{{motherboard.id}}" class="text-dark">
-                        {{motherboard.serial_number}}
-                    </a>
-                </td>
-                <td>{{motherboard.brand}}</td>
-                <td>{{motherboard.model}}</td>
-                <td>{{motherboard.form_factor}}</td>
-                <td>{{motherboard.type_ram_slot}}</td>
-                <td>{{motherboard.integrated_graphics}}</td>
-                <td>{{motherboard.integrated_sound_card}}</td>
-                <td>{{motherboard.integrated_lan_card}}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                <a class="btn btn-outline-secondary" onclick="hideMotherboardChart()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                        <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                    </svg>
+                </a>
+            </h3>
+        </div>
     </div>
 
-    <div class="jumbotron">
+
+    <div class="collapse" id="motherboard-table">
+        <div class="jumbotron">
+
+            <table class="table" border="0" >
+                <thead>
+
+                <tr align="center">
+                    <th scope="col">серійний <br> номер</th>
+                    <th scope="col">бренд</th>
+                    <th scope="col">модель</th>
+                    <th scope="col">форм-<br>фактор</th>
+                    <th scope="col">тип слоту <br> ОЗУ</th>
+                    <th scope="col">інтегрована  <br> відеокарта</th>
+                    <th scope="col">інтегрована <br> звукова-карта</th>
+                    <th scope="col">інтегрована <br> мережева-карта</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for motherboard in motherboards %}
+                <tr align="center">
+                    <td>
+                        <a href="/IT_items/pc_accessories/{{motherboard.name}}/{{motherboard.id}}" class="text-dark">
+                            {{motherboard.serial_number}}
+                        </a>
+                    </td>
+
+                    <td>{{motherboard.brand}}</td>
+                    <td>{{motherboard.model}}</td>
+                    <td>{{motherboard.form_factor}}</td>
+                    <td>{{motherboard.type_ram_slot}}</td>
+
+                    {% if motherboard.integrated_graphics %}
+                    <td> + </td>
+                    {% else %}
+                    <td> - </td>
+                    {% endif %}
+
+                    {% if motherboard.integrated_sound_card %}
+                    <td> + </td>
+                    {% else %}
+                    <td> - </td>
+                    {% endif %}
+
+                     {% if motherboard.integrated_lan_card %}
+                    <td> + </td>
+                    {% else %}
+                    <td> - </td>
+                    {% endif %}
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="jumbotron" id="motherboard-chart">
         <table class="" align="center" border="0">
             <tr>
                 <td colspan="2">
@@ -263,7 +341,6 @@
                 </td>
                 <td align="center">
                     <canvas id="motherboard-brand-chart" width="500" height="375"></canvas>
-
                 </td>
             </tr>
             <tr>
@@ -281,7 +358,6 @@
             </tr>
         </table>
     </div>
-
 
 
 
