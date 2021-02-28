@@ -85,6 +85,29 @@ def get_motherboard_ram_data_and_labels():
     return data_motherboard_ram, labels_motherboard_ram
 
 
+def get_power_supply_consumption_data_and_labels():
+    power_supply_dict = dict()
+    queryset_power_supply = PowerSupply.objects.order_by('power_consumption')[:]
+    labels_power_supply = []
+    data_power_supply = []
+
+    for qs in queryset_power_supply:
+        if qs.power_consumption not in power_supply_dict:
+            power_supply_dict[qs.power_consumption] = 1
+            labels_power_supply.append(qs.power_consumption)
+        else:
+            power_supply_dict[qs.power_consumption] += 1
+
+    for key in power_supply_dict.keys():
+        data_power_supply.append(power_supply_dict[key])
+
+    return data_power_supply, labels_power_supply
+
+
+def get_power_supply_brand_data_and_labels():
+    pass
+
+
 def main(request):
     pcs = PC.objects.all()
     motherboards = Motherboard.objects.all()
@@ -97,6 +120,9 @@ def main(request):
     data_motherboard_form_factor, labels_motherboard_form_factor = get_motherboard_form_factor_data_and_labels()
     data_motherboard_integrated_items, labels_motherboard_integrated_items = get_motherboard_integrated_items_data_and_labels()
     data_motherboard_ram, labels_motherboard_ram = get_motherboard_ram_data_and_labels()
+
+    data_power_supply_consumption, labels_power_supply_consumption = get_power_supply_consumption_data_and_labels()
+    data_power_supply_brand, labels_power_supply_brand = get_power_supply_brand_data_and_labels()
 
     power_supplies_count = power_supplies.count()
 
@@ -112,7 +138,12 @@ def main(request):
                                               'data_motherboard_ram': data_motherboard_ram,
 
                                               'pcs': pcs,
+
                                               'power_supplies': power_supplies,
+
+                                              'labels_power_supply_consumption': labels_power_supply_consumption,
+                                              'data_power_supply_consumption': data_power_supply_consumption,
+
                                               'power_supplies_count': power_supplies_count,
                                               'video_cards': video_cards,
                                               'lan_cards': lan_cards,

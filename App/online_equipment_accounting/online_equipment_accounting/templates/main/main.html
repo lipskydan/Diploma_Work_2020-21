@@ -213,6 +213,107 @@
         }
      };
 
+     var power_supply_consumption = {
+     type: 'bar',
+     data: {
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 50,
+            maxBarThickness: 50,
+            minBarLength: 10,
+            data: {{ data_power_supply_consumption|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+
+            ],
+            label: ''
+        }],
+        labels: {{ labels_power_supply_consumption|safe }}
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'power_supply_consumption'
+                },
+
+            animation: {
+                duration: 2700,
+            },
+
+            scales: {
+                yAxes: [{
+                  id: 'y-axis-0',
+                  gridLines: {
+                    display: true
+                  },
+                  ticks: {
+                    beginAtZero:true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                  },
+                  afterBuildTicks: function(chart) {
+
+                  }
+                }],
+                xAxes: [{
+                  id: 'x-axis-0',
+                  gridLines: {
+                    display: false
+                  },
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+            }
+
+        }
+     };
+
+     var power_supply_brand = {
+     type: 'doughnut',
+     data: {
+        datasets: [{
+            data: {{ data_power_supply_brand|safe }},
+            backgroundColor: [
+               'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            label: ''
+        }],
+        labels: {{ labels_power_supply_brand|safe }}
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Бренд'
+
+            },
+            animation: {
+                duration: 2700,
+            }
+        }
+     };
+
 
 
     window.onload = function() {
@@ -220,11 +321,15 @@
       var motherboard_form_factor_w = document.getElementById('motherboard-form-factor-chart').getContext('2d');
       var motherboard_integrated_items_w = document.getElementById('motherboard-integrated-items-chart').getContext('2d');
       var motherboard_ram_w = document.getElementById('motherboard-ram-chart').getContext('2d');
+      var power_supply_consumption_w = document.getElementById('power-supply-consumption-chart').getContext('2d');
+      var power_supply_brand_w = document.getElementById('power-supply-brand-chart').getContext('2d');
 
       window.myPie = new Chart(motherboard_brand_w, motherboard_brand);
       window.myPie = new Chart(motherboard_form_factor_w, motherboard_form_factor);
       window.myPie = new Chart(motherboard_integrated_items_w, motherboard_integrated_items);
       window.myPie = new Chart(motherboard_ram_w, motherboard_ram);
+      window.myPie = new Chart(power_supply_consumption_w, power_supply_consumption);
+      window.myPie = new Chart(power_supply_brand_w, power_supply_brand);
     };
 
     function hideMotherboardChart() {
@@ -255,19 +360,25 @@
 
     <div class="container">
         <div class="jumbotron">
-            <h3 align="center">Материнські плати &nbsp;
-                <a href="#motherboard-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#motherboard-table" aria-expanded="false" aria-controls="motherboard-table">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
-                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
-                    </svg>
-                </a>
-
-                <a class="btn btn-outline-secondary" onclick="hideMotherboardChart()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-                        <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
-                    </svg>
-                </a>
-            </h3>
+            <table border="0" width="100%">
+                <tr align="center">
+                    <td width="75%"><h3>Материнські плати</h3></td>
+                    <td>
+                         <a href="#motherboard-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#motherboard-table" aria-expanded="false" aria-controls="motherboard-table">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                                 <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                             </svg>
+                         </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-secondary" onclick="hideMotherboardChart()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
@@ -362,43 +473,90 @@
 
 
 
+    <div class="container">
+        <div class="jumbotron">
+            <table border="0" width="100%">
+                <tr align="center">
+                    <td width="75%"><h3>Блоки живлення</h3></td>
+                    <td>
+                         <a href="#powersupply-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#powersupply-table" aria-expanded="false" aria-controls="powersupply-table">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                                 <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                             </svg>
+                         </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-secondary" onclick="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
 
 
+    <div class="collapse" id="powersupply-table">
+        <div class="jumbotron">
+            <table class="table" border="0">
+                <thead>
+                <tr align="center">
+                    <th scope="col">серійний <br> номер</th>
+                    <th scope="col">бренд</th>
+                    <th scope="col">модель</th>
+                    <th scope="col">Максимальна споживана <br> потужність від мережі</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for power_supply in power_supplies %}
+                <tr align="center">
+                    <td>
+                        <a href="/IT_items/pc_accessories/{{power_supply.name}}/{{power_supply.id}}" class="text-dark">
+                            {{power_supply.serial_or_inventory_number}}
+                        </a>
+                    </td>
+                    <td>{{power_supply.brand}}</td>
+                    <td>{{power_supply.model}}</td>
+                    <td>{{power_supply.power_consumption}} Вт</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="jumbotron" id="">
+        <table align="center" border="1">
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2">
+                    <canvas id="power-supply-consumption-chart" width="1000" height="375"></canvas>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="power-supply-brand-chart" width="500" height="375"></canvas>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </table>
+    </div>
 
 
-
-<!--    <div class="jumbotron">-->
-<!--                 <table class="table" border="0">-->
-<!--                     <thead>-->
-<!--                     <tr>-->
-<!--                         <th colspan="8">-->
-<!--                             <h5 align="center">Блоки живлення</h5>-->
-<!--                         </th>-->
-<!--                     </tr>-->
-<!--                     <tr>-->
-<!--                         <th scope="col">serial number</th>-->
-<!--                        <th scope="col">brand</th>-->
-<!--                        <th scope="col">model</th>-->
-<!--                        <th scope="col">power consumption</th>-->
-<!--                    </tr>-->
-<!--                     </thead>-->
-<!--                     <tbody>-->
-<!--                     {% for power_supply in power_supplies %}-->
-<!--                     <tr>-->
-<!--                         <td>-->
-<!--                             <a href="/IT_items/pc_accessories/{{power_supply.name}}/{{power_supply.id}}" class="text-dark">-->
-<!--                                 {{power_supply.serial_or_inventory_number}}-->
-<!--                             </a>-->
-<!--                         </td>-->
-<!--                         <td>{{power_supply.brand}}</td>-->
-<!--                         <td>{{power_supply.model}}</td>-->
-<!--                         <td>{{power_supply.power_consumption}}</td>-->
-<!--                     </tr>-->
-<!--                     {% endfor %}-->
-<!--                     </tbody>-->
-<!--                 </table>-->
-<!--            </div>-->
 
 <!--    <div class="row">-->
 <!--        <div class="col-sm" align="left">-->
