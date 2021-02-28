@@ -244,7 +244,7 @@
         options: {
             title: {
                 display: true,
-                text: 'power_supply_consumption'
+                text: 'споживана потужність від мережі'
                 },
 
             animation: {
@@ -338,8 +338,17 @@
         x.style.display = "block";
         } else {
         x.style.display = "none";
+        }
     }
-}
+
+    function hidePowerSupplyChart() {
+        var x = document.getElementById("power-supply-chart");
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        } else {
+        x.style.display = "none";
+        }
+    }
 
   </script>
 
@@ -357,6 +366,8 @@
     </div>
 
     <br>
+
+<!--    Motherboard Table - BEGIN    -->
 
     <div class="container">
         <div class="jumbotron">
@@ -382,96 +393,98 @@
         </div>
     </div>
 
-
     <div class="collapse" id="motherboard-table">
         <div class="jumbotron">
+            <div style="overflow-x:auto;">
+                <table class="table" border="0" width="100%">
+                    <thead>
+                    <tr align="center">
+                        <th scope="col">серійний <br> номер</th>
+                        <th scope="col">бренд</th>
+                        <th scope="col">модель</th>
+                        <th scope="col">форм-<br>фактор</th>
+                        <th scope="col">тип слоту <br> ОЗУ</th>
+                        <th scope="col">інтегрована  <br> відеокарта</th>
+                        <th scope="col">інтегрована <br> звукова-карта</th>
+                        <th scope="col">інтегрована <br> мережева-карта</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for motherboard in motherboards %}
+                    <tr align="center">
+                        <td>
+                            <a href="/IT_items/pc_accessories/{{motherboard.name}}/{{motherboard.id}}" class="text-dark">
+                                {{motherboard.serial_number}}
+                            </a>
+                        </td>
 
-            <table class="table" border="0" >
-                <thead>
+                        <td>{{motherboard.brand}}</td>
+                        <td>{{motherboard.model}}</td>
+                        <td>{{motherboard.form_factor}}</td>
+                        <td>{{motherboard.type_ram_slot}}</td>
 
-                <tr align="center">
-                    <th scope="col">серійний <br> номер</th>
-                    <th scope="col">бренд</th>
-                    <th scope="col">модель</th>
-                    <th scope="col">форм-<br>фактор</th>
-                    <th scope="col">тип слоту <br> ОЗУ</th>
-                    <th scope="col">інтегрована  <br> відеокарта</th>
-                    <th scope="col">інтегрована <br> звукова-карта</th>
-                    <th scope="col">інтегрована <br> мережева-карта</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for motherboard in motherboards %}
-                <tr align="center">
-                    <td>
-                        <a href="/IT_items/pc_accessories/{{motherboard.name}}/{{motherboard.id}}" class="text-dark">
-                            {{motherboard.serial_number}}
-                        </a>
-                    </td>
+                        {% if motherboard.integrated_graphics %}
+                        <td> + </td>
+                        {% else %}
+                        <td> - </td>
+                        {% endif %}
 
-                    <td>{{motherboard.brand}}</td>
-                    <td>{{motherboard.model}}</td>
-                    <td>{{motherboard.form_factor}}</td>
-                    <td>{{motherboard.type_ram_slot}}</td>
+                        {% if motherboard.integrated_sound_card %}
+                        <td> + </td>
+                        {% else %}
+                        <td> - </td>
+                        {% endif %}
 
-                    {% if motherboard.integrated_graphics %}
-                    <td> + </td>
-                    {% else %}
-                    <td> - </td>
-                    {% endif %}
+                         {% if motherboard.integrated_lan_card %}
+                        <td> + </td>
+                        {% else %}
+                        <td> - </td>
+                        {% endif %}
 
-                    {% if motherboard.integrated_sound_card %}
-                    <td> + </td>
-                    {% else %}
-                    <td> - </td>
-                    {% endif %}
-
-                     {% if motherboard.integrated_lan_card %}
-                    <td> + </td>
-                    {% else %}
-                    <td> - </td>
-                    {% endif %}
-
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <div class="jumbotron" id="motherboard-chart">
-        <table class="" align="center" border="0">
-            <tr>
-                <td colspan="2">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <canvas id="motherboard-ram-chart" width="500" height="375"></canvas>
-                </td>
-                <td align="center">
-                    <canvas id="motherboard-brand-chart" width="500" height="375"></canvas>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <canvas id="motherboard-integrated-items-chart" width="500" height="375"></canvas>
-                </td>
-                <td>
-                    <canvas id="motherboard-form-factor-chart" width="500" height="375"></canvas>
-                </td>
-            </tr>
-        </table>
+        <div style="overflow-x:auto;">
+            <table class="" align="center" border="0">
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <canvas id="motherboard-ram-chart" width="500" height="375"></canvas>
+                    </td>
+                    <td align="center">
+                        <canvas id="motherboard-brand-chart" width="500" height="375"></canvas>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <canvas id="motherboard-integrated-items-chart" width="500" height="375"></canvas>
+                    </td>
+                    <td>
+                        <canvas id="motherboard-form-factor-chart" width="500" height="375"></canvas>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
+<!--    Motherboard Table - END    -->
 
-
+<!--    Power Supply Table - BEGIN    -->
 
     <div class="container">
         <div class="jumbotron">
@@ -479,14 +492,14 @@
                 <tr align="center">
                     <td width="75%"><h3>Блоки живлення</h3></td>
                     <td>
-                         <a href="#powersupply-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#powersupply-table" aria-expanded="false" aria-controls="powersupply-table">
+                         <a href="#power-supply-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#power-supply-table" aria-expanded="false" aria-controls="power-supply-table">
                              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
                                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
                              </svg>
                          </a>
                     </td>
                     <td>
-                        <a class="btn btn-outline-secondary" onclick="">
+                        <a class="btn btn-outline-secondary" onclick="hidePowerSupplyChart()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                                 <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                             </svg>
@@ -497,66 +510,73 @@
         </div>
     </div>
 
-
-
-    <div class="collapse" id="powersupply-table">
+    <div class="collapse" id="power-supply-table">
         <div class="jumbotron">
-            <table class="table" border="0">
-                <thead>
-                <tr align="center">
-                    <th scope="col">серійний <br> номер</th>
-                    <th scope="col">бренд</th>
-                    <th scope="col">модель</th>
-                    <th scope="col">Максимальна споживана <br> потужність від мережі</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for power_supply in power_supplies %}
-                <tr align="center">
-                    <td>
-                        <a href="/IT_items/pc_accessories/{{power_supply.name}}/{{power_supply.id}}" class="text-dark">
-                            {{power_supply.serial_or_inventory_number}}
-                        </a>
+            <div style="overflow-x:auto;">
+                <table class="table" border="0">
+                    <thead>
+                    <tr align="center">
+                        <th scope="col">серійний <br> номер</th>
+                        <th scope="col">бренд</th>
+                        <th scope="col">модель</th>
+                        <th scope="col">Максимальна споживана <br> потужність від мережі</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for power_supply in power_supplies %}
+                    <tr align="center">
+                        <td>
+                            <a href="/IT_items/pc_accessories/{{power_supply.name}}/{{power_supply.id}}" class="text-dark">
+                                {{power_supply.serial_or_inventory_number}}
+                            </a>
+                        </td>
+                        <td>{{power_supply.brand}}</td>
+                        <td>{{power_supply.model}}</td>
+                        <td>{{power_supply.power_consumption}} Вт</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron" id="power-supply-chart">
+        <div style="overflow-x:auto;">
+            <table align="center" border="0">
+                <tr>
+                    <td colspan="2">
+                        <hr>
                     </td>
-                    <td>{{power_supply.brand}}</td>
-                    <td>{{power_supply.model}}</td>
-                    <td>{{power_supply.power_consumption}} Вт</td>
                 </tr>
-                {% endfor %}
-                </tbody>
+                <tr>
+                    <td align="center" colspan="2">
+                        <canvas id="power-supply-consumption-chart" width="1000" height="375"></canvas>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <canvas id="power-supply-brand-chart" width="500" height="375"></canvas>
+                    </td>
+                    <td>
+                        <canvas id="" width="500" height="375"></canvas>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
 
-    <div class="jumbotron" id="">
-        <table align="center" border="1">
-            <tr>
-                <td colspan="2">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td align="center" colspan="2">
-                    <canvas id="power-supply-consumption-chart" width="1000" height="375"></canvas>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <canvas id="power-supply-brand-chart" width="500" height="375"></canvas>
-                </td>
-                <td>
-
-                </td>
-            </tr>
-        </table>
-    </div>
-
-
+<!--    Power Supply Table - END    -->
 
 <!--    <div class="row">-->
 <!--        <div class="col-sm" align="left">-->

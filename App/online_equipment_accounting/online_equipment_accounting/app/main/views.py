@@ -105,7 +105,22 @@ def get_power_supply_consumption_data_and_labels():
 
 
 def get_power_supply_brand_data_and_labels():
-    pass
+    power_supply_dict = dict()
+    queryset_power_supply = PowerSupply.objects.order_by('brand')[:]
+    labels_power_supply = []
+    data_power_supply = []
+
+    for qs in queryset_power_supply:
+        if qs.brand not in power_supply_dict:
+            power_supply_dict[qs.brand] = 1
+            labels_power_supply.append(qs.brand)
+        else:
+            power_supply_dict[qs.brand] += 1
+
+    for key in power_supply_dict.keys():
+        data_power_supply.append(power_supply_dict[key])
+
+    return data_power_supply, labels_power_supply
 
 
 def main(request):
@@ -143,6 +158,8 @@ def main(request):
 
                                               'labels_power_supply_consumption': labels_power_supply_consumption,
                                               'data_power_supply_consumption': data_power_supply_consumption,
+                                              'labels_power_supply_brand': labels_power_supply_brand,
+                                              'data_power_supply_brand': data_power_supply_brand,
 
                                               'power_supplies_count': power_supplies_count,
                                               'video_cards': video_cards,
