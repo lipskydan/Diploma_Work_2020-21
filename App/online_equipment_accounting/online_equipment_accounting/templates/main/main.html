@@ -7,6 +7,17 @@
 
 {% block body %}
 
+<style>
+    #hideMe {
+     animation: cssAnimation 0s 5s forwards;
+  visibility: hidden;
+}
+
+@keyframes cssAnimation {
+  to   { visibility: visible; }
+}
+}
+</style>
 
 <script>
 
@@ -350,6 +361,24 @@
         }
     }
 
+    function hideLanCardChart() {
+        var x = document.getElementById("lan-card-chart");
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        } else {
+        x.style.display = "none";
+        }
+    }
+
+    function hideSoundCardChart() {
+        var x = document.getElementById("sound-card-chart");
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        } else {
+        x.style.display = "none";
+        }
+    }
+
   </script>
 
 <div  class="container mt-4">
@@ -578,113 +607,179 @@
 
 <!--    Power Supply Table - END    -->
 
-<!--    <div class="row">-->
-<!--        <div class="col-sm" align="left">-->
-<!--            <div class="jumbotron">-->
-<!--                 <table class="table" border="0">-->
-<!--                     <thead>-->
-<!--                     <tr>-->
-<!--                         <th colspan="8">-->
-<!--                             <h5 align="center">Мережеві плати</h5>-->
-<!--                         </th>-->
-<!--                     </tr>-->
-<!--                     <tr>-->
-<!--                         <th scope="col">serial number</th>-->
-<!--                        <th scope="col">brand</th>-->
-<!--                        <th scope="col">model</th>-->
-<!--                    </tr>-->
-<!--                     </thead>-->
-<!--                     <tbody>-->
-<!--                     {% for lan_card in lan_cards %}-->
-<!--                     <tr>-->
-<!--                         <td>-->
-<!--                             <a href="/IT_items/pc_accessories/{{lan_card.name}}/{{lan_card.id}}" class="text-dark">-->
-<!--                                 {{lan_card.serial_number}}-->
-<!--                             </a>-->
-<!--                         </td>-->
-<!--                         <td>{{lan_card.brand}}</td>-->
-<!--                         <td>{{lan_card.model}}</td>-->
-<!--                     </tr>-->
-<!--                     {% endfor %}-->
-<!--                     </tbody>-->
-<!--                 </table>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="col-sm" align="right">-->
-<!--            <div class="jumbotron">-->
-<!--                <table class="table" border="0" width="100%">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th colspan="8">-->
-<!--                            <h5 align="center">Звукові плати</h5>-->
-<!--                        </th>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th scope="col">serial number</th>-->
-<!--                        <th scope="col">brand</th>-->
-<!--                        <th scope="col">model</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    {% for sound_card in sound_cards %}-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <a href="/IT_items/pc_accessories/{{sound_card.name}}/{{sound_card.id}}" class="text-dark">-->
-<!--                                {{sound_card.serial_number}}-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>{{sound_card.brand}}</td>-->
-<!--                        <td>{{sound_card.model}}</td>-->
-<!--                        <td>{{sound_card.memory_size}}</td>-->
-<!--                    </tr>-->
-<!--                    {% endfor %}-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+<!--    Lan And Sound Cards Table - BEGIN    -->
 
-<!--    <div class="row">-->
-<!--        <div class="col-sm" align="left">-->
-<!--            <div class="jumbotron">-->
-<!--                <table class="table" border="0" width="100%">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th colspan="8">-->
-<!--                            <h5 align="center">Відеокарти</h5>-->
-<!--                        </th>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th scope="col">serial number</th>-->
-<!--                        <th scope="col">brand</th>-->
-<!--                        <th scope="col">model</th>-->
-<!--                        <th scope="col">memory size</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    {% for video_card in video_cards %}-->
-<!--                    <tr>-->
-<!--                        <td>-->
-<!--                            <a href="/IT_items/pc_accessories/{{video_card.name}}/{{video_card.id}}" class="text-dark">-->
-<!--                                {{video_card.serial_number}}-->
-<!--                            </a>-->
-<!--                        </td>-->
-<!--                        <td>{{video_card.brand}}</td>-->
-<!--                        <td>{{video_card.model}}</td>-->
-<!--                        <td>{{video_card.memory_size}}</td>-->
-<!--                    </tr>-->
-<!--                    {% endfor %}-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="col-sm" align="right">-->
-<!--        </div>-->
-<!--    </div>-->
+        <div class="row">
+            <div class="col" align="center">
 
+                <div class="container">
+                    <div class="jumbotron">
+                        <table border="0" width="100%">
+                            <tr align="center">
+                                <td width="65%"><h3>Мережеві карти</h3></td>
+                                <td>
+                                    <a href="#" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#lan-card-table" aria-expanded="false" aria-controls="lan-card-table">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                                        </svg>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-secondary" onclick="hideLanCardChart()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                            <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="collapse" id="lan-card-table">
+                    <div class="container">
+                        <div class="jumbotron">
+                            <div style="overflow-x:auto;">
+                                <table class="table" border="0">
+                                    <thead>
+                                    <tr align="center">
+                                        <th scope="col">serial number</th>
+                                        <th scope="col">brand</th>
+                                        <th scope="col">model</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for lan_card in lan_cards %}
+                                    <tr align="center">
+                                        <td>
+                                            <a href="/IT_items/pc_accessories/{{lan_card.name}}/{{lan_card.id}}" class="text-dark">
+                                                {{lan_card.serial_number}}
+                                            </a>
+                                        </td>
+                                        <td>{{lan_card.brand}}</td>
+                                        <td>{{lan_card.model}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="jumbotron" id="lan-card-chart">
+                        <div style="overflow-x:auto;">
+                            <table align="center" border="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="2">
+                                        <canvas id="" width="250" height="250"></canvas>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col" align="center">
+
+                <div class="container">
+                    <div class="jumbotron">
+                        <table border="0" width="100%">
+                            <tr align="center">
+                                <td width="65%"><h3>Звукові карти</h3></td>
+                                <td>
+                                    <a href="#" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#sound-card-table" aria-expanded="false" aria-controls="sound-card-table">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                                            <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                                        </svg>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-secondary" onclick="hideSoundCardChart()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                            <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="collapse" id="sound-card-table">
+                    <div class="container">
+                        <div class="jumbotron">
+                            <div style="overflow-x:auto;">
+                                <table class="table" border="0">
+                                    <thead>
+                                    <tr align="center">
+                                        <th scope="col">serial number</th>
+                                        <th scope="col">brand</th>
+                                        <th scope="col">model</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for sound_card in sound_cards %}
+                                    <tr align="center">
+                                        <td>
+                                            <a href="/IT_items/pc_accessories/{{sound_card.name}}/{{sound_card.id}}" class="text-dark">
+                                                {{sound_card.serial_number}}
+                                            </a>
+                                        </td>
+                                        <td>{{sound_card.brand}}</td>
+                                        <td>{{sound_card.model}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="jumbotron" id="sound-card-chart">
+                        <div style="overflow-x:auto;">
+                            <table align="center" border="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="2">
+                                        <canvas id="" width="250" height="250"></canvas>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+<!--    Lan And Sound Cards Table - END    -->
 
     {% else %}
+
     <div class="d-flex justify-content-center">
         <aside class="col-sm-4">
             <div class="card">
@@ -697,6 +792,7 @@
             </div>
         </aside>
     </div>
+
     {% endif %}
 </div>
 
