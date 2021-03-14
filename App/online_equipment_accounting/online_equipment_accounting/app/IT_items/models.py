@@ -153,6 +153,7 @@ class OpticalDrive(models.Model):
     serial_number = models.CharField('серійний номер', max_length=200, unique=False, default='відсутній')
     type_drive = models.CharField(max_length=20, choices=TYPE_OPTICAL_DRIVE, default='не вказано')
     type_connector = models.CharField(max_length=20, choices=TYPE_CONNECTOR_OF_OPTICAL_DRIVE, default='не вказано')
+
     name_for_user = 'Оптичний накопичувач'
     name = 'OpticalDrive'
 

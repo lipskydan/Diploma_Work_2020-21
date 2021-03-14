@@ -4,7 +4,7 @@ from django.forms import widgets
 
 from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard
 
-from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS
+from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE
 
 
 class AddPcForm(forms.ModelForm):
@@ -174,4 +174,26 @@ class AddSoundCard(forms.ModelForm):
 
 
 class AddOpticalDrive(forms.ModelForm):
-    pass
+    optical_drive_brand = forms.CharField(label='Бренд', max_length=30, required=False,
+                                          help_text='Необов’язково')
+
+    optical_drive_model = forms.CharField(label='Модель', max_length=30, required=False, localize=True,
+                                          help_text='Необов’язково')
+
+    optical_drive_serial_number = forms.CharField(label='Серійний номер', max_length=30,
+                                                  required=True, localize=True,
+                                                  help_text='Обов’язково')
+
+    optical_drive_type_drive = forms.ChoiceField(label='Тип оптичного накопичувача', choices=TYPE_OPTICAL_DRIVE,
+                                                 required=False, localize=True, help_text='Необов’язково',
+                                                 widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+
+    optical_drive_type_connector = forms.ChoiceField(label='Тип роз\'єму',
+                                                     choices=TYPE_CONNECTOR_OF_OPTICAL_DRIVE,
+                                                     required=False, localize=True, help_text='Необов’язково',
+                                                     widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+
+    class Meta:
+        model = SoundCard
+        fields = ['optical_drive_brand', 'optical_drive_model', 'optical_drive_serial_number',
+                  'optical_drive_type_drive', 'optical_drive_type_connector']
