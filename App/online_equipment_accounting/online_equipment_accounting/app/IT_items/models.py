@@ -18,6 +18,19 @@ TYPE_RAM_SLOTS = [
     ('DDR3', 'DDR3'),
 ]
 
+TYPE_OPTICAL_DRIVE = [
+    ('не вказано', ''),
+    ('DVD', 'DVD'),
+    ('CD', 'CD'),
+    ('CD-R', 'CD-R'),
+    ('CD-RM', 'CD-RM'),
+]
+
+TYPE_CONNECTOR_OF_OPTICAL_DRIVE = [
+    ('SATA', 'SATA'),
+    ('PATA', 'PATA'),
+]
+
 
 class Motherboard(models.Model):
     __tablename__ = 'Motherboard'
@@ -27,7 +40,7 @@ class Motherboard(models.Model):
 
     serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
 
-    form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS)
+    form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS, default='не вказано')
     type_ram_slot = models.CharField(max_length=20, choices=TYPE_RAM_SLOTS, default='не вказано')
 
     integrated_graphics = models.BooleanField(default=False)
@@ -130,6 +143,27 @@ class SoundCard(models.Model):
     class Meta:
         verbose_name = 'Звукова плата'
         verbose_name_plural = 'Звукові плати'
+
+
+class OpticalDrive(models.Model):
+    __tablename__ = 'OpticalDrive'
+
+    brand = models.CharField('бренд оптичного накопичувача', max_length=200, default='відсутній')
+    model = models.CharField('модель оптичного накопичувача', max_length=200, default='відсутній')
+    serial_number = models.CharField('серійний номер', max_length=200, unique=False, default='відсутній')
+    type_drive = models.CharField(max_length=20, choices=TYPE_OPTICAL_DRIVE, default='не вказано')
+    type_connector = models.CharField(max_length=20, choices=TYPE_CONNECTOR_OF_OPTICAL_DRIVE, default='не вказано')
+    name_for_user = 'Оптичний накопичувач'
+    name = 'OpticalDrive'
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_number)
+
+    class Meta:
+        verbose_name = 'Оптичний накопичувач'
+        verbose_name_plural = 'Оптичні накопичувачі'
 
 
 class PC(models.Model):

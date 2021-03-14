@@ -207,6 +207,10 @@ def add_sound_card(request):
     return render(request, 'IT_items/add_sound_card.html', {'form': form})
 
 
+def add_optical_drive(request):
+    pass
+
+
 def item_delete(request, item_name, item_id):
     item = None
     try:

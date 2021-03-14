@@ -171,3 +171,7 @@ class AddSoundCard(forms.ModelForm):
     class Meta:
         model = SoundCard
         fields = ['sound_card_brand', 'sound_card_model', 'sound_card_serial_number']
+
+
+class AddOpticalDrive(forms.ModelForm):
+    pass
