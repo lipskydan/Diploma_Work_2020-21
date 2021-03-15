@@ -27,6 +27,7 @@ TYPE_OPTICAL_DRIVE = [
 ]
 
 TYPE_CONNECTOR_OF_OPTICAL_DRIVE = [
+    ('не вказано', ''),
     ('SATA', 'SATA'),
     ('PATA', 'PATA'),
 ]
@@ -174,13 +175,14 @@ class PC(models.Model):
 
     floor = models.IntegerField('номер поверху')
     room = models.IntegerField('номер кабінету')
-    place = models.IntegerField('номер учбового місця', default=0, blank=True, null=True)
+    place = models.IntegerField('номер учбового місця', default=0, blank=True, null=False)
 
     motherboard = models.ForeignKey(Motherboard, on_delete=models.OneToOneField, null=True)
     power_supply = models.ForeignKey(PowerSupply, on_delete=models.OneToOneField, null=True)
     video_card = models.ForeignKey(VideoCard, on_delete=models.OneToOneField, null=True)
     lan_card = models.ForeignKey(LanCard, on_delete=models.OneToOneField, null=True)
-    sound_card = models.ForeignKey(SoundCard, on_delete=models.SET_NULL, null=True)
+    sound_card = models.ForeignKey(SoundCard, on_delete=models.OneToOneField, null=True)
+    optical_drive = models.ForeignKey(OpticalDrive, on_delete=models.OneToOneField, null=True)
 
     name_for_user = 'Персональний комп\'ютор'
     name = 'PC'

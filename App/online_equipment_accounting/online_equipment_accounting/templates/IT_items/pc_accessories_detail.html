@@ -11,6 +11,8 @@
 {{ item.name }} - {{ item.serial_number }}
 {% elif item.name == 'SoundCard' %}
 {{ item.name }} - {{ item.serial_number }}
+{% elif item.name == 'OpticalDrive' %}
+{{ item.name }} - {{ item.serial_number }}
 {% endif %}
 {% endblock %}
 
@@ -27,62 +29,71 @@
 
                     {% if item.name == 'Motherboard' %}
 
-                        <h5>Бренд: {{item.brand}}</h5>
-                        <h5>Модель: {{item.model}}</h5>
-                        <h5>Серійний номер: {{item.serial_number}}</h5>
-                        <h5>Форм-фактор: {{item.form_factor}}</h5>
-                        <h5>Тип слоту для ОЗУ: {{item.type_ram_slot}}</h5>
-                        <hr>
+                    <h5>Бренд: {{item.brand}}</h5>
+                    <h5>Модель: {{item.model}}</h5>
+                    <h5>Серійний номер: {{item.serial_number}}</h5>
+                    <h5>Форм-фактор: {{item.form_factor}}</h5>
+                    <h5>Тип слоту для ОЗУ: {{item.type_ram_slot}}</h5>
+                    <hr>
 
-                        {% if item.integrated_graphics%}
-                            <h5>Інтегрована відеокарта: наявна</h5>
-                        {% else %}
-                            <h5>Інтегрована відеокарта: відсутня</h5>
-                        {% endif %}
+                    {% if item.integrated_graphics%}
+                    <h5>Інтегрована відеокарта: наявна</h5>
+                    {% else %}
+                    <h5>Інтегрована відеокарта: відсутня</h5>
+                    {% endif %}
 
-                        {% if item.integrated_sound_card%}
-                            <h5>Інтегрована звукова-карта: наявна</h5>
-                        {% else %}
-                            <h5>Інтегрована звукова-карта: відсутня</h5>
-                        {% endif %}
+                    {% if item.integrated_sound_card%}
+                    <h5>Інтегрована звукова-карта: наявна</h5>
+                    {% else %}
+                    <h5>Інтегрована звукова-карта: відсутня</h5>
+                    {% endif %}
 
-                        {% if item.integrated_lan_card%}
-                            <h5>Інтегрована мережева-карта: наявна</h5>
-                        {% else %}
-                            <h5>Інтегрована мережева-карта: відсутня</h5>
-                        {% endif %}
+                    {% if item.integrated_lan_card%}
+                    <h5>Інтегрована мережева-карта: наявна</h5>
+                    {% else %}
+                    <h5>Інтегрована мережева-карта: відсутня</h5>
+                    {% endif %}
 
-                        <hr>
+                    <hr>
 
                     {% elif item.name == 'PowerSupply' %}
 
-                        <h5>Бренд: {{item.brand}}</h5>
-                        <h5>Модель: {{item.model}}</h5>
-                        <h5>Серійний номер: {{item.serial_or_inventory_number}}</h5>
-                        <h5>Максимальна споживана потужність від мережі: {{item.power_consumption}} Вт</h5>
-                        <hr>
+                    <h5>Бренд: {{item.brand}}</h5>
+                    <h5>Модель: {{item.model}}</h5>
+                    <h5>Серійний номер: {{item.serial_or_inventory_number}}</h5>
+                    <h5>Максимальна споживана потужність від мережі: {{item.power_consumption}} Вт</h5>
+                    <hr>
 
                     {% elif item.name == 'VideoCard' %}
 
-                        <h5>Бренд: {{item.brand}}</h5>
-                        <h5>Модель: {{item.model}}</h5>
-                        <h5>Серійний номер: {{item.serial_number}}</h5>
-                        <h5>Обсяг пам'яті: {{item.memory_size}} MB</h5>
-                        <hr>
+                    <h5>Бренд: {{item.brand}}</h5>
+                    <h5>Модель: {{item.model}}</h5>
+                    <h5>Серійний номер: {{item.serial_number}}</h5>
+                    <h5>Обсяг пам'яті: {{item.memory_size}} MB</h5>
+                    <hr>
 
                      {% elif item.name == 'LanCard' %}
 
-                        <h5>Бренд: {{item.brand}}</h5>
-                        <h5>Модель: {{item.model}}</h5>
-                        <h5>Серійний номер: {{item.serial_number}}</h5>
-                        <hr>
+                    <h5>Бренд: {{item.brand}}</h5>
+                    <h5>Модель: {{item.model}}</h5>
+                    <h5>Серійний номер: {{item.serial_number}}</h5>
+                    <hr>
 
                     {% elif item.name == 'SoundCard' %}
 
-                        <h5>Бренд: {{item.brand}}</h5>
-                        <h5>Модель: {{item.model}}</h5>
-                        <h5>Серійний номер: {{item.serial_number}}</h5>
-                        <hr>
+                    <h5>Бренд: {{item.brand}}</h5>
+                    <h5>Модель: {{item.model}}</h5>
+                    <h5>Серійний номер: {{item.serial_number}}</h5>
+                    <hr>
+
+                    {% elif item.name == 'OpticalDrive' %}
+
+                    <h5>Бренд: {{item.brand}}</h5>
+                    <h5>Модель: {{item.model}}</h5>
+                    <h5>Серійний номер: {{item.serial_number}}</h5>
+                    <h5>Тип приводу: {{item.type_drive}}</h5>
+                    <h5>Тип роз'єму: {{item.type_connector}}</h5>
+                    <hr>
 
                     {% endif %}
 
@@ -102,6 +113,8 @@
                     {% elif item.name == 'SoundCard' %}
 <!--                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/del-sound-card" class="btn btn-danger">Видалити</a>-->
                     <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-sound-card" class="btn btn-success">Редагування</a>
+                    {% elif item.name == 'OpticalDrive' %}
+                    <a href="/IT_items/pc_accessories/{{ item.name }}/{{ item.id }}/update-optical-drive" class="btn btn-success">Редагування</a>
                     {% endif %}
 
                 </div>

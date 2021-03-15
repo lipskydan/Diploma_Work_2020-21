@@ -14,39 +14,25 @@
                     <h1 align="center">Список комплектуючих</h1><br>
 
                     <div class="row" align="center">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h4><a href="#motherboard" class="btn btn-outline-secondary">Материнські плати</a></h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h4><a href="#power-supply" class="btn btn-outline-secondary">Блоки живлення</a></h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h4><a href="#video-card" class="btn btn-outline-secondary">Відеокарти</a></h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h4><a href="#lan-card" class="btn btn-outline-secondary">Мережеві плати</a></h4>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h4><a href="#sound-card" class="btn btn-outline-secondary">Звукові плати</a></h4>
                         </div>
+                         <div class="col-md-4">
+                            <h4><a href="#optical-drive" class="btn btn-outline-secondary">Оптичні накопичувачі</a></h4>
+                        </div>
                     </div>
-
-<!--                    <table class="table" align="center" border="0">-->
-<!--                        <tr>-->
-<!--                            <td align="center">-->
-<!--                                <h4><a href="#motherboard" class="btn btn-outline-secondary">Материнські плати</a></h4>-->
-<!--                            </td>-->
-<!--                            <td align="center">-->
-<!--                                <h4><a href="#power-supply" class="btn btn-outline-secondary">Блоки живлення</a></h4>-->
-<!--                            </td>-->
-<!--                            <td align="center">-->
-<!--                                <h4><a href="#video-card" class="btn btn-outline-secondary">Відеокарти</a></h4>-->
-<!--                            </td>-->
-<!--                            <td align="center">-->
-<!--                                <h4><a href="#lan-card" class="btn btn-outline-secondary">Мережеві плати</a></h4>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
                 </article>
             </div>
         </aside>
@@ -227,7 +213,41 @@
                     </div>
                     {% endif %}
                 </article>
-            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <aside class="col-sm-10">
+            <div class="card">
+                <article class="card-body">
+                    <table class="col-sm-12" border="0">
+                        <tr>
+                            <td>
+                                <h1><a id="optical-drive">Оптичні накопичувачі</a></h1>
+                            </td>
+                            <td align="right">
+                                <h1><a href="add-item/add-optical-drive" class="badge badge-secondary">+</a></h1>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+
+                    {% if items_optical_drive|length > 0 %}
+                    {% for el in items_optical_drive %}
+                    <div class="alert alert-secondary">
+                        <h2>Модель: {{el.brand}} {{ el.model }}</h2>
+                        <h2>Серійний номер: {{ el.serial_number }}</h2>
+                        <a href="/IT_items/pc_accessories/{{el.name}}/{{el.id}}" class="btn btn-secondary">Детальніше</a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="alert alert-secondary">
+                        <h3>У нас ще немає оптичних накопичувачів</h3>
+                    </div>
+                    {% endif %}
+                </article>
         </aside>
     </div>
 </div>

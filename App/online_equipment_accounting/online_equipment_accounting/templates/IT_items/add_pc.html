@@ -199,22 +199,43 @@
                                       <hr>
                                   </td>
                               </tr>
-<!--                              <tr>-->
-<!--                                  <td colspan="2" align="center">-->
-<!--                                      &lt;!&ndash;Name of field and input&ndash;&gt;-->
-<!--                                      {{ form.sound_card.label_tag }} {{ form.sound_card }}-->
+                              <tr>
+                                  <td colspan="2" align="center">
+                                      <!--Name of field and input-->
+                                      {{ form.sound_card.label_tag }} {{ form.sound_card }}
 
-<!--                                      &lt;!&ndash;Show help text for field&ndash;&gt;-->
-<!--                                      {% if form.sound_card.help_text %}-->
-<!--                                      <br><small style="color: grey">{{ form.sound_card.help_text }}</small>-->
-<!--                                      {% endif %}-->
+                                      <!--Show help text for field-->
+                                      {% if form.sound_card.help_text %}
+                                      <br><small style="color: grey">{{ form.sound_card.help_text }}</small>
+                                      {% endif %}
 
-<!--                                      &lt;!&ndash;Show error text for field&ndash;&gt;-->
-<!--                                      {% for error in form.sound_card.errors %}-->
-<!--                                      <p style="color: red">{{ error }}</p>-->
-<!--                                      {% endfor %}-->
-<!--                                  </td>-->
-<!--                              </tr>-->
+                                      <!--Show error text for field-->
+                                      {% for error in form.sound_card.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2">
+                                      <hr>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" align="center">
+                                      <!--Name of field and input-->
+                                      {{ form.optical_drive.label_tag }} {{ form.optical_drive }}
+
+                                      <!--Show help text for field-->
+                                      {% if form.optical_drive.help_text %}
+                                      <br><small style="color: grey">{{ form.optical_drive.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.optical_drive.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                                  </td>
+                              </tr>
                           </table>
                       </div>
                   <input type="submit" class="btn btn-outline-secondary" value="Створити">

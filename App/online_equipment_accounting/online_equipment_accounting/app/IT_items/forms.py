@@ -2,7 +2,7 @@ from django import forms
 
 from django.forms import widgets
 
-from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard
+from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE
 
@@ -40,14 +40,20 @@ class AddPcForm(forms.ModelForm):
                                       localize=True,
                                       widget=widgets.Select(attrs={'size': 1}))
 
-    # sound_card = forms.ModelChoiceField(queryset=SoundCard.objects.all(), label='Звукова плата',
-    #                                     empty_label='', required=False, help_text='Необов’язково',
-    #                                     localize=True,
-    #                                     widget=widgets.Select(attrs={'size': 1}))
+    sound_card = forms.ModelChoiceField(queryset=SoundCard.objects.all(), label='Звукова плата',
+                                        empty_label='', required=False, help_text='Необов’язково',
+                                        localize=True,
+                                        widget=widgets.Select(attrs={'size': 1}))
+
+    optical_drive = forms.ModelChoiceField(queryset=OpticalDrive.objects.all(), label='Оптичний накопичувач',
+                                           empty_label='', required=False, help_text='Необов’язково',
+                                           localize=True,
+                                           widget=widgets.Select(attrs={'size': 1}))
 
     class Meta:
         model = PC
-        fields = ['inventory_number', 'floor', 'room', 'place', 'motherboard', 'power_supply']
+        fields = ['inventory_number', 'floor', 'room', 'place', 'motherboard', 'power_supply',
+                  'video_card', 'lan_card', 'sound_card', 'optical_drive']
 
         widgets = {
             'motherboard': forms.Select(attrs={'class': 'form-control'}),

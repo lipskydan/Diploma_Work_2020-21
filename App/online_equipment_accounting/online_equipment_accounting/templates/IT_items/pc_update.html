@@ -193,6 +193,61 @@
                                         <hr>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Звукова плата:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <div class="mx-auto" style="width: 75%">
+                                            <select class="form-control" name="sound_card" id="sound_card">
+                                                <option value="None">Відсутній</option>
+                                                {% for sound_card in sound_cards %}
+                                                <option {% if sound_card == item.sound_card %} selected {% endif %}
+                                                        value="{{ sound_card }}">
+                                                    {{ sound_card }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Оптичний накопичувач:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <div class="mx-auto" style="width: 75%">
+                                            <select class="form-control" name="" id="">
+                                                <option value="None">Відсутній</option>
+                                                {% for optical_drive in optical_drives %}
+                                                <option {% if optical_drive == item.optical_drive %} selected {% endif %}
+                                                        value="{{ optical_drive }}">
+                                                    {{ optical_drive }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                         <input type="submit" class="btn btn-outline-secondary" value="Оновити">

@@ -154,11 +154,66 @@
 
                         <hr>
 
+                        <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Звукова плата</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.sound_card %}
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.sound_card.name }}/{{ item.sound_card.id }}/update-sound-card" class="badge badge-secondary badge">
+                                            Редагування
+                                        </a></h5>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.sound_card %}
+                            <h5>Бренд: {{item.sound_card.brand}}</h5>
+                            <h5>Модель: {{item.sound_card.model}}</h5>
+                            <h5>Серійний номер: {{item.sound_card.serial_number}}</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
+                        <hr>
+
+                         <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Оптичний накопичувач</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.optical_drive %}
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.optical_drive.name }}/{{ item.optical_drive.id }}/update-optical-drive" class="badge badge-secondary badge">
+                                            Редагування
+                                        </a></h5>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.optical_drive %}
+                            <h5>Бренд: {{item.optical_drive.brand}}</h5>
+                            <h5>Модель: {{item.optical_drive.model}}</h5>
+                            <h5>Серійний номер: {{item.optical_drive.serial_number}}</h5>
+                            <h5>Тип приводу: {{item.optical_drive.type_drive}}</h5>
+                            <h5>Тип роз'єму: {{item.optical_drive.type_connector}}</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
 
                     {% elif item.name == 'Switch' %}
 <!--                        <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>-->
                     {% endif %}
 
+                    <hr>
                     <div class="row">
                         <div class="col-md-9">
                             <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-secondary btn-outline-light">Видалити</a>

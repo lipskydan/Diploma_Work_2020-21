@@ -45,6 +45,8 @@ urlpatterns = [
          name='lan_card_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-sound-card', views.sound_card_update,
          name='sound_card_update'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/update-optical-drive', views.optical_drive_update,
+         name='optical_drive_update'),
 
     path('error', views.error, name='error'),
 

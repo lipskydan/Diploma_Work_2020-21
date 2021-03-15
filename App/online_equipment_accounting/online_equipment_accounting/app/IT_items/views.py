@@ -24,12 +24,14 @@ def pc_accessories(request):
     items_video_card = VideoCard.objects.all()
     items_lan_cards = LanCard.objects.all()
     items_sound_cards = SoundCard.objects.all()
+    items_optical_drive = OpticalDrive.objects.all()
 
     return render(request, 'IT_items/pc_accessories.html', {'items_motherboard': items_motherboard,
                                                             'items_power_supply': items_power_supply,
                                                             'items_video_card': items_video_card,
                                                             'items_lan_cards': items_lan_cards,
-                                                            'items_sound_cards': items_sound_cards})
+                                                            'items_sound_cards': items_sound_cards,
+                                                            'items_optical_drive': items_optical_drive})
 
 
 def item_detail(request, item_name, item_id):
@@ -83,7 +85,9 @@ def add_pc(request):
                       motherboard=cd['motherboard'],
                       power_supply=cd['power_supply'],
                       video_card=cd['video_card'],
-                      lan_card=cd['lan_card'])
+                      lan_card=cd['lan_card'],
+                      sound_card=cd['sound_card'],
+                      optical_drive=cd['optical_drive'])
 
             item.save()
 
@@ -266,66 +270,6 @@ def pc_accessories_delete(request, item_name, item_id):
     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
 
 
-# def motherboard_delete(request, item_name, item_id):
-#     item = None
-#     try:
-#         item = Motherboard.objects.get(id=item_id)
-#     except:
-#         raise Http404('ERROR motherboard_delete')
-#
-#     item.delete()
-#
-#     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-#
-#
-# def power_supply_delete(request, item_name, item_id):
-#     item = None
-#     try:
-#         item = PowerSupply.objects.get(name=item_name, id=item_id)
-#     except:
-#         raise Http404('ERROR motherboard_delete')
-#
-#     item.delete()
-#
-#     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-#
-#
-# def video_card_delete(request, item_name, item_id):
-#     item = None
-#     try:
-#         item = VideoCard.objects.get(id=item_id)
-#     except:
-#         raise Http404('ERROR motherboard_delete')
-#
-#     item.delete()
-#
-#     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-#
-#
-# def lan_card_delete(request, item_name, item_id):
-#     item = None
-#     try:
-#         item = LanCard.objects.get(id=item_id)
-#     except:
-#         raise Http404('ERROR motherboard_delete')
-#
-#     item.delete()
-#
-#     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-#
-#
-# def sound_card_delete(request, item_name, item_id):
-#     item = None
-#     try:
-#         item = SoundCard.objects.get(id=item_id)
-#     except:
-#         raise Http404('ERROR motherboard_delete')
-#
-#     item.delete()
-#
-#     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
-
-
 def pc_update(request, item_name, item_id):
     item = None
     motherboards = None
@@ -333,6 +277,7 @@ def pc_update(request, item_name, item_id):
     video_cards = None
     lan_cards = None
     sound_cards = None
+    optical_drives = None
 
     if item_name == 'PC':
         item = PC.objects.get(id=item_id)
@@ -342,6 +287,7 @@ def pc_update(request, item_name, item_id):
         video_cards = VideoCard.objects.filter()
         lan_cards = LanCard.objects.filter()
         sound_cards = SoundCard.objects.filter()
+        optical_drives = OpticalDrive.objects.filter()
 
     if request.method == 'POST':
 
@@ -398,12 +344,30 @@ def pc_update(request, item_name, item_id):
         # sound_card = request.POST.get('sound_card', None)
         # if sound_card != 'None':
         #     sound_card_dic = sound_card.split()
+
+        # try:
         #     sound_card = SoundCard.objects.get(model=sound_card_dic[2],
-        #                                        brand=sound_card_dic[1],
+        #                                           brand=sound_card_dic[1],
+        #                                           serial_number=sound_card_dic[5])
+        # except ObjectDoesNotExist:
+        #     sound_card = None
+
+        # sound_card = SoundCard.objects.get(model=sound_card_dic[2],
+        #                                    brand=sound_card_dic[1],
         #                                        serial_number=sound_card_dic[5])
         #     item.sound_card = sound_card
         # else:
         #     item.sound_card = None
+
+        # optical_drive = request.POST.get('optical_drive', None)
+        # if optical_drive != 'None':
+        #     optical_drive_dic = optical_drive.split()
+        #     optical_drive = OpticalDrive.objects.get(model=optical_drive_dic[2],
+        #                                              brand=optical_drive_dic[1],
+        #                                              serial_number=optical_drive_dic[5])
+        #     item.optical_drive = optical_drive
+        # else:
+        #     item.optical_drive = None
 
         try:
             item.save()
@@ -416,7 +380,9 @@ def pc_update(request, item_name, item_id):
                                                            'motherboards': motherboards,
                                                            'power_supplies': power_supplies,
                                                            'video_cards': video_cards,
-                                                           'lan_cards': lan_cards})
+                                                           'lan_cards': lan_cards,
+                                                           'sound_cards': sound_cards,
+                                                           'optical_drives': optical_drives})
 
 
 def motherboard_update(request, item_name, item_id):
@@ -550,9 +516,14 @@ def sound_card_update(request, item_name, item_id):
 
 def optical_drive_update(request, item_name, item_id):
     item = None
+    type_drives = None
+    type_connectors = None
 
     if item_name == 'OpticalDrive':
         item = OpticalDrive.objects.get(id=item_id)
+
+        type_drives = [el[0] for el in TYPE_OPTICAL_DRIVE]
+        type_connectors = [el[0] for el in TYPE_CONNECTOR_OF_OPTICAL_DRIVE]
 
     if request.method == 'POST':
 
@@ -560,8 +531,9 @@ def optical_drive_update(request, item_name, item_id):
             item.brand = request.POST['optical_drive_brand']
             item.model = request.POST['optical_drive_model']
             item.serial_number = request.POST['optical_drive_serial_number']
-            item.type_drive = request.POST['optical_drive_type_drive']
-            item.type_connector = request.POST['optical_drive_type_connector']
+
+            item.type_drive = request.POST.get('optical_drive_type_drive', None)
+            item.type_connector = request.POST.get('optical_drive_type_connector', None)
         try:
             item.save()
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
@@ -569,7 +541,9 @@ def optical_drive_update(request, item_name, item_id):
             return 'При обновлении оборудывания произошла ошибка'
 
     else:
-        return render(request, 'IT_items/optical_drive_update.html', {'item': item})
+        return render(request, 'IT_items/optical_drive_update.html', {'item': item,
+                                                                      'type_drives': type_drives,
+                                                                      'type_connectors': type_connectors})
 
 
 def error(request):
