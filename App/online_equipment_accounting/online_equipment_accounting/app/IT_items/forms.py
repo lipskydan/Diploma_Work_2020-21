@@ -57,7 +57,11 @@ class AddPcForm(forms.ModelForm):
 
         widgets = {
             'motherboard': forms.Select(attrs={'class': 'form-control'}),
-            'power_supply': forms.Select(attrs={'class': 'form-control'})
+            'power_supply': forms.Select(attrs={'class': 'form-control'}),
+            'video_card': forms.Select(attrs={'class': 'form-control'}),
+            'lan_card': forms.Select(attrs={'class': 'form-control'}),
+            'sound_card': forms.Select(attrs={'class': 'form-control'}),
+            'optical_drive': forms.Select(attrs={'class': 'form-control'}),
         }
 
 

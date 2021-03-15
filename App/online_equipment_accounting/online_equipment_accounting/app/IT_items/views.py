@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import View
 from django.core.exceptions import ObjectDoesNotExist
+from typing import Dict
 
 from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCard, AddLanCard, AddSoundCard, \
     AddOpticalDrive
@@ -299,14 +300,9 @@ def pc_update(request, item_name, item_id):
         motherboard = request.POST.get('motherboard', None)
         if motherboard != 'None':
             motherboard_dic = motherboard.split()
-
-            try:
-                motherboard = Motherboard.objects.get(model=motherboard_dic[2],
-                                                      brand=motherboard_dic[1],
-                                                      serial_number=motherboard_dic[5])
-            except ObjectDoesNotExist:
-                motherboard = None
-
+            motherboard = Motherboard.objects.get(model=motherboard_dic[2],
+                                                  brand=motherboard_dic[1],
+                                                  serial_number=motherboard_dic[5])
             item.motherboard = motherboard
         else:
             item.motherboard = None
@@ -341,25 +337,19 @@ def pc_update(request, item_name, item_id):
         else:
             item.lan_card = None
 
-        # sound_card = request.POST.get('sound_card', None)
-        # if sound_card != 'None':
-        #     sound_card_dic = sound_card.split()
+        sound_card = request.POST.get('sound_card', None)
+        if sound_card != 'None':
+            sound_card_dic = sound_card.split()
+            sound_card = SoundCard.objects.get(model=sound_card_dic[2],
+                                               brand=sound_card_dic[1],
+                                               serial_number=sound_card_dic[5])
+            item.sound_card = sound_card
+        else:
+            item.sound_card = None
 
-        # try:
-        #     sound_card = SoundCard.objects.get(model=sound_card_dic[2],
-        #                                           brand=sound_card_dic[1],
-        #                                           serial_number=sound_card_dic[5])
-        # except ObjectDoesNotExist:
-        #     sound_card = None
+        optical_drive = request.POST.get('optical_drive', None)
+        print(optical_drive)
 
-        # sound_card = SoundCard.objects.get(model=sound_card_dic[2],
-        #                                    brand=sound_card_dic[1],
-        #                                        serial_number=sound_card_dic[5])
-        #     item.sound_card = sound_card
-        # else:
-        #     item.sound_card = None
-
-        # optical_drive = request.POST.get('optical_drive', None)
         # if optical_drive != 'None':
         #     optical_drive_dic = optical_drive.split()
         #     optical_drive = OpticalDrive.objects.get(model=optical_drive_dic[2],
