@@ -187,11 +187,11 @@ def get_optical_drive_type_drive_data_and_labels():
     data_optical_drive = []
 
     for qs in queryset_optical_drive:
-        if qs.brand not in optical_drive_dict:
-            optical_drive_dict[qs.brand] = 1
-            labels_optical_drive.append(qs.brand)
+        if qs.type_drive not in optical_drive_dict:
+            optical_drive_dict[qs.type_drive] = 1
+            labels_optical_drive.append(qs.type_drive)
         else:
-            optical_drive_dict[qs.brand] += 1
+            optical_drive_dict[qs.type_drive] += 1
 
     for key in optical_drive_dict.keys():
         data_optical_drive.append(optical_drive_dict[key])
@@ -206,11 +206,11 @@ def get_optical_drive_type_connector_data_and_labels():
     data_optical_drive = []
 
     for qs in queryset_optical_drive:
-        if qs.brand not in optical_drive_dict:
-            optical_drive_dict[qs.brand] = 1
-            labels_optical_drive.append(qs.brand)
+        if qs.type_connector not in optical_drive_dict:
+            optical_drive_dict[qs.type_connector] = 1
+            labels_optical_drive.append(qs.type_connector)
         else:
-            optical_drive_dict[qs.brand] += 1
+            optical_drive_dict[qs.type_connector] += 1
 
     for key in optical_drive_dict.keys():
         data_optical_drive.append(optical_drive_dict[key])
@@ -241,7 +241,7 @@ def main(request):
 
     data_optical_drive_brand, labels_optical_drive_brand = get_optical_drive_brand_data_and_labels()
     data_optical_drive_type, labels_optical_drive_type = get_optical_drive_type_drive_data_and_labels()
-    data_optical_type_connector, labels_optical_type_connector = get_optical_drive_type_drive_data_and_labels()
+    data_optical_drive_type_connector, labels_optical_drive_type_connector = get_optical_drive_type_connector_data_and_labels()
 
     power_supplies_count = power_supplies.count()
 
@@ -271,8 +271,8 @@ def main(request):
                                               'data_optical_drive_brand': data_optical_drive_brand,
                                               'labels_optical_drive_type': labels_optical_drive_type,
                                               'data_optical_drive_type': data_optical_drive_type,
-                                              'labels_optical_type_connector': labels_optical_type_connector,
-                                              'data_optical_type_connector': data_optical_type_connector,
+                                              'labels_optical_drive_type_connector': labels_optical_drive_type_connector,
+                                              'data_optical_drive_type_connector': data_optical_drive_type_connector,
 
                                               'lan_cards': lan_cards,
 

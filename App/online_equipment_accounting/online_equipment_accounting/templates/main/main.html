@@ -396,7 +396,7 @@
      };
 
     var optical_drive_type_drive = {
-     type: 'horizontalBar',
+     type: 'bar',
      data: {
         datasets: [{
             barPercentage: 0.5,
@@ -423,12 +423,11 @@
         }],
         labels: {{ labels_optical_drive_type|safe }}
         },
-        options: {
+         options: {
             title: {
                 display: true,
                 text: 'тип приводу'
-
-            },
+                },
 
             animation: {
                 duration: 2700,
@@ -438,10 +437,11 @@
                 yAxes: [{
                   id: 'y-axis-0',
                   gridLines: {
-                    display: false
+                    display: true
                   },
                   ticks: {
                     beginAtZero:true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
                   },
                   afterBuildTicks: function(chart) {
 
@@ -450,17 +450,148 @@
                 xAxes: [{
                   id: 'x-axis-0',
                   gridLines: {
-                    display: true
+                    display: false
                   },
                   ticks: {
-                    beginAtZero: true,
-                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                    beginAtZero: true
                   }
                 }]
             }
+
         }
      };
 
+     var optical_drive_type_connector = {
+     type: 'bar',
+     data: {
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 50,
+            maxBarThickness: 50,
+            minBarLength: 10,
+            data: {{ data_optical_drive_type_connector|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+
+            ],
+            label: ''
+        }],
+        labels: {{ labels_optical_drive_type_connector|safe }}
+        },
+      options: {
+            title: {
+                display: true,
+                text: 'тип роз\'єму'
+                },
+
+            animation: {
+                duration: 2700,
+            },
+
+            scales: {
+                yAxes: [{
+                  id: 'y-axis-0',
+                  gridLines: {
+                    display: true
+                  },
+                  ticks: {
+                    beginAtZero:true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                  },
+                  afterBuildTicks: function(chart) {
+
+                  }
+                }],
+                xAxes: [{
+                  id: 'x-axis-0',
+                  gridLines: {
+                    display: false
+                  },
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+            }
+
+        }
+     };
+
+     var optical_drive_brand = {
+     type: 'bar',
+     data: {
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 50,
+            maxBarThickness: 50,
+            minBarLength: 10,
+            data: {{ data_optical_drive_brand|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+
+            ],
+            label: ''
+        }],
+        labels: {{ labels_optical_drive_brand|safe }}
+        },
+      options: {
+            title: {
+                display: true,
+                text: 'бренд'
+                },
+
+            animation: {
+                duration: 2700,
+            },
+
+            scales: {
+                yAxes: [{
+                  id: 'y-axis-0',
+                  gridLines: {
+                    display: true
+                  },
+                  ticks: {
+                    beginAtZero:true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                  },
+                  afterBuildTicks: function(chart) {
+
+                  }
+                }],
+                xAxes: [{
+                  id: 'x-axis-0',
+                  gridLines: {
+                    display: false
+                  },
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+            }
+
+        }
+     };
 
 
     window.onload = function() {
@@ -477,6 +608,8 @@
       var sound_card_brand_w = document.getElementById('sound-card-brand-chart').getContext('2d');
 
       var optical_drive_type_drive_w = document.getElementById('optical-drive-type-drive-chart').getContext('2d');
+      var optical_drive_type_connector_w = document.getElementById('optical-drive-type-connector-chart').getContext('2d');
+      var optical_drive_brand_w = document.getElementById('optical-drive-brand-chart').getContext('2d');
 
 
       window.myPie = new Chart(motherboard_brand_w, motherboard_brand);
@@ -492,6 +625,8 @@
       window.myPie = new Chart(sound_card_brand_w, sound_card_brand);
 
       window.myPie = new Chart(optical_drive_type_drive_w, optical_drive_type_drive);
+      window.myPie = new Chart(optical_drive_type_connector_w, optical_drive_type_connector);
+      window.myPie = new Chart(optical_drive_brand_w, optical_drive_brand);
 
     };
 
@@ -524,6 +659,15 @@
 
     function hideSoundCardChart() {
         var x = document.getElementById("sound-card-chart");
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        } else {
+        x.style.display = "none";
+        }
+    }
+
+    function hideOpticalDriveChart() {
+         var x = document.getElementById("optical-drive-chart");
         if (x.style.display === "none") {
         x.style.display = "block";
         } else {
@@ -755,7 +899,7 @@
 
 <!--    Power Supply Table - END    -->
 
-    <!--    Optical Drive Table - BEGIN    -->
+<!--    Optical Drive Table - BEGIN    -->
 
     <div class="container">
         <div class="jumbotron">
@@ -816,7 +960,7 @@
 
     <div class="jumbotron" id="optical-drive-chart">
         <div style="overflow-x:auto;">
-            <table align="center" border="1">
+            <table align="center" border="0">
                 <tr>
                     <td colspan="2">
                         <hr>
@@ -827,8 +971,14 @@
                         <canvas id="optical-drive-type-drive-chart" width="500" height="375"></canvas>
                     </td>
                     <td>
-                    <canvas id="" width="500" height="375"></canvas>
+                        <canvas id="optical-drive-type-connector-chart" width="500" height="375"></canvas>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <canvas id="optical-drive-brand-chart" width="500" height="190"></canvas>
+                    </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -839,7 +989,7 @@
         </div>
     </div>
 
-<!--    Power Supply Table - END    -->
+<!--    Optical Drive Table - END    -->
 
 
 <!--    Lan And Sound Cards Table - BEGIN    -->
