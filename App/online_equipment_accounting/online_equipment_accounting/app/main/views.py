@@ -8,7 +8,7 @@ from django.template import RequestContext
 from .forms import SignUpForm, LoginForm
 
 from django.db import models
-from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, SoundCard
+from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, SoundCard, OpticalDrive
 
 
 def get_motherboard_brand_data_and_labels():
@@ -65,7 +65,7 @@ def get_motherboard_integrated_items_data_and_labels():
 
     return data_motherboard, labels_motherboard
 
-    
+
 def get_motherboard_ram_data_and_labels():
     motherboard_dict = dict()
     queryset_motherboard = Motherboard.objects.order_by('form_factor')[:]
@@ -123,10 +123,106 @@ def get_power_supply_brand_data_and_labels():
     return data_power_supply, labels_power_supply
 
 
+def get_lan_card_brand_data_and_labels():
+    lan_card_dict = dict()
+    queryset_lan_card = LanCard.objects.order_by('brand')[:]
+    labels_lan_card = []
+    data_lan_card = []
+
+    for qs in queryset_lan_card:
+        if qs.brand not in lan_card_dict:
+            lan_card_dict[qs.brand] = 1
+            labels_lan_card.append(qs.brand)
+        else:
+            lan_card_dict[qs.brand] += 1
+
+    for key in lan_card_dict.keys():
+        data_lan_card.append(lan_card_dict[key])
+
+    return data_lan_card, labels_lan_card
+
+
+def get_sound_card_brand_data_and_labels():
+    sound_card_dict = dict()
+    queryset_sound_card = SoundCard.objects.order_by('brand')[:]
+    labels_sound_card = []
+    data_sound_card = []
+
+    for qs in queryset_sound_card:
+        if qs.brand not in sound_card_dict:
+            sound_card_dict[qs.brand] = 1
+            labels_sound_card.append(qs.brand)
+        else:
+            sound_card_dict[qs.brand] += 1
+
+    for key in sound_card_dict.keys():
+        data_sound_card.append(sound_card_dict[key])
+
+    return data_sound_card, labels_sound_card
+
+
+def get_optical_drive_brand_data_and_labels():
+    optical_drive_dict = dict()
+    queryset_optical_drive = OpticalDrive.objects.order_by('brand')[:]
+    labels_optical_drive = []
+    data_optical_drive = []
+
+    for qs in queryset_optical_drive:
+        if qs.brand not in optical_drive_dict:
+            optical_drive_dict[qs.brand] = 1
+            labels_optical_drive.append(qs.brand)
+        else:
+            optical_drive_dict[qs.brand] += 1
+
+    for key in optical_drive_dict.keys():
+        data_optical_drive.append(optical_drive_dict[key])
+
+    return data_optical_drive, labels_optical_drive
+
+
+def get_optical_drive_type_drive_data_and_labels():
+    optical_drive_dict = dict()
+    queryset_optical_drive = OpticalDrive.objects.order_by('type_drive')[:]
+    labels_optical_drive = []
+    data_optical_drive = []
+
+    for qs in queryset_optical_drive:
+        if qs.brand not in optical_drive_dict:
+            optical_drive_dict[qs.brand] = 1
+            labels_optical_drive.append(qs.brand)
+        else:
+            optical_drive_dict[qs.brand] += 1
+
+    for key in optical_drive_dict.keys():
+        data_optical_drive.append(optical_drive_dict[key])
+
+    return data_optical_drive, labels_optical_drive
+
+
+def get_optical_drive_type_connector_data_and_labels():
+    optical_drive_dict = dict()
+    queryset_optical_drive = OpticalDrive.objects.order_by('type_connector')[:]
+    labels_optical_drive = []
+    data_optical_drive = []
+
+    for qs in queryset_optical_drive:
+        if qs.brand not in optical_drive_dict:
+            optical_drive_dict[qs.brand] = 1
+            labels_optical_drive.append(qs.brand)
+        else:
+            optical_drive_dict[qs.brand] += 1
+
+    for key in optical_drive_dict.keys():
+        data_optical_drive.append(optical_drive_dict[key])
+
+    return data_optical_drive, labels_optical_drive
+
+
 def main(request):
     pcs = PC.objects.all()
     motherboards = Motherboard.objects.all()
     power_supplies = PowerSupply.objects.all()
+    optical_drives = OpticalDrive.objects.all()
     video_cards = VideoCard.objects.all()
     lan_cards = LanCard.objects.all()
     sound_cards = SoundCard.objects.all()
@@ -138,6 +234,14 @@ def main(request):
 
     data_power_supply_consumption, labels_power_supply_consumption = get_power_supply_consumption_data_and_labels()
     data_power_supply_brand, labels_power_supply_brand = get_power_supply_brand_data_and_labels()
+
+    data_lan_card_brand, labels_lan_card_brand = get_lan_card_brand_data_and_labels()
+
+    data_sound_card_brand, labels_sound_card_brand = get_sound_card_brand_data_and_labels()
+
+    data_optical_drive_brand, labels_optical_drive_brand = get_optical_drive_brand_data_and_labels()
+    data_optical_drive_type, labels_optical_drive_type = get_optical_drive_type_drive_data_and_labels()
+    data_optical_type_connector, labels_optical_type_connector = get_optical_drive_type_drive_data_and_labels()
 
     power_supplies_count = power_supplies.count()
 
@@ -161,10 +265,28 @@ def main(request):
                                               'labels_power_supply_brand': labels_power_supply_brand,
                                               'data_power_supply_brand': data_power_supply_brand,
 
-                                              'power_supplies_count': power_supplies_count,
-                                              'video_cards': video_cards,
+                                              'optical_drives': optical_drives,
+
+                                              'labels_optical_drive_brand': labels_optical_drive_brand,
+                                              'data_optical_drive_brand': data_optical_drive_brand,
+                                              'labels_optical_drive_type': labels_optical_drive_type,
+                                              'data_optical_drive_type': data_optical_drive_type,
+                                              'labels_optical_type_connector': labels_optical_type_connector,
+                                              'data_optical_type_connector': data_optical_type_connector,
+
                                               'lan_cards': lan_cards,
-                                              'sound_cards': sound_cards})
+
+                                              'labels_lan_card_brand': labels_lan_card_brand,
+                                              'data_lan_card_brand': data_lan_card_brand,
+
+                                              'sound_cards': sound_cards,
+
+                                              'labels_sound_card_brand': labels_sound_card_brand,
+                                              'data_sound_card_brand': data_sound_card_brand,
+
+                                              'power_supplies_count': power_supplies_count,
+
+                                              'video_cards': video_cards})
 
 
 def user_sign_up(request):
