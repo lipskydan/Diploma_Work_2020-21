@@ -290,6 +290,8 @@ def pc_update(request, item_name, item_id):
         sound_cards = SoundCard.objects.filter()
         optical_drives = OpticalDrive.objects.filter()
 
+        print(optical_drives)
+
     if request.method == 'POST':
 
         item.inventory_number = request.POST['inventory_number']
@@ -348,16 +350,17 @@ def pc_update(request, item_name, item_id):
             item.sound_card = None
 
         optical_drive = request.POST.get('optical_drive', None)
+        # optical_drive = item.optical_drive
         print(optical_drive)
 
-        # if optical_drive != 'None':
-        #     optical_drive_dic = optical_drive.split()
-        #     optical_drive = OpticalDrive.objects.get(model=optical_drive_dic[2],
-        #                                              brand=optical_drive_dic[1],
-        #                                              serial_number=optical_drive_dic[5])
-        #     item.optical_drive = optical_drive
-        # else:
-        #     item.optical_drive = None
+        if optical_drive != 'None':
+            optical_drive_dic = optical_drive.split()
+            optical_drive = OpticalDrive.objects.get(model=optical_drive_dic[2],
+                                                     brand=optical_drive_dic[1],
+                                                     serial_number=optical_drive_dic[5])
+            item.optical_drive = optical_drive
+        else:
+            item.optical_drive = None
 
         try:
             item.save()

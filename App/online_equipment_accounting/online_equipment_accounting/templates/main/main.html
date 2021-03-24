@@ -252,11 +252,12 @@
         }],
         labels: {{ labels_power_supply_consumption|safe }}
         },
-        options: {
+       options: {
             title: {
                 display: true,
-                text: 'споживана потужність від мережі'
-                },
+                text: 'Максимальна споживана потужність від мережі'
+
+            },
 
             animation: {
                 duration: 2700,
@@ -266,11 +267,10 @@
                 yAxes: [{
                   id: 'y-axis-0',
                   gridLines: {
-                    display: true
+                    display: false
                   },
                   ticks: {
                     beginAtZero:true,
-                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
                   },
                   afterBuildTicks: function(chart) {
 
@@ -279,14 +279,14 @@
                 xAxes: [{
                   id: 'x-axis-0',
                   gridLines: {
-                    display: false
+                    display: true
                   },
                   ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
                   }
                 }]
             }
-
         }
      };
 
@@ -396,7 +396,7 @@
      };
 
     var optical_drive_type_drive = {
-     type: 'bar',
+     type: 'horizontalBar',
      data: {
         datasets: [{
             barPercentage: 0.5,
@@ -427,7 +427,8 @@
             title: {
                 display: true,
                 text: 'тип приводу'
-                },
+
+            },
 
             animation: {
                 duration: 2700,
@@ -437,11 +438,10 @@
                 yAxes: [{
                   id: 'y-axis-0',
                   gridLines: {
-                    display: true
+                    display: false
                   },
                   ticks: {
                     beginAtZero:true,
-                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
                   },
                   afterBuildTicks: function(chart) {
 
@@ -450,19 +450,19 @@
                 xAxes: [{
                   id: 'x-axis-0',
                   gridLines: {
-                    display: false
+                    display: true
                   },
                   ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
                   }
                 }]
             }
-
         }
      };
 
      var optical_drive_type_connector = {
-     type: 'bar',
+     type: 'horizontalBar',
      data: {
         datasets: [{
             barPercentage: 0.5,
@@ -493,7 +493,8 @@
             title: {
                 display: true,
                 text: 'тип роз\'єму'
-                },
+
+            },
 
             animation: {
                 duration: 2700,
@@ -503,11 +504,10 @@
                 yAxes: [{
                   id: 'y-axis-0',
                   gridLines: {
-                    display: true
+                    display: false
                   },
                   ticks: {
                     beginAtZero:true,
-                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
                   },
                   afterBuildTicks: function(chart) {
 
@@ -516,14 +516,14 @@
                 xAxes: [{
                   id: 'x-axis-0',
                   gridLines: {
-                    display: false
+                    display: true
                   },
                   ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
                   }
                 }]
             }
-
         }
      };
 
@@ -593,6 +593,107 @@
         }
      };
 
+     var video_card_brand = {
+     type: 'doughnut',
+     data: {
+        datasets: [{
+            data: {{ data_video_card_brand|safe }},
+            backgroundColor: [
+               'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            label: ''
+        }],
+        labels: {{ labels_video_card_brand|safe }}
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Бренд'
+
+            },
+            animation: {
+                duration: 2700,
+            }
+        }
+     };
+
+     var video_card_memory_size = {
+     type: 'horizontalBar',
+     data: {
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 50,
+            maxBarThickness: 50,
+            minBarLength: 10,
+            data: {{ data_video_card_memory_size|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+
+            ],
+            label: ''
+        }],
+        labels: {{ labels_video_card_memory_size|safe }}
+        },
+      options: {
+            title: {
+                display: true,
+                text: 'об\'єм памяті'
+
+            },
+
+            animation: {
+                duration: 2700,
+            },
+
+            scales: {
+                yAxes: [{
+                  id: 'y-axis-0',
+                  gridLines: {
+                    display: false
+                  },
+                  ticks: {
+                    beginAtZero:true,
+                  },
+                  afterBuildTicks: function(chart) {
+
+                  }
+                }],
+                xAxes: [{
+                  id: 'x-axis-0',
+                  gridLines: {
+                    display: true
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                  }
+                }]
+            }
+        }
+     };
+
 
     window.onload = function() {
       var motherboard_brand_w = document.getElementById('motherboard-brand-chart').getContext('2d');
@@ -611,6 +712,8 @@
       var optical_drive_type_connector_w = document.getElementById('optical-drive-type-connector-chart').getContext('2d');
       var optical_drive_brand_w = document.getElementById('optical-drive-brand-chart').getContext('2d');
 
+      var video_card_brand_w = document.getElementById('video-card-brand-chart').getContext('2d');
+      var video_card_memory_size_w = document.getElementById('video-card-memory-size-chart').getContext('2d');
 
       window.myPie = new Chart(motherboard_brand_w, motherboard_brand);
       window.myPie = new Chart(motherboard_form_factor_w, motherboard_form_factor);
@@ -628,6 +731,9 @@
       window.myPie = new Chart(optical_drive_type_connector_w, optical_drive_type_connector);
       window.myPie = new Chart(optical_drive_brand_w, optical_drive_brand);
 
+      window.myPie = new Chart(video_card_brand_w, video_card_brand);
+      window.myPie = new Chart(video_card_memory_size_w, video_card_memory_size);
+
     };
 
     function hideAllCharts(){
@@ -636,6 +742,7 @@
         hideLanCardChart();
         hideSoundCardChart();
         hideOpticalDriveChart();
+        hideVideoCardChart();
     }
 
     function hideMotherboardChart() {
@@ -675,7 +782,16 @@
     }
 
     function hideOpticalDriveChart() {
-         var x = document.getElementById("optical-drive-chart");
+        var x = document.getElementById("optical-drive-chart");
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        } else {
+        x.style.display = "none";
+        }
+    }
+
+    function hideVideoCardChart(){
+        var x = document.getElementById("video-card-chart");
         if (x.style.display === "none") {
         x.style.display = "block";
         } else {
@@ -993,6 +1109,90 @@
 
 <!--    Optical Drive Table - END    -->
 
+<!--    Video Card Table - BEGIN    -->
+
+    <div class="container">
+        <div class="jumbotron">
+            <table border="0" width="100%">
+                <tr align="center">
+                    <td width="75%"><h3>Відеокарти</h3></td>
+                    <td>
+                         <a href="#video-card-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#video-card-table" aria-expanded="false" aria-controls="video-card-table">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                                 <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                             </svg>
+                         </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-secondary" onclick="hideVideoCardChart()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="collapse" id="video-card-table">
+        <div class="jumbotron">
+            <div style="overflow-x:auto;">
+                <table class="table" border="0">
+                    <thead>
+                    <tr align="center">
+                        <th scope="col">серійний <br> номер</th>
+                        <th scope="col">бренд</th>
+                        <th scope="col">модель</th>
+                        <th scope="col">об'єм памяті</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for video_card in video_cards %}
+                    <tr align="center">
+                        <td>
+                            <a href="/IT_items/pc_accessories/{{video_card.name}}/{{video_card.id}}" class="text-dark">
+                                {{video_card.serial_number}}
+                            </a>
+                        </td>
+                        <td>{{video_card.brand}}</td>
+                        <td>{{video_card.model}}</td>
+                        <td>{{video_card.memory_size}} MB</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron" id="video-card-chart">
+        <div style="overflow-x:auto;">
+            <table align="center" border="0">
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <canvas id="video-card-brand-chart" width="400" height="375"></canvas>
+                    </td>
+                    <td>
+                        <canvas id="video-card-memory-size-chart" width="600" height="375"></canvas>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+<!--    Video Card  Table - END    -->
 
 <!--    Lan And Sound Cards Table - BEGIN    -->
 

@@ -12,21 +12,23 @@
                <form method="post">
                   {% csrf_token %}
                       <div class="form-group">
-                          <table class="col-sm-12" align="center" border="1">
+                          <table class="col-sm-12" align="center" border="0">
                               <tr>
                                   <td colspan="2">
                                       <hr>
                                   </td>
                               </tr>
                               <tr>
-                                  <td align="center">
+                                  <td align="center" width="45%">
                                       <!--Name of field and input-->
                                       {{ form.inventory_number.label_tag }}
-                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                      {{ form.inventory_number }}
-
-                                      <br>
-
+                                  </td>
+                                  <td align="center">
+                                       {{ form.inventory_number }}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.inventory_number.help_text %}
                                       <small style="color: grey">{{ form.inventory_number.help_text }}</small>
@@ -43,15 +45,27 @@
                                       <hr>
                                   </td>
                               </tr>
+                          </table>
+
+                          <table class="col-sm-12" align="center" border="0">
                               <tr>
-                                  <td align="center" width="50%">
+                                  <td align="center" width="25%">
                                       <!--Name of field and input-->
                                       {{ form.floor.label_tag }}
-                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                  </td>
+                                  <td align="center" width="25%">
                                       {{ form.floor }}
-
-                                      <br>
-
+                                  </td>
+                                  <td align="center" width="25%">
+                                      <!--Name of field and input-->
+                                      {{ form.room.label_tag }}
+                                  </td>
+                                  <td align="center" width="25%">
+                                      {{ form.room }}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.floor.help_text %}
                                       <small style="color: grey">{{ form.floor.help_text }}</small>
@@ -62,14 +76,7 @@
                                       <p style="color: red">{{ error }}</p>
                                       {% endfor %}
                                   </td>
-                                  <td align="center">
-                                      <!--Name of field and input-->
-                                      {{ form.room.label_tag }}
-                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                      {{ form.room }}
-
-                                      <br>
-
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.room.help_text %}
                                       <small style="color: grey">{{ form.room.help_text }}</small>
@@ -82,17 +89,22 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td colspan="2">
+                                  <td colspan="4">
                                       <br>
                                   </td>
                               </tr>
                               <tr>
-                                  <td align="center">
+                                  <td align="center" width="25%">
                                       <!--Name of field and input-->
-                                      {{ form.place.label_tag }} {{ form.place }}
+                                      {{ form.place.label_tag }}
 
-                                      <br>
-
+                                  </td>
+                                  <td align="center" width="25%">
+                                      {{ form.place }}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.place.help_text %}
                                       <small style="color: grey">{{ form.place.help_text }}</small>
@@ -105,20 +117,29 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td colspan="2">
+                                  <td colspan="4">
                                       <hr>
                                   </td>
                               </tr>
-                              <tr>
-                                  <td colspan="2" align="center">
-                                      <!--Name of field and input-->
-                                      {{ form.motherboard.label_tag }} {{ form.motherboard }}
+                          </table>
 
+                          <table class="col-sm-12" align="center" border="0">
+                              <tr>
+                                  <td align="center" width="38%">
+                                      <!--Name of field and input-->
+                                      {{ form.motherboard.label_tag }}
+
+                                  </td>
+                                  <td align="center">
+                                      {{ form.motherboard }}
+                                  </td>
+                              </tr>
+                               <tr>
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.motherboard.help_text %}
                                       <br><small style="color: grey">{{ form.motherboard.help_text }}</small>
                                       {% endif %}
-
                                       <!--Show error text for field-->
                                       {% for error in form.motherboard.errors %}
                                       <p style="color: red">{{ error }}</p>
@@ -131,12 +152,17 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td colspan="2" align="center">
+                                  <td align="center">
                                       <!--Name of field and input-->
                                       {{ form.power_supply.label_tag }}
 <!--                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                  </td>
+                                  <td align="center">
                                       {{ form.power_supply }}
-
+                                  </td>
+                              </tr>
+                               <tr>
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.power_supply.help_text %}
                                       <br><small style="color: grey">{{ form.power_supply.help_text }}</small>
@@ -154,12 +180,16 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td colspan="2" align="center">
+                                  <td align="center">
                                       <!--Name of field and input-->
                                       {{ form.video_card.label_tag }}
-<!--                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-                                      {{ form.video_card }}
-
+                                  </td>
+                                  <td align="center">
+                                       {{ form.video_card }}
+                                  </td>
+                              </tr>
+                               <tr>
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.video_card.help_text %}
                                       <br><small style="color: grey">{{ form.video_card.help_text }}</small>
@@ -177,12 +207,16 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td colspan="2" align="center">
+                                  <td align="center">
                                       <!--Name of field and input-->
                                       {{ form.lan_card.label_tag }}
-<!--                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-                                      {{ form.lan_card }}
-
+                                  </td>
+                                  <td align="center">
+                                       {{ form.lan_card }}
+                                  </td>
+                              </tr>
+                              <tr align="center">
+                                  <td colspan="2">
                                       <!--Show help text for field-->
                                       {% if form.lan_card.help_text %}
                                       <br><small style="color: grey">{{ form.lan_card.help_text }}</small>
@@ -200,10 +234,16 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td colspan="2" align="center">
+                                  <td align="center">
                                       <!--Name of field and input-->
-                                      {{ form.sound_card.label_tag }} {{ form.sound_card }}
-
+                                      {{ form.sound_card.label_tag }}
+                                  </td>
+                                  <td align="center">
+                                      {{ form.sound_card }}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.sound_card.help_text %}
                                       <br><small style="color: grey">{{ form.sound_card.help_text }}</small>
@@ -221,10 +261,16 @@
                                   </td>
                               </tr>
                               <tr>
-                                  <td colspan="2" align="center">
+                                  <td align="center">
                                       <!--Name of field and input-->
-                                      {{ form.optical_drive.label_tag }} {{ form.optical_drive }}
-
+                                      {{ form.optical_drive.label_tag }}
+                                  </td>
+                                  <td align="center">
+                                       {{ form.optical_drive }}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" align="center">
                                       <!--Show help text for field-->
                                       {% if form.optical_drive.help_text %}
                                       <br><small style="color: grey">{{ form.optical_drive.help_text }}</small>
@@ -236,9 +282,14 @@
                                       {% endfor %}
                                   </td>
                               </tr>
+                              <tr>
+                                  <td colspan="2">
+                                      <hr>
+                                  </td>
+                              </tr>
                           </table>
                       </div>
-                  <input type="submit" class="btn btn-outline-secondary" value="Створити">
+                  <input type="submit" class="btn btn-outline-info" value="Створити">
                </form>
             </article>
          </div>

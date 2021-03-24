@@ -10,7 +10,7 @@
       <aside class="col-sm-10">
          <div class="card">
             <article class="card-body">
-                <div class="alert alert-secondary">
+                <div class="alert alert-info">
 
                     <h2 class="alert-heading">Основне</h2>
                     <hr>
@@ -34,7 +34,7 @@
                                 </td>
                                 <td align="right">
                                     {% if item.motherboard %}
-                                    <h5><a href="/IT_items/pc_accessories/{{ item.motherboard.name }}/{{ item.motherboard.id }}/update-motherboard" class="badge badge-secondary">
+                                    <h5><a href="/IT_items/pc_accessories/{{ item.motherboard.name }}/{{ item.motherboard.id }}/update-motherboard" class="badge badge-info">
                                         Редагування
                                     </a></h5>
                                      {% endif %}
@@ -81,7 +81,7 @@
                                     </td>
                                     <td align="right">
                                         {% if item.power_supply %}
-                                        <h5><a href="/IT_items/pc_accessories/{{ item.power_supply.name }}/{{ item.power_supply.id }}/update-power-supply" class="badge badge-secondary">
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.power_supply.name }}/{{ item.power_supply.id }}/update-power-supply" class="badge badge-info">
                                             Редагування
                                         </a></h5>
                                         {% endif %}
@@ -107,7 +107,7 @@
                                     </td>
                                     <td align="right">
                                         {% if item.video_card %}
-                                        <h5><a href="/IT_items/pc_accessories/{{ item.video_card.name }}/{{ item.video_card.id }}/update-video-card" class="badge badge-secondary">
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.video_card.name }}/{{ item.video_card.id }}/update-video-card" class="badge badge-info">
                                             Редагування
                                         </a></h5>
                                         {% endif %}
@@ -134,7 +134,7 @@
                                     </td>
                                     <td align="right">
                                         {% if item.lan_card %}
-                                        <h5><a href="/IT_items/pc_accessories/{{ item.lan_card.name }}/{{ item.lan_card.id }}/update-lan-card" class="badge badge-secondary badge">
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.lan_card.name }}/{{ item.lan_card.id }}/update-lan-card" class="badge badge-info badge">
                                             Редагування
                                         </a></h5>
                                         {% endif %}
@@ -161,7 +161,7 @@
                                     </td>
                                     <td align="right">
                                         {% if item.sound_card %}
-                                        <h5><a href="/IT_items/pc_accessories/{{ item.sound_card.name }}/{{ item.sound_card.id }}/update-sound-card" class="badge badge-secondary badge">
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.sound_card.name }}/{{ item.sound_card.id }}/update-sound-card" class="badge badge-info badge">
                                             Редагування
                                         </a></h5>
                                         {% endif %}
@@ -188,7 +188,7 @@
                                     </td>
                                     <td align="right">
                                         {% if item.optical_drive %}
-                                        <h5><a href="/IT_items/pc_accessories/{{ item.optical_drive.name }}/{{ item.optical_drive.id }}/update-optical-drive" class="badge badge-secondary badge">
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.optical_drive.name }}/{{ item.optical_drive.id }}/update-optical-drive" class="badge badge-info badge">
                                             Редагування
                                         </a></h5>
                                         {% endif %}
@@ -216,10 +216,10 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-9">
-                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-secondary btn-outline-light">Видалити</a>
+                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-info btn-outline-light">Видалити</a>
 
                             {% if item.name == 'PC' %}
-                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/update-pc" class="btn btn-secondary btn-outline-light">Редагування</a>
+                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/update-pc" class="btn btn-info btn-outline-light">Редагування</a>
                             {% endif %}
 
                         </div>

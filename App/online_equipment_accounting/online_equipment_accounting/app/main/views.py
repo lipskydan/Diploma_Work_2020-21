@@ -94,7 +94,7 @@ def get_power_supply_consumption_data_and_labels():
     for qs in queryset_power_supply:
         if qs.power_consumption not in power_supply_dict:
             power_supply_dict[qs.power_consumption] = 1
-            labels_power_supply.append(qs.power_consumption)
+            labels_power_supply.append(str(str(qs.power_consumption) + ' Вт'))
         else:
             power_supply_dict[qs.power_consumption] += 1
 
@@ -218,6 +218,44 @@ def get_optical_drive_type_connector_data_and_labels():
     return data_optical_drive, labels_optical_drive
 
 
+def get_video_card_brand_data_and_labels():
+    dict_item = dict()
+    queryset = VideoCard.objects.order_by('brand')[:]
+    labels = []
+    data = []
+
+    for qs in queryset:
+        if qs.brand not in dict_item:
+            dict_item[qs.brand] = 1
+            labels.append(qs.brand)
+        else:
+            dict_item[qs.brand] += 1
+
+    for key in dict_item.keys():
+        data.append(dict_item[key])
+
+    return data, labels
+
+
+def get_video_card_memory_size_data_and_labels():
+    dict_item = dict()
+    queryset = VideoCard.objects.order_by('memory_size')[:]
+    labels = []
+    data = []
+
+    for qs in queryset:
+        if qs.memory_size not in dict_item:
+            dict_item[qs.memory_size] = 1
+            labels.append([str(str(qs.memory_size) + ' MB'), str('( ' + str(round(qs.memory_size/1024)) + ' GB )')])
+        else:
+            dict_item[qs.memory_size] += 1
+
+    for key in dict_item.keys():
+        data.append(dict_item[key])
+
+    return data, labels
+
+
 def main(request):
     pcs = PC.objects.all()
     motherboards = Motherboard.objects.all()
@@ -242,6 +280,9 @@ def main(request):
     data_optical_drive_brand, labels_optical_drive_brand = get_optical_drive_brand_data_and_labels()
     data_optical_drive_type, labels_optical_drive_type = get_optical_drive_type_drive_data_and_labels()
     data_optical_drive_type_connector, labels_optical_drive_type_connector = get_optical_drive_type_connector_data_and_labels()
+
+    data_video_card_brand, labels_video_card_brand = get_video_card_brand_data_and_labels()
+    data_video_card_memory_size, labels_video_card_memory_size = get_video_card_memory_size_data_and_labels()
 
     power_supplies_count = power_supplies.count()
 
@@ -274,6 +315,13 @@ def main(request):
                                               'labels_optical_drive_type_connector': labels_optical_drive_type_connector,
                                               'data_optical_drive_type_connector': data_optical_drive_type_connector,
 
+                                              'video_cards': video_cards,
+
+                                              'labels_video_card_brand': labels_video_card_brand,
+                                              'data_video_card_brand': data_video_card_brand,
+                                              'labels_video_card_memory_size': labels_video_card_memory_size,
+                                              'data_video_card_memory_size': data_video_card_memory_size,
+
                                               'lan_cards': lan_cards,
 
                                               'labels_lan_card_brand': labels_lan_card_brand,
@@ -284,9 +332,7 @@ def main(request):
                                               'labels_sound_card_brand': labels_sound_card_brand,
                                               'data_sound_card_brand': data_sound_card_brand,
 
-                                              'power_supplies_count': power_supplies_count,
-
-                                              'video_cards': video_cards})
+                                              'power_supplies_count': power_supplies_count})
 
 
 def user_sign_up(request):

@@ -29,7 +29,7 @@
                                <h1>Персональні комп'ютори</h1>
                             </td>
                             <td align="right">
-                                <h1><a href="add-item/add-pc" class="badge badge-secondary">+</a></h1>
+                                <h1><a href="add-item/add-pc" class="badge badge-info">+</a></h1>
                             </td>
                         </tr>
                     </table>
@@ -37,10 +37,10 @@
 
                     {% if items_pc|length > 0 %}
                     {% for el in items_pc %}
-                    <div class="alert alert-secondary">
+                    <div class="alert alert-info">
                         <h2>Тип обладнання: {{ el.name_for_user }}</h2>
                         <h2>Інвентарний номер: {{ el.inventory_number }}</h2>
-                        <a href="/IT_items/{{el.name}}/{{el.id}} " class="btn btn-secondary">Детальніше</a>
+                        <a href="/IT_items/{{el.name}}/{{el.id}} " class="btn btn-info">Детальніше</a>
                     </div>
                     {% endfor %}
                     {% else %}

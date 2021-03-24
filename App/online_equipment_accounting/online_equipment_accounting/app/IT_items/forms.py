@@ -11,44 +11,45 @@ class AddPcForm(forms.ModelForm):
     inventory_number = forms.CharField(label='Інвентарний номер', max_length=30, required=True, help_text='Обов’язково',
                                        localize=True,
                                        error_messages={
-                                           'unique': 'Персональний комп\'ютор з таким інвентарним номером вже існує.'})
+                                           'unique': 'Персональний комп\'ютор з таким інвентарним номером вже існує.'},
+                                       widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
 
     floor = forms.IntegerField(label='Номер поверху', required=True, help_text='Обов’язково',
-                               localize=True)
+                               localize=True, widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
     room = forms.IntegerField(label='Номер кабінету', required=True, help_text='Обов’язково',
-                              localize=True)
+                              localize=True, widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
     place = forms.IntegerField(label='Номер учбового місця', required=False, help_text='Необов’язково',
-                               localize=True)
+                               localize=True, widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard = forms.ModelChoiceField(queryset=Motherboard.objects.all(), label='Материнська плата',
                                          empty_label='', required=False, help_text='Необов’язково',
                                          localize=True,
-                                         widget=widgets.Select(attrs={'size': 1}))
+                                         widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     power_supply = forms.ModelChoiceField(queryset=PowerSupply.objects.all(), label='Блок живлення',
                                           empty_label='', required=False, help_text='Необов’язково',
                                           localize=True,
-                                          widget=widgets.Select(attrs={'size': 1}))
+                                          widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     video_card = forms.ModelChoiceField(queryset=VideoCard.objects.all(), label='Відео карта',
                                         empty_label='', required=False, help_text='Необов’язково',
                                         localize=True,
-                                        widget=widgets.Select(attrs={'size': 1}))
+                                        widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     lan_card = forms.ModelChoiceField(queryset=LanCard.objects.all(), label='Мережева плата',
                                       empty_label='', required=False, help_text='Необов’язково',
                                       localize=True,
-                                      widget=widgets.Select(attrs={'size': 1}))
+                                      widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     sound_card = forms.ModelChoiceField(queryset=SoundCard.objects.all(), label='Звукова плата',
                                         empty_label='', required=False, help_text='Необов’язково',
                                         localize=True,
-                                        widget=widgets.Select(attrs={'size': 1}))
+                                        widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     optical_drive = forms.ModelChoiceField(queryset=OpticalDrive.objects.all(), label='Оптичний накопичувач',
                                            empty_label='', required=False, help_text='Необов’язково',
                                            localize=True,
-                                           widget=widgets.Select(attrs={'size': 1}))
+                                           widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     class Meta:
         model = PC

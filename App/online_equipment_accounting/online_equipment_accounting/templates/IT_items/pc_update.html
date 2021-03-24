@@ -236,7 +236,7 @@
                                 <tr>
                                     <td colspan="3" align="center">
                                         <div class="mx-auto" style="width: 75%">
-                                            <select class="form-control" name="" id="">
+                                            <select class="form-control" name="optical_drive" id="optical_drive">
                                                 <option value="None">Відсутній</option>
                                                 {% for optical_drive in optical_drives %}
                                                 <option {% if optical_drive == item.optical_drive %} selected {% endif %}
@@ -250,7 +250,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <input type="submit" class="btn btn-outline-secondary" value="Оновити">
+                        <input type="submit" class="btn btn-outline-info" value="Оновити">
                     </form>
                 </article>
             </div>
