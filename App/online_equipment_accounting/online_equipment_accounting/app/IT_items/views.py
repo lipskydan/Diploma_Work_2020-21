@@ -7,11 +7,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from typing import Dict
 
 from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCard, AddLanCard, AddSoundCard, \
-    AddOpticalDrive, AddSolidStateDriveForm
+    AddOpticalDrive, AddSolidStateDriveForm, AddHardDiskDriveForm
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
     TYPE_OPERATING_SYSTEM
-from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive
+from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive, \
+    HardDiskDrive
 from .utils import render_to_pdf
 
 import pdfkit
@@ -50,6 +51,7 @@ def pc_accessories(request):
     items_sound_cards = SoundCard.objects.all()
     items_optical_drive = OpticalDrive.objects.all()
     items_solid_state_drive = SolidStateDrive.objects.all()
+    items_hard_disk_drive = HardDiskDrive.objects.all()
 
     return render(request, 'IT_items/pc_accessories.html', {'items_motherboard': items_motherboard,
                                                             'items_power_supply': items_power_supply,
@@ -57,7 +59,8 @@ def pc_accessories(request):
                                                             'items_lan_cards': items_lan_cards,
                                                             'items_sound_cards': items_sound_cards,
                                                             'items_optical_drive': items_optical_drive,
-                                                            'items_solid_state_drive': items_solid_state_drive})
+                                                            'items_solid_state_drive': items_solid_state_drive,
+                                                            'items_hard_disk_drive': items_hard_disk_drive})
 
 
 def item_detail(request, item_name, item_id):
@@ -89,6 +92,8 @@ def pc_accessories_detail(request, item_name, item_id):
             item = OpticalDrive.objects.get(id=item_id)
         if item_name == 'SolidStateDrive':
             item = SolidStateDrive.objects.get(id=item_id)
+        if item_name == 'HardDiskDrive':
+            item = HardDiskDrive.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_detail')
 
@@ -183,6 +188,31 @@ def add_solid_state_drive(request):
         pass
 
     return render(request, 'IT_items/add_solid_state_drive.html', {'form': form})
+
+
+@check_denied_access_add
+def add_hard_disk_drive(request):
+    if request.method == 'POST':
+        form = AddHardDiskDriveForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            hard_disk_drive = HardDiskDrive(serial_number=cd['hard_disk_drive_serial_number'],
+                                            brand=cd['hard_disk_drive_brand'],
+                                            model=cd['hard_disk_drive_model'],
+                                            memory_size=cd['hard_disk_drive_memory_size'])
+
+            try:
+                hard_disk_drive.save()
+            except:
+                return render(request, 'IT_items/error.html', {'serial_number': hard_disk_drive.serial_number,
+                                                               'name_of_item': hard_disk_drive.name})
+
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+    else:
+        form = AddHardDiskDriveForm()
+        pass
+
+    return render(request, 'IT_items/add_hard_disk_drive.html', {'form': form})
 
 
 @check_denied_access_add
@@ -328,6 +358,8 @@ def pc_accessories_delete(request, item_name, item_id):
             item = OpticalDrive.objects.get(id=item_id)
         elif item_name == 'SolidStateDrive':
             item = SolidStateDrive.objects.get(id=item_id)
+        elif item_name == 'HardDiskDrive':
+            item = HardDiskDrive.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_delete')
 
@@ -510,6 +542,31 @@ def solid_state_drive_update(request, item_name, item_id):
 
     else:
         return render(request, 'IT_items/solid_state_drive_update.html', {'item': item})
+
+
+@check_denied_access_del_or_update
+def hard_disk_drive_update(request, item_name, item_id):
+    item = None
+
+    if item_name == 'HardDiskDrive':
+        item = HardDiskDrive.objects.get(id=item_id)
+
+    if request.method == 'POST':
+
+        if item_name == 'HardDiskDrive':
+            item.brand = request.POST['hard_disk_drive_brand']
+            item.model = request.POST['hard_disk_drive_drive_model']
+            item.serial_number = request.POST['hard_disk_drive_serial_number']
+            item.memory_size = request.POST['hard_disk_drive_memory_size']
+
+        try:
+            item.save()
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+        except ObjectDoesNotExist:
+            return 'При обновлении оборудывания произошла ошибка'
+
+    else:
+        return render(request, 'IT_items/hard_disk_drive_update.html', {'item': item})
 
 
 @check_denied_access_del_or_update

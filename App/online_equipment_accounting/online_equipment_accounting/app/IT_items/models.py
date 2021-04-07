@@ -72,8 +72,8 @@ class Motherboard(models.Model):
 class SolidStateDrive(models.Model):
     __tablename__ = 'SolidStateDrive'
 
-    brand = models.CharField('бренд материнської плати', max_length=200, default='відсутній')
-    model = models.CharField('модель материнської плати', max_length=200, default='відсутній')
+    brand = models.CharField('бренд', max_length=200, default='відсутній')
+    model = models.CharField('модель', max_length=200, default='відсутній')
 
     serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
     memory_size = models.IntegerField('обсяг пам\'яті', default=0)
@@ -84,11 +84,33 @@ class SolidStateDrive(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return str(self.model) + ' ' + str(self.memory_size) + ' ' + str(self.serial_number)
+        return str(self.brand) + ' ' + str(self.memory_size) + ' ' + str(self.serial_number)
 
     class Meta:
         verbose_name = 'Твердотільний накопичувач'
         verbose_name_plural = 'Твердотільні накопичувачі'
+
+
+class HardDiskDrive(models.Model):
+    __tablename__ = 'HardDiskDrive'
+
+    brand = models.CharField('бренд', max_length=200, default='відсутній')
+    model = models.CharField('модель', max_length=200, default='відсутній')
+
+    serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
+    memory_size = models.IntegerField('обсяг пам\'яті', default=0)
+
+    name_for_user = 'Жорсткий магнітний диск'
+    name = 'HardDiskDrive'
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return str(self.brand) + ' ' + str(self.memory_size) + ' ' + str(self.serial_number)
+
+    class Meta:
+        verbose_name = 'Жорсткий магнітний диск'
+        verbose_name_plural = 'Жорсткі магнітні диски'
 
 
 class PowerSupply(models.Model):
