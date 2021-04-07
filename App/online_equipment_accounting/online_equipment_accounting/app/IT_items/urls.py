@@ -21,6 +21,7 @@ urlpatterns = [
     path('add-item/add-lan-card', views.add_lan_card, name='add_lan_card'),
     path('add-item/add-sound-card', views.add_sound_card, name='add_sound_card'),
     path('add-item/add-optical-drive', views.add_optical_drive, name='add_optical_drive'),
+    path('add-item/add-solid-state-drive', views.add_solid_state_drive, name='add_solid_state_drive'),
 
     path('<str:item_name>/<int:item_id>', views.item_detail, name='item_detail'),
     path('pc_accessories/<str:item_name>/<int:item_id>', views.pc_accessories_detail, name='item_detail'),
@@ -37,6 +38,8 @@ urlpatterns = [
     path('<str:item_name>/<int:item_id>/update-pc', views.pc_update, name='pc_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-motherboard', views.motherboard_update,
          name='motherboard_update'),
+    path('pc_accessories/<str:item_name>/<int:item_id>/update-solid-state-drive', views.solid_state_drive_update,
+         name='solid_state_drive_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-power-supply', views.power_supply_update,
          name='power_supply_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-video-card', views.video_card_update,
@@ -47,6 +50,9 @@ urlpatterns = [
          name='sound_card_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-optical-drive', views.optical_drive_update,
          name='optical_drive_update'),
+
+
+
 
     path('error', views.error, name='error'),
 

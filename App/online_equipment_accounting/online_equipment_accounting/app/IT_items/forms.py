@@ -2,7 +2,7 @@ from django import forms
 
 from django.forms import widgets
 
-from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive
+from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
     TYPE_OPERATING_SYSTEM
@@ -23,8 +23,8 @@ class AddPcForm(forms.ModelForm):
                                localize=True, widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
 
     operating_system = forms.ChoiceField(label='Операційна система', choices=TYPE_OPERATING_SYSTEM,
-                                               required=False, localize=True, help_text='Необов’язково',
-                                               widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+                                         required=False, localize=True, help_text='Необов’язково',
+                                         widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     text_field = forms.CharField(label='Нотатки',
                                  widget=forms.Textarea(attrs={'size': 1, 'class': 'form-control'}))
@@ -117,6 +117,36 @@ class AddMotherboardForm(forms.ModelForm):
         fields = ['motherboard_serial_number', 'motherboard_brand', 'motherboard_model',
                   'motherboard_integrated_graphics', 'motherboard_integrated_sound_card',
                   'motherboard_integrated_lan_card', 'motherboard_form_factor']
+
+
+class AddSolidStateDriveForm(forms.ModelForm):
+    solid_state_drive_serial_number = forms.CharField(label='Серійний номер', max_length=30,
+                                                      required=True, localize=True,
+                                                      help_text='Обов’язково',
+                                                      error_messages={
+                                                          'unique': 'Материнська плата з таким серійним номером вже існує.'},
+                                                      widget=widgets.TextInput(
+                                                          attrs={'size': 1, 'class': 'form-control'}))
+
+    solid_state_drive_brand = forms.CharField(label='Бренд', max_length=30,
+                                              required=True,
+                                              help_text='Обов’язково, у разі відсутності - вказати відсутньо',
+                                              widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
+
+    solid_state_drive_model = forms.CharField(label='Модель', max_length=30,
+                                              required=True,
+                                              help_text='Обов’язково, у разі відсутності - вказати відсутньо',
+                                              localize=True,
+                                              widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
+
+    solid_state_drive_memory_size = forms.IntegerField(label='Обсяг пам\'яті', localize=True, required=True,
+                                                       help_text='Обов’язково, вказувати в GB',
+                                                       widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
+
+    class Meta:
+        model = SolidStateDrive
+        fields = ['solid_state_drive_serial_number', 'solid_state_drive_brand', 'solid_state_drive_model',
+                  'solid_state_drive_memory_size']
 
 
 class AddPowerSupplyForm(forms.ModelForm):

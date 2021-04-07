@@ -69,6 +69,28 @@ class Motherboard(models.Model):
         verbose_name_plural = 'Материнські плати'
 
 
+class SolidStateDrive(models.Model):
+    __tablename__ = 'SolidStateDrive'
+
+    brand = models.CharField('бренд материнської плати', max_length=200, default='відсутній')
+    model = models.CharField('модель материнської плати', max_length=200, default='відсутній')
+
+    serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
+    memory_size = models.IntegerField('обсяг пам\'яті', default=0)
+
+    name_for_user = 'Твердотільний накопичувач'
+    name = 'SolidStateDrive'
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return str(self.model) + ' ' + str(self.memory_size) + ' ' + str(self.serial_number)
+
+    class Meta:
+        verbose_name = 'Твердотільний накопичувач'
+        verbose_name_plural = 'Твердотільні накопичувачі'
+
+
 class PowerSupply(models.Model):
     __tablename__ = 'PowerSupply'
 

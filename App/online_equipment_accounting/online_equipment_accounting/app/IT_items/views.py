@@ -7,11 +7,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from typing import Dict
 
 from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCard, AddLanCard, AddSoundCard, \
-    AddOpticalDrive
+    AddOpticalDrive, AddSolidStateDriveForm
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
     TYPE_OPERATING_SYSTEM
-from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive
+from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive
 from .utils import render_to_pdf
 
 import pdfkit
@@ -49,13 +49,15 @@ def pc_accessories(request):
     items_lan_cards = LanCard.objects.all()
     items_sound_cards = SoundCard.objects.all()
     items_optical_drive = OpticalDrive.objects.all()
+    items_solid_state_drive = SolidStateDrive.objects.all()
 
     return render(request, 'IT_items/pc_accessories.html', {'items_motherboard': items_motherboard,
                                                             'items_power_supply': items_power_supply,
                                                             'items_video_card': items_video_card,
                                                             'items_lan_cards': items_lan_cards,
                                                             'items_sound_cards': items_sound_cards,
-                                                            'items_optical_drive': items_optical_drive})
+                                                            'items_optical_drive': items_optical_drive,
+                                                            'items_solid_state_drive': items_solid_state_drive})
 
 
 def item_detail(request, item_name, item_id):
@@ -85,6 +87,8 @@ def pc_accessories_detail(request, item_name, item_id):
             item = SoundCard.objects.get(id=item_id)
         if item_name == 'OpticalDrive':
             item = OpticalDrive.objects.get(id=item_id)
+        if item_name == 'SolidStateDrive':
+            item = SolidStateDrive.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_detail')
 
@@ -154,6 +158,31 @@ def add_motherboard(request):
         pass
 
     return render(request, 'IT_items/add_motherboard.html', {'form': form})
+
+
+@check_denied_access_add
+def add_solid_state_drive(request):
+    if request.method == 'POST':
+        form = AddSolidStateDriveForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            solid_state_drive = SolidStateDrive(serial_number=cd['solid_state_drive_serial_number'],
+                                                brand=cd['solid_state_drive_brand'],
+                                                model=cd['solid_state_drive_model'],
+                                                memory_size=cd['solid_state_drive_memory_size'])
+
+            try:
+                solid_state_drive.save()
+            except:
+                return render(request, 'IT_items/error.html', {'serial_number': solid_state_drive.serial_number,
+                                                               'name_of_item': solid_state_drive.name})
+
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+    else:
+        form = AddSolidStateDriveForm()
+        pass
+
+    return render(request, 'IT_items/add_solid_state_drive.html', {'form': form})
 
 
 @check_denied_access_add
@@ -297,6 +326,8 @@ def pc_accessories_delete(request, item_name, item_id):
             item = SoundCard.objects.get(id=item_id)
         elif item_name == 'OpticalDrive':
             item = OpticalDrive.objects.get(id=item_id)
+        elif item_name == 'SolidStateDrive':
+            item = SolidStateDrive.objects.get(id=item_id)
     except:
         raise Http404('ERROR pc_accessories_delete')
 
@@ -334,10 +365,7 @@ def pc_update(request, item_name, item_id):
         item.floor = request.POST['floor']
         item.room = request.POST['room']
         item.place = request.POST['place']
-
         item.operating_system = request.POST.get('operating_system', None)
-
-        # item.text_field = request.POST['text_field']
         item.text_field = request.POST.get('text_field', False)
 
         motherboard = request.POST.get('motherboard', None)
@@ -457,6 +485,31 @@ def motherboard_update(request, item_name, item_id):
         return render(request, 'IT_items/motherboard_update.html', {'item': item,
                                                                     'form_factors': form_factors,
                                                                     'type_ram_slots': type_ram_slots})
+
+
+@check_denied_access_del_or_update
+def solid_state_drive_update(request, item_name, item_id):
+    item = None
+
+    if item_name == 'SolidStateDrive':
+        item = SolidStateDrive.objects.get(id=item_id)
+
+    if request.method == 'POST':
+
+        if item_name == 'SolidStateDrive':
+            item.brand = request.POST['solid_state_drive_brand']
+            item.model = request.POST['solid_state_drive_model']
+            item.serial_number = request.POST['solid_state_drive_serial_number']
+            item.memory_size = request.POST['solid_state_drive_memory_size']
+
+        try:
+            item.save()
+            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+        except ObjectDoesNotExist:
+            return 'При обновлении оборудывания произошла ошибка'
+
+    else:
+        return render(request, 'IT_items/solid_state_drive_update.html', {'item': item})
 
 
 @check_denied_access_del_or_update
@@ -618,7 +671,6 @@ class GeneratePDF(LoginRequiredMixin, View):
             'item_operating_system': item.operating_system,
             'item_text_field': item.text_field,
 
-
             'item_motherboard_brand': item.motherboard.brand,
             'item_motherboard_model': item.motherboard.model,
             'item_motherboard_serial_number': item.motherboard.serial_number,
@@ -651,12 +703,6 @@ class GeneratePDF(LoginRequiredMixin, View):
             'item_optical_drive_serial_number': item.optical_drive.serial_number,
             'item_optical_drive_type_drive': item.optical_drive.type_drive,
             'item_optical_drive_type_connector': item.optical_drive.type_connector,
-
-
-
-
-
-
         }
 
         template = 'IT_items/invoice.html'
