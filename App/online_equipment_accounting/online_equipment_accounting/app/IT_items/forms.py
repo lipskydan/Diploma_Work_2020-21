@@ -4,7 +4,8 @@ from django.forms import widgets
 
 from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive
 
-from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE
+from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
+    TYPE_OPERATING_SYSTEM
 
 
 class AddPcForm(forms.ModelForm):
@@ -20,6 +21,13 @@ class AddPcForm(forms.ModelForm):
                               localize=True, widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
     place = forms.IntegerField(label='Номер учбового місця', required=False, help_text='Необов’язково',
                                localize=True, widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
+
+    operating_system = forms.ChoiceField(label='Операційна система', choices=TYPE_OPERATING_SYSTEM,
+                                               required=False, localize=True, help_text='Необов’язково',
+                                               widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+
+    text_field = forms.CharField(label='Нотатки',
+                                 widget=forms.Textarea(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard = forms.ModelChoiceField(queryset=Motherboard.objects.all(), label='Материнська плата',
                                          empty_label='', required=False, help_text='Необов’язково',

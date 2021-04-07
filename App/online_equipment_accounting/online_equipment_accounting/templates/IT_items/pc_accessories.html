@@ -16,7 +16,6 @@
             <div class="card">
                 <article class="card-body">
                     <h1 align="center">Список комплектуючих</h1><br>
-
                     <div class="row" align="center">
                         <div class="col-md-4">
                             <h4><a href="#motherboard" class="btn btn-outline-info" style="height:40px;width:200px">Материнські плати</a></h4>
@@ -82,6 +81,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-center">
         <aside class="col-sm-10">
+            <div class="card">
             <article class="card-body">
                 <table class="col-sm-12" border="0">
                     <tr>
@@ -92,7 +92,7 @@
                                 <h1><a href="add-item/add-power-supply" class="badge badge-info">+</a></h1>
                             </td>
                         </tr>
-                    </table>
+                </table>
                     <br>
 
                     {% if items_power_supply|length > 0 %}
@@ -108,7 +108,9 @@
                         <h3>У нас ще немає блоків живлення</h3>
                     </div>
                     {% endif %}
-                </article>
+
+            </article>
+            </div>
         </aside>
     </div>
 </div>
@@ -121,7 +123,7 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1><a id="video-card">Відеокарти</a></h1></div>
+                                <h1><a id="video-card">Відеокарти</a></h1>
                             </td>
                             <td align="right">
                                 <h1><a href="add-item/add-video-card" class="badge badge-info">+</a></h1>
@@ -157,7 +159,7 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1><a id="lan-card">Мережеві плати</a></h1></div>
+                                <h1><a id="lan-card">Мережеві плати</a></h1>
                             </td>
                             <td align="right">
                                 <h1><a href="add-item/add-lan-card" class="badge badge-info">+</a></h1>
@@ -193,7 +195,7 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1><a id="sound-card">Звукові плати</a></h1></div>
+                                <h1><a id="sound-card">Звукові плати</a></h1>
                             </td>
                             <td align="right">
                                 <h1><a href="add-item/add-sound-card" class="badge badge-info">+</a></h1>
@@ -216,6 +218,7 @@
                     </div>
                     {% endif %}
                 </article>
+            </div>
         </aside>
     </div>
 </div>
@@ -251,6 +254,7 @@
                     </div>
                     {% endif %}
                 </article>
+            </div>
         </aside>
     </div>
 </div>

@@ -20,10 +20,10 @@ def render_to_pdf(template_src, context_dict):
     result = BytesIO()
     template = render_to_string(template_src, context_dict)
     pdf = pisa.pisaDocument(BytesIO(template.encode('UTF-8')), result,
-                            encoding='utf-8',)
-                            # link_callback=fetch_pdf_resources)
+                            encoding='utf-8',
+                            link_callback=fetch_pdf_resources)
 
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type='application/pdf')
 
-    return None
+    return pdf

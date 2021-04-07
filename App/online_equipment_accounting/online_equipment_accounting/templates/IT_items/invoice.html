@@ -18,7 +18,7 @@
 
       body {
         font-family: "Arial";
-        font-size: 20px
+        font-size: 12px
         }
 
       .container {
@@ -33,20 +33,160 @@
           <aside class="col-sm-10">
               <div class="card">
                   <article class="card-body">
-                      <h2>Основне</h2>
-                      <p>Тип обладнання: {{ item_name_for_user }}</p>
-                      <p>Інвентарний номер: {{ item_inventory_number }}</p>
 
-                      <h2>Місцезнаходження</h2>
-                      <p>Поверх: {{ item_floor }}</p>
-                      <p>Кабінет: {{ item_room }}</p>
-                      <p>Учбове місце: {{ item_place }}</p>
+                      <table class="" align="center" border="0">
+                          <tr>
+                              <td colspan="2">
+                                  <h3>Основне</h3>
+                              </td>
+<!--                              <td>2</td>-->
+                          </tr>
+                          <tr>
+                              <td>
+                                  Тип обладнання: {{ item_name_for_user }}
+                                  <br>
+                                  Інвентарний номер: {{ item_inventory_number }}
+                              </td>
+                              <td>
+                                  Операційна система: {{ item_operating_system }}
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <h3>Місцезнаходження</h3>
+                              </td>
+                              <td>
+                                   Поверх: {{ item_floor }}
+                                  <br>
+                                  Кабінет: {{ item_room }}
+                                  <br>
+                                  Учбове місце: {{ item_place }}
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="2" align="center">
+                                  <h3>Компоненти</h3>
+                              </td>
+<!--                              <td>2</td>-->
+                          </tr>
+                          <tr>
+                              <td>
+                                  <h3>Материнська плата</h3>
+                              </td>
+                              <td>
+                                  <h3>Оптичні накопичувачі</h3>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td align="justify">
+                                  Бренд: {{item_motherboard_brand}}
+                                  <br>
+                                  Модель: {{item_motherboard_model}}
+                                  <br>
+                                  Серійний номер: {{item_motherboard_serial_number}}
+                                  <br>
+                                  Форм-фактор: {{item_motherboard_form_factor}}
+                                  <br>
+                                  Тип слоту для ОЗУ: {{item_motherboard_type_ram_slot}}
+                                  <br>
 
-                      <h2>Компоненти</h2>
+                                  {% if item.motherboard_integrated_graphics%}
+                                  Інтегрована відеокарта: наявна
+                                  {% else %}
+                                  Інтегрована відеокарта: відсутня
+                                  {% endif %}
+                                  <br>
+                                  {% if item.motherboard_integrated_sound_card%}
+                                  Інтегрована звукова-карта: наявна
+                                  {% else %}
+                                  Інтегрована звукова-карта: відсутня
+                                  {% endif %}
+                                  <br>
+                                  {% if item.motherboard_integrated_lan_card%}
+                                  Інтегрована мережева-карта: наявна
+                                  {% else %}
+                                  Інтегрована мережева-карта: відсутня
+                                  {% endif %}
+                              </td>
+                              <td>
+                                  Бренд: {{item_optical_drive_brand}}
+                                  <br>
+                                  Модель: {{item_optical_drive_model}}
+                                  <br>
+                                  Серійний номер: {{item_optical_drive_serial_number}}
+                                  <br>
+                                  Тип приводу: {{item_optical_drive_type_drive}}
+                                  <br>
+                                  Тип роз'єму: {{item_optical_drive_type_connector}}
 
-                      <h2>Материнська плата</h2>
-                      <p>Модель: {{item_motherboard_model}}</p>
-                      <p>Серійний номер: {{item_motherboard_serial_number}}</p>
+
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <h3>Відеокарти</h3>
+                              </td>
+                              <td>
+                                  <h3>Блоки живлення</h3>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  Бренд: {{item_video_card_brand}}
+                                  <br>
+                                  Модель: {{item_video_card_model}}
+                                  <br>
+                                  Серійний номер: {{item_video_card_serial_number}}
+                                  <br>
+                                  Обсяг пам'яті: {{item_video_card_memory_size}}MB
+                              </td>
+                              <td>
+                                   Бренд: {{item_power_supply_brand}}
+                                  <br>
+                                  Модель: {{item_power_supply_model}}
+                                  <br>
+                                  Серійний номер: {{item_power_supply_serial_number}}
+                                  <br>
+                                  Максимальна споживана потужність від мережі: {{item_power_supply_power_consumption}}W
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <br>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <h3>Звукові плати</h3>
+                              </td>
+                              <td>
+                                  <h3>Мережеві плати</h3>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  Бренд: {{item_sound_card_brand}}
+                                  <br>
+                                  Модель: {{item_sound_card_model}}
+                                  <br>
+                                  Серійний номер: {{item_sound_card_serial_number}}
+                              </td>
+                              <td>
+                                  Бренд: {{item_lan_card_brand}}
+                                  <br>
+                                  Модель: {{item_lan_card_model}}
+                                  <br>
+                                  Серійний номер: {{item_lan_card_serial_number}}
+
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="2">
+                                  <h3>Нотатки</h3>
+                                  {{item_text_field}}
+                              </td>
+                          </tr>
+                      </table>
                   </article>
               </div>
           </aside>

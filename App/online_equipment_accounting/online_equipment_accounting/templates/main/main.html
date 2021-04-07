@@ -805,11 +805,40 @@
 
     {% if user.is_authenticated %}
 
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid" style="background-color:#D1ECF1">
+<!--        <table border="1" width="100%">-->
+<!--            <tr>-->
+<!--                <td colspan="2" rowspan="2" align="center" width="40%">-->
+<!--&lt;!&ndash;                    {{ user.image }}&ndash;&gt;-->
+<!--                    <input type="image" name="image" src="https://mdn.mozillademos.org/files/2917/fxlogo.png" width="50">-->
+<!--                </td>-->
+<!--&lt;!&ndash;                <td>2</td>&ndash;&gt;-->
+<!--                <td align="right">-->
+<!--                    <h1 class="display-5">-->
+<!--                        {{ user.first_name }} {{ user.last_name }}-->
+<!--                    </h1>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--&lt;!&ndash;                <td colspan="2">4</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>5</td>&ndash;&gt;-->
+<!--                <td align="right">{{ user.email }}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>-->
+<!--                    7-->
+<!--                </td>-->
+<!--                <td>8</td>-->
+<!--                <td align="right">-->
+<!--                    <p class="lead"><a class="text-dark" href="logout">Logout</a></p>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
         <div class="container">
-            <h1 class="display-5">
-                Вітаю {{ user.first_name }} {{ user.last_name }},
+            <h1 class="display-4">
+                Вітаю, {{ user.first_name }} {{ user.last_name }}
             </h1>
+            <hr class="my-4">
             <p class="lead"><a class="text-dark" href="logout">Logout</a></p>
         </div>
     </div>
@@ -819,19 +848,19 @@
 <!--    Motherboard Table - BEGIN    -->
 
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color:#D1ECF1">
             <table border="0" width="100%">
                 <tr align="center">
                     <td width="75%"><h3>Материнські плати</h3></td>
                     <td>
-                         <a href="#motherboard-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#motherboard-table" aria-expanded="false" aria-controls="motherboard-table">
+                         <a href="#motherboard-table" class="btn btn-outline-info" data-toggle="collapse" data-target="#motherboard-table" aria-expanded="false" aria-controls="motherboard-table">
                              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
                                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
                              </svg>
                          </a>
                     </td>
                     <td>
-                        <a class="btn btn-outline-secondary" onclick="hideMotherboardChart()">
+                        <a class="btn btn-outline-info" onclick="hideMotherboardChart()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                                 <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                             </svg>
@@ -843,7 +872,7 @@
     </div>
 
     <div class="collapse" id="motherboard-table">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color:#D1ECF1">
             <div style="overflow-x:auto;">
                 <table class="table" border="0" width="100%">
                     <thead>
@@ -898,7 +927,7 @@
         </div>
     </div>
 
-    <div class="jumbotron" id="motherboard-chart">
+    <div class="jumbotron" id="motherboard-chart" style="background-color:#D1ECF1">
         <div style="overflow-x:auto;">
             <table class="" align="center" border="0">
                 <tr>
@@ -936,19 +965,19 @@
 <!--    Power Supply Table - BEGIN    -->
 
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color:#D1ECF1">
             <table border="0" width="100%">
                 <tr align="center">
                     <td width="75%"><h3>Блоки живлення</h3></td>
                     <td>
-                         <a href="#power-supply-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#power-supply-table" aria-expanded="false" aria-controls="power-supply-table">
+                         <a href="#power-supply-table" class="btn btn-outline-info" data-toggle="collapse" data-target="#power-supply-table" aria-expanded="false" aria-controls="power-supply-table">
                              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
                                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
                              </svg>
                          </a>
                     </td>
                     <td>
-                        <a class="btn btn-outline-secondary" onclick="hidePowerSupplyChart()">
+                        <a class="btn btn-outline-info" onclick="hidePowerSupplyChart()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                                 <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                             </svg>
@@ -960,7 +989,7 @@
     </div>
 
     <div class="collapse" id="power-supply-table">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color:#D1ECF1">
             <div style="overflow-x:auto;">
                 <table class="table" border="0">
                     <thead>
@@ -990,7 +1019,7 @@
         </div>
     </div>
 
-    <div class="jumbotron" id="power-supply-chart">
+    <div class="jumbotron" id="power-supply-chart" style="background-color:#D1ECF1">
         <div style="overflow-x:auto;">
             <table align="center" border="0">
                 <tr>
@@ -1020,19 +1049,19 @@
 <!--    Optical Drive Table - BEGIN    -->
 
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color:#D1ECF1">
             <table border="0" width="100%">
                 <tr align="center">
                     <td width="75%"><h3>Оптичні накопичувачі</h3></td>
                     <td>
-                         <a href="#optical-drive-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#optical-drive-table" aria-expanded="false" aria-controls="optical-drive-table">
+                         <a href="#optical-drive-table" class="btn btn-outline-info" data-toggle="collapse" data-target="#optical-drive-table" aria-expanded="false" aria-controls="optical-drive-table">
                              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
                                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
                              </svg>
                          </a>
                     </td>
                     <td>
-                        <a class="btn btn-outline-secondary" onclick="hideOpticalDriveChart()">
+                        <a class="btn btn-outline-info" onclick="hideOpticalDriveChart()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                                 <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                             </svg>
@@ -1044,7 +1073,7 @@
     </div>
 
     <div class="collapse" id="optical-drive-table">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color:#D1ECF1">
             <div style="overflow-x:auto;">
                 <table class="table" border="0">
                     <thead>
@@ -1076,7 +1105,7 @@
         </div>
     </div>
 
-    <div class="jumbotron" id="optical-drive-chart">
+    <div class="jumbotron" id="optical-drive-chart" style="background-color:#D1ECF1">
         <div style="overflow-x:auto;">
             <table align="center" border="0">
                 <tr>
@@ -1112,19 +1141,19 @@
 <!--    Video Card Table - BEGIN    -->
 
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color:#D1ECF1">
             <table border="0" width="100%">
                 <tr align="center">
                     <td width="75%"><h3>Відеокарти</h3></td>
                     <td>
-                         <a href="#video-card-table" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#video-card-table" aria-expanded="false" aria-controls="video-card-table">
+                         <a href="#video-card-table" class="btn btn-outline-info" data-toggle="collapse" data-target="#video-card-table" aria-expanded="false" aria-controls="video-card-table">
                              <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
                                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
                              </svg>
                          </a>
                     </td>
                     <td>
-                        <a class="btn btn-outline-secondary" onclick="hideVideoCardChart()">
+                        <a class="btn btn-outline-info" onclick="hideVideoCardChart()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                                 <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                             </svg>
@@ -1136,7 +1165,7 @@
     </div>
 
     <div class="collapse" id="video-card-table">
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-color:#D1ECF1">
             <div style="overflow-x:auto;">
                 <table class="table" border="0">
                     <thead>
@@ -1166,7 +1195,7 @@
         </div>
     </div>
 
-    <div class="jumbotron" id="video-card-chart">
+    <div class="jumbotron" id="video-card-chart" style="background-color:#D1ECF1">
         <div style="overflow-x:auto;">
             <table align="center" border="0">
                 <tr>
@@ -1200,19 +1229,19 @@
             <div class="col" align="center">
 
                 <div class="container">
-                    <div class="jumbotron">
+                    <div class="jumbotron" style="background-color:#D1ECF1">
                         <table border="0" width="100%">
                             <tr align="center">
                                 <td width="65%"><h3>Мережеві карти</h3></td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#lan-card-table" aria-expanded="false" aria-controls="lan-card-table">
+                                    <a href="#" class="btn btn-outline-info" data-toggle="collapse" data-target="#lan-card-table" aria-expanded="false" aria-controls="lan-card-table">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
                                             <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
                                         </svg>
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-secondary" onclick="hideLanCardChart()">
+                                    <a class="btn btn-outline-info" onclick="hideLanCardChart()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                                             <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                                         </svg>
@@ -1225,7 +1254,7 @@
 
                 <div class="collapse" id="lan-card-table">
                     <div class="container">
-                        <div class="jumbotron">
+                        <div class="jumbotron" style="background-color:#D1ECF1">
                             <div style="overflow-x:auto;">
                                 <table class="table" border="0">
                                     <thead>
@@ -1255,7 +1284,7 @@
                 </div>
 
                 <div class="container">
-                    <div class="jumbotron" id="lan-card-chart">
+                    <div class="jumbotron" id="lan-card-chart" style="background-color:#D1ECF1">
                         <div style="overflow-x:auto;">
                             <table align="center" border="0">
                                 <tr>
@@ -1282,19 +1311,19 @@
             <div class="col" align="center">
 
                 <div class="container">
-                    <div class="jumbotron">
+                    <div class="jumbotron" style="background-color:#D1ECF1">
                         <table border="0" width="100%">
                             <tr align="center">
                                 <td width="65%"><h3>Звукові карти</h3></td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#sound-card-table" aria-expanded="false" aria-controls="sound-card-table">
+                                    <a href="#" class="btn btn-outline-info" data-toggle="collapse" data-target="#sound-card-table" aria-expanded="false" aria-controls="sound-card-table">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
                                             <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
                                         </svg>
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-secondary" onclick="hideSoundCardChart()">
+                                    <a class="btn btn-outline-info" onclick="hideSoundCardChart()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                                             <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
                                         </svg>
@@ -1307,7 +1336,7 @@
 
                 <div class="collapse" id="sound-card-table">
                     <div class="container">
-                        <div class="jumbotron">
+                        <div class="jumbotron" style="background-color:#D1ECF1">
                             <div style="overflow-x:auto;">
                                 <table class="table" border="0">
                                     <thead>
@@ -1337,7 +1366,7 @@
                 </div>
 
                 <div class="container">
-                    <div class="jumbotron" id="sound-card-chart">
+                    <div class="jumbotron" id="sound-card-chart" style="background-color:#D1ECF1">
                         <div style="overflow-x:auto;">
                             <table align="center" border="0">
                                 <tr>
@@ -1373,7 +1402,7 @@
                 <article class="card-body">
                     <h4 class="card-title mb-4 mt-1" align="center">Ви не авторизовані</h4>
                     <div class="form-group">
-                        <a href="/login" class="btn btn-success btn-block">Авторизуватися</a>
+                        <a href="/login" class="btn btn-info btn-block">Авторизуватися</a>
                     </div>
                 </article>
             </div>

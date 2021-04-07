@@ -7,6 +7,7 @@ from django.template import RequestContext
 
 from .forms import SignUpForm, LoginForm
 
+from django import template
 from django.db import models
 from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, SoundCard, OpticalDrive
 
@@ -371,3 +372,12 @@ def user_login(request):
 
 def user_logout(request):
     user_logout(request)
+
+
+register = template.Library()
+
+
+@register.filter(name='viewers')
+def has_group(user, group_name):
+    group = Group.objects.get(name=group_name)
+    return True if group in user.groups.all() else False

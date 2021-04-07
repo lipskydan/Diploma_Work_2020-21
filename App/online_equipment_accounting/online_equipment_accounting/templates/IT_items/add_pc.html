@@ -125,6 +125,54 @@
 
                           <table class="col-sm-12" align="center" border="0">
                               <tr>
+                                  <td align="center" width="25%">
+                                      <!--Name of field and input-->
+                                      {{ form.operating_system.label_tag }}
+                                  </td>
+                                  <td align="center" width="25%">
+                                      {{ form.operating_system }}
+                                  </td>
+                                  <td align="center" width="25%">
+<!--                                      &lt;!&ndash;Name of field and input&ndash;&gt;-->
+<!--                                      {{ form.room.label_tag }}-->
+                                  </td>
+                                  <td align="center" width="25%">
+<!--                                      {{ form.room }}-->
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2" align="center">
+                                      <!--Show help text for field-->
+                                      {% if form.operating_system.help_text %}
+                                      <small style="color: grey">{{ form.operating_system.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.operating_system.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                                  </td>
+                                  <td colspan="2" align="center">
+<!--                                      &lt;!&ndash;Show help text for field&ndash;&gt;-->
+<!--                                      {% if form.room.help_text %}-->
+<!--                                      <small style="color: grey">{{ form.room.help_text }}</small>-->
+<!--                                      {% endif %}-->
+
+<!--                                      &lt;!&ndash;Show error text for field&ndash;&gt;-->
+<!--                                      {% for error in form.room.errors %}-->
+<!--                                      <p style="color: red">{{ error }}</p>-->
+<!--                                      {% endfor %}-->
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="4">
+                                      <hr>
+                                  </td>
+                              </tr>
+                          </table>
+
+                          <table class="col-sm-12" align="center" border="0">
+                              <tr>
                                   <td align="center" width="38%">
                                       <!--Name of field and input-->
                                       {{ form.motherboard.label_tag }}
@@ -284,6 +332,20 @@
                               </tr>
                               <tr>
                                   <td colspan="2">
+                                      <hr>
+                                  </td>
+                              </tr>
+                          </table>
+
+                          <table class="col-sm-12" align="center" border="0">
+                              <tr>
+                                  <td>
+                                      {{ form.text_field.label_tag }}
+                                      {{ form.text_field }}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
                                       <hr>
                                   </td>
                               </tr>

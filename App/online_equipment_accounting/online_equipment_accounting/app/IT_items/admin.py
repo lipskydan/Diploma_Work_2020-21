@@ -9,3 +9,4 @@ admin.site.register(VideoCard)
 admin.site.register(LanCard)
 admin.site.register(SoundCard)
 admin.site.register(OpticalDrive)
+

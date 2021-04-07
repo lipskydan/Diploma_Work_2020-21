@@ -74,6 +74,30 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>
+                                        <p>Операційна система:</p>
+                                        <div class="mx-auto" style="width: 75%">
+                                            <select class="form-control" name="operating_system" id="operating_system">
+                                                <option value="None">Відсутній</option>
+                                                {% for operating_system in operating_systems %}
+                                                <option {% if operating_system == item.operating_system %} selected {% endif %}
+                                                        value="{{ operating_system }}">
+                                                    {{ operating_system }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+<!--                                        <input type="text" name="place" id="place" class="form-control" value="{{ item.place }}" placeholder="Введіть номер поверху">-->
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td colspan="3">
                                         <p>Материнська плата:</p>
                                     </td>
@@ -246,6 +270,21 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="left">
+                                        <p>Нотатки: </p>
+<!--                                        <input type="text" name="text_field" id="text_field" class="form-control" value="{{ item.text_field }}" placeholder="Місце для нотаток">-->
+                                        <textarea name="text_field" id="text_field" class="form-control" placeholder="Місце для нотаток">
+                                            {{ item.text_field }}
+                                        </textarea>
+<!--                                        <input type="text" class="form-control" value="" placeholder="Нотатки">-->
                                     </td>
                                 </tr>
                             </table>

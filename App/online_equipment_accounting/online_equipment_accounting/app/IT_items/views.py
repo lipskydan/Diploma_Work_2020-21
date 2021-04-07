@@ -9,9 +9,32 @@ from typing import Dict
 from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCard, AddLanCard, AddSoundCard, \
     AddOpticalDrive
 
-from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE
+from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
+    TYPE_OPERATING_SYSTEM
 from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive
 from .utils import render_to_pdf
+
+import pdfkit
+
+
+def check_denied_access_add(func):
+    def wrapper(request):
+        if not request.user.groups.filter(name__in=['editors']).exists():
+            return render(request, 'IT_items/denied_access.html')
+        else:
+            return func(request)
+
+    return wrapper
+
+
+def check_denied_access_del_or_update(func):
+    def wrapper(request, item_name, item_id):
+        if not request.user.groups.filter(name__in=['editors']).exists():
+            return render(request, 'IT_items/denied_access.html')
+        else:
+            return func(request, item_name, item_id)
+
+    return wrapper
 
 
 def IT_items(request):
@@ -68,14 +91,16 @@ def pc_accessories_detail(request, item_name, item_id):
     return render(request, 'IT_items/pc_accessories_detail.html', {'item': item})
 
 
+@check_denied_access_add
 def add(request):
     return render(request, 'IT_items/add.html')
 
 
-def add_item(request):
-    return render(request, 'IT_items/add.html')
+# def add_item(request):
+#     return render(request, 'IT_items/add.html')
 
 
+@check_denied_access_add
 def add_pc(request):
     if request.method == 'POST':
         form = AddPcForm(request.POST)
@@ -83,6 +108,7 @@ def add_pc(request):
             cd = form.cleaned_data
 
             item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place=cd['place'],
+                      operating_system=cd['operating_system'], text_field=cd['text_field'],
                       motherboard=cd['motherboard'],
                       power_supply=cd['power_supply'],
                       video_card=cd['video_card'],
@@ -100,6 +126,7 @@ def add_pc(request):
     return render(request, 'IT_items/add_pc.html', {'form': form})
 
 
+@check_denied_access_add
 def add_motherboard(request):
     if request.method == 'POST':
         form = AddMotherboardForm(request.POST)
@@ -129,6 +156,7 @@ def add_motherboard(request):
     return render(request, 'IT_items/add_motherboard.html', {'form': form})
 
 
+@check_denied_access_add
 def add_power_supply(request):
     if request.method == 'POST':
         form = AddPowerSupplyForm(request.POST)
@@ -152,6 +180,7 @@ def add_power_supply(request):
     return render(request, 'IT_items/add_power_supply.html', {'form': form})
 
 
+@check_denied_access_add
 def add_video_card(request):
     if request.method == 'POST':
         form = AddVideoCard(request.POST)
@@ -176,6 +205,7 @@ def add_video_card(request):
     return render(request, 'IT_items/add_video_card.html', {'form': form})
 
 
+@check_denied_access_add
 def add_lan_card(request):
     if request.method == 'POST':
         form = AddLanCard(request.POST)
@@ -199,6 +229,7 @@ def add_lan_card(request):
     return render(request, 'IT_items/add_lan_card.html', {'form': form})
 
 
+@check_denied_access_add
 def add_sound_card(request):
     if request.method == 'POST':
         form = AddSoundCard(request.POST)
@@ -216,6 +247,7 @@ def add_sound_card(request):
     return render(request, 'IT_items/add_sound_card.html', {'form': form})
 
 
+@check_denied_access_add
 def add_optical_drive(request):
     if request.method == 'POST':
         form = AddOpticalDrive(request.POST)
@@ -235,6 +267,7 @@ def add_optical_drive(request):
     return render(request, 'IT_items/add_optical_drive.html', {'form': form})
 
 
+@check_denied_access_del_or_update
 def item_delete(request, item_name, item_id):
     item = None
     try:
@@ -248,6 +281,7 @@ def item_delete(request, item_name, item_id):
     return HttpResponseRedirect(reverse('IT_items:IT_items'))
 
 
+@check_denied_access_del_or_update
 def pc_accessories_delete(request, item_name, item_id):
     item = None
     try:
@@ -271,8 +305,10 @@ def pc_accessories_delete(request, item_name, item_id):
     return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
 
 
+@check_denied_access_del_or_update
 def pc_update(request, item_name, item_id):
     item = None
+    operating_systems = None
     motherboards = None
     power_supplies = None
     video_cards = None
@@ -290,7 +326,7 @@ def pc_update(request, item_name, item_id):
         sound_cards = SoundCard.objects.filter()
         optical_drives = OpticalDrive.objects.filter()
 
-        print(optical_drives)
+        operating_systems = [el[0] for el in TYPE_OPERATING_SYSTEM]
 
     if request.method == 'POST':
 
@@ -298,6 +334,11 @@ def pc_update(request, item_name, item_id):
         item.floor = request.POST['floor']
         item.room = request.POST['room']
         item.place = request.POST['place']
+
+        item.operating_system = request.POST.get('operating_system', None)
+
+        # item.text_field = request.POST['text_field']
+        item.text_field = request.POST.get('text_field', False)
 
         motherboard = request.POST.get('motherboard', None)
         if motherboard != 'None':
@@ -370,6 +411,7 @@ def pc_update(request, item_name, item_id):
 
     else:
         return render(request, 'IT_items/pc_update.html', {'item': item,
+                                                           'operating_systems': operating_systems,
                                                            'motherboards': motherboards,
                                                            'power_supplies': power_supplies,
                                                            'video_cards': video_cards,
@@ -378,6 +420,7 @@ def pc_update(request, item_name, item_id):
                                                            'optical_drives': optical_drives})
 
 
+@check_denied_access_del_or_update
 def motherboard_update(request, item_name, item_id):
     item = None
     form_factors = None
@@ -416,6 +459,7 @@ def motherboard_update(request, item_name, item_id):
                                                                     'type_ram_slots': type_ram_slots})
 
 
+@check_denied_access_del_or_update
 def power_supply_update(request, item_name, item_id):
     item = None
 
@@ -440,6 +484,7 @@ def power_supply_update(request, item_name, item_id):
         return render(request, 'IT_items/power_supply_update.html', {'item': item})
 
 
+@check_denied_access_del_or_update
 def video_card_update(request, item_name, item_id):
     item = None
 
@@ -463,6 +508,7 @@ def video_card_update(request, item_name, item_id):
         return render(request, 'IT_items/video_card_update.html', {'item': item})
 
 
+@check_denied_access_del_or_update
 def lan_card_update(request, item_name, item_id):
     item = None
 
@@ -485,6 +531,7 @@ def lan_card_update(request, item_name, item_id):
         return render(request, 'IT_items/lan_card_update.html', {'item': item})
 
 
+@check_denied_access_del_or_update
 def sound_card_update(request, item_name, item_id):
     item = None
 
@@ -507,6 +554,7 @@ def sound_card_update(request, item_name, item_id):
         return render(request, 'IT_items/sound_card_update.html', {'item': item})
 
 
+@check_denied_access_del_or_update
 def optical_drive_update(request, item_name, item_id):
     item = None
     type_drives = None
@@ -562,11 +610,53 @@ class GeneratePDF(LoginRequiredMixin, View):
             'item_name': item.name,
             'item_name_for_user': item.name_for_user,
             'item_inventory_number': item.inventory_number,
+
             'item_floor': item.floor,
             'item_room': item.room,
+            'item_place': item.place,
+
+            'item_operating_system': item.operating_system,
+            'item_text_field': item.text_field,
+
+
+            'item_motherboard_brand': item.motherboard.brand,
             'item_motherboard_model': item.motherboard.model,
             'item_motherboard_serial_number': item.motherboard.serial_number,
-            'item_place': item.place,
+            'item_motherboard_form_factor': item.motherboard.form_factor,
+            'item_motherboard_type_ram_slot': item.motherboard.type_ram_slot,
+            'item_motherboard_integrated_graphics': item.motherboard.integrated_graphics,
+            'item_motherboard_integrated_sound_card': item.motherboard.integrated_sound_card,
+            'item_motherboard_integrated_lan_card': item.motherboard.integrated_lan_card,
+
+            'item_power_supply_brand': item.power_supply.brand,
+            'item_power_supply_model': item.power_supply.model,
+            'item_power_supply_serial_number': item.power_supply.serial_or_inventory_number,
+            'item_power_supply_power_consumption': item.power_supply.power_consumption,
+
+            'item_video_card_brand': item.video_card.brand,
+            'item_video_card_model': item.video_card.model,
+            'item_video_card_serial_number': item.video_card.serial_number,
+            'item_video_card_memory_size': item.video_card.memory_size,
+
+            'item_lan_card_brand': item.lan_card.brand,
+            'item_lan_card_model': item.lan_card.model,
+            'item_lan_card_serial_number': item.lan_card.serial_number,
+
+            'item_sound_card_brand': item.sound_card.brand,
+            'item_sound_card_model': item.sound_card.model,
+            'item_sound_card_serial_number': item.sound_card.serial_number,
+
+            'item_optical_drive_brand': item.optical_drive.brand,
+            'item_optical_drive_model': item.optical_drive.model,
+            'item_optical_drive_serial_number': item.optical_drive.serial_number,
+            'item_optical_drive_type_drive': item.optical_drive.type_drive,
+            'item_optical_drive_type_connector': item.optical_drive.type_connector,
+
+
+
+
+
+
         }
 
         template = 'IT_items/invoice.html'

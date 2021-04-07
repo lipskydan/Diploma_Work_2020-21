@@ -32,6 +32,14 @@ TYPE_CONNECTOR_OF_OPTICAL_DRIVE = [
     ('PATA', 'PATA'),
 ]
 
+TYPE_OPERATING_SYSTEM = [
+    ('не вказано', ''),
+    ('Windows 10', 'Windows 10'),
+    ('Windows 7', 'Windows 7'),
+    ('Windows XP', 'Windows XP'),
+    ('Ubuntu', 'Ubuntu'),
+]
+
 
 class Motherboard(models.Model):
     __tablename__ = 'Motherboard'
@@ -177,12 +185,16 @@ class PC(models.Model):
     room = models.IntegerField('номер кабінету')
     place = models.IntegerField('номер учбового місця', default=0, blank=True, null=False)
 
+    operating_system = models.CharField(max_length=20, choices=TYPE_OPERATING_SYSTEM, default='не вказано')
+
     motherboard = models.ForeignKey(Motherboard, on_delete=models.OneToOneField, null=True)
     power_supply = models.ForeignKey(PowerSupply, on_delete=models.OneToOneField, null=True)
     video_card = models.ForeignKey(VideoCard, on_delete=models.OneToOneField, null=True)
     lan_card = models.ForeignKey(LanCard, on_delete=models.OneToOneField, null=True)
     sound_card = models.ForeignKey(SoundCard, on_delete=models.OneToOneField, null=True)
     optical_drive = models.ForeignKey(OpticalDrive, on_delete=models.OneToOneField, null=True)
+
+    text_field = models.TextField(default='Місце для нотаток')
 
     name_for_user = 'Персональний комп\'ютор'
     name = 'PC'
