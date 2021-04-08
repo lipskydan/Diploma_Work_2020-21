@@ -76,6 +76,63 @@
                         {% endif %}
 
                         <hr>
+
+                        <table class="col-sm-12" border="0">
+                            <tr>
+                                <td>
+                                   <h3 class="alert-heading">Твердотільний накопичувач</h3>
+                                </td>
+                                <td align="right">
+                                    {% if item.solid_state_drive %}
+                                    <h5><a href="/IT_items/pc_accessories/{{ item.solid_state_drive.name }}/{{ item.solid_state_drive.id }}/update-solid-state-drive" class="badge badge-info">
+                                        Редагування
+                                    </a></h5>
+                                     {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.solid_state_drive %}
+                            <h5>Бренд: {{item.solid_state_drive.brand}}</h5>
+                            <h5>Модель: {{item.solid_state_drive.model}}</h5>
+                            <h5>Серійний номер: {{item.solid_state_drive.serial_number}}</h5>
+                            <h5>Обсяг пам'яті: {{item.solid_state_drive.memory_size}} GB</h5>
+                        {% else %}
+                            <h5>Відсутня</h5>
+                        {% endif %}
+
+                        <hr>
+
+                        <table class="col-sm-12" border="0">
+                            <tr>
+                                <td>
+                                   <h3 class="alert-heading">Жорсткий магнітний диск</h3>
+                                </td>
+                                <td align="right">
+                                    {% if item.hard_disk_drive %}
+                                    <h5><a href="/IT_items/pc_accessories/{{ item.hard_disk_drive.name }}/{{ item.hard_disk_drive.id }}/update-hard-disk-drive" class="badge badge-info">
+                                        Редагування
+                                    </a></h5>
+                                     {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.hard_disk_drive %}
+                            <h5>Бренд: {{item.hard_disk_drive.brand}}</h5>
+                            <h5>Модель: {{item.hard_disk_drive.model}}</h5>
+                            <h5>Серійний номер: {{item.hard_disk_drive.serial_number}}</h5>
+                            <h5>Обсяг пам'яті: {{item.hard_disk_drive.memory_size}} GB</h5>
+                        {% else %}
+                            <h5>Відсутня</h5>
+                        {% endif %}
+
+                        <hr>
+
                          <table class="col-sm-12" border="0">
                                 <tr>
                                     <td>

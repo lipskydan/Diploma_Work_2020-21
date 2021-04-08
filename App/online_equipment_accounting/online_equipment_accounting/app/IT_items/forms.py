@@ -27,13 +27,25 @@ class AddPcForm(forms.ModelForm):
                                          required=False, localize=True, help_text='Необов’язково',
                                          widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
-    text_field = forms.CharField(label='Нотатки',
+    text_field = forms.CharField(label='Нотатки', required=False,
                                  widget=forms.Textarea(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard = forms.ModelChoiceField(queryset=Motherboard.objects.all(), label='Материнська плата',
                                          empty_label='', required=False, help_text='Необов’язково',
                                          localize=True,
                                          widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+
+    solid_state_drive = forms.ModelChoiceField(queryset=SolidStateDrive.objects.all(),
+                                               label='Твердотільний накопичувач',
+                                               empty_label='', required=False, help_text='Необов’язково',
+                                               localize=True,
+                                               widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+
+    hard_disk_drive = forms.ModelChoiceField(queryset=HardDiskDrive.objects.all(),
+                                             label='Жорсткий магнітний диск',
+                                             empty_label='', required=False, help_text='Необов’язково',
+                                             localize=True,
+                                             widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
     power_supply = forms.ModelChoiceField(queryset=PowerSupply.objects.all(), label='Блок живлення',
                                           empty_label='', required=False, help_text='Необов’язково',

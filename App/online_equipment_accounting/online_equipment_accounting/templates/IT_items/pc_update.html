@@ -129,6 +129,66 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3">
+                                        <p>Твердотільний накопичувач:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <div class="mx-auto" style="width: 75%">
+                                            <select class="form-control" name="solid_state_drive" id="solid_state_drive">
+                                                <option value="None">Відсутня</option>
+                                                {% for solid_state_drive in solid_state_drives %}
+                                                <option {% if solid_state_drive == item.solid_state_drive %} selected {% endif %}
+                                                        value="{{ solid_state_drive }}">
+                                                    {{ solid_state_drive }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>Жорсткий магнітний диск:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <div class="mx-auto" style="width: 75%">
+                                            <select class="form-control" name="hard_disk_drive" id="hard_disk_drive">
+                                                <option value="None">Відсутня</option>
+                                                {% for hard_disk_drive in hard_disk_drives %}
+                                                <option {% if hard_disk_drive == item.hard_disk_drive %} selected {% endif %}
+                                                        value="{{ hard_disk_drive }}">
+                                                    {{ hard_disk_drive }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
                                         <p>Блок живлення:</p>
                                     </td>
                                 </tr>

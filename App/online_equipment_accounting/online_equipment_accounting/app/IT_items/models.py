@@ -227,18 +227,20 @@ class PC(models.Model):
 
     floor = models.IntegerField('номер поверху')
     room = models.IntegerField('номер кабінету')
-    place = models.IntegerField('номер учбового місця', default=0, blank=True, null=False)
+    place = models.IntegerField('номер учбового місця', default=0, null=True)
 
     operating_system = models.CharField(max_length=20, choices=TYPE_OPERATING_SYSTEM, default='не вказано')
 
     motherboard = models.ForeignKey(Motherboard, on_delete=models.OneToOneField, null=True)
+    solid_state_drive = models.ForeignKey(SolidStateDrive, on_delete=models.OneToOneField, null=True)
+    hard_disk_drive = models.ForeignKey(HardDiskDrive, on_delete=models.OneToOneField, null=True)
     power_supply = models.ForeignKey(PowerSupply, on_delete=models.OneToOneField, null=True)
     video_card = models.ForeignKey(VideoCard, on_delete=models.OneToOneField, null=True)
     lan_card = models.ForeignKey(LanCard, on_delete=models.OneToOneField, null=True)
     sound_card = models.ForeignKey(SoundCard, on_delete=models.OneToOneField, null=True)
     optical_drive = models.ForeignKey(OpticalDrive, on_delete=models.OneToOneField, null=True)
 
-    text_field = models.TextField(default='Місце для нотаток')
+    text_field = models.TextField(default='Місце для нотаток', null=True)
 
     name_for_user = 'Персональний комп\'ютор'
     name = 'PC'

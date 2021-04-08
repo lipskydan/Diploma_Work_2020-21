@@ -34,7 +34,7 @@
               <div class="card">
                   <article class="card-body">
 
-                      <table class="" align="center" border="1">
+                      <table class="" align="center" border="0">
                           <tr>
                               <td colspan="2">
                                   <h3>Основне</h3>
@@ -74,11 +74,12 @@
                                   <h3>Материнська плата</h3>
                               </td>
                               <td>
-                                  <h3>Оптичні накопичувачі</h3>
+                                  <h3>Оптичний накопичувач</h3>
                               </td>
                           </tr>
                           <tr>
                               <td align="justify">
+                                  {% if item_motherboard_serial_number %}
                                   Бренд: {{item_motherboard_brand}}
                                   <br>
                                   Модель: {{item_motherboard_model}}
@@ -107,8 +108,12 @@
                                   {% else %}
                                   Інтегрована мережева-карта: відсутня
                                   {% endif %}
+                                  {% else %}
+                                  Відсутня
+                                  {% endif %}
                               </td>
                               <td>
+                                  {% if item_optical_drive_serial_number %}
                                   Бренд: {{item_optical_drive_brand}}
                                   <br>
                                   Модель: {{item_optical_drive_model}}
@@ -118,20 +123,58 @@
                                   Тип приводу: {{item_optical_drive_type_drive}}
                                   <br>
                                   Тип роз'єму: {{item_optical_drive_type_connector}}
-
-
+                                  {% else %}
+                                  Відсутній
+                                  {% endif %}
                               </td>
                           </tr>
                           <tr>
                               <td>
-                                  <h3>Відеокарти</h3>
+                                  <h3>Твердотільний накопичувач</h3>
                               </td>
                               <td>
-                                  <h3>Блоки живлення</h3>
+                                  <h3>Жорсткий магнітний диск</h3>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td align="justify">
+                                  {% if item_solid_state_drive_serial_number %}
+                                  Бренд: {{item_solid_state_drive_brand}}
+                                  <br>
+                                  Модель: {{item_solid_state_drive_model}}
+                                  <br>
+                                  Серійний номер: {{item_solid_state_drive_serial_number}}
+                                  <br>
+                                  Обсяг пам'яті: {{item_solid_state_drive_memory_size}}GB
+                                  {% else %}
+                                  Відсутній
+                                  {% endif %}
+                              </td>
+                              <td>
+                                  {% if item_hard_disk_drive_serial_number %}
+                                  Бренд: {{item_hard_disk_drive_brand}}
+                                  <br>
+                                  Модель: {{item_hard_disk_drive_model}}
+                                  <br>
+                                  Серійний номер: {{item_hard_disk_drive_serial_number}}
+                                  <br>
+                                  Обсяг пам'яті: {{item_hard_disk_drive_memory_size}}GB
+                                  {% else %}
+                                  Відсутній
+                                  {% endif %}
                               </td>
                           </tr>
                           <tr>
                               <td>
+                                  <h3>Відеокарта</h3>
+                              </td>
+                              <td>
+                                  <h3>Блок живлення</h3>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  {% if item_video_card_serial_number %}
                                   Бренд: {{item_video_card_brand}}
                                   <br>
                                   Модель: {{item_video_card_model}}
@@ -139,8 +182,12 @@
                                   Серійний номер: {{item_video_card_serial_number}}
                                   <br>
                                   Обсяг пам'яті: {{item_video_card_memory_size}}MB
+                                  {% else %}
+                                  Відсутня
+                                  {% endif %}
                               </td>
                               <td>
+                                  {% if item_power_supply_serial_number %}
                                    Бренд: {{item_power_supply_brand}}
                                   <br>
                                   Модель: {{item_power_supply_model}}
@@ -148,6 +195,9 @@
                                   Серійний номер: {{item_power_supply_serial_number}}
                                   <br>
                                   Максимальна споживана потужність від мережі: {{item_power_supply_power_consumption}}W
+                                  {% else %}
+                                  Відсутній
+                                  {% endif %}
                               </td>
                           </tr>
                           <tr>
@@ -157,27 +207,34 @@
                           </tr>
                           <tr>
                               <td>
-                                  <h3>Звукові плати</h3>
+                                  <h3>Звукова плата</h3>
                               </td>
                               <td>
-                                  <h3>Мережеві плати</h3>
+                                  <h3>Мережева плата</h3>
                               </td>
                           </tr>
                           <tr>
                               <td>
+                                  {% if item_sound_card_serial_number %}
                                   Бренд: {{item_sound_card_brand}}
                                   <br>
                                   Модель: {{item_sound_card_model}}
                                   <br>
                                   Серійний номер: {{item_sound_card_serial_number}}
+                                  {% else %}
+                                  Відсутня
+                                  {% endif %}
                               </td>
                               <td>
+                                  {% if item_lan_card_serial_number %}
                                   Бренд: {{item_lan_card_brand}}
                                   <br>
                                   Модель: {{item_lan_card_model}}
                                   <br>
                                   Серійний номер: {{item_lan_card_serial_number}}
-
+                                  {% else %}
+                                  Відсутня
+                                  {% endif %}
                               </td>
                           </tr>
                           <tr>

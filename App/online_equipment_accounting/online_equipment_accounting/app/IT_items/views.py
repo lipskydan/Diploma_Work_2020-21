@@ -119,6 +119,8 @@ def add_pc(request):
             item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place=cd['place'],
                       operating_system=cd['operating_system'], text_field=cd['text_field'],
                       motherboard=cd['motherboard'],
+                      solid_state_drive=cd['solid_state_drive'],
+                      hard_disk_drive=cd['hard_disk_drive'],
                       power_supply=cd['power_supply'],
                       video_card=cd['video_card'],
                       lan_card=cd['lan_card'],
@@ -373,6 +375,8 @@ def pc_update(request, item_name, item_id):
     item = None
     operating_systems = None
     motherboards = None
+    solid_state_drives = None
+    hard_disk_drives = None
     power_supplies = None
     video_cards = None
     lan_cards = None
@@ -383,6 +387,8 @@ def pc_update(request, item_name, item_id):
         item = PC.objects.get(id=item_id)
 
         motherboards = Motherboard.objects.filter()
+        solid_state_drives = SolidStateDrive.objects.filter()
+        hard_disk_drives = HardDiskDrive.objects.filter()
         power_supplies = PowerSupply.objects.filter()
         video_cards = VideoCard.objects.filter()
         lan_cards = LanCard.objects.filter()
@@ -409,6 +415,24 @@ def pc_update(request, item_name, item_id):
             item.motherboard = motherboard
         else:
             item.motherboard = None
+
+        solid_state_drive = request.POST.get('solid_state_drive', None)
+        if solid_state_drive != 'None':
+            solid_state_drive_dic = solid_state_drive.split()
+            solid_state_drive = SolidStateDrive.objects.get(brand=solid_state_drive_dic[0],
+                                                            serial_number=solid_state_drive_dic[2])
+            item.solid_state_drive = solid_state_drive
+        else:
+            item.solid_state_drive = None
+
+        hard_disk_drive = request.POST.get('hard_disk_drive', None)
+        if hard_disk_drive != 'None':
+            hard_disk_drive_dic = hard_disk_drive.split()
+            hard_disk_drive = HardDiskDrive.objects.get(brand=hard_disk_drive_dic[0],
+                                                        serial_number=hard_disk_drive_dic[2])
+            item.hard_disk_drive = hard_disk_drive
+        else:
+            item.hard_disk_drive = None
 
         power_supply = request.POST.get('power_supply', None)
         if power_supply != 'None':
@@ -473,6 +497,8 @@ def pc_update(request, item_name, item_id):
         return render(request, 'IT_items/pc_update.html', {'item': item,
                                                            'operating_systems': operating_systems,
                                                            'motherboards': motherboards,
+                                                           'solid_state_drives': solid_state_drives,
+                                                           'hard_disk_drives': hard_disk_drives,
                                                            'power_supplies': power_supplies,
                                                            'video_cards': video_cards,
                                                            'lan_cards': lan_cards,
@@ -728,38 +754,48 @@ class GeneratePDF(LoginRequiredMixin, View):
             'item_operating_system': item.operating_system,
             'item_text_field': item.text_field,
 
-            'item_motherboard_brand': item.motherboard.brand,
-            'item_motherboard_model': item.motherboard.model,
-            'item_motherboard_serial_number': item.motherboard.serial_number,
-            'item_motherboard_form_factor': item.motherboard.form_factor,
-            'item_motherboard_type_ram_slot': item.motherboard.type_ram_slot,
-            'item_motherboard_integrated_graphics': item.motherboard.integrated_graphics,
-            'item_motherboard_integrated_sound_card': item.motherboard.integrated_sound_card,
-            'item_motherboard_integrated_lan_card': item.motherboard.integrated_lan_card,
+            'item_motherboard_brand': item.motherboard.brand if item.motherboard else None,
+            'item_motherboard_model': item.motherboard.model if item.motherboard else None,
+            'item_motherboard_serial_number': item.motherboard.serial_number if item.motherboard else None,
+            'item_motherboard_form_factor': item.motherboard.form_factor if item.motherboard else None,
+            'item_motherboard_type_ram_slot': item.motherboard.type_ram_slot if item.motherboard else None,
+            'item_motherboard_integrated_graphics': item.motherboard.integrated_graphics if item.motherboard else None,
+            'item_motherboard_integrated_sound_card': item.motherboard.integrated_sound_card if item.motherboard else None,
+            'item_motherboard_integrated_lan_card': item.motherboard.integrated_lan_card if item.motherboard else None,
 
-            'item_power_supply_brand': item.power_supply.brand,
-            'item_power_supply_model': item.power_supply.model,
-            'item_power_supply_serial_number': item.power_supply.serial_or_inventory_number,
-            'item_power_supply_power_consumption': item.power_supply.power_consumption,
+            'item_solid_state_drive_brand': item.solid_state_drive.brand if item.solid_state_drive else None,
+            'item_solid_state_drive_model': item.solid_state_drive.model if item.solid_state_drive else None,
+            'item_solid_state_drive_serial_number': item.solid_state_drive.serial_number if item.solid_state_drive else None,
+            'item_solid_state_drive_memory_size': item.solid_state_drive.memory_size if item.solid_state_drive else None,
 
-            'item_video_card_brand': item.video_card.brand,
-            'item_video_card_model': item.video_card.model,
-            'item_video_card_serial_number': item.video_card.serial_number,
-            'item_video_card_memory_size': item.video_card.memory_size,
+            'item_hard_disk_drive_brand': item.hard_disk_drive.brand if item.hard_disk_drive else None,
+            'item_hard_disk_drive_model': item.hard_disk_drive.model if item.hard_disk_drive else None,
+            'item_hard_disk_drive_serial_number': item.hard_disk_drive.serial_number if item.hard_disk_drive else None,
+            'item_hard_disk_drive_memory_size': item.hard_disk_drive.memory_size if item.hard_disk_drive else None,
 
-            'item_lan_card_brand': item.lan_card.brand,
-            'item_lan_card_model': item.lan_card.model,
-            'item_lan_card_serial_number': item.lan_card.serial_number,
+            'item_power_supply_brand': item.power_supply.brand if item.power_supply else None,
+            'item_power_supply_model': item.power_supply.model if item.power_supply else None,
+            'item_power_supply_serial_number': item.power_supply.serial_or_inventory_number if item.power_supply else None,
+            'item_power_supply_power_consumption': item.power_supply.power_consumption if item.power_supply else None,
 
-            'item_sound_card_brand': item.sound_card.brand,
-            'item_sound_card_model': item.sound_card.model,
-            'item_sound_card_serial_number': item.sound_card.serial_number,
+            'item_video_card_brand': item.video_card.brand if item.video_card else None,
+            'item_video_card_model': item.video_card.model if item.video_card else None,
+            'item_video_card_serial_number': item.video_card.serial_number if item.video_card else None,
+            'item_video_card_memory_size': item.video_card.memory_size if item.video_card else None,
 
-            'item_optical_drive_brand': item.optical_drive.brand,
-            'item_optical_drive_model': item.optical_drive.model,
-            'item_optical_drive_serial_number': item.optical_drive.serial_number,
-            'item_optical_drive_type_drive': item.optical_drive.type_drive,
-            'item_optical_drive_type_connector': item.optical_drive.type_connector,
+            'item_lan_card_brand': item.lan_card.brand if item.lan_card else None,
+            'item_lan_card_model': item.lan_card.model if item.lan_card else None,
+            'item_lan_card_serial_number': item.lan_card.serial_number if item.lan_card else None,
+
+            'item_sound_card_brand': item.sound_card.brand if item.sound_card else None,
+            'item_sound_card_model': item.sound_card.model if item.sound_card else None,
+            'item_sound_card_serial_number': item.sound_card.serial_number if item.sound_card else None,
+
+            'item_optical_drive_brand': item.optical_drive.brand if item.optical_drive else None,
+            'item_optical_drive_model': item.optical_drive.model if item.optical_drive else None,
+            'item_optical_drive_serial_number': item.optical_drive.serial_number if item.optical_drive else None,
+            'item_optical_drive_type_drive': item.optical_drive.type_drive if item.optical_drive else None,
+            'item_optical_drive_type_connector': item.optical_drive.type_connector if item.optical_drive else None,
         }
 
         template = 'IT_items/invoice.html'
