@@ -164,21 +164,21 @@ Sign Up
                          </tr>
                           <tr align="center">
                              <td>
-                                 {{ form.image.label_tag }}
+                                 {{ form.group.label_tag }}
                              </td>
                              <td>
-                                 {{ form.image }}
+                                 {{ form.group }}
                              </td>
                          </tr>
                           <tr align="center">
                              <td colspan="2">
                                  <!--Show help text for field-->
-                                 {% if form.image.help_text %}
-                                 <small style="color: grey">{{ form.image.help_text }}</small>
+                                 {% if form.group.help_text %}
+                                 <small style="color: grey">{{ form.group.help_text }}</small>
                                  {% endif %}
 
                                  <!--Show error text for field-->
-                                 {% for error in form.image.errors %}
+                                 {% for error in form.group.errors %}
                                  <p style="color: red">{{ error }}</p>
                                  {% endfor %}
                              </td>

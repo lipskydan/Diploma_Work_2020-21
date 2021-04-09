@@ -20,7 +20,7 @@ import pdfkit
 
 def check_denied_access_add(func):
     def wrapper(request):
-        if not request.user.groups.filter(name__in=['editors']).exists():
+        if not request.user.groups.filter(name__in=['Редактор']).exists():
             return render(request, 'IT_items/denied_access.html')
         else:
             return func(request)
@@ -30,7 +30,7 @@ def check_denied_access_add(func):
 
 def check_denied_access_del_or_update(func):
     def wrapper(request, item_name, item_id):
-        if not request.user.groups.filter(name__in=['editors']).exists():
+        if not request.user.groups.filter(name__in=['Редактор']).exists():
             return render(request, 'IT_items/denied_access.html')
         else:
             return func(request, item_name, item_id)
