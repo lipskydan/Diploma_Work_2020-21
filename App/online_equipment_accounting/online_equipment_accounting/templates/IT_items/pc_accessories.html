@@ -1,7 +1,7 @@
 {% extends 'base_main.html' %}
 
 {% block title %}
-Список комплектуючих
+Перелік комплектуючих
 {% endblock %}
 
 {% block body %}
@@ -15,32 +15,33 @@
         <aside class="col-sm-10">
             <div class="card">
                 <article class="card-body">
-                    <h1 align="center">Список комплектуючих</h1><br>
+                    <h1 align="center">Перелік комплектуючих</h1><br>
                     <div class="row" align="center">
-                        <div class="col-md-4">
-                            <h4><a href="#motherboard" class="btn btn-outline-info" style="height:40px;width:240px">Материнські плати</a></h4>
+                        <div class="col-md-12">
+                            <h4><a href="#motherboard" class="btn btn-outline-info" style="height:40px;width:520px">Материнські плати</a></h4>
                         </div>
-                        <div class="col-md-4">
-                            <h4><a href="#power-supply" class="btn btn-outline-info" style="height:40px;width:240px">Блоки живлення</a></h4>
+                        <div class="col-md-12">
+                            <h4><a href="#power-supply" class="btn btn-outline-info" style="height:40px;width:520px">Блоки живлення</a></h4>
                         </div>
-                        <div class="col-md-4">
-                            <h4><a href="#video-card" class="btn btn-outline-info" style="height:40px;width:240px">Відеокарти</a></h4>
+                        <div class="col-md-12">
+                            <h4><a href="#video-card" class="btn btn-outline-info" style="height:40px;width:520px">Відеокарти</a></h4>
                         </div>
-                        <div class="col-md-4">
-                            <h4><a href="#lan-card" class="btn btn-outline-info" style="height:40px;width:240px">Мережеві плати</a></h4>
+                        <div class="col-md-12">
+                            <h4><a href="#lan-card" class="btn btn-outline-info" style="height:40px;width:520px">Мережеві плати</a></h4>
                         </div>
-                        <div class="col-md-4">
-                            <h4><a href="#sound-card" class="btn btn-outline-info" style="height:40px;width:240px">Звукові плати</a></h4>
+                        <div class="col-md-12">
+                            <h4><a href="#sound-card" class="btn btn-outline-info" style="height:40px;width:520px">Звукові плати</a></h4>
                         </div>
-                        <div class="col-md-4">
-                            <h4><a href="#optical-drive" class="btn btn-outline-info" style="height:40px;width:240px">Оптичні накопичувачі</a></h4>
+                        <div class="col-md-12">
+                            <h4><a href="#optical-drive" class="btn btn-outline-info" style="height:40px;width:520px">Оптичні приводи</a></h4>
                         </div>
-                        <div class="col-md-4">
-                            <h4><a href="#solid-state-drive" class="btn btn-outline-info" style="height:40px;width:240px">Твердотільні накопичувачі</a></h4>
+                        <div class="col-md-12">
+                            <h4><a href="#solid-state-drive" class="btn btn-outline-info" style="height:40px;width:520px">Твердотільні накопичувачі</a></h4>
                         </div>
-                        <div class="col-md-4">
-                            <h4><a href="#hard-disk-drive" class="btn btn-outline-info" style="height:40px;width:240px">Жорсткі магнітні диски</a></h4>
+                        <div class="col-md-12">
+                            <h4><a href="#hard-disk-drive" class="btn btn-outline-info" style="height:40px;width:520px">Накопичувачі на жорстких магнітних дисках</a></h4>
                         </div>
+
                     </div>
                 </article>
             </div>
@@ -129,7 +130,7 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1><a id="hard-disk-drive">Жорсткі магнітні диски</a></h1>
+                                <h1><a id="hard-disk-drive">Накопичувачі на жорстких магнітних дисках</a></h1>
                             </td>
                             <td align="right">
                                 <h1><a href="add-item/add-hard-disk-drive" class="badge badge-info">+</a></h1>
@@ -147,7 +148,7 @@
                     {% endfor %}
                     {% else %}
                     <div class="alert alert-info">
-                        <h3>У нас ще немає материнських плат</h3>
+                        <h3>У нас ще немає накопичувачів на жорстких магнітних дисках</h3>
                     </div>
                     {% endif %}
                 </article>
@@ -309,7 +310,7 @@
                     <table class="col-sm-12" border="0">
                         <tr>
                             <td>
-                                <h1><a id="optical-drive">Оптичні накопичувачі</a></h1>
+                                <h1><a id="optical-drive">Оптичні приводи</a></h1>
                             </td>
                             <td align="right">
                                 <h1><a href="add-item/add-optical-drive" class="badge badge-info">+</a></h1>
@@ -328,7 +329,7 @@
                     {% endfor %}
                     {% else %}
                     <div class="alert alert-info">
-                        <h3>У нас ще немає оптичних накопичувачів</h3>
+                        <h3>У нас ще немає оптичних приводів</h3>
                     </div>
                     {% endif %}
                 </article>

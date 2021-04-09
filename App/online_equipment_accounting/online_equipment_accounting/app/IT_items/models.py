@@ -100,7 +100,7 @@ class HardDiskDrive(models.Model):
     serial_number = models.CharField('серійний номер', max_length=200, unique=True, default='відсутній')
     memory_size = models.IntegerField('обсяг пам\'яті', default=0)
 
-    name_for_user = 'Жорсткий магнітний диск'
+    name_for_user = 'Накопичувач на жорстких магнітних дисках'
     name = 'HardDiskDrive'
 
     objects = models.Manager()
@@ -109,8 +109,8 @@ class HardDiskDrive(models.Model):
         return str(self.brand) + ' ' + str(self.memory_size) + ' ' + str(self.serial_number)
 
     class Meta:
-        verbose_name = 'Жорсткий магнітний диск'
-        verbose_name_plural = 'Жорсткі магнітні диски'
+        verbose_name = 'Накопичувач на жорстких магнітних дисках'
+        verbose_name_plural = 'Накопичувачі на жорстких магнітних дисках'
 
 
 class PowerSupply(models.Model):
@@ -207,7 +207,7 @@ class OpticalDrive(models.Model):
     type_drive = models.CharField(max_length=20, choices=TYPE_OPTICAL_DRIVE, default='не вказано')
     type_connector = models.CharField(max_length=20, choices=TYPE_CONNECTOR_OF_OPTICAL_DRIVE, default='не вказано')
 
-    name_for_user = 'Оптичний накопичувач'
+    name_for_user = 'Оптичний привод'
     name = 'OpticalDrive'
 
     objects = models.Manager()
@@ -216,8 +216,8 @@ class OpticalDrive(models.Model):
         return 'модель ' + str(self.brand) + ' ' + str(self.model) + ' - номер ' + str(self.serial_number)
 
     class Meta:
-        verbose_name = 'Оптичний накопичувач'
-        verbose_name_plural = 'Оптичні накопичувачі'
+        verbose_name = 'Оптичний привод'
+        verbose_name_plural = 'Оптичні приводи'
 
 
 class PC(models.Model):

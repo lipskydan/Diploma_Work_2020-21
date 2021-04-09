@@ -278,7 +278,7 @@ class AddOpticalDrive(forms.ModelForm):
                                                   required=True, localize=True,
                                                   help_text='Обов’язково')
 
-    optical_drive_type_drive = forms.ChoiceField(label='Тип оптичного накопичувача', choices=TYPE_OPTICAL_DRIVE,
+    optical_drive_type_drive = forms.ChoiceField(label='Тип оптичного привода', choices=TYPE_OPTICAL_DRIVE,
                                                  required=False, localize=True, help_text='Необов’язково',
                                                  widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 

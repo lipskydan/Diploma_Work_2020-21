@@ -2,7 +2,7 @@
 
 {% block title %}
     {% if item.name == 'OpticalDrive' %}
-    Оновлення оптичного накопичувача
+    Оновлення оптичного привода
     {% endif %}
 {% endblock %}
 {% block body %}
@@ -13,7 +13,7 @@
             <article class="card-body">
 
                 {% if item.name == 'OpticalDrive' %}
-                <h1>Оновлення оптичного накопичувача</h1>
+                <h1>Оновлення оптичного привода</h1>
 
                 <form method="post">
                     {% csrf_token %}

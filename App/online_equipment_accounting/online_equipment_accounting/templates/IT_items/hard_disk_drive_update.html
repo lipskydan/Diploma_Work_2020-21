@@ -2,7 +2,7 @@
 
 {% block title %}
     {% if item.name == 'HardDiskDrive' %}
-    Оновлення Жорсткого магнітного диску
+    Оновлення Накопичувача на жорстких магнітних дисках
     {% endif %}
 {% endblock %}
 {% block body %}
@@ -13,7 +13,7 @@
             <article class="card-body">
 
                  {% if item.name == 'HardDiskDrive' %}
-                    <h1>Оновлення жорсткого магнітного диску</h1>
+                    <h1>Оновлення накопичувача на жорстких магнітних дисках</h1>
 
                     <form method="post">
                     {% csrf_token %}
