@@ -42,11 +42,16 @@
                     <h5>Тип слоту для ОЗУ: {{item.type_ram_slot}}</h5>
                     <hr>
 
+
+                    <h5>Центральный процессор: {{item.central_processing_unit}}</h5>
+
                     {% if item.integrated_graphics%}
                     <h5>Інтегрована відеокарта: наявна</h5>
                     {% else %}
                     <h5>Інтегрована відеокарта: відсутня</h5>
                     {% endif %}
+
+                    <hr>
 
                     {% if item.integrated_sound_card%}
                     <h5>Інтегрована звукова-карта: наявна</h5>

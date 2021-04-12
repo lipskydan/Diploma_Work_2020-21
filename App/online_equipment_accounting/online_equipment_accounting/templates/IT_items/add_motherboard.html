@@ -12,7 +12,7 @@
                <form method="post">
                   {% csrf_token %}
                    <div class="form-group">
-                        <table class="col-sm-12" align="center" border="0">
+                        <table class="col-sm-12" align="center" border="1">
                             <tr>
                                   <td colspan="3">
                                       <hr>
@@ -97,7 +97,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3" align="center">
-                                    <!--Name of field and input-->
+                                      <!--Name of field and input-->
                                     {{ form.motherboard_form_factor.label_tag }}
 
                                     <div class="mx-auto" style="width: 50%">
@@ -121,8 +121,26 @@
                                   </td>
                             </tr>
                             <tr>
-                                <td align="center">
+                                <td colspan="2" align="center">
                                     <!--Name of field and input-->
+                                    {{ form.motherboard_central_processing_unit.label_tag }}
+                                    <div class="mx-auto" style="width: 50%">
+                                    {{ form.motherboard_central_processing_unit }}
+                                    </div>
+                                    <!--Show help text for field-->
+                                    {% if form.motherboard_central_processing_unit.help_text %}
+                                    <small style="color: grey">{{ form.motherboard_central_processing_unit.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.motherboard_central_processing_unit.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+
+                                </td>
+<!--                                <td>2</td>-->
+                                <td align="center">
+                                     <!--Name of field and input-->
                                     {{ form.motherboard_integrated_graphics.label_tag }}
                                     {{ form.motherboard_integrated_graphics }}
                                     <br>
@@ -136,6 +154,13 @@
                                     <p style="color: red">{{ error }}</p>
                                     {% endfor %}
                                 </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
                                 <td align="center">
                                     <!--Name of field and input-->
                                     {{ form.motherboard_integrated_sound_card.label_tag }}
@@ -150,6 +175,9 @@
                                     {% for error in form.motherboard_integrated_sound_card.errors %}
                                     <p style="color: red">{{ error }}</p>
                                     {% endfor %}
+                                </td>
+                                <td align="center">
+                                    2
                                 </td>
                                 <td align="center">
                                     <!--Name of field and input-->

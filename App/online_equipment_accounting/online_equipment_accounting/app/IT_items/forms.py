@@ -6,7 +6,7 @@ from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard,
     HardDiskDrive
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
-    TYPE_OPERATING_SYSTEM
+    TYPE_OPERATING_SYSTEM, TYPE_CENTRAL_PROCESSING_UNIT
 
 
 class AddPcForm(forms.ModelForm):
@@ -113,6 +113,12 @@ class AddMotherboardForm(forms.ModelForm):
     motherboard_type_ram_slot = forms.ChoiceField(label='Тип слоту для ОЗУ', choices=TYPE_RAM_SLOTS,
                                                   required=False, localize=True, help_text='Необов’язково',
                                                   widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+
+    motherboard_central_processing_unit = forms.ChoiceField(label='Центральний процесор',
+                                                            choices=TYPE_CENTRAL_PROCESSING_UNIT,
+                                                            required=False, localize=True, help_text='Необов’язково',
+                                                            widget=widgets.Select(
+                                                                attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard_integrated_graphics = forms.BooleanField(label='Інтегрована відеокарта', localize=True,
                                                          required=False, help_text='Вказати чи наявна',

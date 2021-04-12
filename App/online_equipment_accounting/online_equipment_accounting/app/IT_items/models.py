@@ -18,6 +18,15 @@ TYPE_RAM_SLOTS = [
     ('DDR3', 'DDR3'),
 ]
 
+TYPE_CENTRAL_PROCESSING_UNIT = [
+    ('не вказано', ''),
+    ('Intel Core i7', 'Intel Core i7'),
+    ('Intel Core i5', 'Intel Core i5'),
+    ('Intel Core i3', 'Intel Core i3'),
+    ('Intel Core Pentium', 'Intel Core Pentium'),
+    ('Intel Core 2 Duo', 'Intel Core 2 Duo'),
+]
+
 TYPE_OPTICAL_DRIVE = [
     ('не вказано', ''),
     ('DVD', 'DVD'),
@@ -52,7 +61,9 @@ class Motherboard(models.Model):
     form_factor = models.CharField(max_length=20, choices=MOTHERBOARD_FROM_FACTORS, default='не вказано')
     type_ram_slot = models.CharField(max_length=20, choices=TYPE_RAM_SLOTS, default='не вказано')
 
+    central_processing_unit = models.CharField(max_length=20, choices=TYPE_CENTRAL_PROCESSING_UNIT, default='не вказано')
     integrated_graphics = models.BooleanField(default=False)
+
     integrated_sound_card = models.BooleanField(default=False)
     integrated_lan_card = models.BooleanField(default=False)
 

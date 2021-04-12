@@ -10,7 +10,7 @@ from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCa
     AddOpticalDrive, AddSolidStateDriveForm, AddHardDiskDriveForm
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
-    TYPE_OPERATING_SYSTEM
+    TYPE_OPERATING_SYSTEM, TYPE_CENTRAL_PROCESSING_UNIT
 from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive, \
     HardDiskDrive
 from .utils import render_to_pdf
@@ -146,6 +146,7 @@ def add_motherboard(request):
             motherboard = Motherboard(serial_number=cd['motherboard_serial_number'],
                                       brand=cd['motherboard_brand'],
                                       model=cd['motherboard_model'],
+                                      central_processing_unit=cd['motherboard_central_processing_unit'],
                                       integrated_graphics=cd['motherboard_integrated_graphics'],
                                       integrated_sound_card=cd['motherboard_integrated_sound_card'],
                                       integrated_lan_card=cd['motherboard_integrated_lan_card'],
@@ -511,12 +512,14 @@ def motherboard_update(request, item_name, item_id):
     item = None
     form_factors = None
     type_ram_slots = None
+    central_processing_units = None
 
     if item_name == 'Motherboard':
         item = Motherboard.objects.get(id=item_id)
 
         form_factors = [el[0] for el in MOTHERBOARD_FROM_FACTORS]
         type_ram_slots = [el[0] for el in TYPE_RAM_SLOTS]
+        central_processing_units = [el[0] for el in TYPE_CENTRAL_PROCESSING_UNIT]
 
     if request.method == 'POST':
 
@@ -526,6 +529,7 @@ def motherboard_update(request, item_name, item_id):
 
             item.serial_number = request.POST['motherboard_serial_number']
 
+            item.central_processing_unit = request.POST.get('motherboard_central_processing_unit', None)
             item.form_factor = request.POST.get('motherboard_form_factor', None)
             item.type_ram_slot = request.POST.get('motherboard_type_ram_slot', None)
 
@@ -542,7 +546,8 @@ def motherboard_update(request, item_name, item_id):
     else:
         return render(request, 'IT_items/motherboard_update.html', {'item': item,
                                                                     'form_factors': form_factors,
-                                                                    'type_ram_slots': type_ram_slots})
+                                                                    'type_ram_slots': type_ram_slots,
+                                                                    'central_processing_units': central_processing_units})
 
 
 @check_denied_access_del_or_update
@@ -741,7 +746,15 @@ class GeneratePDF(LoginRequiredMixin, View):
         except:
             raise Http404('ERROR GeneratePdf:get')
 
+        from datetime import datetime
+
         context = {
+            'user_first_name': request.user.first_name,
+            'user_last_name': request.user.last_name,
+
+
+            'current_time': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+
             'item_id': item.id,
             'item_name': item.name,
             'item_name_for_user': item.name_for_user,

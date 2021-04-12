@@ -56,11 +56,13 @@
                             <h5>Тип слоту для ОЗУ: {{item.motherboard.type_ram_slot}}</h5>
                             <br>
 
+                            <h5>Центральный процессор: {{item.motherboard.central_processing_unit}}</h5>
                             {% if item.motherboard.integrated_graphics%}
                                 <h5>Інтегрована відеокарта: наявна</h5>
                             {% else %}
                                 <h5>Інтегрована відеокарта: відсутня</h5>
                             {% endif %}
+                            <br>
 
                             {% if item.motherboard.integrated_sound_card%}
                                 <h5>Інтегрована звукова-карта: наявна</h5>
