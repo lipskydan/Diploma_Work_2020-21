@@ -12,7 +12,7 @@
                <form method="post">
                   {% csrf_token %}
                    <div class="form-group">
-                        <table class="col-sm-12" align="center" border="1">
+                        <table class="col-sm-12" align="center" border="0">
                             <tr>
                                   <td colspan="3">
                                       <hr>
@@ -124,7 +124,7 @@
                                 <td colspan="2" align="center">
                                     <!--Name of field and input-->
                                     {{ form.motherboard_central_processing_unit.label_tag }}
-                                    <div class="mx-auto" style="width: 50%">
+                                    <div class="mx-auto" style="width: 85%">
                                     {{ form.motherboard_central_processing_unit }}
                                     </div>
                                     <!--Show help text for field-->
@@ -176,8 +176,7 @@
                                     <p style="color: red">{{ error }}</p>
                                     {% endfor %}
                                 </td>
-                                <td align="center">
-                                    2
+                                <td align="center" width="15%">
                                 </td>
                                 <td align="center">
                                     <!--Name of field and input-->
@@ -217,6 +216,11 @@
                                     <p style="color: red">{{ error }}</p>
                                     {% endfor %}
                                 </td>
+                            </tr>
+                             <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
                             </tr>
                         </table>
                    </div>

@@ -477,7 +477,7 @@ def pc_update(request, item_name, item_id):
 
         optical_drive = request.POST.get('optical_drive', None)
         # optical_drive = item.optical_drive
-        print(optical_drive)
+        # print(optical_drive)
 
         if optical_drive != 'None':
             optical_drive_dic = optical_drive.split()
@@ -752,7 +752,6 @@ class GeneratePDF(LoginRequiredMixin, View):
             'user_first_name': request.user.first_name,
             'user_last_name': request.user.last_name,
 
-
             'current_time': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
 
             'item_id': item.id,
@@ -772,6 +771,7 @@ class GeneratePDF(LoginRequiredMixin, View):
             'item_motherboard_serial_number': item.motherboard.serial_number if item.motherboard else None,
             'item_motherboard_form_factor': item.motherboard.form_factor if item.motherboard else None,
             'item_motherboard_type_ram_slot': item.motherboard.type_ram_slot if item.motherboard else None,
+            'item_motherboard_central_processing_unit': item.motherboard.central_processing_unit if item.motherboard else None,
             'item_motherboard_integrated_graphics': item.motherboard.integrated_graphics if item.motherboard else None,
             'item_motherboard_integrated_sound_card': item.motherboard.integrated_sound_card if item.motherboard else None,
             'item_motherboard_integrated_lan_card': item.motherboard.integrated_lan_card if item.motherboard else None,

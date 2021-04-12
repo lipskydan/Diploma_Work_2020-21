@@ -157,6 +157,72 @@
         }
      };
 
+     var motherboard_cpus = {
+     type: 'horizontalBar',
+     data: {
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 50,
+            maxBarThickness: 50,
+            minBarLength: 10,
+            data: {{ data_motherboard_cpu|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+
+            ],
+            label: ''
+        }],
+        labels: {{ labels_motherboard_cpu|safe }}
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Центральний процесор (CPU)'
+
+            },
+
+            animation: {
+                duration: 2700,
+            },
+
+            scales: {
+                yAxes: [{
+                  id: 'y-axis-0',
+                  gridLines: {
+                    display: false
+                  },
+                  ticks: {
+                    beginAtZero:true,
+                  },
+                  afterBuildTicks: function(chart) {
+
+                  }
+                }],
+                xAxes: [{
+                  id: 'x-axis-0',
+                  gridLines: {
+                    display: true
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                  }
+                }]
+            }
+        }
+     };
+
 
      var motherboard_ram = {
      type: 'bar',
@@ -221,6 +287,107 @@
                 }]
             }
 
+        }
+     };
+
+     var solid_state_drive_brand = {
+     type: 'doughnut',
+     data: {
+        datasets: [{
+            data: {{ data_solid_state_drive_brand|safe }},
+            backgroundColor: [
+               'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            label: ''
+        }],
+        labels: {{ labels_solid_state_drive_brand|safe }}
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Бренд'
+
+            },
+            animation: {
+                duration: 2700,
+            }
+        }
+     };
+
+     var solid_state_drive_memory_size = {
+     type: 'horizontalBar',
+     data: {
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 50,
+            maxBarThickness: 50,
+            minBarLength: 10,
+            data: {{ data_solid_state_drive_memory_size|safe }},
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+
+            ],
+            label: ''
+        }],
+        labels: {{ labels_solid_state_drive_memory_size|safe }}
+        },
+      options: {
+            title: {
+                display: true,
+                text: 'об\'єм памяті'
+
+            },
+
+            animation: {
+                duration: 2700,
+            },
+
+            scales: {
+                yAxes: [{
+                  id: 'y-axis-0',
+                  gridLines: {
+                    display: false
+                  },
+                  ticks: {
+                    beginAtZero:true,
+                  },
+                  afterBuildTicks: function(chart) {
+
+                  }
+                }],
+                xAxes: [{
+                  id: 'x-axis-0',
+                  gridLines: {
+                    display: true
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                  }
+                }]
+            }
         }
      };
 
@@ -699,7 +866,11 @@
       var motherboard_brand_w = document.getElementById('motherboard-brand-chart').getContext('2d');
       var motherboard_form_factor_w = document.getElementById('motherboard-form-factor-chart').getContext('2d');
       var motherboard_integrated_items_w = document.getElementById('motherboard-integrated-items-chart').getContext('2d');
+      var motherboard_cpus_w = document.getElementById('motherboard-cpus-chart').getContext('2d');
       var motherboard_ram_w = document.getElementById('motherboard-ram-chart').getContext('2d');
+
+      var solid_state_drive_brand_w = document.getElementById('solid-state-drive-brand-chart').getContext('2d');
+      var solid_state_drive_memory_size_w = document.getElementById('solid-state-drive-memory-size-chart').getContext('2d');
 
       var power_supply_consumption_w = document.getElementById('power-supply-consumption-chart').getContext('2d');
       var power_supply_brand_w = document.getElementById('power-supply-brand-chart').getContext('2d');
@@ -718,7 +889,11 @@
       window.myPie = new Chart(motherboard_brand_w, motherboard_brand);
       window.myPie = new Chart(motherboard_form_factor_w, motherboard_form_factor);
       window.myPie = new Chart(motherboard_integrated_items_w, motherboard_integrated_items);
+      window.myPie = new Chart(motherboard_cpus_w, motherboard_cpus);
       window.myPie = new Chart(motherboard_ram_w, motherboard_ram);
+
+      window.myPie = new Chart(solid_state_drive_brand_w, solid_state_drive_brand);
+      window.myPie = new Chart(solid_state_drive_memory_size_w, solid_state_drive_memory_size);
 
       window.myPie = new Chart(power_supply_consumption_w, power_supply_consumption);
       window.myPie = new Chart(power_supply_brand_w, power_supply_brand);
@@ -738,6 +913,7 @@
 
     function hideAllCharts(){
         hideMotherboardChart();
+        hideSolidStateDriveChart();
         hidePowerSupplyChart();
         hideLanCardChart();
         hideSoundCardChart();
@@ -747,6 +923,15 @@
 
     function hideMotherboardChart() {
         var x = document.getElementById("motherboard-chart");
+        if (x.style.display === "none") {
+        x.style.display = "block";
+        } else {
+        x.style.display = "none";
+        }
+    }
+
+    function hideSolidStateDriveChart() {
+        var x = document.getElementById("solid-state-drive-chart");
         if (x.style.display === "none") {
         x.style.display = "block";
         } else {
@@ -953,14 +1138,108 @@
                         <canvas id="motherboard-integrated-items-chart" width="500" height="375"></canvas>
                     </td>
                     <td>
+                        <canvas id="motherboard-cpus-chart" width="500" height="375"></canvas>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan>
                         <canvas id="motherboard-form-factor-chart" width="500" height="375"></canvas>
                     </td>
+                    <td></td>
                 </tr>
             </table>
         </div>
     </div>
 
 <!--    Motherboard Table - END    -->
+
+<!--    Solid State Drive Table - BEGIN-->
+
+
+    <div class="container">
+        <div class="jumbotron" style="background-color:#D1ECF1">
+            <table border="0" width="100%">
+                <tr align="center">
+                    <td width="75%"><h3>Твердотільні накопичувачі</h3></td>
+                    <td>
+                         <a href="#motherboard-table" class="btn btn-outline-info" data-toggle="collapse" data-target="#solid-state-drive-table" aria-expanded="false" aria-controls="solid-state-drive-table">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                                 <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"/>
+                             </svg>
+                         </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-info" onclick="hideSolidStateDriveChart()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="collapse" id="solid-state-drive-table">
+        <div class="jumbotron" style="background-color:#D1ECF1">
+            <div style="overflow-x:auto;">
+                <table class="table" border="0" width="100%">
+                    <thead>
+                    <tr align="center">
+                        <th scope="col">серійний <br> номер</th>
+                        <th scope="col">бренд</th>
+                        <th scope="col">модель</th>
+                        <th scope="col">обсяг пам'яті</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for solid_state_drive in solid_state_drives %}
+                    <tr align="center">
+                        <td>
+                            <a href="/IT_items/pc_accessories/{{solid_state_drive.name}}/{{solid_state_drive.id}}" class="text-dark">
+                                {{solid_state_drive.serial_number}}
+                            </a>
+                        </td>
+
+                        <td>{{solid_state_drive.brand}}</td>
+                        <td>{{solid_state_drive.model}}</td>
+                        <td>{{solid_state_drive.memory_size}}</td>
+
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron" id="solid-state-drive-chart" style="background-color:#D1ECF1">
+        <div style="overflow-x:auto;">
+            <table class="" align="center" border="0">
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <canvas id="solid-state-drive-brand-chart" width="500" height="375"></canvas>
+                    </td>
+                    <td align="center">
+                        <canvas id="solid-state-drive-memory-size-chart" width="500" height="375"></canvas>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+<!--    Solid State Drive Table - END-->
 
 <!--    Power Supply Table - BEGIN    -->
 

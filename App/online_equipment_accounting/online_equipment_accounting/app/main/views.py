@@ -9,7 +9,7 @@ from .forms import SignUpForm, LoginForm
 
 from django import template
 from django.db import models
-from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, SoundCard, OpticalDrive
+from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive
 
 
 def get_motherboard_brand_data_and_labels():
@@ -67,6 +67,25 @@ def get_motherboard_integrated_items_data_and_labels():
     return data_motherboard, labels_motherboard
 
 
+def get_motherboard_central_processing_units_data_and_labels():
+    motherboard_dict = dict()
+    queryset_motherboard = Motherboard.objects.order_by('central_processing_unit')[:]
+    labels_motherboard_cpu = []
+    data_motherboard_cpu = []
+
+    for qs in queryset_motherboard:
+        if qs.central_processing_unit not in motherboard_dict:
+            motherboard_dict[qs.central_processing_unit] = 1
+            labels_motherboard_cpu.append(qs.central_processing_unit)
+        else:
+            motherboard_dict[qs.central_processing_unit] += 1
+
+    for key in motherboard_dict.keys():
+        data_motherboard_cpu.append(motherboard_dict[key])
+
+    return data_motherboard_cpu, labels_motherboard_cpu
+
+
 def get_motherboard_ram_data_and_labels():
     motherboard_dict = dict()
     queryset_motherboard = Motherboard.objects.order_by('form_factor')[:]
@@ -84,6 +103,47 @@ def get_motherboard_ram_data_and_labels():
         data_motherboard_ram.append(motherboard_dict[key])
 
     return data_motherboard_ram, labels_motherboard_ram
+
+
+def get_solid_state_drives_brand_data_and_labels():
+    solid_state_drive_dict = dict()
+    queryset_solid_state_drive = SolidStateDrive.objects.order_by('brand')[:]
+    labels_solid_state_drive_brand = []
+    data_solid_state_drive_brand = []
+
+    for qs in queryset_solid_state_drive:
+        if qs.brand not in solid_state_drive_dict:
+            solid_state_drive_dict[qs.brand] = 1
+            labels_solid_state_drive_brand.append(qs.brand)
+        else:
+            solid_state_drive_dict[qs.brand] += 1
+
+    for key in solid_state_drive_dict.keys():
+        data_solid_state_drive_brand.append(solid_state_drive_dict[key])
+
+    return data_solid_state_drive_brand, labels_solid_state_drive_brand
+
+
+def get_solid_state_drives_memory_size_data_and_labels():
+    dict_item = dict()
+    queryset = SolidStateDrive.objects.order_by('memory_size')[:]
+    labels = []
+    data = []
+
+    for qs in queryset:
+        if qs.memory_size not in dict_item:
+            dict_item[qs.memory_size] = 1
+            if qs.memory_size >= 1000:
+                labels.append([str(str(qs.memory_size) + ' GB'), str('( ' + str(round(qs.memory_size / 1000)) + ' TB )')])
+            else:
+                labels.append([str(str(qs.memory_size) + ' GB')])
+        else:
+            dict_item[qs.memory_size] += 1
+
+    for key in dict_item.keys():
+        data.append(dict_item[key])
+
+    return data, labels
 
 
 def get_power_supply_consumption_data_and_labels():
@@ -247,7 +307,7 @@ def get_video_card_memory_size_data_and_labels():
     for qs in queryset:
         if qs.memory_size not in dict_item:
             dict_item[qs.memory_size] = 1
-            labels.append([str(str(qs.memory_size) + ' MB'), str('( ' + str(round(qs.memory_size/1024)) + ' GB )')])
+            labels.append([str(str(qs.memory_size) + ' MB'), str('( ' + str(round(qs.memory_size / 1024)) + ' GB )')])
         else:
             dict_item[qs.memory_size] += 1
 
@@ -260,6 +320,7 @@ def get_video_card_memory_size_data_and_labels():
 def main(request):
     pcs = PC.objects.all()
     motherboards = Motherboard.objects.all()
+    solid_state_drives = SolidStateDrive.objects.all()
     power_supplies = PowerSupply.objects.all()
     optical_drives = OpticalDrive.objects.all()
     video_cards = VideoCard.objects.all()
@@ -269,7 +330,11 @@ def main(request):
     data_motherboard_brand, labels_motherboard_brand = get_motherboard_brand_data_and_labels()
     data_motherboard_form_factor, labels_motherboard_form_factor = get_motherboard_form_factor_data_and_labels()
     data_motherboard_integrated_items, labels_motherboard_integrated_items = get_motherboard_integrated_items_data_and_labels()
+    data_motherboard_cpu, labels_motherboard_cpu = get_motherboard_central_processing_units_data_and_labels()
     data_motherboard_ram, labels_motherboard_ram = get_motherboard_ram_data_and_labels()
+
+    data_solid_state_drive_brand, labels_solid_state_drive_brand = get_solid_state_drives_brand_data_and_labels()
+    data_solid_state_drive_memory_size, labels_solid_state_drive_memory_size = get_solid_state_drives_memory_size_data_and_labels()
 
     data_power_supply_consumption, labels_power_supply_consumption = get_power_supply_consumption_data_and_labels()
     data_power_supply_brand, labels_power_supply_brand = get_power_supply_brand_data_and_labels()
@@ -295,8 +360,16 @@ def main(request):
                                               'data_motherboard_form_factor': data_motherboard_form_factor,
                                               'labels_motherboard_integrated_items': labels_motherboard_integrated_items,
                                               'data_motherboard_integrated_items': data_motherboard_integrated_items,
+                                              'labels_motherboard_cpu': labels_motherboard_cpu,
+                                              'data_motherboard_cpu': data_motherboard_cpu,
                                               'labels_motherboard_ram': labels_motherboard_ram,
                                               'data_motherboard_ram': data_motherboard_ram,
+
+                                              'solid_state_drives': solid_state_drives,
+                                              'labels_solid_state_drive_brand': labels_solid_state_drive_brand,
+                                              'data_solid_state_drive_brand': data_solid_state_drive_brand,
+                                              'labels_solid_state_drive_memory_size': labels_solid_state_drive_memory_size,
+                                              'data_solid_state_drive_memory_size': data_solid_state_drive_memory_size,
 
                                               'pcs': pcs,
 
@@ -340,7 +413,6 @@ def user_sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
