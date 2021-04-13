@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import View
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.timezone import pytz
 from typing import Dict
 
 from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCard, AddLanCard, AddSoundCard, \
@@ -16,6 +17,7 @@ from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard,
 from .utils import render_to_pdf
 
 import pdfkit
+from datetime import datetime
 
 
 def check_denied_access_add(func):
@@ -105,10 +107,6 @@ def add(request):
     return render(request, 'IT_items/add.html')
 
 
-# def add_item(request):
-#     return render(request, 'IT_items/add.html')
-
-
 @check_denied_access_add
 def add_pc(request):
     if request.method == 'POST':
@@ -153,12 +151,11 @@ def add_motherboard(request):
                                       form_factor=cd['motherboard_form_factor'],
                                       type_ram_slot=cd['motherboard_type_ram_slot'])
 
-            # motherboard.save()
             try:
                 motherboard.save()
             except:
                 return render(request, 'IT_items/error.html', {'serial_number': motherboard.serial_number,
-                                                               'name_of_item': motherboard.name})
+                                                               'name_of_item': motherboard.name_for_user})
 
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -183,7 +180,7 @@ def add_solid_state_drive(request):
                 solid_state_drive.save()
             except:
                 return render(request, 'IT_items/error.html', {'serial_number': solid_state_drive.serial_number,
-                                                               'name_of_item': solid_state_drive.name})
+                                                               'name_of_item': solid_state_drive.name_for_user})
 
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -208,7 +205,7 @@ def add_hard_disk_drive(request):
                 hard_disk_drive.save()
             except:
                 return render(request, 'IT_items/error.html', {'serial_number': hard_disk_drive.serial_number,
-                                                               'name_of_item': hard_disk_drive.name})
+                                                               'name_of_item': hard_disk_drive.name_for_user})
 
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -227,12 +224,12 @@ def add_power_supply(request):
             power_supply = PowerSupply(brand=cd['power_supply_brand'], model=cd['power_supply_model'],
                                        serial_or_inventory_number=cd['power_supply_serial_number_or_inventory_number'],
                                        power_consumption=cd['power_supply_power_consumption'])
-            # power_supply.save()
+
             try:
                 power_supply.save()
             except:
                 return render(request, 'IT_items/error.html', {'serial_number': power_supply.serial_or_inventory_number,
-                                                               'name_of_item': power_supply.name})
+                                                               'name_of_item': power_supply.name_for_user})
 
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -252,12 +249,12 @@ def add_video_card(request):
                                    model=cd['video_card_model'],
                                    serial_number=cd['video_card_serial_number'],
                                    memory_size=cd['video_card_memory_size'])
-            # video_card.save()
+
             try:
                 video_card.save()
             except:
                 return render(request, 'IT_items/error.html', {'serial_number': video_card.serial_number,
-                                                               'name_of_item': video_card.name})
+                                                               'name_of_item': video_card.name_for_user})
 
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -276,12 +273,12 @@ def add_lan_card(request):
             lan_card = LanCard(brand=cd['lan_card_brand'],
                                model=cd['lan_card_model'],
                                serial_number=cd['lan_card_serial_number'])
-            # lan_card.save()
+
             try:
                 lan_card.save()
             except:
                 return render(request, 'IT_items/error.html', {'serial_number': lan_card.serial_number,
-                                                               'name_of_item': lan_card.name})
+                                                               'name_of_item': lan_card.name_for_user})
 
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
@@ -300,7 +297,11 @@ def add_sound_card(request):
             sound_card = SoundCard(brand=cd['sound_card_brand'],
                                    model=cd['sound_card_model'],
                                    serial_number=cd['sound_card_serial_number'])
-            sound_card.save()
+            try:
+                sound_card.save()
+            except:
+                return render(request, 'IT_items/error.html', {'serial_number': sound_card.serial_number,
+                                                               'name_of_item': sound_card.name_for_user})
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
         form = AddSoundCard()
@@ -320,7 +321,11 @@ def add_optical_drive(request):
                                          serial_number=cd['optical_drive_serial_number'],
                                          type_drive=cd['optical_drive_type_drive'],
                                          type_connector=cd['optical_drive_type_connector'])
-            optical_drive.save()
+            try:
+                optical_drive.save()
+            except:
+                return render(request, 'IT_items/error.html', {'serial_number': optical_drive.serial_number,
+                                                               'name_of_item': optical_drive.name_for_user})
             return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
     else:
         form = AddOpticalDrive()
@@ -476,9 +481,6 @@ def pc_update(request, item_name, item_id):
             item.sound_card = None
 
         optical_drive = request.POST.get('optical_drive', None)
-        # optical_drive = item.optical_drive
-        # print(optical_drive)
-
         if optical_drive != 'None':
             optical_drive_dic = optical_drive.split()
             optical_drive = OpticalDrive.objects.get(model=optical_drive_dic[2],
@@ -746,13 +748,13 @@ class GeneratePDF(LoginRequiredMixin, View):
         except:
             raise Http404('ERROR GeneratePdf:get')
 
-        from datetime import datetime
+        tzkiev = pytz.timezone('Europe/Kiev')
 
         context = {
             'user_first_name': request.user.first_name,
             'user_last_name': request.user.last_name,
 
-            'current_time': datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            'current_time': datetime.now(tzkiev).strftime("%d/%m/%Y %H:%M:%S"),
 
             'item_id': item.id,
             'item_name': item.name,

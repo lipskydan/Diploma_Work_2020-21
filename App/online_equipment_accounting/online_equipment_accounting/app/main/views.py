@@ -9,7 +9,8 @@ from .forms import SignUpForm, LoginForm
 
 from django import template
 from django.db import models
-from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive
+from IT_items.models import Motherboard, PowerSupply, PC, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive, \
+    HardDiskDrive
 
 
 def get_motherboard_brand_data_and_labels():
@@ -134,7 +135,50 @@ def get_solid_state_drives_memory_size_data_and_labels():
         if qs.memory_size not in dict_item:
             dict_item[qs.memory_size] = 1
             if qs.memory_size >= 1000:
-                labels.append([str(str(qs.memory_size) + ' GB'), str('( ' + str(round(qs.memory_size / 1000)) + ' TB )')])
+                labels.append(
+                    [str(str(qs.memory_size) + ' GB'), str('( ' + str(round(qs.memory_size / 1000)) + ' TB )')])
+            else:
+                labels.append([str(str(qs.memory_size) + ' GB')])
+        else:
+            dict_item[qs.memory_size] += 1
+
+    for key in dict_item.keys():
+        data.append(dict_item[key])
+
+    return data, labels
+
+
+def get_hard_disk_drives_brand_data_and_labels():
+    dict_item = dict()
+    queryset = HardDiskDrive.objects.order_by('brand')[:]
+    labels = []
+    data = []
+
+    for qs in queryset:
+        if qs.brand not in dict_item:
+            dict_item[qs.brand] = 1
+            labels.append(qs.brand)
+        else:
+            dict_item[qs.brand] += 1
+
+    for key in dict_item.keys():
+        data.append(dict_item[key])
+
+    return data, labels
+
+
+def get_hard_disk_drives_memory_size_data_and_labels():
+    dict_item = dict()
+    queryset = HardDiskDrive.objects.order_by('memory_size')[:]
+    labels = []
+    data = []
+
+    for qs in queryset:
+        if qs.memory_size not in dict_item:
+            dict_item[qs.memory_size] = 1
+            if qs.memory_size >= 1000:
+                labels.append(
+                    [str(str(qs.memory_size) + ' GB'), str('( ' + str(round(qs.memory_size / 1000)) + ' TB )')])
             else:
                 labels.append([str(str(qs.memory_size) + ' GB')])
         else:
@@ -321,6 +365,7 @@ def main(request):
     pcs = PC.objects.all()
     motherboards = Motherboard.objects.all()
     solid_state_drives = SolidStateDrive.objects.all()
+    hard_disk_drives = HardDiskDrive.objects.all()
     power_supplies = PowerSupply.objects.all()
     optical_drives = OpticalDrive.objects.all()
     video_cards = VideoCard.objects.all()
@@ -335,6 +380,9 @@ def main(request):
 
     data_solid_state_drive_brand, labels_solid_state_drive_brand = get_solid_state_drives_brand_data_and_labels()
     data_solid_state_drive_memory_size, labels_solid_state_drive_memory_size = get_solid_state_drives_memory_size_data_and_labels()
+
+    data_hard_disk_drive_brand, labels_hard_disk_drive_brand = get_hard_disk_drives_brand_data_and_labels()
+    data_hard_disk_drive_memory_size, labels_hard_disk_drive_memory_size = get_hard_disk_drives_memory_size_data_and_labels()
 
     data_power_supply_consumption, labels_power_supply_consumption = get_power_supply_consumption_data_and_labels()
     data_power_supply_brand, labels_power_supply_brand = get_power_supply_brand_data_and_labels()
@@ -370,6 +418,12 @@ def main(request):
                                               'data_solid_state_drive_brand': data_solid_state_drive_brand,
                                               'labels_solid_state_drive_memory_size': labels_solid_state_drive_memory_size,
                                               'data_solid_state_drive_memory_size': data_solid_state_drive_memory_size,
+
+                                              'hard_disk_drives': hard_disk_drives,
+                                              'labels_hard_disk_drive_brand': labels_hard_disk_drive_brand,
+                                              'data_hard_disk_drive_brand': data_hard_disk_drive_brand,
+                                              'labels_hard_disk_drive_memory_size': labels_hard_disk_drive_memory_size,
+                                              'data_hard_disk_drive_memory_size': data_hard_disk_drive_memory_size,
 
                                               'pcs': pcs,
 

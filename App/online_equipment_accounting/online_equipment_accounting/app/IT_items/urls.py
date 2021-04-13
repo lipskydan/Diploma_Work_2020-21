@@ -13,7 +13,6 @@ urlpatterns = [
     path('pc_accessories', views.pc_accessories, name='pc_accessories'),
 
     path('add', views.add, name='add'),
-    # path('add-item', views.add_item, name='add_item'),
     path('add-item/add-pc', views.add_pc, name='add_pc'),
     path('add-item/add-motherboard', views.add_motherboard, name='add_motherboard'),
     path('add-item/add-power-supply', views.add_power_supply, name='add_power_supply'),
@@ -30,12 +29,6 @@ urlpatterns = [
 
     path('<str:item_name>/<int:item_id>/del', views.item_delete, name='item_delete'),
     path('pc_accessories/<str:item_name>/<int:item_id>/del', views.pc_accessories_delete, name='item_delete'),
-
-    # path('pc_accessories/<str:item_name>/<int:item_id>/del-motherboard', views.motherboard_delete, name='motherboard_delete'),
-    # path('pc_accessories/<str:item_name>/<int:item_id>/del-power-supply', views.power_supply_delete, name='power_supply_delete'),
-    # path('pc_accessories/<str:item_name>/<int:item_id>/del-video-card', views.video_card_delete, name='video_card_delete'),
-    # path('pc_accessories/<str:item_name>/<int:item_id>/del-lan-card', views.lan_card_delete, name='lan_card_delete'),
-    # path('pc_accessories/<str:item_name>/<int:item_id>/del-sound-card', views.sound_card_delete, name='sound_card_delete'),
 
     path('<str:item_name>/<int:item_id>/update-pc', views.pc_update, name='pc_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-motherboard', views.motherboard_update,
@@ -54,9 +47,6 @@ urlpatterns = [
          name='sound_card_update'),
     path('pc_accessories/<str:item_name>/<int:item_id>/update-optical-drive', views.optical_drive_update,
          name='optical_drive_update'),
-
-
-
 
     path('error', views.error, name='error'),
 

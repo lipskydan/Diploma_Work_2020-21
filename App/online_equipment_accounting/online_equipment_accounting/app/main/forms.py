@@ -33,10 +33,6 @@ class SignUpForm(UserCreationForm):
                                    help_text='Обов’язково', queryset=Group.objects.all(), required=True,
                                    widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
-    # image = forms.ImageField(required=False, label='Фото користувача', max_length=254, localize=True,
-    #                          help_text='Необов’язково',
-    #                          widget=widgets.FileInput(attrs={'size': 1, 'class': 'form-control'}))
-
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'group')
