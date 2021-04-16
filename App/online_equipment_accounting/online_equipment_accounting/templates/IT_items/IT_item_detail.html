@@ -306,19 +306,26 @@
 <!--                    {% endif %}-->
 
                     <hr>
-                    <div class="row">
-                        <div class="col-md-9">
-                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-info btn-outline-light">Видалити</a>
 
-                            {% if item.name == 'PC' %}
-                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/update-pc" class="btn btn-info btn-outline-light">Редагування</a>
-                            {% endif %}
+                    <table width="100%" align="center" border="0">
+                        <tr>
+                            <td width="5%"></td>
+                            <td width="15%">
+                                <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-info btn-outline-light">Видалити</a>
+                            </td>
+                            <td width="30%">
+                                {% if item.name == 'PC' %}
+                                <a href="/IT_items/{{ item.name }}/{{ item.id }}/update-pc" class="btn btn-info btn-outline-light">Редагування</a>
+                                {% endif %}
+                            </td>
+                            <td width="45%" align="right">
+                                <a href="/IT_items/{{ item.name }}/{{ item.id }}/pdf" class="btn btn-info btn-outline-light">Створити PDF</a>
+                            </td>
+                            <td width=5%></td>
+                        </tr>
 
-                        </div>
-                        <div class="col-md-3">
-                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/pdf" class="btn btn-info btn-outline-light">Створити PDF</a>
-                        </div>
-                    </div>
+                    </table>
+
 
                 </div>
             </article>

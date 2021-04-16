@@ -410,7 +410,6 @@ def pc_update(request, item_name, item_id):
         item.room = request.POST['room']
         item.place = request.POST['place']
         item.operating_system = request.POST.get('operating_system', None)
-        item.text_field = request.POST.get('text_field', False)
 
         motherboard = request.POST.get('motherboard', None)
         if motherboard != 'None':
