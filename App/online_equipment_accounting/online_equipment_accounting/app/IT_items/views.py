@@ -737,11 +737,11 @@ def add_work_report(request, item_name, item_id):
     created_date = datetime.now(pytz.timezone('Europe/Kiev')).strftime("%Y/%M/%D %H:%M:%S")
 
     if item_name == 'PC':
-            item = PC.objects.get(id=item_id)
-            inventory_number_pc = item.inventory_number
-            work_report = WorkReport(inventory_number_pc=inventory_number_pc,
-                                     work_report_field=work_report_field,
-                                     created_date=created_date)
+        item = PC.objects.get(id=item_id)
+        inventory_number_pc = item.inventory_number
+        work_report = WorkReport(inventory_number_pc=inventory_number_pc,
+                                 work_report_field=work_report_field,
+                                 created_date=created_date)
 
     if request.method == 'POST':
         work_report.work_report_field = request.POST['work_report_field']
@@ -759,11 +759,23 @@ def add_work_report(request, item_name, item_id):
 
 def work_reports(request, item_name, item_id):
     item = PC.objects.get(id=item_id)
-    print(f'item.inventory_number = {item.inventory_number}')
     reports = WorkReport.objects.filter(inventory_number_pc=item.inventory_number)
 
     return render(request, 'IT_items/work_reports.html', {'reports': reports,
                                                           'item': item})
+
+
+def work_report_detail(request, item_name, item_id, inventory_number_pc, report_id):
+    item = PC.objects.get(id=item_id)
+    report = WorkReport.objects.get(inventory_number_pc=inventory_number_pc, id=report_id)
+    return render(request, 'IT_items/work_report_detail.html', {'report': report,
+                                                                'item': item})
+
+
+def work_report_del(request, item_name, item_id, inventory_number_pc, report_id):
+    report = WorkReport.objects.get(inventory_number_pc=inventory_number_pc, id=report_id)
+    report.delete()
+    return HttpResponseRedirect(reverse('IT_items:IT_items'))
 
 
 def error(request):
@@ -854,6 +866,56 @@ class GeneratePDF(LoginRequiredMixin, View):
 
         if pdf:
             filename = '{}_#_{}_floor_{}_room_{}.pdf'.format(item.name, item.inventory_number, item.floor, item.room)
+            content = 'inline; filename="{}"'.format(filename)
+
+            if request.GET.get('save_to_file') == 'true':
+                content = 'attachment; filename="{}"'.format(filename)
+
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = content
+            return response
+
+        return HttpResponse(status=404)
+
+
+class GenerateWorkReportPDF(LoginRequiredMixin, View):
+
+    @staticmethod
+    def get(request, item_name, item_id, inventory_number_pc, report_id):
+        """
+        Generate PDF from HTML template
+        """
+        item = None
+        work_report = None
+
+        try:
+            if item_name == 'PC':
+                item = PC.objects.get(id=item_id)
+        except:
+            raise Http404('ERROR GeneratePdf:get')
+
+        work_report = WorkReport.objects.get(id=report_id)
+
+        tzkiev = pytz.timezone('Europe/Kiev')
+
+        context = {
+            'user_first_name': request.user.first_name,
+            'user_last_name': request.user.last_name,
+
+            'current_time': datetime.now(tzkiev).strftime("%d/%m/%Y %H:%M:%S"),
+
+            'item_name_for_user': item.name_for_user,
+            'inventory_number_pc': work_report.inventory_number_pc,
+            'work_report_field': work_report.work_report_field,
+
+
+        }
+
+        template = 'IT_items/work_report_pdf.html'
+        pdf = render_to_pdf(template, context)
+
+        if pdf:
+            filename = 'inventory_number_pc_{}_report_id_{}.pdf'.format(work_report.inventory_number_pc, work_report.id)
             content = 'inline; filename="{}"'.format(filename)
 
             if request.GET.get('save_to_file') == 'true':

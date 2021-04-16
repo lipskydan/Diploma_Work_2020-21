@@ -273,8 +273,30 @@
 
                     <hr>
 
-                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/add_work_report" class="btn btn-info btn-outline-light">add_work_report</a>
-                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/work_reports" class="btn btn-info btn-outline-light">list_work_report</a>
+                     <table class="col-sm-12" border="0">
+                         <tr>
+                             <td width="40%">
+                                 <h3 class="alert-heading">Акти проведених робіт</h3>
+                             </td>
+
+                            <td width="28%" align="center">
+                                <h4><a href="/IT_items/{{ item.name }}/{{ item.id }}/add_work_report" class="badge badge-info badge">
+                                    Створити новий акт
+                                </a></h4>
+                            </td>
+                            <td width="4%"></td>
+                            <td width="28%" align="center">
+                                 <h4><a href="/IT_items/{{ item.name }}/{{ item.id }}/work_reports" class="badge badge-info badge">
+                                     Переглянути всі акти
+                                 </a></h4>
+                            </td>
+                        </tr>
+                    </table>
+<!--                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/add_work_report" class="btn btn-info btn-outline-light">add_work_report</a>-->
+
+<!--                            <a href="/IT_items/{{ item.name }}/{{ item.id }}/work_reports" class="btn btn-info btn-outline-light">list_work_report</a>-->
+
+
 
 <!--                    <h5>Нотатки: <br><br> {{ item.text_field }}</h5>-->
 
