@@ -272,12 +272,16 @@
                         {% endif %}
 
                     <hr>
-                    <h5>Нотатки: <br><br> {{ item.text_field }}</h5>
+
+                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/add_work_report" class="btn btn-info btn-outline-light">add_work_report</a>
+                    <a href="/IT_items/{{ item.name }}/{{ item.id }}/work_reports" class="btn btn-info btn-outline-light">list_work_report</a>
+
+<!--                    <h5>Нотатки: <br><br> {{ item.text_field }}</h5>-->
 
 
-                    {% elif item.name == 'Switch' %}
+<!--                    {% elif item.name == 'Switch' %}-->
 <!--                        <h4>Кількість Ethernet портів: {{ item.count_of_ports }}</h4>-->
-                    {% endif %}
+<!--                    {% endif %}-->
 
                     <hr>
                     <div class="row">

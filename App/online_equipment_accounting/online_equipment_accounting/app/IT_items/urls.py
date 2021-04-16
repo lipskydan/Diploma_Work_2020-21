@@ -48,6 +48,11 @@ urlpatterns = [
     path('pc_accessories/<str:item_name>/<int:item_id>/update-optical-drive', views.optical_drive_update,
          name='optical_drive_update'),
 
+
+    path('<str:item_name>/<int:item_id>/add_work_report', views.add_work_report, name='add_work_report'),
+    path('<str:item_name>/<int:item_id>/work_reports', views.work_reports, name='work_reports'),
+
+
     path('error', views.error, name='error'),
 
     path('<str:item_name>/<int:item_id>/pdf', GeneratePDF.as_view()),

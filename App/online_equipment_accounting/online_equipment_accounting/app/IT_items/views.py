@@ -8,12 +8,12 @@ from django.utils.timezone import pytz
 from typing import Dict
 
 from .forms import AddPcForm, AddMotherboardForm, AddPowerSupplyForm, AddVideoCard, AddLanCard, AddSoundCard, \
-    AddOpticalDrive, AddSolidStateDriveForm, AddHardDiskDriveForm
+    AddOpticalDrive, AddSolidStateDriveForm, AddHardDiskDriveForm, AddWorkReport
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
     TYPE_OPERATING_SYSTEM, TYPE_CENTRAL_PROCESSING_UNIT
 from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive, \
-    HardDiskDrive
+    HardDiskDrive, WorkReport
 from .utils import render_to_pdf
 
 import pdfkit
@@ -115,7 +115,7 @@ def add_pc(request):
             cd = form.cleaned_data
 
             item = PC(inventory_number=cd['inventory_number'], floor=cd['floor'], room=cd['room'], place=cd['place'],
-                      operating_system=cd['operating_system'], text_field=cd['text_field'],
+                      operating_system=cd['operating_system'],
                       motherboard=cd['motherboard'],
                       solid_state_drive=cd['solid_state_drive'],
                       hard_disk_drive=cd['hard_disk_drive'],
@@ -730,6 +730,42 @@ def optical_drive_update(request, item_name, item_id):
                                                                       'type_connectors': type_connectors})
 
 
+def add_work_report(request, item_name, item_id):
+    work_report = None
+    work_report_field = ''
+    inventory_number_pc = ''
+    created_date = datetime.now(pytz.timezone('Europe/Kiev')).strftime("%Y/%M/%D %H:%M:%S")
+
+    if item_name == 'PC':
+            item = PC.objects.get(id=item_id)
+            inventory_number_pc = item.inventory_number
+            work_report = WorkReport(inventory_number_pc=inventory_number_pc,
+                                     work_report_field=work_report_field,
+                                     created_date=created_date)
+
+    if request.method == 'POST':
+        work_report.work_report_field = request.POST['work_report_field']
+        try:
+            work_report.save()
+            return HttpResponseRedirect(reverse('IT_items:IT_items'))
+        except ObjectDoesNotExist:
+            return 'При обновлении оборудывания произошла ошибка'
+
+    else:
+        return render(request, 'IT_items/add_work_report.html', {'work_report': work_report,
+                                                                 'inventory_number_pc': inventory_number_pc,
+                                                                 'created_date': created_date})
+
+
+def work_reports(request, item_name, item_id):
+    item = PC.objects.get(id=item_id)
+    print(f'item.inventory_number = {item.inventory_number}')
+    reports = WorkReport.objects.filter(inventory_number_pc=item.inventory_number)
+
+    return render(request, 'IT_items/work_reports.html', {'reports': reports,
+                                                          'item': item})
+
+
 def error(request):
     return render(request, 'IT_items/error.html')
 
@@ -766,7 +802,7 @@ class GeneratePDF(LoginRequiredMixin, View):
             'item_place': item.place,
 
             'item_operating_system': item.operating_system,
-            'item_text_field': item.text_field,
+            # 'item_text_field': item.text_field if item.text_field else None,
 
             'item_motherboard_brand': item.motherboard.brand if item.motherboard else None,
             'item_motherboard_model': item.motherboard.model if item.motherboard else None,

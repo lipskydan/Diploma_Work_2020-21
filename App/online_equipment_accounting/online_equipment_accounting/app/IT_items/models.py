@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 MOTHERBOARD_FROM_FACTORS = [
     ('не вказано', ''),
@@ -251,7 +252,7 @@ class PC(models.Model):
     sound_card = models.ForeignKey(SoundCard, on_delete=models.OneToOneField, null=True)
     optical_drive = models.ForeignKey(OpticalDrive, on_delete=models.OneToOneField, null=True)
 
-    text_field = models.TextField(default='Місце для нотаток', null=True)
+    # text_field = models.TextField(default='Місце для нотаток', null=True)
 
     name_for_user = 'Персональний комп\'ютор'
     name = 'PC'
@@ -265,3 +266,24 @@ class PC(models.Model):
     class Meta:
         verbose_name = 'Персональний комп\'ютор'
         verbose_name_plural = 'Персональні комп\'ютори'
+
+
+class WorkReport(models.Model):
+    __tablename__ = 'WorkReport'
+
+    inventory_number_pc = models.CharField('інвентарний номер персонального комп\'ютера', max_length=200, unique=False)
+    work_report_field = models.TextField('Опис проведених робіт', default='Опис проведених робіт', unique=False)
+    created_date = models.DateTimeField('Час створення', auto_now=True, blank=True)
+
+    name_for_user = 'Акт проведеної роботи'
+    name = 'Work Report'
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return 'inventory_number_pc - ' + str(self.inventory_number_pc) + ' created_date - ' + str(self.created_date)
+
+    class Meta:
+        verbose_name = 'Акт проведеної роботи'
+        verbose_name_plural = 'Акти проведених робіт'
+

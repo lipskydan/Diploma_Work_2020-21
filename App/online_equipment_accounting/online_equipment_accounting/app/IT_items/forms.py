@@ -3,7 +3,7 @@ from django import forms
 from django.forms import widgets
 
 from .models import PC, Motherboard, PowerSupply, VideoCard, LanCard, SoundCard, OpticalDrive, SolidStateDrive, \
-    HardDiskDrive
+    HardDiskDrive, WorkReport
 
 from .models import MOTHERBOARD_FROM_FACTORS, TYPE_RAM_SLOTS, TYPE_OPTICAL_DRIVE, TYPE_CONNECTOR_OF_OPTICAL_DRIVE, \
     TYPE_OPERATING_SYSTEM, TYPE_CENTRAL_PROCESSING_UNIT
@@ -27,8 +27,8 @@ class AddPcForm(forms.ModelForm):
                                          required=False, localize=True, help_text='Необов’язково',
                                          widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
-    text_field = forms.CharField(label='Нотатки', required=False,
-                                 widget=forms.Textarea(attrs={'size': 1, 'class': 'form-control'}))
+    # text_field = forms.CharField(label='Нотатки', required=False,
+    #                              widget=forms.Textarea(attrs={'size': 1, 'class': 'form-control'}))
 
     motherboard = forms.ModelChoiceField(queryset=Motherboard.objects.all(), label='Материнська плата',
                                          empty_label='', required=False, help_text='Необов’язково',
@@ -297,3 +297,17 @@ class AddOpticalDrive(forms.ModelForm):
         model = SoundCard
         fields = ['optical_drive_brand', 'optical_drive_model', 'optical_drive_serial_number',
                   'optical_drive_type_drive', 'optical_drive_type_connector']
+
+
+class AddWorkReport(forms.ModelForm):
+    inventory_number_pc = forms.CharField(label='Інвентарний номер персонального комп\'ютера', max_length=30,
+                                          required=True, help_text='Обов’язково', localize=True,
+                                          widget=widgets.TextInput(attrs={'size': 1, 'class': 'form-control'}))
+
+    work_report_field = forms.CharField(label='Опис проведених робіт', help_text='Обов’язково',
+                                        localize=True, required=True,
+                                        widget=forms.Textarea(attrs={'size': 1, 'class': 'form-control'}))
+
+    class Meta:
+        model = WorkReport
+        fields = ['inventory_number_pc', 'work_report_field']
