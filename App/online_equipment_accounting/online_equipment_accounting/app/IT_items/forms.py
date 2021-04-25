@@ -143,7 +143,7 @@ class AddSolidStateDriveForm(forms.ModelForm):
                                                       required=True, localize=True,
                                                       help_text='Обов’язково',
                                                       error_messages={
-                                                          'unique': 'Материнська плата з таким серійним номером вже існує.'},
+                                                          'unique': 'Твердотільний накопичувач з таким серійним номером вже існує.'},
                                                       widget=widgets.TextInput(
                                                           attrs={'size': 1, 'class': 'form-control'}))
 
@@ -174,7 +174,7 @@ class AddHardDiskDriveForm(forms.ModelForm):
                                                     required=True, localize=True,
                                                     help_text='Обов’язково',
                                                     error_messages={
-                                                        'unique': 'Материнська плата з таким серійним номером вже існує.'},
+                                                        'unique': 'Жорсткий магнітний диск з таким серійним номером вже існує.'},
                                                     widget=widgets.TextInput(
                                                         attrs={'size': 1, 'class': 'form-control'}))
 

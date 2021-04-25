@@ -61,7 +61,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(PROJECT_ROOT, 'templates')
+            os.path.join(PROJECT_ROOT, 'templates'),
+            os.path.join(PROJECT_ROOT, 'static')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -160,8 +161,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
-]
+STATICFILES_DIRS = [os.path.join(PROJECT_ROOT, 'online_equipment_accounting/static')]
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
