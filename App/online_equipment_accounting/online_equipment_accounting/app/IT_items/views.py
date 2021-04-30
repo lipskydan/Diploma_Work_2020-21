@@ -20,6 +20,10 @@ import pdfkit
 from datetime import datetime
 
 
+def test(request):
+    return render(request, 'IT_items/message_item.html')
+
+
 def check_denied_access_add(func):
     def wrapper(request):
         if not request.user.groups.filter(name__in=['Редактор']).exists():
@@ -127,7 +131,9 @@ def add_pc(request):
 
             item.save()
 
-            return HttpResponseRedirect(reverse('IT_items:IT_items'))
+            # return HttpResponseRedirect(reverse('IT_items:IT_items'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'add'})
     else:
         form = AddPcForm()
         pass
@@ -157,7 +163,10 @@ def add_motherboard(request):
                 return render(request, 'IT_items/error.html', {'serial_number': motherboard.serial_number,
                                                                'name_of_item': motherboard.name_for_user})
 
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html',
+                          {'name_of_item_for_user': motherboard.name_for_user,
+                           'type_action': 'add'})
     else:
         form = AddMotherboardForm()
         pass
@@ -182,7 +191,10 @@ def add_solid_state_drive(request):
                 return render(request, 'IT_items/error.html', {'serial_number': solid_state_drive.serial_number,
                                                                'name_of_item': solid_state_drive.name_for_user})
 
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html',
+                          {'name_of_item_for_user': solid_state_drive.name_for_user,
+                           'type_action': 'add'})
     else:
         form = AddSolidStateDriveForm()
         pass
@@ -207,7 +219,10 @@ def add_hard_disk_drive(request):
                 return render(request, 'IT_items/error.html', {'serial_number': hard_disk_drive.serial_number,
                                                                'name_of_item': hard_disk_drive.name_for_user})
 
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html',
+                          {'name_of_item_for_user': hard_disk_drive.name_for_user,
+                           'type_action': 'add'})
     else:
         form = AddHardDiskDriveForm()
         pass
@@ -231,7 +246,11 @@ def add_power_supply(request):
                 return render(request, 'IT_items/error.html', {'serial_number': power_supply.serial_or_inventory_number,
                                                                'name_of_item': power_supply.name_for_user})
 
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html',
+                          {'name_of_item_for_user': power_supply.name_for_user,
+                           'type_action': 'add'})
+
     else:
         form = AddPowerSupplyForm()
         pass
@@ -256,7 +275,10 @@ def add_video_card(request):
                 return render(request, 'IT_items/error.html', {'serial_number': video_card.serial_number,
                                                                'name_of_item': video_card.name_for_user})
 
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html',
+                          {'name_of_item_for_user': video_card.name_for_user,
+                           'type_action': 'add'})
     else:
         form = AddVideoCard()
         pass
@@ -280,7 +302,10 @@ def add_lan_card(request):
                 return render(request, 'IT_items/error.html', {'serial_number': lan_card.serial_number,
                                                                'name_of_item': lan_card.name_for_user})
 
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html',
+                          {'name_of_item_for_user': lan_card.name_for_user,
+                           'type_action': 'add'})
     else:
         form = AddLanCard()
         pass
@@ -302,7 +327,11 @@ def add_sound_card(request):
             except:
                 return render(request, 'IT_items/error.html', {'serial_number': sound_card.serial_number,
                                                                'name_of_item': sound_card.name_for_user})
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html',
+                          {'name_of_item_for_user': sound_card.name_for_user,
+                           'type_action': 'add'})
     else:
         form = AddSoundCard()
         pass
@@ -326,7 +355,11 @@ def add_optical_drive(request):
             except:
                 return render(request, 'IT_items/error.html', {'serial_number': optical_drive.serial_number,
                                                                'name_of_item': optical_drive.name_for_user})
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html',
+                          {'name_of_item_for_user': optical_drive.name_for_user,
+                           'type_action': 'add'})
     else:
         form = AddOpticalDrive()
         pass
@@ -906,7 +939,6 @@ class GenerateWorkReportPDF(LoginRequiredMixin, View):
             'item_name_for_user': item.name_for_user,
             'inventory_number_pc': work_report.inventory_number_pc,
             'work_report_field': work_report.work_report_field,
-
 
         }
 

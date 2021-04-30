@@ -1,0 +1,57 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+{% if  type_action == 'add'%}
+Об'єкт було додано
+{% elif type_action == 'del' %}
+Об'єкт було видалено
+{% elif type_action == 'edit' %}
+Об'єкт було редаговано
+{% endif %}
+
+{% endblock %}
+{% block body %}
+<br>
+<br>
+<br>
+<div class="d-flex justify-content-center">
+    <aside class="col-sm-11">
+        <div class="card">
+            <article class="card-body">
+
+              <table border="0">
+                <tr>
+                  <td colspan="3">
+                      {% if  type_action == 'add'%}
+                      <h2><p align="center"> Об'єкт "{{name_of_item_for_user}}" було додано</p></h2>
+                      {% elif type_action == 'del' %}
+                      <h2><p align="center"> Об'єкт "{{name_of_item_for_user}}" було видалено</p></h2>
+                      {% elif type_action == 'edit' %}
+                      <h2><p align="center"> Об'єкт "{{name_of_item_for_user}}" було редаговано</p></h2>
+                      {% endif %}
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td width="33%">
+                    <p align="center">
+                        <a class="btn btn-outline-info  btn-block" href="/IT_items/add" role="button">Продовжити</a>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+
+
+
+
+
+			</article>
+        </div>
+    </aside>
+</div>
+<br>
+<br>
+<br>
+{% endblock %}
