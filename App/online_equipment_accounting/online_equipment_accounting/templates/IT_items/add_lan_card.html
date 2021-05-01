@@ -1,0 +1,98 @@
+{% extends 'base_main.html' %}
+{% block title %}
+Додавання Мережевої плати
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+   <div class="d-flex justify-content-center">
+      <aside class="col-sm-10">
+         <div class="card">
+            <article class="card-body">
+               <h1>Додавання відео карти</h1>
+               <form method="post">
+                  {% csrf_token %}
+                   <div class="form-group">
+                        <table class="col-sm-12" align="center" border="0">
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
+
+                                    <!--Name of field and input-->
+                                    {{ form.lan_card_serial_number.label_tag }} {{ form.lan_card_serial_number }}
+
+                                    <br>
+
+                                    <!--Show help text for field-->
+                                    {% if form.lan_card_serial_number.help_text %}
+                                    <small style="color: grey">{{ form.lan_card_serial_number.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.lan_card_serial_number.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.lan_card_brand.label_tag }}
+<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                    {{ form.lan_card_brand }}
+
+                                    <br>
+
+                                    <!--Show help text for field-->
+                                    {% if form.lan_card_brand.help_text %}
+                                    <small style="color: grey">{{ form.lan_card_brand.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.lan_card_brand.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                                <td></td>
+                                <td align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.lan_card_model.label_tag }}
+<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                    {{ form.lan_card_model }}
+
+                                    <br>
+
+                                    <!--Show help text for field-->
+                                    {% if form.lan_card_model.help_text %}
+                                    <small style="color: grey">{{ form.lan_card_model.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.lan_card_model.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                        </table>
+                   </div>
+                   <input type="submit" class="btn btn-outline-info" value="Створити">
+               </form>
+            </article>
+         </div>
+      </aside>
+   </div>
+</div>
+{% endblock %}

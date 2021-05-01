@@ -1,0 +1,75 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+   Акт проведеної роботи
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+   <div class="d-flex justify-content-center">
+      <aside class="col-sm-8">
+         <div class="card">
+            <article class="card-body">
+
+              <h1>Акт проведеної роботи</h1>
+
+              <form method="post">
+                {% csrf_token %}
+
+                <div class="">
+                  <div class="form-group">
+                    <table class="col-sm-12" align="center" border="0">
+                      <tr>
+                        <td colspan="2">
+                          <hr>
+                        </td>
+                      </tr>
+                      <tr>
+                          <td width="40%" align="center">
+                              <p>Час створення:</p>
+                          </td>
+                          <td>
+                          <input type="text" disabled name="created_date" id="created_date" class="form-control" value="{{created_date}}">
+                        </td>
+                      </tr>
+                        <tr>
+                            <td colspan="2"><br></td>
+                        </tr>
+                      <tr>
+                        <td width="40%" align="center">
+                          <p>Персональний комп'ютер:</p>
+                        </td>
+                        <td>
+                          <input type="text" disabled name="inventory_number_pc" id="inventory_number_pc" class="form-control" value="{{inventory_number_pc}}">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <hr>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <p>Опис проведених робіт</p>
+                          <textarea name="work_report_field" id="work_report_field" class="form-control" placeholder=""></textarea>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <hr>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                   <input type="submit" class="btn btn-outline-info" value="Створити">
+              </form>
+
+
+
+            </article>
+         </div>
+      </aside>
+   </div>
+</div>
+{% endblock %}
+

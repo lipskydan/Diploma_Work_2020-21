@@ -1,0 +1,123 @@
+{% extends "base_main.html" %}
+{% block title %}Авторизація{% endblock %}
+{% block body %}
+
+<div class="d-flex justify-content-center">
+            <aside class="col-sm-4">
+                <div class="card">
+                    <article class="card-body">
+<!--                        <a href="/signup" class="float-right btn btn-outline-info">Регістрація</a>-->
+                        <h4 class="card-title mb-4 mt-1">Авторизація</h4>
+
+                        <form method="post">
+                            {% csrf_token %}
+
+                     <table class="col-sm-12" align="center" border="0">
+                         <tr>
+                             <td colspan="2">
+                                 <hr>
+                             </td>
+                         </tr>
+                         <tr align="center">
+                             <td width="35%">
+                                 {{ form.username.label_tag }}
+                             </td>
+                             <td>
+                                 {{ form.username }}
+                             </td>
+                         </tr>
+                         <tr align="center">
+                             <td colspan="2">
+                                  <!--Show help text for field-->
+                                      {% if form.username.help_text %}
+                                      <small style="color: grey">{{ form.username.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.username.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                             </td>
+                         </tr>
+                         <tr>
+                             <td colspan="2">
+                                 <br>
+                             </td>
+                         </tr>
+                         <tr align="center">
+                             <td width="35%">
+                                 {{ form.password.label_tag }}
+                             </td>
+                             <td>
+                                 {{ form.password }}
+                             </td>
+                         </tr>
+                         <tr align="center">
+                             <td colspan="2">
+                                  <!--Show help text for field-->
+                                      {% if form.password.help_text %}
+                                      <small style="color: grey">{{ form.password.help_text }}</small>
+                                      {% endif %}
+
+                                      <!--Show error text for field-->
+                                      {% for error in form.password.errors %}
+                                      <p style="color: red">{{ error }}</p>
+                                      {% endfor %}
+                             </td>
+                         </tr>
+                         <tr>
+                             <td colspan="2">
+                                 <hr>
+                             </td>
+                         </tr>
+                     </table>
+
+<!--                            <div class="">-->
+<!--                                {% for field in form %}-->
+<!--                                <div class="form-group">-->
+<!--                                    {{ field.label_tag }} <br> {{ field }} <br>-->
+<!--                                </div>-->
+<!--                                {% endfor %}-->
+<!--                            </div>-->
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-block">Увійти</button>
+                            </div>
+                        </form>
+                    </article>
+                </div>
+            </aside>
+</div>
+
+{% endblock %}
+
+<!--<div class="row">-->
+<!--	<aside class="col-sm-4">-->
+<!--        <p>Login form style 1</p>-->
+<!--        <div class="card">-->
+<!--            <article class="card-body">-->
+<!--                <a href="" class="float-right btn btn-outline-info">Sign up</a>-->
+<!--                <h4 class="card-title mb-4 mt-1">Sign in</h4>-->
+<!--                <form>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Your email</label>-->
+<!--                        <input name="" class="form-control" placeholder="Email" type="email">-->
+<!--                    </div> &lt;!&ndash; form-group// &ndash;&gt;-->
+<!--                    <div class="form-group">-->
+<!--                        <a class="float-right" href="#">Forgot?</a>-->
+<!--                        <label>Your password</label>-->
+<!--                        <input class="form-control" placeholder="******" type="password">-->
+<!--                    </div> &lt;!&ndash; form-group// &ndash;&gt;-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="checkbox">-->
+<!--                            <label> <input type="checkbox"> Save password </label>-->
+<!--                        </div> &lt;!&ndash; checkbox .// &ndash;&gt;-->
+<!--                    </div> &lt;!&ndash; form-group// &ndash;&gt;-->
+<!--                    <div class="form-group">-->
+<!--                        <button type="submit" class="btn btn-info btn-block"> Login  </button>-->
+<!--                    </div> &lt;!&ndash; form-group// &ndash;&gt;-->
+<!--                </form>-->
+<!--            </article>-->
+<!--        </div> &lt;!&ndash; card.// &ndash;&gt;-->
+<!--    </aside> &lt;!&ndash; col.// &ndash;&gt;-->
+<!--</div>-->

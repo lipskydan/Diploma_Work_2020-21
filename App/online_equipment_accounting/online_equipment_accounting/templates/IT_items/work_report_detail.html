@@ -1,0 +1,59 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+Акт проведеної роботи
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <aside class="col-sm-10">
+            <div class="card">
+                <article class="card-body">
+                    <div class="alert alert-info">
+
+                        <h2 align="center" class="alert-heading">Акт проведеної роботи</h2>
+                        <hr>
+                        <h5>Час створення: {{ report.created_date }}</h5>
+                        <hr>
+
+                        <table width="95%" align="center" border="0">
+                            <tr>
+                                <td>
+                                    <p align="justify">{{ report.work_report_field }}</p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        <table width="100%" align="center" border="0">
+                            <tr>
+                                <td width="5%"></td>
+                                <td width="45%" align="center">
+                                    <a href="/IT_items/{{item.name}}/{{item.id}}/work_reports/{{report.inventory_number_pc}}/{{report.id}}/del" class="btn btn-info btn-outline-light">Видалити</a>
+                                </td>
+                                <td width="45%" align="center">
+                                    <a href="/IT_items/{{item.name}}/{{item.id}}/work_reports/{{report.inventory_number_pc}}/{{report.id}}/pdf" class="btn btn-info btn-outline-light">Створити PDF</a>
+                                </td>
+                                <td width="5%"></td>
+                            </tr>
+                        </table>
+
+
+<!--                  <div class="row">-->
+<!--                    <div class="col-md-3">-->
+<!--                        <a href="/IT_items/{{item.name}}/{{item.id}}/work_reports/{{report.inventory_number_pc}}/{{report.id}}/del" class="btn btn-info btn-outline-light">Видалити</a>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-9">-->
+<!--                        <a href="/IT_items/{{item.name}}/{{item.id}}/work_reports/{{report.inventory_number_pc}}/{{report.id}}/pdf" class="btn btn-info btn-outline-light">Створити PDF</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+                    </div>
+                </article>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}
+

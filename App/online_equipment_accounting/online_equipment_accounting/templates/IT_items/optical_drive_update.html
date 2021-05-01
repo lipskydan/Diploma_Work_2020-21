@@ -1,0 +1,119 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+    {% if item.name == 'OpticalDrive' %}
+    Оновлення оптичного привода
+    {% endif %}
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+   <div class="d-flex justify-content-center">
+      <aside class="col-sm-8">
+         <div class="card">
+            <article class="card-body">
+
+                {% if item.name == 'OpticalDrive' %}
+                <h1>Оновлення оптичного привода</h1>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="">
+                        <div class="form-group">
+                            <table class="col-sm-12" align="center" border="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Тип обладнання:</p>
+                                        <div class="mx-auto" style="width: 95%">
+                                            <input type="text" disabled name="name" id="name" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">
+                                        <p>Модель:</p>
+                                        <div class="mx-auto" style="width: 90%">
+                                            <input type="text" name="optical_drive_model" id="optical_drive_model" class="form-control" value="{{ item.model }}" placeholder="Введіть модель материнської плати">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>Бренд:</p>
+                                        <div class="mx-auto" style="width: 90%">
+                                            <input type="text" name="optical_drive_brand" id="optical_drive_brand" class="form-control" value="{{ item.brand }}" placeholder="Введіть тип обладнанням">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Серійний номер:</p>
+                                        <div class="mx-auto" style="width: 95%">
+                                            <input type="text" name="optical_drive_serial_number" id="optical_drive_serial_number" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер материнської плати">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Тип приводу:</p>
+                                        <div class="mx-auto" style="width: 90%">
+                                            <select class="form-control" name="optical_drive_type_drive" id="optical_drive_type_drive">
+                                                {% for type_drive in type_drives %}
+                                                <option {% if type_drive == item.type_drive %} selected {% endif %}
+                                                        value="{{ type_drive }}">
+                                                    {{ type_drive }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>Тип роз'єму:</p>
+                                        <div class="mx-auto" style="width: 90%">
+                                            <select class="form-control" name="optical_drive_type_connector" id="optical_drive_type_connector">
+                                                {% for type_connector in type_connectors %}
+                                                <option {% if type_connector == item.type_connector %} selected {% endif %}
+                                                        value="{{ type_connector }}">
+                                                    {{ type_connector }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-outline-info" value="Оновити">
+                </form>
+                {% endif %}
+
+            </article>
+         </div>
+      </aside>
+   </div>
+</div>
+{% endblock %}
+

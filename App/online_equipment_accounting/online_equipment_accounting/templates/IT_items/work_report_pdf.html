@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+      <link rel="stylesheet" href="online_equipment_accounting/templates/bootstrap_for_xhtml2pdf.css">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <title>Акт проведеної роботи</title>
+    <style type="text/css">
+      @page {
+        size: "A4";
+        border: 5px;
+        margin: .5cm;
+      }
+
+       @font-face {
+        font-family: "Arial";
+        src: url("online_equipment_accounting/arial.ttf") format("truetype");
+        }
+
+      body {
+        font-family: "Arial";
+        font-size: 12px
+        }
+
+      .container {
+        padding: .4cm;
+      }
+    </style>
+  </head>
+  <body>
+
+  <table border="0">
+      <tr>
+          <td align="center" colspan="3">
+              <h3>Акт проведеної роботи</h3>
+          </td>
+      </tr>
+      <tr>
+        <td align="center" colspan="3">
+          <h4>{{item_name_for_user}} {{ inventory_number_pc }}</h4>
+        </td>
+      </tr>
+     <tr>
+          <td colspan="3">
+              <br>
+          </td>
+      </tr>
+      <tr>
+          <td width="60%">
+              <h5>Згенерував акт проведеної роботи: {{ user_first_name }} {{ user_last_name }}</h5>
+          </td>
+          <td width="10%"></td>
+        <td align="center"><h5>{{ current_time }}</h5></td>
+      </tr>
+    <tr>
+      <td colspan="3">
+        <br>
+      </td>
+    </tr>    <tr>
+      <td colspan="3">
+        <h4>Звіт</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <p align="justify">{{ work_report_field }}</p>
+      </td>
+    </tr>
+  </table>
+  </body>
+</html>

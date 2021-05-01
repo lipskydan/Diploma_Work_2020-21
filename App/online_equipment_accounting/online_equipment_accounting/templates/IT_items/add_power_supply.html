@@ -1,0 +1,127 @@
+{% extends 'base_main.html' %}
+{% block title %}
+Додавання Блока живлення
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+   <div class="d-flex justify-content-center">
+      <aside class="col-sm-10">
+         <div class="card">
+            <article class="card-body">
+               <h1>Додавання блока живлення</h1>
+               <form method="post">
+                  {% csrf_token %}
+                   <div class="form-group">
+                        <table class="col-sm-12" align="center" border="0">
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
+
+                                    <!--Name of field and input-->
+                                    {{ form.power_supply_serial_number_or_inventory_number.label_tag }}
+                                    <br>
+                                    {{ form.power_supply_serial_number_or_inventory_number }}
+                                    <br>
+
+
+
+                                    <!--Show help text for field-->
+                                    {% if form.power_supply_serial_number_or_inventory_number.help_text %}
+                                    <small style="color: grey">{{ form.power_supply_serial_number_or_inventory_number.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.power_supply_serial_number_or_inventory_number.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.power_supply_brand.label_tag }}
+<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                    {{ form.power_supply_brand }}
+
+                                    <br>
+
+                                    <!--Show help text for field-->
+                                    {% if form.power_supply_brand.help_text %}
+                                    <small style="color: grey">{{ form.power_supply_brand.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.power_supply_brand.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                                <td></td>
+                                <td align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.power_supply_model.label_tag }}
+<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                    {{ form.power_supply_model }}
+
+                                    <br>
+
+                                    <!--Show help text for field-->
+                                    {% if form.power_supply_model.help_text %}
+                                    <small style="color: grey">{{ form.power_supply_model.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.power_supply_model.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
+                                    <!--Name of field and input-->
+                                    {{ form.power_supply_power_consumption.label_tag }}
+                                    <br>
+<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                    {{ form.power_supply_power_consumption }}
+
+                                    <br>
+
+                                    <!--Show help text for field-->
+                                    {% if form.power_supply_power_consumption.help_text %}
+                                    <small style="color: grey">{{ form.power_supply_power_consumption.help_text }}</small>
+                                    {% endif %}
+
+                                    <!--Show error text for field-->
+                                    {% for error in form.power_supply_power_consumption.errors %}
+                                    <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                            <tr>
+                                  <td colspan="3">
+                                      <hr>
+                                  </td>
+                            </tr>
+                        </table>
+                   </div>
+                   <input type="submit" class="btn btn-outline-info" value="Створити">
+               </form>
+            </article>
+         </div>
+      </aside>
+   </div>
+</div>
+{% endblock %}

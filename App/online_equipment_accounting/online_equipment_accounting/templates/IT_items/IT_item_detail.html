@@ -1,0 +1,325 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+{{ item.name }} - {{ item.inventory_number }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+      <aside class="col-sm-10">
+         <div class="card">
+            <article class="card-body">
+                <div class="alert alert-info">
+
+                    <h2 align="center" class="alert-heading">Паспорт обладнання</h2>
+                    <hr>
+                    <h2 class="alert-heading">Основне</h2>
+                    <hr>
+                    <h5 align="justify">Тип обладнання: {{ item.name_for_user }}</h5>
+                    <h5 align="justify">Інвентарний номер: {{ item.inventory_number }}</h5>
+                    <hr>
+                    <h2 class="alert-heading">Місцезнаходження</h2>
+                    <hr>
+                    <h5>Поверх: {{ item.floor }}</h5>
+                    <h5>Кабінет: {{ item.room }}</h5>
+                    <h5>Учбове місце: {{ item.place }}</h5>
+                    <hr>
+                    <h5>Операційна система: {{ item.operating_system }}</h5>
+                    <hr>
+                    <h2 class="alert-heading">Компоненти</h2>
+                    <hr>
+
+
+                         <table class="col-sm-12" border="0">
+                            <tr>
+                                <td>
+                                   <h3 class="alert-heading">Материнська плата</h3>
+                                </td>
+                                <td align="right">
+                                    {% if item.motherboard %}
+                                    <h5><a href="/IT_items/pc_accessories/{{ item.motherboard.name }}/{{ item.motherboard.id }}/update-motherboard" class="badge badge-info">
+                                        Редагування
+                                    </a></h5>
+                                     {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.motherboard %}
+                            <h5>Бренд: {{item.motherboard.brand}}</h5>
+                            <h5>Модель: {{item.motherboard.model}}</h5>
+                            <h5>Серійний номер: {{item.motherboard.serial_number}}</h5>
+                            <h5>Форм-фактор: {{item.motherboard.form_factor}}</h5>
+                            <h5>Тип слоту для ОЗУ: {{item.motherboard.type_ram_slot}}</h5>
+                            <br>
+
+                            <h5>Центральный процессор: {{item.motherboard.central_processing_unit}}</h5>
+                            {% if item.motherboard.integrated_graphics%}
+                                <h5>Інтегрована відеокарта: наявна</h5>
+                            {% else %}
+                                <h5>Інтегрована відеокарта: відсутня</h5>
+                            {% endif %}
+                            <br>
+
+                            {% if item.motherboard.integrated_sound_card%}
+                                <h5>Інтегрована звукова-карта: наявна</h5>
+                            {% else %}
+                                <h5>Інтегрована звукова-карта: відсутня</h5>
+                            {% endif %}
+
+                            {% if item.motherboard.integrated_lan_card%}
+                                <h5>Інтегрована мережева-карта: наявна</h5>
+                            {% else %}
+                                <h5>Інтегрована мережева-карта: відсутня</h5>
+                            {% endif %}
+                        {% else %}
+                            <h5>Відсутня</h5>
+                        {% endif %}
+
+                        <hr>
+
+                        <table class="col-sm-12" border="0">
+                            <tr>
+                                <td>
+                                   <h3 class="alert-heading">Твердотільний накопичувач</h3>
+                                </td>
+                                <td align="right">
+                                    {% if item.solid_state_drive %}
+                                    <h5><a href="/IT_items/pc_accessories/{{ item.solid_state_drive.name }}/{{ item.solid_state_drive.id }}/update-solid-state-drive" class="badge badge-info">
+                                        Редагування
+                                    </a></h5>
+                                     {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.solid_state_drive %}
+                            <h5>Бренд: {{item.solid_state_drive.brand}}</h5>
+                            <h5>Модель: {{item.solid_state_drive.model}}</h5>
+                            <h5>Серійний номер: {{item.solid_state_drive.serial_number}}</h5>
+                            <h5>Обсяг пам'яті: {{item.solid_state_drive.memory_size}} GB</h5>
+                        {% else %}
+                            <h5>Відсутня</h5>
+                        {% endif %}
+
+                        <hr>
+
+                        <table class="col-sm-12" border="0">
+                            <tr>
+                                <td>
+                                   <h3 class="alert-heading">Накопичувач на жорстких магнітних дисках</h3>
+                                </td>
+                                <td align="right">
+                                    {% if item.hard_disk_drive %}
+                                    <h5><a href="/IT_items/pc_accessories/{{ item.hard_disk_drive.name }}/{{ item.hard_disk_drive.id }}/update-hard-disk-drive" class="badge badge-info">
+                                        Редагування
+                                    </a></h5>
+                                     {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.hard_disk_drive %}
+                            <h5>Бренд: {{item.hard_disk_drive.brand}}</h5>
+                            <h5>Модель: {{item.hard_disk_drive.model}}</h5>
+                            <h5>Серійний номер: {{item.hard_disk_drive.serial_number}}</h5>
+                            <h5>Обсяг пам'яті: {{item.hard_disk_drive.memory_size}} GB</h5>
+                        {% else %}
+                            <h5>Відсутня</h5>
+                        {% endif %}
+
+                        <hr>
+
+                         <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Блок живлення</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.power_supply %}
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.power_supply.name }}/{{ item.power_supply.id }}/update-power-supply" class="badge badge-info">
+                                            Редагування
+                                        </a></h5>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+                        <hr>
+
+                        {% if item.power_supply %}
+                            <h5>Бренд: {{item.power_supply.brand}}</h5>
+                            <h5>Модель: {{item.power_supply.model}}</h5>
+                            <h5>Серійний номер: {{item.power_supply.serial_or_inventory_number}}</h5>
+                            <h5>Максимальна споживана потужність від мережі: {{item.power_supply.power_consumption}}W</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
+                        <hr>
+                        <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Відеокарта</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.video_card %}
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.video_card.name }}/{{ item.video_card.id }}/update-video-card" class="badge badge-info">
+                                            Редагування
+                                        </a></h5>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.video_card %}
+                            <h5>Бренд: {{item.video_card.brand}}</h5>
+                            <h5>Модель: {{item.video_card.model}}</h5>
+                            <h5>Серійний номер: {{item.video_card.serial_number}}</h5>
+                            <h5>Обсяг пам'яті: {{item.video_card.memory_size}} MB</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
+                        <hr>
+                        <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Мережева плата</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.lan_card %}
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.lan_card.name }}/{{ item.lan_card.id }}/update-lan-card" class="badge badge-info badge">
+                                            Редагування
+                                        </a></h5>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.lan_card %}
+                            <h5>Бренд: {{item.lan_card.brand}}</h5>
+                            <h5>Модель: {{item.lan_card.model}}</h5>
+                            <h5>Серійний номер: {{item.lan_card.serial_number}}</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
+                        <hr>
+
+                        <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Звукова плата</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.sound_card %}
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.sound_card.name }}/{{ item.sound_card.id }}/update-sound-card" class="badge badge-info badge">
+                                            Редагування
+                                        </a></h5>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.sound_card %}
+                            <h5>Бренд: {{item.sound_card.brand}}</h5>
+                            <h5>Модель: {{item.sound_card.model}}</h5>
+                            <h5>Серійний номер: {{item.sound_card.serial_number}}</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
+                        <hr>
+
+                         <table class="col-sm-12" border="0">
+                                <tr>
+                                    <td>
+                                        <h3 class="alert-heading">Оптичний накопичувач</h3>
+                                    </td>
+                                    <td align="right">
+                                        {% if item.optical_drive %}
+                                        <h5><a href="/IT_items/pc_accessories/{{ item.optical_drive.name }}/{{ item.optical_drive.id }}/update-optical-drive" class="badge badge-info badge">
+                                            Редагування
+                                        </a></h5>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        </table>
+
+                        <hr>
+
+                        {% if item.optical_drive %}
+                            <h5>Бренд: {{item.optical_drive.brand}}</h5>
+                            <h5>Модель: {{item.optical_drive.model}}</h5>
+                            <h5>Серійний номер: {{item.optical_drive.serial_number}}</h5>
+                            <h5>Тип приводу: {{item.optical_drive.type_drive}}</h5>
+                            <h5>Тип роз'єму: {{item.optical_drive.type_connector}}</h5>
+                        {% else %}
+                            <h5>Відсутній</h5>
+                        {% endif %}
+
+                    <hr>
+
+                     <table class="col-sm-12" border="0">
+                         <tr>
+                             <td width="40%">
+                                 <h3 class="alert-heading">Акти проведених робіт</h3>
+                             </td>
+
+                            <td width="28%" align="center">
+                                <h4><a href="/IT_items/{{ item.name }}/{{ item.id }}/add_work_report" class="badge badge-info badge">
+                                    Створити новий акт
+                                </a></h4>
+                            </td>
+                            <td width="4%"></td>
+                            <td width="28%" align="center">
+                                 <h4><a href="/IT_items/{{ item.name }}/{{ item.id }}/work_reports" class="badge badge-info badge">
+                                     Переглянути всі акти
+                                 </a></h4>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <hr>
+
+                    <table width="100%" align="center" border="0">
+                        <tr>
+                            <td width="5%"></td>
+                            <td width="15%">
+                                <a href="/IT_items/{{ item.name }}/{{ item.id }}/del" class="btn btn-info btn-outline-light">Видалити</a>
+                            </td>
+                            <td width="30%">
+                                {% if item.name == 'PC' %}
+                                <a href="/IT_items/{{ item.name }}/{{ item.id }}/update-pc" class="btn btn-info btn-outline-light">Редагування</a>
+                                {% endif %}
+                            </td>
+                            <td width="45%" align="right">
+                                <a href="/IT_items/{{ item.name }}/{{ item.id }}/pdf" class="btn btn-info btn-outline-light">Створити PDF</a>
+                            </td>
+                            <td width=5%></td>
+                        </tr>
+
+                    </table>
+
+
+                </div>
+            </article>
+         </div>
+      </aside>
+    </div>
+</div>
+{% endblock %}
+

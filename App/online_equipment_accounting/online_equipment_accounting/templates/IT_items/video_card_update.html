@@ -1,0 +1,90 @@
+{% extends 'base_main.html' %}
+
+{% block title %}
+    {% if item.name == 'VideoCard' %}
+    Оновлення відеокарти
+    {% endif %}
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+   <div class="d-flex justify-content-center">
+      <aside class="col-sm-8">
+         <div class="card">
+            <article class="card-body">
+
+                 {% if item.name == 'VideoCard' %}
+                    <h1>Оновлення відеокарти</h1>
+
+                    <form method="post">
+                    {% csrf_token %}
+                    <div class="">
+                        <div class="form-group">
+                            <table class="col-sm-12" align="center" border="0">
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Тип обладнання:</p>
+                                        <input type="text" disabled name="name_video_card" id="name_video_card" class="form-control" value="{{ item.name_for_user }}" placeholder="Введіть тип обладнанням">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Серійний номер:</p>
+                                        <input type="text" name="video_card_serial_number" id="video_card_serial_number" class="form-control" value="{{ item.serial_number }}" placeholder="Введіть серійний номер">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td width="50%">
+                                        <p>Модель:</p>
+                                        <input type="text" name="video_card_model" id="video_card_model" class="form-control" value="{{ item.model }}" placeholder="Введіть модель">
+                                    </td>
+                                    <td>
+                                        <p>Бренд:</p>
+                                        <input type="text" name="video_card_brand" id="video_card_brand" class="form-control" value="{{ item.brand }}" placeholder="Введіть бренд">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p>Обсяг пам'яті в MB (1 GB = 1024 MB):</p>
+                                        <input type="text" name="video_card_memory_size" id="video_card_memory_size" class="form-control" value="{{ item.memory_size }}" placeholder="Введіть максимальну споживану потужність від мережі">
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td colspan="2">
+                                        <hr>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-outline-info" value="Оновити">
+                </form>
+
+                {% endif %}
+
+            </article>
+         </div>
+      </aside>
+   </div>
+</div>
+{% endblock %}
+
