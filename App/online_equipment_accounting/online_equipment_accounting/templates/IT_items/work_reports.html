@@ -13,15 +13,23 @@
                 <article class="card-body">
                     <table align="center" width="100%" border="0">
                         <tr align="center">
-                            <td width="60%">
+                            <td width="60%" rowspan="2">
                                 <h1>{{item.name_for_user}}</h1>
                             </td>
                             <td width="40%">
                                 <h1>{{item.inventory_number}}</h1>
                             </td>
                         </tr>
+                        <tr>
+                            <td align="center">
+                                <h5>
+                                    <a href="/IT_items/{{ item.name }}/{{ item.id }}" class="badge badge-info">
+                                        Повернутися до паспорта обладнання
+                                    </a>
+                                </h5>
+                            </td>
+                        </tr>
                     </table>
-
                 </article>
             </div>
         </aside>

@@ -18,7 +18,6 @@
     <aside class="col-sm-11">
         <div class="card">
             <article class="card-body">
-
               <table border="0">
                 <tr>
                   <td colspan="3">
@@ -36,17 +35,30 @@
                   <td></td>
                   <td width="33%">
                     <p align="center">
-                        <a class="btn btn-outline-info  btn-block" href="/IT_items/add" role="button">Продовжити</a>
+                      {% if  type_action == 'add'%}
+                        {% if  name_of_item_for_user == 'Персональний комп\'ютор'%}
+                            <a class="btn btn-outline-info  btn-block" href="/IT_items/" role="button">Продовжити</a>
+                        {% else %}
+                            <a class="btn btn-outline-info  btn-block" href="/IT_items/pc_accessories" role="button">Продовжити</a>
+                        {% endif %}
+                      {% elif type_action == 'del' %}
+                        {% if  name_of_item_for_user == 'Персональний комп\'ютор'%}
+                            <a class="btn btn-outline-info  btn-block" href="/IT_items/" role="button">Продовжити</a>
+                        {% else %}
+                            <a class="btn btn-outline-info  btn-block" href="/IT_items/pc_accessories" role="button">Продовжити</a>
+                        {% endif %}
+                      {% elif type_action == 'edit' %}
+                        {% if  name_of_item_for_user == 'Персональний комп\'ютор'%}
+                            <a class="btn btn-outline-info  btn-block" href="/IT_items/" role="button">Продовжити</a>
+                        {% else %}
+                            <a class="btn btn-outline-info  btn-block" href="/IT_items/pc_accessories" role="button">Продовжити</a>
+                        {% endif %}
+                      {% endif %}
+
                     </p>
                   </td>
                 </tr>
               </table>
-
-
-
-
-
-
 			</article>
         </div>
     </aside>

@@ -12,7 +12,6 @@ urlpatterns = [
     path('', views.IT_items, name='IT_items'),
     path('pc_accessories', views.pc_accessories, name='pc_accessories'),
 
-    path('test', views.test, name='test'),
 
     path('add', views.add, name='add'),
     path('add-item/add-pc', views.add_pc, name='add_pc'),

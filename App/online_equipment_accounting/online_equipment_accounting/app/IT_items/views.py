@@ -20,10 +20,6 @@ import pdfkit
 from datetime import datetime
 
 
-def test(request):
-    return render(request, 'IT_items/message_item.html')
-
-
 def check_denied_access_add(func):
     def wrapper(request):
         if not request.user.groups.filter(name__in=['Редактор']).exists():
@@ -378,7 +374,10 @@ def item_delete(request, item_name, item_id):
 
     item.delete()
 
-    return HttpResponseRedirect(reverse('IT_items:IT_items'))
+    # return HttpResponseRedirect(reverse('IT_items:IT_items'))
+    return render(request, 'IT_items/message_item.html',
+                  {'name_of_item_for_user': item.name_for_user,
+                   'type_action': 'del'})
 
 
 @check_denied_access_del_or_update
@@ -406,7 +405,9 @@ def pc_accessories_delete(request, item_name, item_id):
 
     item.delete()
 
-    return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+    # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+    return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                          'type_action': 'del'})
 
 
 @check_denied_access_del_or_update
@@ -524,7 +525,9 @@ def pc_update(request, item_name, item_id):
 
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:IT_items'))
+            # return HttpResponseRedirect(reverse('IT_items:IT_items'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -573,7 +576,9 @@ def motherboard_update(request, item_name, item_id):
 
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -601,7 +606,9 @@ def solid_state_drive_update(request, item_name, item_id):
 
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -626,7 +633,9 @@ def hard_disk_drive_update(request, item_name, item_id):
 
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -651,7 +660,9 @@ def power_supply_update(request, item_name, item_id):
 
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -675,7 +686,9 @@ def video_card_update(request, item_name, item_id):
             item.memory_size = request.POST['video_card_memory_size']
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -698,7 +711,9 @@ def lan_card_update(request, item_name, item_id):
             item.serial_number = request.POST['lan_card_serial_number']
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -721,7 +736,9 @@ def sound_card_update(request, item_name, item_id):
             item.serial_number = request.POST['sound_card_serial_number']
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -752,7 +769,9 @@ def optical_drive_update(request, item_name, item_id):
             item.type_connector = request.POST.get('optical_drive_type_connector', None)
         try:
             item.save()
-            return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            # return HttpResponseRedirect(reverse('IT_items:pc_accessories'))
+            return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
+                                                                  'type_action': 'edit'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -764,9 +783,13 @@ def optical_drive_update(request, item_name, item_id):
 
 def add_work_report(request, item_name, item_id):
     work_report = None
+    item = None
     work_report_field = ''
     inventory_number_pc = ''
-    created_date = datetime.now(pytz.timezone('Europe/Kiev')).strftime("%Y/%M/%D %H:%M:%S")
+
+    tzkiev = pytz.timezone('Europe/Kiev')
+    created_date = datetime.now(tzkiev).strftime("%Y/%M/%D %H:%M:%S")
+    # created_date = datetime.now(pytz.timezone('Europe/Kiev')).strftime("%Y/%M/%D %H:%M:%S")
 
     if item_name == 'PC':
         item = PC.objects.get(id=item_id)
@@ -779,7 +802,11 @@ def add_work_report(request, item_name, item_id):
         work_report.work_report_field = request.POST['work_report_field']
         try:
             work_report.save()
-            return HttpResponseRedirect(reverse('IT_items:IT_items'))
+            # return HttpResponseRedirect(reverse('IT_items:IT_items'))
+            return render(request, 'IT_items/message_work_report.html', {'work_report': work_report.name_for_user,
+                                                                         'name_of_item': item.name,
+                                                                         'id_of_item': item.id,
+                                                                         'type_action': 'add'})
         except ObjectDoesNotExist:
             return 'При обновлении оборудывания произошла ошибка'
 
@@ -807,7 +834,11 @@ def work_report_detail(request, item_name, item_id, inventory_number_pc, report_
 def work_report_del(request, item_name, item_id, inventory_number_pc, report_id):
     report = WorkReport.objects.get(inventory_number_pc=inventory_number_pc, id=report_id)
     report.delete()
-    return HttpResponseRedirect(reverse('IT_items:IT_items'))
+    # return HttpResponseRedirect(reverse('IT_items:IT_items'))
+    return render(request, 'IT_items/message_work_report.html', {'work_report': report.name_for_user,
+                                                                 'name_of_item': item_name,
+                                                                 'id_of_item': item_id,
+                                                                 'type_action': 'del'})
 
 
 def error(request):
