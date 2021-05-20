@@ -580,7 +580,7 @@ def motherboard_update(request, item_name, item_id):
             return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
                                                                   'type_action': 'edit'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/motherboard_update.html', {'item': item,
@@ -610,7 +610,7 @@ def solid_state_drive_update(request, item_name, item_id):
             return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
                                                                   'type_action': 'edit'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/solid_state_drive_update.html', {'item': item})
@@ -637,7 +637,7 @@ def hard_disk_drive_update(request, item_name, item_id):
             return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
                                                                   'type_action': 'edit'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/hard_disk_drive_update.html', {'item': item})
@@ -664,7 +664,7 @@ def power_supply_update(request, item_name, item_id):
             return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
                                                                   'type_action': 'edit'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/power_supply_update.html', {'item': item})
@@ -690,7 +690,7 @@ def video_card_update(request, item_name, item_id):
             return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
                                                                   'type_action': 'edit'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/video_card_update.html', {'item': item})
@@ -715,7 +715,7 @@ def lan_card_update(request, item_name, item_id):
             return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
                                                                   'type_action': 'edit'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/lan_card_update.html', {'item': item})
@@ -740,7 +740,7 @@ def sound_card_update(request, item_name, item_id):
             return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
                                                                   'type_action': 'edit'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/sound_card_update.html', {'item': item})
@@ -773,7 +773,7 @@ def optical_drive_update(request, item_name, item_id):
             return render(request, 'IT_items/message_item.html', {'name_of_item_for_user': item.name_for_user,
                                                                   'type_action': 'edit'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/optical_drive_update.html', {'item': item,
@@ -808,7 +808,7 @@ def add_work_report(request, item_name, item_id):
                                                                          'id_of_item': item.id,
                                                                          'type_action': 'add'})
         except ObjectDoesNotExist:
-            return 'При обновлении оборудывания произошла ошибка'
+            return 'При оновлені обладнання трапилася помилка'
 
     else:
         return render(request, 'IT_items/add_work_report.html', {'work_report': work_report,
