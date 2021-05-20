@@ -254,7 +254,7 @@ class PC(models.Model):
 
     # text_field = models.TextField(default='Місце для нотаток', null=True)
 
-    name_for_user = 'Персональний комп\'ютор'
+    name_for_user = 'Персональний комп\'ютер'
     name = 'PC'
 
     objects = models.Manager()
@@ -264,8 +264,8 @@ class PC(models.Model):
             self.inventory_number)
 
     class Meta:
-        verbose_name = 'Персональний комп\'ютор'
-        verbose_name_plural = 'Персональні комп\'ютори'
+        verbose_name = 'Персональний комп\'ютер'
+        verbose_name_plural = 'Персональні комп\'ютери'
 
 
 class WorkReport(models.Model):
