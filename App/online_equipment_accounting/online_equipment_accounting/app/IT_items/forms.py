@@ -222,6 +222,17 @@ class AddHardDiskDriveForm(forms.ModelForm):
                                                      widget=widgets.TextInput(
                                                          attrs={'size': 1, 'class': 'form-control'}))
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'hard_disk_drive_serial_number',
+            'hard_disk_drive_brand',
+            'hard_disk_drive_model',
+            'hard_disk_drive_memory_size',
+            Submit('submit', 'Створити')
+        )
+
     class Meta:
         model = HardDiskDrive
         fields = ['hard_disk_drive_serial_number', 'hard_disk_drive_brand', 'hard_disk_drive_model',

@@ -1,4 +1,6 @@
 {% extends 'base_main.html' %}
+{% load crispy_forms_tags %}
+
 {% block title %}
 Додавання Накопичувача на жорстких магнітних дисках
 {% endblock %}
@@ -9,121 +11,8 @@
          <div class="card">
             <article class="card-body">
                <h1>Додавання накопичувача на жорстких магнітних дисках</h1>
-               <form method="post">
-                  {% csrf_token %}
-                   <div class="form-group">
-                        <table class="col-sm-12" align="center" border="0">
-                            <tr>
-                                  <td colspan="3">
-                                      <hr>
-                                  </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" align="center">
-
-                                    <!--Name of field and input-->
-                                    {{ form.hard_disk_drive_serial_number.label_tag }}
-
-                                    <div class="mx-auto" style="width: 50%">
-                                    {{ form.hard_disk_drive_serial_number }}
-                                    </div>
-
-                                    <!--Show help text for field-->
-                                    {% if form.hard_disk_drive_serial_number.help_text %}
-                                    <small style="color: grey">{{ form.hard_disk_drive_serial_number.help_text }}</small>
-                                    {% endif %}
-
-                                    <!--Show error text for field-->
-                                    {% for error in form.hard_disk_drive_serial_number.errors %}
-                                    <p style="color: red">{{ error }}</p>
-                                    {% endfor %}
-                                </td>
-                            </tr>
-                            <tr>
-                                  <td colspan="3">
-                                      <hr>
-                                  </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" align="center">
-                                    <!--Name of field and input-->
-                                    {{ form.hard_disk_drive_brand.label_tag }}
-<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-                                    <div class="mx-auto" style="width: 50%">
-                                    {{ form.hard_disk_drive_brand }}
-                                    </div>
-
-                                    <!--Show help text for field-->
-                                    {% if form.hard_disk_drive_brand.help_text %}
-                                    <small style="color: grey">{{ form.hard_disk_drive_brand.help_text }}</small>
-                                    {% endif %}
-
-                                    <!--Show error text for field-->
-                                    {% for error in form.hard_disk_drive_brand.errors %}
-                                    <p style="color: red">{{ error }}</p>
-                                    {% endfor %}
-                                </td>
-                            </tr>
-                            <tr>
-                                  <td colspan="3">
-                                      <hr>
-                                  </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" align="center">
-                                    <!--Name of field and input-->
-                                    {{ form.hard_disk_drive_model.label_tag }}
-<!--                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-
-                                    <div class="mx-auto" style="width: 50%">
-                                    {{ form.hard_disk_drive_model }}
-                                    </div>
-
-                                    <!--Show help text for field-->
-                                    {% if form.hard_disk_drive_model.help_text %}
-                                    <small style="color: grey">{{ form.hard_disk_drive_model.help_text }}</small>
-                                    {% endif %}
-
-                                    <!--Show error text for field-->
-                                    {% for error in form.hard_disk_drive_model.errors %}
-                                    <p style="color: red">{{ error }}</p>
-                                    {% endfor %}
-                                </td>
-                            </tr>
-                            <tr>
-                                  <td colspan="3">
-                                      <hr>
-                                  </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" align="center">
-                                    <!--Name of field and input-->
-                                    {{ form.hard_disk_drive_memory_size.label_tag }}
-
-                                    <div class="mx-auto" style="width: 50%">
-                                    {{ form.hard_disk_drive_memory_size }}
-                                    </div>
-
-                                    <!--Show help text for field-->
-                                    {% if form.hard_disk_drive_memory_size.help_text %}
-                                    <small style="color: grey">{{ form.hard_disk_drive_memory_size.help_text }}</small>
-                                    {% endif %}
-
-                                    <!--Show error text for field-->
-                                    {% for error in form.hard_disk_drive_memory_size.errors %}
-                                    <p style="color: red">{{ error }}</p>
-                                    {% endfor %}
-                                </td>
-                            </tr>
-                            <tr>
-                                  <td colspan="3">
-                                      <hr>
-                                  </td>
-                            </tr>
-                        </table>
-                   </div>
-                   <input type="submit" class="btn btn-outline-info" value="Створити">
-               </form>
+                {% csrf_token %}
+                {% crispy form %}
             </article>
          </div>
       </aside>
