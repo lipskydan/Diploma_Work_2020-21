@@ -74,6 +74,39 @@ class AddPcForm(forms.ModelForm):
                                            localize=True,
                                            widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'inventory_number',
+
+            Row(
+                Column('floor', css_class='form-group col-md-6 mb-0'),
+                Column('room', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            Row(
+                Column('place', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            'operating_system',
+
+            'motherboard',
+            'solid_state_drive',
+            'hard_disk_drive',
+            'power_supply',
+            'video_card',
+            'lan_card',
+            'sound_card',
+            'optical_drive',
+            
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
+        )
+
     class Meta:
         model = PC
         fields = ['inventory_number', 'floor', 'room', 'place', 'motherboard', 'power_supply',
