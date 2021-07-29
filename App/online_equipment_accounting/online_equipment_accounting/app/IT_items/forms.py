@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Row, Column, Submit
+from crispy_forms.layout import Layout, Row, Column, Submit, ButtonHolder
 from django import forms
 
 from django.forms import widgets
@@ -156,7 +156,9 @@ class AddMotherboardForm(forms.ModelForm):
                 css_class='form-row'
             ),
 
-            Submit('submit', 'Створити')
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
         )
 
     class Meta:
@@ -190,6 +192,19 @@ class AddSolidStateDriveForm(forms.ModelForm):
                                                        help_text='Обов’язково, вказувати в GB',
                                                        widget=widgets.TextInput(
                                                            attrs={'size': 1, 'class': 'form-control'}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'solid_state_drive_serial_number',
+            'solid_state_drive_brand',
+            'solid_state_drive_model',
+            'solid_state_drive_memory_size',
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
+        )
 
     class Meta:
         model = SolidStateDrive
@@ -230,7 +245,9 @@ class AddHardDiskDriveForm(forms.ModelForm):
             'hard_disk_drive_brand',
             'hard_disk_drive_model',
             'hard_disk_drive_memory_size',
-            Submit('submit', 'Створити')
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
         )
 
     class Meta:
@@ -255,6 +272,24 @@ class AddPowerSupplyForm(forms.ModelForm):
                                                         help_text='Обов’язково',
                                                         localize=True)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'power_supply_serial_number_or_inventory_number',
+
+            Row(
+                Column('power_supply_brand', css_class='form-group col-md-6 mb-0'),
+                Column('power_supply_model', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            'power_supply_power_consumption',
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
+        )
+
     class Meta:
         model = PowerSupply
         fields = ['power_supply_brand', 'power_supply_model', 'power_supply_serial_number_or_inventory_number',
@@ -275,6 +310,25 @@ class AddVideoCard(forms.ModelForm):
     video_card_memory_size = forms.IntegerField(label='Обсяг пам\'яті', localize=True, required=True,
                                                 help_text='Обов’язково, вказувати в MB (1 GB = 1024 MB)')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'video_card_serial_number',
+
+            Row(
+                Column('video_card_brand', css_class='form-group col-md-6 mb-0'),
+                Column('video_card_model', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            'video_card_memory_size',
+
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
+        )
+
     class Meta:
         model = VideoCard
         fields = ['video_card_brand', 'video_card_model', 'video_card_serial_number', 'video_card_memory_size']
@@ -291,6 +345,23 @@ class AddLanCard(forms.ModelForm):
                                              required=True, localize=True,
                                              help_text='Обов’язково')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'lan_card_serial_number',
+
+            Row(
+                Column('lan_card_brand', css_class='form-group col-md-6 mb-0'),
+                Column('lan_card_model', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
+        )
+
     class Meta:
         model = LanCard
         fields = ['lan_card_brand', 'lan_card_model', 'lan_card_serial_number']
@@ -306,6 +377,23 @@ class AddSoundCard(forms.ModelForm):
     sound_card_serial_number = forms.CharField(label='Серійний номер', max_length=30,
                                                required=True, localize=True,
                                                help_text='Обов’язково')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'sound_card_serial_number',
+
+            Row(
+                Column('sound_card_brand', css_class='form-group col-md-6 mb-0'),
+                Column('sound_card_model', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
+        )
 
     class Meta:
         model = SoundCard
@@ -331,6 +419,26 @@ class AddOpticalDrive(forms.ModelForm):
                                                      choices=TYPE_CONNECTOR_OF_OPTICAL_DRIVE,
                                                      required=False, localize=True, help_text='Необов’язково',
                                                      widget=widgets.Select(attrs={'size': 1, 'class': 'form-control'}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'optical_drive_serial_number',
+
+            Row(
+                Column('optical_drive_brand', css_class='form-group col-md-6 mb-0'),
+                Column('optical_drive_model', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            'optical_drive_type_drive',
+            'optical_drive_type_connector',
+
+            ButtonHolder(
+                Submit('submit', 'Створити', css_class='btn btn-info')
+            )
+        )
 
     class Meta:
         model = SoundCard
