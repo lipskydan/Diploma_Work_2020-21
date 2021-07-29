@@ -1,3 +1,5 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Row, Column, Submit
 from django import forms
 
 from django.forms import widgets
@@ -130,6 +132,32 @@ class AddMotherboardForm(forms.ModelForm):
     motherboard_integrated_lan_card = forms.BooleanField(label='Інтегрована мережева-карта', localize=True,
                                                          required=False, help_text='Вказати чи наявна',
                                                          widget=forms.CheckboxInput(attrs={'class': 'checkbox'}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'motherboard_serial_number',
+
+            Row(
+                Column('motherboard_brand', css_class='form-group col-md-6 mb-0'),
+                Column('motherboard_model', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+            'motherboard_form_factor',
+            'motherboard_type_ram_slot',
+            'motherboard_central_processing_unit',
+
+            Row(
+                Column('motherboard_integrated_graphics', css_class='form-group col-md-4 mb-0'),
+                Column('motherboard_integrated_sound_card', css_class='form-group col-md-4 mb-0'),
+                Column('motherboard_integrated_lan_card', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+
+            Submit('submit', 'Створити')
+        )
 
     class Meta:
         model = Motherboard
